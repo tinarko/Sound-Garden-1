@@ -4,6 +4,8 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
 
+// import passport authentication strategies
+var authentication = require('./authentication');
 var config = require('./../config/config');
 var db = require('./../database/index');
 var requestHandler = require('./requestHandler');
@@ -28,12 +30,16 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  db.findByID(id, (err, user) => {
+  // db.findByID(id, (err, user) => {
+  //   done(err, user);
+  // });
+  db.findUser(id, (err, user) => {
     done(err, user);
   });
 });
 
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.static(__dirname + './../client/dist'));
+
 app.get('/auth/facebook', 
   passport.authenticate('facebook', {scope: 'email'}));
 app.get('/auth/facebook/return', 
@@ -44,8 +50,12 @@ app.get('/auth/facebook/return',
     // redirect home on successful login
     res.redirect('/');
   });
+// redirect invalid paths to homepage 
+// app.get('/*', (req, res) => {
+//   res.redirect('/');
+// });
 
-app.listen(3000, function() {
-  console.log('listening on port 3000!');
+app.listen(1337, function() {
+  console.log('listening on port 1337!');
 });
 
