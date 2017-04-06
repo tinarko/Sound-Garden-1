@@ -7,10 +7,13 @@ import {
 } from 'react-router-dom';
 
 import Balance from './Balance.jsx';
-import Budget from './Budget.jsx'
+import Budget from './components/budget.jsx'
 import CCSelector from './CCSelector.jsx';
 import Portfolio from './Portfolio.jsx';
 import EmailNotifications from './emailNotifications.jsx';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import appReducer from './reducers/appReducer';
 
 class App extends React.Component {
   constructor(props) {
@@ -63,4 +66,10 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+let store = createStore(appReducer);
+
+ReactDOM.render(
+<Provider store={store}>
+  <App />
+</Provider>,
+ document.getElementById('app'));
