@@ -14,8 +14,11 @@ module.exports = {
     console.log('here is the profile', userid);
     var queryString = 'SELECT * FROM USERS where userid = ?';
     connection.query(queryString, userid, function(err, existingUser) {
-      console.log('user did not exist, we must add it', existingUser);
-      cb(err, false);
+      if (existingUser.length === 0) {
+        cb(err, false);
+      } else {
+        cb(err, existingUser[0]);
+      }
     });
   },
 
