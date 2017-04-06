@@ -24,36 +24,22 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// serialize and deserialize User to save and retrieve user data from session
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-  // db.findByID(id, (err, user) => {
-  //   done(err, user);
-  // });
-  db.findUser(id, (err, user) => {
-    done(err, user);
-  });
-});
 
 app.use(express.static(__dirname + './../client/dist'));
 
 app.get('/auth/facebook', 
   passport.authenticate('facebook', {scope: 'email'}));
 app.get('/auth/facebook/return', 
-  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  passport.authenticate('facebook', { 
+    successRedirect: '/',
+    // failureRedirect: '/login', 
+  }),
   (req, res) => {
     // write cookie
     res.cookie('advisorly', 'loggedIn');
     // redirect home on successful login
     res.redirect('/');
   });
-// redirect invalid paths to homepage 
-// app.get('/*', (req, res) => {
-//   res.redirect('/');
-// });
 
 app.listen(1337, function() {
   console.log('listening on port 1337!');
