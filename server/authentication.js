@@ -14,10 +14,10 @@ passport.use(new FacebookStrategy({
     db.findUser(profile._json.id, (err, existingUser) => {
       // TODO: error handle invalid search for profile.id
       if (existingUser !== false) {
-        console.log('this is if existing user', existingUser)
+        console.log('this is if existing user', existingUser);
         done(null, existingUser);
       } else {
-        console.log('this is if NOT existinguser')
+        console.log('this is if NOT existinguser');
         db.saveUser(profile._json, (err, newUser) => {
           if (err) {
             // TODO: error handle invalid save of user
