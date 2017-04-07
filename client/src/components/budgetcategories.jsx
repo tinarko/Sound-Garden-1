@@ -15,7 +15,7 @@ class BudgetCategories extends React.Component {
     return (
       <li className="budgetCategory">
         {category}
-        Budget Goal: {budgetGoal}
+        Budget Goal: {budgetGoal} <button> Increment </button> <button> Decrement </button>
         Spent this Month: {actualSpending}
       <button> Edit </button>
       </li>
