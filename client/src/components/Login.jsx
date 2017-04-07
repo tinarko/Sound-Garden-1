@@ -8,14 +8,14 @@ class Login extends React.Component {
   }
 
   onPlaidClick() {
-    // will sign a user into an Item and store the access token into the database
+    // will sign a user into an Item and store the access token into the database (used to access institutional data)
     Plaid.create({
       clientName: 'Plaid Walkthrough Demo',
       env: 'sandbox',
       key: config.plaid.publicKey,
       product: ['auth', 'transactions'],
       // webhook: '[WEBHOOK_URL]', // Optional – use webhooks to get transaction and error updates
-      // selectAccount: false, // Optional – trigger the Select Account
+      selectAccount: true, // Optional – trigger the Select Account
       onLoad: function() {
         // Optional, called when Link loads
       },
@@ -25,6 +25,7 @@ class Login extends React.Component {
         // user selected and the account ID, if `selectAccount` is enabled.
         
         // TODO: implement server route for plaid
+        console.log(metadata);
         fetch('/plaid/access_token', {
           method: 'POST',
           headers: {
@@ -43,6 +44,7 @@ class Login extends React.Component {
       },
       onExit: function(err, metadata) {
         // The user exited the Link flow.
+        console.log(metadata)
         if (err != null) {
           // The user encountered a Plaid API error prior to exiting.
         }
