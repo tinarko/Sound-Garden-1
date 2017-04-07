@@ -4,25 +4,7 @@ import config from './../../../config/config.js';
 class Login extends React.Component {
   constructor(props) {
     super(props);
-    this.onFbClick = this.onFbClick.bind(this);
     this.onPlaidClick = this.onPlaidClick.bind(this);
-  }
-  
-  onFbClick() {
-    let myRequest = new Request('/auth/facebook');
-    return fetch(myRequest)
-      .then((response) => {
-        console.log('here is the successful response', response);
-        if (response) {
-          // this.setState({
-          //   signedin: true,
-          // });
-          console.log('hi')
-        } 
-      })
-      .catch((err) => {
-        console.log('error', error);
-      });
   }
 
   onPlaidClick() {
@@ -64,7 +46,9 @@ class Login extends React.Component {
         {/* TODO: pass loggedIn prop here && check
         // read the token, if they are signed in: render button to add stuff to plaid OR go to balances
         // else show this button*/}
-        <button onClick={this.onFbClick}>Sign In with Facebook</button>
+        <form action="/auth/facebook" method="GET">
+          <button >Login with Facebook</button>
+        </form>
         <button id="link-button"
           onClick={this.onPlaidClick}
         >Add Accounts to Plaid</button>
