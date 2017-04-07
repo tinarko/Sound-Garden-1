@@ -24,6 +24,10 @@
     "passport-facebook": "^2.1.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "react-router": "^4.0.0",
+    "react-router-dom": "^4.0.0",
+    "react-router-redux": "^5.0.0-alpha.4",
     "webpack": "^2.3.3"
   },
   "devDependencies": {
@@ -34,7 +38,7 @@
   },
   "babel": {
     "presets": [
-      "es2015"
+      "es2015"     
     ]
   }
 }
