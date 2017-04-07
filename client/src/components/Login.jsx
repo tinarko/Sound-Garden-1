@@ -22,10 +22,23 @@ class Login extends React.Component {
         // Send the public_token to your app server.
         // The metadata object contains info about the institution the
         // user selected and the account ID, if `selectAccount` is enabled.
+        
         // TODO: implement server route for plaid
-        $.post('/get_access_token', {
-          public_token: public_token,
-        });
+        fetch('/plaid/access_token', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            public_token: public_token,
+          })
+        })
+          .then((response) => {
+            console.log('successful post to plaid access token');
+          })
+          .catch((err) => {
+            console.log('error in post to plaid access token', err);
+          });
       },
       onExit: function(err, metadata) {
         // The user exited the Link flow.

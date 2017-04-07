@@ -24,19 +24,6 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // let myRequest = new Request('/auth/facebook');
-    // return fetch(myRequest)
-    //   .then((response) => {
-    //     console.log('here is the successful response', response);
-    //     if (response) {
-    //       this.setState({
-    //         signedin: true,
-    //       });
-    //     } 
-    //   })
-    //   .catch((err) => {
-    //     console.log('error', error);
-    //   });
   }
 
   render () {
