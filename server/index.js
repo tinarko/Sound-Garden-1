@@ -41,6 +41,7 @@ app.get('/auth/facebook/return',
     res.redirect('/');
   });
 
+app.post('/plaid/access_token', requestHandler.plaid.accessToken);
 app.listen(1337, function() {
   console.log('listening on port 1337!');
 });
