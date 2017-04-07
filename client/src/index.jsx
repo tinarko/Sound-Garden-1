@@ -6,14 +6,14 @@ import {
   Link
 } from 'react-router-dom';
 
-import Balance from './Balance.jsx';
-import Budget from './components/budget.jsx'
-import CCSelector from './CCSelector.jsx';
-import Portfolio from './Portfolio.jsx';
-import EmailNotifications from './emailNotifications.jsx';
+import Balance from './components/Balance.jsx';
+import Budget from './components/Budget.jsx';
+import CCSelector from './components/CCSelector.jsx';
+import Portfolio from './components/Portfolio.jsx';
+import EmailNotifications from './components/EmailNotifications.jsx';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import appReducer from './reducers/appReducer';
+import appReducer from './reducers/appReducer.js';
 
 class App extends React.Component {
   constructor(props) {

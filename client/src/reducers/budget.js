@@ -8,4 +8,6 @@ const budget = (state = 0, action) => {
   default:
     return state;
   }
-}
+};
+
+export default budget;
