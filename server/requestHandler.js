@@ -4,13 +4,13 @@ var plaid = require('plaid');
 
 var config = require('./../config/config');
 var db = require('./../database/index');
-var config = require('./../config.js');
+var config = require('./../config/config');
 
-var PLAID_CLIENT_ID  = envvar.string('PLAID_CLIENT_ID');
-var PLAID_SECRET     = envvar.string('PLAID_SECRET');
-var PLAID_PUBLIC_KEY = envvar.string('PLAID_PUBLIC_KEY');
+var PLAID_CLIENT_ID  = config.plaid.clientID;
+var PLAID_SECRET     = config.plaid.clientSecret;
+var PLAID_PUBLIC_KEY = config.plaid.publicKey;
 // TODO: adjust environment as product life cycle advances
-var PLAID_ENV        = envvar.string('PLAID_ENV', 'sandbox');
+var PLAID_ENV        = config.plaid.plaidEnv;
 
 // TODO: store ACCESS_TOKEN INTO DATABASE
 var PUBLIC_TOKEN = null;
@@ -24,7 +24,8 @@ var client = new plaid.Client(
   plaid.environments[PLAID_ENV]
 );
 
-module.export = {
+// exchanges and stores the Item's (institution's) access token
+module.exports = {
   'plaid': {
     accessToken: function(req, res) {
       PUBLIC_TOKEN = req.body.public_token;

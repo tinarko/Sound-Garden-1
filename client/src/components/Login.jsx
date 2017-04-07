@@ -8,6 +8,7 @@ class Login extends React.Component {
   }
 
   onPlaidClick() {
+    // will sign a user into an Item and store the access token into the database
     Plaid.create({
       clientName: 'Plaid Walkthrough Demo',
       env: 'sandbox',
