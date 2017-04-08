@@ -40,6 +40,10 @@ INSERT INTO categorytypes (id, name) VALUES (1, 'Restaurants');
 INSERT INTO categorytypes (id, name) VALUES (2, 'Gas and Transportation');
 INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (1, 1, 1, 500.00, 200.00);
 INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (2, 1, 2, 100.00, 50.00);
+
+-- INSERT INTO budgets (id, user_id, month) VALUES (2, 2, NOW());
+-- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (3, 2, 1, 550.00, 200.00);
+-- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (4, 2, 2, 150.00, 10.00);
 /*  Execute this file from the command line by typing:
  *    mysql -u root < schema.sql
  *  to create the database and the tables.*/

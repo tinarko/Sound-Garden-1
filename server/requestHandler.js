@@ -39,5 +39,17 @@ module.exports = {
         res.json({error: false});
       });
     }
+  },
+
+  'budget': {
+    getUserBudgets: function (req, res) {
+      db.getUserBudgets(req.params.id, function(err, results) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.status(200).send(results);
+        }
+      });
+    }
   }
 };

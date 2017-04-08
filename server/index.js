@@ -42,6 +42,9 @@ app.get('/auth/facebook/return',
   });
 
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);
+
+app.get('/budget/getuserbudgets/:id', requestHandler.budget.getUserBudgets);
+
 app.listen(1337, function() {
   console.log('listening on port 1337!');
 });
