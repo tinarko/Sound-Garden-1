@@ -1,5 +1,5 @@
 import React from 'react';
-import config from './../../../config/config.js';
+// import config from './../../../config/config.js';
 
 class Login extends React.Component {
   constructor(props) {
@@ -33,7 +33,8 @@ class Login extends React.Component {
     Plaid.create({
       clientName: 'Plaid Walkthrough Demo',
       env: 'sandbox',
-      key: config.plaid.publicKey,
+      // key: config.plaid.publicKey,
+      key: process.env.PLAID_clientID,
       product: ['auth', 'transactions'],
       // webhook: '[WEBHOOK_URL]', // Optional – use webhooks to get transaction and error updates
       // selectAccount: true, // Optional – trigger the Select Account

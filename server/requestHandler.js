@@ -5,12 +5,18 @@ var Promise = require('bluebird');
 
 var config = require('./../config/config');
 var db = require('./../database/index');
-var config = require('./../config/config');
+// var config = require('./../config/config');
 
-var PLAID_CLIENT_ID  = config.plaid.clientID;
-var PLAID_SECRET     = config.plaid.clientSecret;
-var PLAID_PUBLIC_KEY = config.plaid.publicKey;
-var PLAID_ENV        = config.plaid.plaidEnv;
+// var PLAID_CLIENT_ID  = config.plaid.clientID;
+// var PLAID_SECRET     = config.plaid.clientSecret;
+// var PLAID_PUBLIC_KEY = config.plaid.publicKey;
+// // TODO: adjust environment as product life cycle advances
+// var PLAID_ENV        = config.plaid.plaidEnv;
+
+var PLAID_CLIENT_ID  = process.env.PLAID_clientID;
+var PLAID_SECRET     = process.env.PLAID_clientSecret;
+var PLAID_PUBLIC_KEY = process.env.PLAID_publicKey;
+var PLAID_ENV        = process.env.PLAID_env;
 
 var client = new plaid.Client(
   PLAID_CLIENT_ID,
