@@ -24,19 +24,16 @@ class Login extends React.Component {
         // The metadata object contains info about the institution the
         // user selected and the account ID, if `selectAccount` is enabled.
         
-        // TODO: implement server route for plaid
-        console.log(document.cookie);
         fetch('/plaid/access_token', {
           method: 'POST',
+          // TODO: required to send cookies
+          credentials: 'same-origin',
           headers: {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             public_token: public_token,
             metadata: metadata,
-            // read and send cookie
-            // TODO: attempt not to parse here
-            userid: document.cookie.split('=')[1],
           })
         })
           .then((response) => {

@@ -50,7 +50,7 @@ class App extends React.Component {
   }
 }
 
-const middleware = applyMiddleware(thunkMiddleware, createLogger())
+const middleware = applyMiddleware(thunkMiddleware, createLogger());
 let store = createStore(appReducer, middleware);
 
 ReactDOM.render(

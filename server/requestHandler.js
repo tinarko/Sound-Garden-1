@@ -35,7 +35,7 @@ module.exports = {
         }
         var ACCESS_TOKEN = tokenResponse.access_token;
         var institutionName = req.body.metadata.institution.name;
-        var userid = req.body.userid;
+        var userid = req.session.passport.user;
         // TODO: userid only present after sign in
 
         // check if the item exists update item, if not, add the item
@@ -51,7 +51,7 @@ module.exports = {
     accounts: function(req, res) {
       // TODO: must supply access_token
       // userid only present after sign-in
-      console.log(req.session.passport.user.userid)
+      // console.log(req.session.passport.user.userid)
       client.getAuth("access-sandbox-7269eaa2-c476-45f6-ae85-9e6f8e4c0824", function(error, data) {
         if (error) {
           console.log('error in getting account data', error);
