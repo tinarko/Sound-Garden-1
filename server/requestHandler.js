@@ -41,10 +41,13 @@ module.exports = {
         // check if the item exists update item, if not, add the item
         db.updatePlaidItem([ACCESS_TOKEN, institutionName, userid], function(err, response) {
           console.log(response);
+          if (response === 0) {
+            // plaid item is new so insert
+            db.insertPlaidItem([userid, ACCESS_TOKEN, institutionName], function(err, response) {
+
+            });
+          }
         });
-        // add the access token to the user's account --------------- adding items
-        // db.insertPlaidItem([userid, ACCESS_TOKEN, institutionName], function(err, response) {
-        // });
         res.json({error: false});
       });
     },

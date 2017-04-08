@@ -38,15 +38,15 @@ module.exports = {
   updatePlaidItem: function(params, cb) {
     var query = 'UPDATE items SET access_token = ?, institution_name = ? where user_id = ?';
     connection.query(query, params, function(err, results, field) {
-      console.log('updated plaid item');
-      cb(err, results);
+      console.log('updated plaid item', results);
+      cb(err, results.affectedRows);
     });
   },
   
   insertPlaidItem: function(params, cb) {
-    var query = 'insert into items values (?, ?, ?)';
+    var query = 'insert into items (user_id, access_token, institution_name) values (?, ?, ?)';
     connection.query(query, params, function(err, results, field) { 
-      console.log('inserted new plaid item');
+      console.log('inserted new plaid item', results);
       cb(err, results);
     });
   },
