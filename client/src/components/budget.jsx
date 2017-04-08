@@ -13,7 +13,7 @@ class Budget extends React.Component {
 
   componentWillMount () {
     let { dispatch, getBudgets } = this.props;
-    this.props.getBudgets(1);
+    getBudgets(1);
     // this.getUserBudgets(1);
   }
 
@@ -38,7 +38,6 @@ class Budget extends React.Component {
     let totalSpent = 500;
     let totalBudget = 600;
 
-    // need to include Router for Budget Edit Button
     return (
       <div>
         <div>

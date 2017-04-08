@@ -1,5 +1,5 @@
 const initialState = {
-  budgets: [],
+  budgets: ['test'],
   fetchingBudgets: false,
   error: null
 };
