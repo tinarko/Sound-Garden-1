@@ -1,3 +1,4 @@
+import fetch from 'isomorphic-fetch';
 
 const fetchingBudgets = () => {
   return {
@@ -28,13 +29,19 @@ export const getUserBudgets = (userid) => {
         'Content-Type': 'application/json'
       }
     })
-    .then((results) => {
-      console.log('response in getUserBudgets action', results);
-      dispatch(receivedUserBudgets(results.data));
+    //note to self: investigate why commented out code is different from the one below...
+    // .then((results) => {
+    //   console.log('results', results);
+    //   console.log('results.json() in getUserBudgets action', results.json());
+    //   return results.json();
+    // })
+    .then(response => response.json())
+    .then((json) => {
+      dispatch(receivedUserBudgets(json));
     })
     .catch((err) => {
       console.log('error in get', err);
-      dispatch(fetchUserBudgetsError(error));
+      dispatch(fetchUserBudgetsError(err));
     });
   };
 };

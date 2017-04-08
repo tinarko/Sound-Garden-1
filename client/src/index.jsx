@@ -5,9 +5,10 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { createLogger } from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
 
 import appReducer from './reducers/appReducer.js';
 import Balance from './components/Balance.jsx';
@@ -49,7 +50,8 @@ class App extends React.Component {
   }
 }
 
-let store = createStore(appReducer);
+const middleware = applyMiddleware(thunkMiddleware, createLogger())
+let store = createStore(appReducer, middleware);
 
 ReactDOM.render(
 <Provider store={store}>

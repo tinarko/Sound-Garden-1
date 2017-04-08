@@ -16,7 +16,7 @@ class Budget extends React.Component {
     return (
       <div>
         <h2> Budget for {month} </h2>
-        <BudgetCategories/>
+
       </div>
 
     )

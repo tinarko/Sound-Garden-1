@@ -43,10 +43,12 @@ module.exports = {
 
   'budget': {
     getUserBudgets: function (req, res) {
+      console.log('in request Handler');
       db.getUserBudgets(req.params.id, function(err, results) {
         if (err) {
           res.status(500).send(err);
         } else {
+          console.log('results:', results);
           res.status(200).send(results);
         }
       });
