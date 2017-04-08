@@ -6,7 +6,6 @@ var config = require('./../config/config');
 var db = require('./../database/index');
 var config = require('./../config/config');
 
-
 var PLAID_CLIENT_ID  = config.plaid.clientID;
 var PLAID_SECRET     = config.plaid.clientSecret;
 var PLAID_PUBLIC_KEY = config.plaid.publicKey;
@@ -20,12 +19,12 @@ var client = new plaid.Client(
   plaid.environments[PLAID_ENV]
 );
 
-// exchanges and stores the Item's (institution's) access token
 //TODO: error handling
 module.exports = {
   'plaid': {
     accessToken: function(req, res) {
       var PUBLIC_TOKEN = req.body.public_token;
+      // exchange public token for access token through plaid client
       client.exchangePublicToken(PUBLIC_TOKEN, function(err, tokenResponse) {
         if (err) {
           console.log('could not exchange public token', error);
@@ -38,6 +37,8 @@ module.exports = {
 
         // check if the item exists update item, if not, add the item
         db.updatePlaidItem([ACCESS_TOKEN, institutionName, userid], function(err, response) {
+          // TODO: -------------------- never adds more than one row in current state
+          // TODO: refine to update based off of account id
           console.log(response);
           if (err) {
             console.log('error updating plaid item');
@@ -53,16 +54,27 @@ module.exports = {
               }    
               return res.json({error: false});
             });
+          } else {
+            return res.json({error: false});
           }
-          return res.json({error: false});
         });
       });
     },
     accounts: function(req, res) {
       // TODO: must supply access_token
-      // userid only present after sign-in
-      // console.log(req.session.passport.user.userid)
-      
+      // Query database to retrieve all Plaid items associated with userid
+        // iterate through access tokens and retrieve data through Plaid client
+        // add data to object and send response
+      var userid = req.session.passport.user;
+      var accountData = {};
+      db.getPlaidItems(userid, function(err, response) {
+        console.log(response);
+        // note: specific information per account received after access_token is used
+        for (var i = 0; i < response.length; i++) {
+          
+        }
+      });
+
       client.getAuth("access-sandbox-7269eaa2-c476-45f6-ae85-9e6f8e4c0824", function(error, data) {
         if (error) {
           console.log('error in getting account data', error);

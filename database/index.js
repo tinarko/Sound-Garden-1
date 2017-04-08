@@ -36,8 +36,10 @@ module.exports = {
   },
 
   updatePlaidItem: function(params, cb) {
-    var query = 'UPDATE items SET access_token = ?, institution_name = ? where user_id = ?';
-    connection.query(query, params, function(err, results, field) {
+    // update if the institution name already exists
+    // refine to update off of account data
+    var query = 'UPDATE items SET access_token = ?, institution_name = ? where user_id = ? AND institution_name = ?';
+    connection.query(query, [params[0], params[1], params[2], params[1]], function(err, results, field) {
       console.log('updated plaid item', results);
       cb(err, results.affectedRows);
     });
@@ -51,6 +53,12 @@ module.exports = {
     });
   },
 
+  getPlaidItems: function(userid, cb) {
+    var query = 'select * from items, users where users.userid = ?';
+    connection.query(query, userid, function(err, results, field) {
+      cb(err, results);
+    });
+  },
 
   getUserBudgets: function (userid, cb) {
     //need category name and amount from user

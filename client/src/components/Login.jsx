@@ -5,6 +5,23 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.onPlaidClick = this.onPlaidClick.bind(this);
+    this.getAccountData = this.getAccountData.bind(this);
+  }
+
+  getAccountData() {
+    fetch('/plaid/accounts', {
+      // TODO: required to send cookies
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then((response) => {
+        console.log('successful fetch of account data', response);
+      })
+      .catch((err) => {
+        console.log('error in fetching account data', err);
+      });
   }
 
   onPlaidClick() {
@@ -69,6 +86,7 @@ class Login extends React.Component {
         <button id="link-button"
           onClick={this.onPlaidClick}
         >Add Accounts to Plaid</button>
+        <button onClick={this.getAccountData}>Account data</button>
       </div>
     );
   }
