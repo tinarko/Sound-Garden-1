@@ -12,7 +12,34 @@ CREATE TABLE users (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE budgets (
+  id int NOT NULL AUTO_INCREMENT,
+  user_id int NOT NULL,
+  month timestamp, 
+  PRIMARY KEY (id)
+);
 
+CREATE TABLE categorytypes (
+  id int NOT NULL AUTO_INCREMENT,
+  name varchar(255),
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE budgetcategories (
+  id int NOT NULL AUTO_INCREMENT,
+  budget_id int NOT NULL,
+  category_id int NOT NULL,
+  goalvalue decimal(7,2),
+  actualvalue decimal(7,2),
+  PRIMARY KEY (id)
+);
+
+INSERT INTO users (id, userid, name) VALUES (1, 1, 'Chris'); 
+INSERT INTO budgets (id, user_id, month) VALUES (1, 1, NOW());
+INSERT INTO categorytypes (id, name) VALUES (1, 'Restaurants');
+INSERT INTO categorytypes (id, name) VALUES (2, 'Gas and Transportation');
+INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (1, 1, 1, 500.00, 200.00);
+INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (2, 1, 2, 100.00, 50.00);
 /*  Execute this file from the command line by typing:
- *    mysql -u root < server/schema.sql
+ *    mysql -u root < schema.sql
  *  to create the database and the tables.*/

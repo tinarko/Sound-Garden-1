@@ -24,6 +24,7 @@ class Budget extends React.Component {
 
         </div>
         <BudgetCategories/>
+        <BudgetCategories/>
       </div>
 
     )
