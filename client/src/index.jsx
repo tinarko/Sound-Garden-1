@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { createLogger } from 'redux-logger';
 
 import appReducer from './reducers/appReducer.js';
 import Balance from './components/Balance.jsx';
