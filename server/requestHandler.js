@@ -10,10 +10,7 @@ var config = require('./../config/config');
 var PLAID_CLIENT_ID  = config.plaid.clientID;
 var PLAID_SECRET     = config.plaid.clientSecret;
 var PLAID_PUBLIC_KEY = config.plaid.publicKey;
-// TODO: adjust environment as product life cycle advances
 var PLAID_ENV        = config.plaid.plaidEnv;
-
-// TODO: store ACCESS_TOKEN INTO DATABASE
 
 var client = new plaid.Client(
   PLAID_CLIENT_ID,
@@ -24,6 +21,7 @@ var client = new plaid.Client(
 );
 
 // exchanges and stores the Item's (institution's) access token
+//TODO: error handling
 module.exports = {
   'plaid': {
     accessToken: function(req, res) {
@@ -41,20 +39,30 @@ module.exports = {
         // check if the item exists update item, if not, add the item
         db.updatePlaidItem([ACCESS_TOKEN, institutionName, userid], function(err, response) {
           console.log(response);
+          if (err) {
+            console.log('error updating plaid item');
+            return res.json({error: 'error updating plaid item'});
+          }
+          
           if (response === 0) {
             // plaid item is new so insert
             db.insertPlaidItem([userid, ACCESS_TOKEN, institutionName], function(err, response) {
-
+              if (err) {
+                console.log('error inserting plaid item');
+                return res.json({error: 'error inserting plaid item'});
+              }    
+              return res.json({error: false});
             });
           }
+          return res.json({error: false});
         });
-        res.json({error: false});
       });
     },
     accounts: function(req, res) {
       // TODO: must supply access_token
       // userid only present after sign-in
       // console.log(req.session.passport.user.userid)
+      
       client.getAuth("access-sandbox-7269eaa2-c476-45f6-ae85-9e6f8e4c0824", function(error, data) {
         if (error) {
           console.log('error in getting account data', error);
