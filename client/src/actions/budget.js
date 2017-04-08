@@ -19,25 +19,25 @@ export const receivedUserBudgets = (budgets) => {
   };
 };
 
-// export const getUserBudgets = (userid) => {
-//   return (dispatch) => {
-//     dispatch(fetchingBudgets());
-//     fetch(`/budget/getuserbudgets/${userid}`, {
-//       method: 'GET',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       }
-//     })
-//     .then((results) => {
-//       console.log('response in getUserBudgets action', results);
-//       dispatch(receivedUserBudgets(results.data));
-//     })
-//     .catch((err) => {
-//       console.log('error in get', err);
-//       dispatch(fetchUserBudgetsError(error));
-//     });
-//   };
-// };
+export const getUserBudgets = (userid) => {
+  return (dispatch) => {
+    dispatch(fetchingBudgets());
+    fetch(`/budget/getuserbudgets/${userid}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((results) => {
+      console.log('response in getUserBudgets action', results);
+      dispatch(receivedUserBudgets(results.data));
+    })
+    .catch((err) => {
+      console.log('error in get', err);
+      dispatch(fetchUserBudgetsError(error));
+    });
+  };
+};
 
 export const incrementBudget = () => {
   return {
