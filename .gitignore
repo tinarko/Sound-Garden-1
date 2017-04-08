@@ -1,6 +1,7 @@
 ### node etc ###
 
 # config
+*.env
 config/config.js
 
 # Logs
