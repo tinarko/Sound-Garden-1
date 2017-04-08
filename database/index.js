@@ -35,6 +35,23 @@ module.exports = {
     });
   },
 
+  updatePlaidItem: function(params, cb) {
+    var query = 'UPDATE items SET access_token = ?, institution_name = ? where user_id = ?';
+    connection.query(query, params, function(err, results, field) {
+      console.log('updated plaid item');
+      cb(err, results);
+    });
+  },
+  
+  insertPlaidItem: function(params, cb) {
+    var query = 'insert into items values (?, ?, ?)';
+    connection.query(query, params, function(err, results, field) { 
+      console.log('inserted new plaid item');
+      cb(err, results);
+    });
+  },
+
+
   getUserBudgets: function (userid, cb) {
     //need category name and amount from user
     //obtain user id where name = whichever

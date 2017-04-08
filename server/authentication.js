@@ -29,6 +29,7 @@ passport.use(new FacebookStrategy({
 }));
 
 // serialize and deserialize User to save and retrieve user data from session
+// stores user in session
 passport.serializeUser((user, done) => {
   console.log('serializing', user);
   done(null, user);
@@ -39,8 +40,5 @@ passport.deserializeUser((id, done) => {
   //   done(err, user);
   // });
   console.log('deserializing', id);
-  done(null, id)
-  // db.findUser({userid: id}, (err, user) => {
-  //   done(err, user);
-  // });
+  done(null, id);
 });

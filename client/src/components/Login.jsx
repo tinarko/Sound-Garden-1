@@ -15,7 +15,7 @@ class Login extends React.Component {
       key: config.plaid.publicKey,
       product: ['auth', 'transactions'],
       // webhook: '[WEBHOOK_URL]', // Optional – use webhooks to get transaction and error updates
-      selectAccount: true, // Optional – trigger the Select Account
+      // selectAccount: true, // Optional – trigger the Select Account
       onLoad: function() {
         // Optional, called when Link loads
       },
@@ -25,7 +25,7 @@ class Login extends React.Component {
         // user selected and the account ID, if `selectAccount` is enabled.
         
         // TODO: implement server route for plaid
-        console.log(metadata);
+        console.log(document.cookie);
         fetch('/plaid/access_token', {
           method: 'POST',
           headers: {
@@ -33,6 +33,10 @@ class Login extends React.Component {
           },
           body: JSON.stringify({
             public_token: public_token,
+            metadata: metadata,
+            // read and send cookie
+            // TODO: attempt not to parse here
+            userid: document.cookie.split('=')[1],
           })
         })
           .then((response) => {
@@ -44,7 +48,7 @@ class Login extends React.Component {
       },
       onExit: function(err, metadata) {
         // The user exited the Link flow.
-        console.log(metadata)
+        console.log(metadata);
         if (err != null) {
           // The user encountered a Plaid API error prior to exiting.
         }

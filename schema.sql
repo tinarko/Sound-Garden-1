@@ -5,11 +5,10 @@ CREATE DATABASE thesis;
 USE thesis;
 
 CREATE TABLE users (
-  id int NOT NULL AUTO_INCREMENT,
   userid varchar(255) NOT NULL,
   name varchar(255),
   email varchar(255),
-  PRIMARY KEY (id)
+  PRIMARY KEY (userid)
 );
 
 CREATE TABLE budgets (
@@ -32,6 +31,14 @@ CREATE TABLE budgetcategories (
   goalvalue decimal(7,2),
   actualvalue decimal(7,2),
   PRIMARY KEY (id)
+);
+
+CREATE TABLE items (
+  id int NOT NULL AUTO_INCREMENT,
+  user_id varchar(255),
+  access_token varchar(255),
+  institution_name varchar(255),
+  PRIMARY KEY(id)
 );
 
 /*  Execute this file from the command line by typing:
