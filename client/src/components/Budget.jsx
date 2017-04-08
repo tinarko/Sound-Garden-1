@@ -52,9 +52,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getBudgets: (userid) => { dispatch(getUserBudgets(userid)); },
-    // receivedUserBudgets: (results) => { dispatch(receivedUserBudgets(results.data)); },
-    // fetchUserBudgetsError: (error) => { dispatch(fetchUserBudgetsError(error))}
+    getBudgets: (userid) => { dispatch(getUserBudgets(userid)); }
   };
 };
 export default connect (mapStateToProps, mapDispatchToProps) (Budget);
