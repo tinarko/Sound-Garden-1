@@ -8,7 +8,6 @@ import { getUserBudgets } from '../actions/budget.js';
 class Budget extends React.Component {
   constructor (props) {
     super(props);
-    // this.getUserBudgets = this.getUserBudgets.bind(this);
   }
 
   componentWillMount () {
@@ -17,22 +16,11 @@ class Budget extends React.Component {
     // this.getUserBudgets(1);
   }
 
-  // getUserBudgets (userid) {
-  //   fetch(`/budget/getuserbudgets/${userid}`, {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-  //   .then((results) => {
-  //     console.log('response in getUserBudgets action', results);
-  //     this.props.receivedUserBudgets(results);
-  //   })
-  //   .catch((err) => {
-  //     console.log('error in get', err);
-  //     this.props.fetchUserBudgetsError(err);
-  //   });
+  // componentDidMount () {
+  //   let { dispatch, getBudgets } = this.props;
+  //   getBudgets(1);
   // }
+
   render () {
 
     let totalSpent = 500;

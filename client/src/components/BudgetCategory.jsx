@@ -3,26 +3,20 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { incrementBudget, decrementBudget } from '../actions/budget.js';
 
-class BudgetCategories extends React.Component {
+class BudgetCategory extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    console.log('this.props', this.props);
-  }
-
-
   render() {
 
-    let category = 'Restaurant'; 
     let actualSpending = 200;
 
     return (
       <p className="budgetCategory">
-        {category}
+        {this.props.budgetcategory.name}
         <div>
-        Budget Goal: {this.props.budget} <button onClick={(e) => { this.props.handleIncrement(); } }> Increment </button> <button onClick={(e) => { this.props.handleDecrement(); } }> Decrement </button>
+        Budget Goal: {this.props.budgetcategory.goalvalue} <button onClick={(e) => { this.props.handleIncrement(); } }> Increment </button> <button onClick={(e) => { this.props.handleDecrement(); } }> Decrement </button>
         </div>
         <div>
         Spent this Month: {actualSpending}
@@ -46,4 +40,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect (mapStateToProps, mapDispatchToProps) (BudgetCategories);
+export default connect (mapStateToProps, mapDispatchToProps) (BudgetCategory);
