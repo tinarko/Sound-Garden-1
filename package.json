@@ -14,6 +14,7 @@
   "dependencies": {
     "babel-loader": "^6.4.1",
     "babel-preset-react": "^6.23.0",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
     "envvar": "^1.1.0",

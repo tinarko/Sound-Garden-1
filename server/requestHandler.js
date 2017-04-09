@@ -1,6 +1,7 @@
 var envvar = require('envvar');
 var moment = require('moment');
 var plaid = require('plaid');
+var Promise = require('bluebird');
 
 var config = require('./../config/config');
 var db = require('./../database/index');
@@ -66,24 +67,36 @@ module.exports = {
         // iterate through access tokens and retrieve data through Plaid client
         // add data to object and send response
       var userid = req.session.passport.user;
+      var promises = [];
       var accountData = {};
       db.getPlaidItems(userid, function(err, response) {
-        console.log(response);
+        // console.log(response);
         // note: specific information per account received after access_token is used
         for (var i = 0; i < response.length; i++) {
-          
+          promises.push(client.getAccounts(response[i].access_token)
+            .then(function(data) {
+              console.log(data);
+              // IMPORTANT: data contains accounts and item (bank) information
+              // TODO: only need accounts information for now.
+              return data.accounts;
+            })
+            .catch(function(error) {
+              return error;
+              // return res.json({error: 'error in getting account data from plaid client'});
+            })
+          );
         }
-      });
-
-      client.getAuth("access-sandbox-7269eaa2-c476-45f6-ae85-9e6f8e4c0824", function(error, data) {
-        if (error) {
-          console.log('error in getting account data', error);
-          return res.json({error: 'error in getting account data'});
-        }
-        res.json({
-          accounts: data.accounts,
-          numbers: data.numbers
-        });
+        Promise.all(promises)
+          .then(function(results) {
+            for (var i = 0; i < response.length; i++) {
+              accountData[response[i].institution_name] = results[i];
+              console.log(accountData);
+              return res.json(accountData);
+            }
+          })
+          .catch(function(error) {
+            return res.json({error: 'error in getting account data from plaid clients'});
+          });
       });
     }
   },
