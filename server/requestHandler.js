@@ -69,13 +69,14 @@ module.exports = {
       var userid = req.session.passport.user;
       var promises = [];
       var accountData = {};
+      // store names Items (for names) in plaidInstitutions
+      var plaidInstitutions = [];
       db.getPlaidItems(userid, function(err, response) {
-        // console.log(response);
         // note: specific information per account received after access_token is used
+        plaidInstitutions = response;
         for (var i = 0; i < response.length; i++) {
           promises.push(client.getAccounts(response[i].access_token)
             .then(function(data) {
-              console.log(data);
               // IMPORTANT: data contains accounts and item (bank) information
               // TODO: only need accounts information for now.
               return data.accounts;
@@ -88,11 +89,10 @@ module.exports = {
         }
         Promise.all(promises)
           .then(function(results) {
-            for (var i = 0; i < response.length; i++) {
-              accountData[response[i].institution_name] = results[i];
-              console.log(accountData);
-              return res.json(accountData);
+            for (var j = 0; j < plaidInstitutions.length; j++) {
+              accountData[plaidInstitutions[j].institution_name] = results[j];
             }
+            return res.json(accountData);
           })
           .catch(function(error) {
             return res.json({error: 'error in getting account data from plaid clients'});

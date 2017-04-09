@@ -18,6 +18,10 @@ class Login extends React.Component {
     })
       .then((response) => {
         console.log('successful fetch of account data', response);
+        response.json()
+          .then(function(json) {
+            console.log(json);
+          });
       })
       .catch((err) => {
         console.log('error in fetching account data', err);
