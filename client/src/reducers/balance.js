@@ -1,15 +1,21 @@
 // reducers accept previous state and action
-export default (state = {}, action) => {
+export default (state = {
+  balance: null,
+  error: null,
+  fetching: false,
+  fetched: false,
+
+}, action) => {
   switch (action.type) {
     case 'GET_BALANCE_START': {
-      state = {
+      return state = {
         ...state, 
         fetching: true
       };
       break;
     }
     case 'GET_BALANCE_ERROR': {
-      state = {
+      return state = {
         ...state,
         fetching: false,
         error: action.payload
@@ -17,7 +23,7 @@ export default (state = {}, action) => {
       break;
     }
     case 'GET_BALANCE_FULFILLED': {
-      state = {
+      return state = {
         ...state,
         fetching: false,
         fetched: true,
@@ -25,6 +31,7 @@ export default (state = {}, action) => {
       };
       break;
     }
+    default: 
+      return state;
   }
-  return state;
 };
