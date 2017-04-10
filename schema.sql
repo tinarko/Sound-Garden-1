@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS thesis;
+DROP DATABASE IF EXISTS heroku_aa9603bdcb7e15e;
 
-CREATE DATABASE thesis;
+CREATE DATABASE heroku_aa9603bdcb7e15e;
 
-USE thesis;
+USE heroku_aa9603bdcb7e15e;
 
 CREATE TABLE users (
   userid varchar(255) NOT NULL,

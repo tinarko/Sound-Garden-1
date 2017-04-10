@@ -30,7 +30,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-app.use(express.static(__dirname + './../client/index.html'));
+app.use(express.static(__dirname + './../client/dist'));
 
 app.get('/auth/facebook', 
   passport.authenticate('facebook', {scope: 'email'}));
