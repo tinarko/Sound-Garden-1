@@ -28,7 +28,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-          <h1>Thesis</h1>
+          <Link to="/"><h1>Thesis</h1></Link>
           <Navbar />
 
           <hr/>
