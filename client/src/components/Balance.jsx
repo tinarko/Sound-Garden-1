@@ -3,9 +3,7 @@ import React from 'react';
 class Balance extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-    };
-  }
+    }
 
   componentDidMount() {
   }

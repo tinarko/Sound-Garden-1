@@ -5,12 +5,9 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { createLogger } from 'redux-logger';
-import thunkMiddleware from 'redux-thunk';
 
-import appReducer from './reducers/appReducer.js';
+import store from './../store.js';
 import Balance from './components/Balance.jsx';
 import Budget from './components/Budget.jsx';
 import CCSelector from './components/CCSelector.jsx';
@@ -22,8 +19,6 @@ import EmailNotifications from './components/EmailNotifications.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { 
-    };
   }
 
   componentDidMount() {
@@ -50,11 +45,9 @@ class App extends React.Component {
   }
 }
 
-const middleware = applyMiddleware(thunkMiddleware, createLogger());
-let store = createStore(appReducer, middleware);
-
 ReactDOM.render(
-<Provider store={store}>
-  <App />
-</Provider>,
- document.getElementById('app'));
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+);

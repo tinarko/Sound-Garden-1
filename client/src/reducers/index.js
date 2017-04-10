@@ -5,9 +5,6 @@ import budget from './budget.js';
 // import * as reducers from './reducers';
 // const appReducer = combineReducers(reducers);
 
-// temporary combineReducers
-const appReducer = combineReducers({
+export default combineReducers({
   budget
 });
-
-export default appReducer;
