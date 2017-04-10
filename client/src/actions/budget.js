@@ -28,7 +28,9 @@ export const getUserBudgets = (userid) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      credentials: 'same-origin',
+
     })
     //note to self: investigate why commented out code is different from the one below...
     // .then((results) => {
