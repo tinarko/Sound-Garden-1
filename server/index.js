@@ -48,6 +48,7 @@ app.get('/budget/getuserbudgets/:id', requestHandler.budget.getUserBudgets);
 app.get('/creditcards/getcreditcards/:userid', requestHandler.creditcards.getUserCreditcards);
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);
 app.get('/plaid/accounts', requestHandler.plaid.accounts);
+app.get('/plaid/transactions/:year/:month', requestHandler.plaid.transactions);
 
 app.get('*', (req,res) => {
   res.sendFile(path.resolve(__dirname,'..','client', 'index.html'));
@@ -57,5 +58,6 @@ let port = process.env.PORT || 1337;
 
 app.listen(port, function() {
   console.log('listening on port ' + port + '!');
+
 });
 

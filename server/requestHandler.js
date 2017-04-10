@@ -116,6 +116,53 @@ module.exports = {
             return res.json({error: 'error in getting account data from plaid clients'});
           });
       });
+    },
+    transactions: function (req, res) {
+      var userid = req.session.passport.user;
+      var periodStart = `${req.params.year}-${req.params.month}-01`
+      // console.log('begin of month', periodStart);
+      // console.log('typeof begin of month', typeof periodStart);
+
+      var today = new Date ();
+      var month = (today.getMonth() + 1).toString();
+      if (month.length < 2) {
+        month = '0'.concat(month);
+      }
+      var year = today.getFullYear().toString();
+
+      var day = today.getDate().toString();
+
+      var periodEnd = year + '-' + month + '-' + day;
+      console.log('todayDate', periodEnd);
+
+      var promises = [];
+      var transactionData = {};
+      var plaidInstitutions = [];
+      db.getPlaidItems(userid, function(err, response) {
+        plaidInstitutions = response;
+        for (var i = 0; i < response.length; i++) {
+          // promises.push(client.getTransactions(response[i].access_token, periodStart, periodEnd)
+          promises.push(client.getTransactions(response[i].access_token, '2017-03-01', '2017-04-15')
+            .then(function(data) {
+              console.log('entered then');
+              return data.transactions;
+            })
+            .catch(function(error) {
+              return error;
+            })
+          );
+        }
+        Promise.all(promises)
+        .then(function(results) {
+          for (var j = 0; j < plaidInstitutions.length; j++) {
+            transactionData[plaidInstitutions[j].institution_name] = results[j];
+          }
+          return res.json(transactionData);
+        })
+        .catch(function(error) {
+          return res.json({error: 'error in getting transaction data from plaid clients'});
+        });
+      });
     }
   },
 

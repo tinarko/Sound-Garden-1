@@ -6,6 +6,7 @@ class Login extends React.Component {
     super(props);
     this.onPlaidClick = this.onPlaidClick.bind(this);
     this.getAccountData = this.getAccountData.bind(this);
+    this.getTransactionData = this.getTransactionData.bind(this);
   }
 
   getAccountData() {
@@ -25,6 +26,26 @@ class Login extends React.Component {
       })
       .catch((err) => {
         console.log('error in fetching account data', err);
+      });
+  }
+
+  getTransactionData() {
+    fetch('/plaid/transactions', {
+      // TODO: required to send cookies
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then((response) => {
+        console.log('successful fetch of transaction data', response);
+        response.json()
+          .then(function(json) {
+            console.log(json);
+          });
+      })
+      .catch((err) => {
+        console.log('error in fetching transaction data', err);
       });
   }
 
@@ -92,6 +113,7 @@ class Login extends React.Component {
           onClick={this.onPlaidClick}
         >Add Accounts to Plaid</button>
         <button onClick={this.getAccountData}>Account data</button>
+        <button onClick={this.getTransactionData}>Transaction data</button>
       </div>
     );
   }
