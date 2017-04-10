@@ -1,5 +1,8 @@
 export const getBalance = () => {
-  return () => {
+  // dispatching in this manner utilizes the thunk middleware
+  return (dispatch) => {
+    console.log('hi')
+    dispatch({type: 'GET_BALANCE_START'});
     fetch('/plaid/accounts', {
       // TODO: required to send cookies
       credentials: 'same-origin',
@@ -16,7 +19,7 @@ export const getBalance = () => {
       })
       .catch((err) => {
         console.log('error in fetching account data', err);
-        dispatch({type: 'GET_BALANCE_REJECTED', payload: err});
+        dispatch({type: 'GET_BALANCE_ERROR', payload: err});
       });
   };
 };

@@ -8,5 +8,5 @@ import balance from './balance.js';
 
 export default combineReducers({
   balance,
-  budget
+  budget,
 });

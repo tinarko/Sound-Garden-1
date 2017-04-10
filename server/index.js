@@ -1,7 +1,7 @@
 let dotenv = require('dotenv')
 var path = require('path');
-dotenv.load();
-dotenv.config({path: process.env.PWD + '/config.env'});
+// dotenv.load();
+// dotenv.config({path: process.env.PWD + '/config.env'});
 
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -11,7 +11,7 @@ var passport = require('passport');
 
 // import passport authentication strategies
 var authentication = require('./authentication');
-// var config = require('./../config/config');
+var config = require('./../config/config');
 var db = require('./../database/index');
 var requestHandler = require('./requestHandler');
 
