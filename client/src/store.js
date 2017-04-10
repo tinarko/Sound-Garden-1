@@ -4,4 +4,4 @@ import {createLogger} from 'redux-logger';
 import reducer from './reducers/index.js';
 
 const middleware = applyMiddleware(thunkMiddleware, createLogger());
-export default createStore(appReducer, middleware);
+export default createStore(reducer, middleware);

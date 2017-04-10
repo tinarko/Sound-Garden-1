@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import store from './../store.js';
+import store from './store.js';
 import Balance from './components/Balance.jsx';
 import Budget from './components/Budget.jsx';
 import CCSelector from './components/CCSelector.jsx';
