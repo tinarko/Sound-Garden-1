@@ -1,13 +1,12 @@
 var passport = require('passport');
-var config = require('./../config/config');
+// var config = require('./../config/config');
 var FacebookStrategy = require('passport-facebook');
 var db = require('./../database/index');
 
-
 passport.use(new FacebookStrategy({
-  clientID: config.facebook.clientID,
-  clientSecret: config.facebook.clientSecret,
-  callbackURL: config.facebook.callbackURL,
+  clientID: process.env.FB_appID,
+  clientSecret: process.env.FB_secret,
+  callbackURL: process.env.SITE_URL + 'auth/facebook/return',
   profileFields: ['id', 'displayName', 'email'],
 }, 
 (accessToken, refreshToken, profile, done) => {

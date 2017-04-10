@@ -3,7 +3,6 @@ var moment = require('moment');
 var plaid = require('plaid');
 var Promise = require('bluebird');
 
-var config = require('./../config/config');
 var db = require('./../database/index');
 // var config = require('./../config/config');
 

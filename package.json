@@ -9,18 +9,22 @@
   },
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/index.js"
+    "server-dev": "nodemon server/index.js",
+    "start": "node server/index.js",
+    "heroku-postbuild": "webpack"
   },
   "dependencies": {
     "babel-loader": "^6.4.1",
     "babel-preset-react": "^6.23.0",
-    "bluebird": "^3.5.0",
     "babel-preset-stage-2": "^6.24.1",
+    "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
     "envvar": "^1.1.0",
     "express": "^4.15.2",
     "express-session": "^1.15.2",
+    "isomorphic-fetch": "^2.2.1",
+    "json-loader": "^0.5.4",
     "moment": "^2.18.1",
     "mysql": "^2.13.0",
     "nodemon": "^1.11.0",

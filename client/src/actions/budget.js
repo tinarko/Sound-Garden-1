@@ -23,6 +23,7 @@ export const receivedUserBudgets = (budgets) => {
 export const getUserBudgets = (userid) => {
   return (dispatch) => {
     dispatch(fetchingBudgets());
+    console.log(userid);
     fetch(`/budget/getuserbudgets/${userid}`, {
       method: 'GET',
       headers: {

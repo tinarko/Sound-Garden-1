@@ -63,7 +63,7 @@ module.exports = {
   getUserBudgets: function (userid, cb) {
     //need category name and amount from user
     //obtain user id where name = whichever
-    var queryString = 'select categorytypes.name, budgetcategories.goalvalue, budgetcategories.actualvalue from categorytypes inner join budgetcategories inner join budgets inner join users on users.id = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id AND users.id = ?;';
+    var queryString = 'select categorytypes.name, budgetcategories.goalvalue, budgetcategories.actualvalue from categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id AND users.userid = ?;';
     connection.query(queryString, userid, function (err, results) {
       if (results.length === 0) {
         cb(err, null);

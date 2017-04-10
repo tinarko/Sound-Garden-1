@@ -1,3 +1,8 @@
+let dotenv = require('dotenv')
+var path = require('path');
+dotenv.load();
+dotenv.config({path: process.env.PWD + '/config.env'});
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -6,7 +11,7 @@ var passport = require('passport');
 
 // import passport authentication strategies
 var authentication = require('./authentication');
-var config = require('./../config/config');
+// var config = require('./../config/config');
 var db = require('./../database/index');
 var requestHandler = require('./requestHandler');
 
@@ -44,7 +49,14 @@ app.get('/auth/facebook/return',
 app.get('/budget/getuserbudgets/:id', requestHandler.budget.getUserBudgets);
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);
 app.get('/plaid/accounts', requestHandler.plaid.accounts);
-app.listen(1337, function() {
-  console.log('listening on port 1337!');
+
+app.get('*', (req,res) => {
+  res.sendFile(path.resolve(__dirname,'..','client', 'index.html'));
+});
+
+let port = process.env.PORT || 1337;
+
+app.listen(port, function() {
+  console.log('listening on port ' + port + '!');
 });
 
