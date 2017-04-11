@@ -138,16 +138,16 @@ module.exports = {
       var promises = [];
       var transactionData = {};
       var plaidInstitutions = [];
+      var counter = 1;
       db.getPlaidItems(userid, function(err, response) {
         plaidInstitutions = response;
         for (var i = 0; i < response.length; i++) {
           // promises.push(client.getTransactions(response[i].access_token, periodStart, periodEnd)
           promises.push(client.getTransactions(response[i].access_token, '2017-03-10', '2017-04-10')
             .then(function(data) {
-              console.log('entered then');
-              console.log('transactions data =======', data);
+              console.log('transactions data =======', data.transactions.length);
               return data.transactions;
-              
+
             })
             .catch(function(error) {
               return error;
@@ -156,10 +156,48 @@ module.exports = {
         }
         Promise.all(promises)
         .then(function(results) {
-          for (var j = 0; j < plaidInstitutions.length; j++) {
-            transactionData[plaidInstitutions[j].institution_name] = results[j];
-          }
-          return res.json(transactionData);
+          console.log('these are the results of the promise all', results[0].length, results[1].length);
+          // for (var j = 0; j < plaidInstitutions.length; j++) {
+          //   transactionData[plaidInstitutions[j].institution_name] = results[j];
+          // }
+          var transactions = [];
+          results.forEach(function(array) {
+            for (var i = 0; i < array.length; i++) {
+              transactions.push(array[i]);
+            }
+          });
+          console.log('transactions.length', transactions.length);
+
+          var categoryObject = {
+              'Restaurants': 0,
+              'Fast Food': 0,
+              'Coffee Shop': 0,
+              'Groceries': 0,
+              'Entertainment': 0,
+              'Travel': 0,
+              // 'Food and Drink': 0,
+              'Other': 0
+            };
+            
+            for (var i = 0; i < transactions.length; i++) {
+              if (transactions[i]['category']) {
+                for (var j = 0; j < transactions[i]['category'].length; j++) {
+                  var categoryName = transactions[i]['category'][j];
+                  if(categoryName in categoryObject) {
+                    categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'];
+                  } else if (categoryName === 'Transfer' || categoryName === 'Deposit' ) {
+                    continue;
+                  } else {
+                    categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'];
+                  }
+                }
+              } else {
+                categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'];
+              }
+            }
+          
+          // return res.json(transactions);
+          return res.json(categoryObject);
         })
         .catch(function(error) {
           return res.json({error: 'error in getting transaction data from plaid clients'});
