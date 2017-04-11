@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : '',
-  database : 'thesis'
+  database : 'heroku_aa9603bdcb7e15e'
 });
 
 connection.connect();

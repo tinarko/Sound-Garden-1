@@ -15,6 +15,7 @@ class Balance extends React.Component {
   }
 
   render () {
+
     return (
       <div>
         <h1>Balance</h1>
