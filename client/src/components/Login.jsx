@@ -1,5 +1,5 @@
 import React from 'react';
-import config from './../../../config/config.js';
+// import config from './../../../config/config.js';
 
 class Login extends React.Component {
   constructor(props) {
