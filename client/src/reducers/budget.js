@@ -2,8 +2,9 @@ const initialState = {
   budgets: ['test'],
   fetchingBudgets: false,
   error: null, 
-  transactions: null,
-  fetchingTransactions: false
+  fetchingTransactions: false,
+  totalSpent: 0,
+  totalBudget: 0
 };
 
 
@@ -31,9 +32,30 @@ const budget = (state = initialState, action) => {
         fetchingTransactions: true
       }
     case 'RECEIVED_TRANSACTIONS':
+      var newArray = state.budgets; 
+
+        for (var category in action.transactions) {
+          var found = false;
+          for (var i = 0; i < newArray.length; i++) {
+            if (category === newArray[i].name) {
+              newArray[i].actualvalue = action.transactions[category];
+              found = true;
+            } 
+          }
+
+          if (!found) {
+            for (var i =0; i < newArray.length; i++) {
+              if (newArray[i] === 'Other') {
+                newArray[i].value = newArray[i].value + action.transactions[category];
+              }
+            }
+          }
+        }
+
+        console.log('newArray after transformation', newArray);
       return {
         ...state,
-        transactions: action.transactions
+        budgets: newArray
       };
     case 'FETCH_TRANSACTIONS_ERROR':
       return {
