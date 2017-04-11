@@ -92,12 +92,34 @@ module.exports = {
             })
           );
         }
+        var accountTypes = {};
         Promise.all(promises)
           .then(function(results) {
             for (var j = 0; j < plaidInstitutions.length; j++) {
               accountData[plaidInstitutions[j].institution_name] = results[j];
             }
-            return res.json(accountData);
+            // categorize the account data for the client
+            for (var item in accountData) {
+              console.log(item, accountData)
+              // initializes the object
+              for (let i = 0; i < accountData[item].length; i++) {
+                // iterate through each account
+                var accountSubtype = accountData[item][i].subtype;
+                // if the account type is NOT present, initialize the array
+                if (!accountTypes[accountSubtype]) {
+                  accountTypes[accountSubtype] = [{
+                    institution_name: item,
+                    account: accountData[item][i],
+                  }];
+                } else {
+                  accountTypes[accountSubtype].push({
+                    institution_name: item,
+                    account: accountData[item][i],
+                  });
+                }
+              }
+            }
+            return res.json(accountTypes);
           })
           .catch(function(error) {
             return res.json({error: 'error in getting account data from plaid clients'});
