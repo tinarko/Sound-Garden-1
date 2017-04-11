@@ -1,10 +1,11 @@
 import React from 'react';
 
 const BalanceListEntry = (props) => {
-  console.log(props)
+  console.log(props);
   return (
     <li>
-      hi
+      <p>{props.account.name}</p>
+      <p>Available: {props.account.balances.available}</p>
     </li>
   );
 };

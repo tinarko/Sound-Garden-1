@@ -21,8 +21,12 @@ class Balance extends React.Component {
     } else if (this.props.fetched) {
       balance = (
         <div className="balance-list">
-          {Object.keys(this.props.balance).map((key) => {
-            return <BalanceList name={key} balance={this.props.balance[key]}/>;
+          {Object.keys(this.props.balance).map((key, index) => {
+            return <BalanceList 
+              name={key}
+              balance={this.props.balance[key]}
+              key={index}
+            />;
           })}
         </div>);
     }
