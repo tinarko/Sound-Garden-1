@@ -2,23 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import BudgetCategoryList from './BudgetCategoryList.jsx';
-import { getUserBudgets } from '../actions/budget.js';
+import { getUserBudgets, getTransactionData } from '../actions/budget.js';
 // import { receivedUserBudgets, fetchUserBudgetsError } from '../actions/budget.js';
 
 class Budget extends React.Component {
   constructor (props) {
     super(props);
-    this.getTransactionData = this.getTransactionData.bind(this);
   }
 
   componentWillMount () {
-    let { dispatch, getBudgets } = this.props;
-    getBudgets(1);
-    // this.getUserBudgets(1);
-  }
+    console.log('props1', this.props);
+    let { dispatch, getBudgets, getTransactionData} = this.props;
+    console.log('props2', this.props);
 
-  componentDidMount () {
-    console.log('Date.now');
+    // this.getUserBudgets(1);
+    getBudgets(1);
+
     var today = new Date ();
     var month = (today.getMonth() + 1).toString();
     if (month.length < 2) {
@@ -26,28 +25,8 @@ class Budget extends React.Component {
     }
     var year = today.getFullYear().toString();
 
-    this.getTransactionData(year, month);
-  }
-
-  getTransactionData(year, month) {
-    fetch(`/plaid/transactions/${year}/${month}`, {
-      method: 'GET',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then((response) => {
-        console.log('successful fetch of transaction data', response);
-        response.json()
-          .then(function(json) {
-            console.log('console.log json', json);
-            
-          });
-      })
-      .catch((err) => {
-        console.log('error in fetching transaction data', err);
-      });
+    // this.getTransactionData(year, month);
+    getTransactionData(year, month);
   }
 
   render () {
@@ -69,7 +48,7 @@ class Budget extends React.Component {
         <BudgetCategoryList budgetcategories= {this.props.budgetcategories}/>
       </div>
 
-    )
+    );
   }
 }
 
@@ -81,7 +60,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getBudgets: (userid) => { dispatch(getUserBudgets(userid)); }
+    getBudgets: (userid) => { dispatch(getUserBudgets(userid)); },
+    getTransactionData: (year, month) => { dispatch(getTransactionData(year, month)); }
   };
 };
 export default connect (mapStateToProps, mapDispatchToProps) (Budget);

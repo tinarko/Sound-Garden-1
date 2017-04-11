@@ -1,7 +1,9 @@
 const initialState = {
   budgets: ['test'],
   fetchingBudgets: false,
-  error: null
+  error: null, 
+  transactions: null,
+  fetchingTransactions: false
 };
 
 
@@ -23,6 +25,22 @@ const budget = (state = initialState, action) => {
         ...state,
         error: action.error
       };
+    case 'FETCHING_TRANSACTION_DATA':
+      return {
+        ...state,
+        fetchingTransactions: true
+      }
+    case 'RECEIVED_TRANSACTIONS':
+      return {
+        ...state,
+        transactions: action.transactions
+      };
+    case 'FETCH_TRANSACTIONS_ERROR':
+      return {
+        ...state,
+        error: action.error
+      }
+
     case 'INCREMENT_BUDGET':
       return state + 10;
     case 'DECREMENT_BUDGET':

@@ -13,7 +13,7 @@ export const receivedUserBudgets = (budgets) => {
   };
 };
 
- export const fetchUserBudgetsError = (error) => {
+export const fetchUserBudgetsError = (error) => {
   return {
     type: 'FETCH_BUDGETS_ERROR',
     error
@@ -46,6 +46,66 @@ export const getUserBudgets = (userid) => {
       console.log('error in get', err);
       dispatch(fetchUserBudgetsError(err));
     });
+  };
+};
+
+const fetchingTransactionData = () => {
+  return {
+    type: 'FETCHING_TRANSACTION_DATA'
+  };
+};
+
+export const receivedTransactionData = (transactions) => {
+  return {
+    type: 'RECEIVED_TRANSACTIONS',
+    transactions
+  };
+};
+
+export const fetchTransactionError = (error) => {
+  return {
+    type: 'FETCH_TRANSACTIONS_ERROR',
+    error
+  };
+};
+
+export const getTransactionData = (year, month) => {
+  return (dispatch) => {
+    dispatch(fetchingTransactionData());
+    fetch(`/plaid/transactions/${year}/${month}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin'
+    })
+      .then((response) => {
+        console.log('successful fetch of transaction data', response);
+        response.json()
+          .then(function(json) {
+            var categoryObject = {
+              'Restaurants': 0,
+              'Travel': 0,
+              'Other': 0
+            };
+            console.log('console.log json', json);
+            // for (var key in json) {
+            //   // console.log(key);
+            //   for (var i = 0; i < json[key].length; i++) {
+            //     console.log(json[key][i]);
+            //     for (var j = 0; j < json[key][i]['category'].length; j++) {
+            //       var categoryName = json[key][i]['category'][j];
+            //       categoryObject[categoryName] ? categoryObject[categoryName] = categoryObject[categoryName] + json[key][i]['amount']
+            //     }
+            //   }
+            // }
+            dispatch(receivedTransactionData(json));
+          });
+      })
+      .catch((err) => {
+        console.log('error in fetching transaction data', err);
+        dispatch(fetchTransactionError(err));
+      });
   };
 };
 
