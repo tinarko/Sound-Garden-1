@@ -6,7 +6,7 @@ class Login extends React.Component {
     super(props);
     this.onPlaidClick = this.onPlaidClick.bind(this);
     this.getAccountData = this.getAccountData.bind(this);
-    this.getTransactionData = this.getTransactionData.bind(this);
+    // this.getTransactionData = this.getTransactionData.bind(this);
   }
 
   getAccountData() {
@@ -29,25 +29,25 @@ class Login extends React.Component {
       });
   }
 
-  getTransactionData() {
-    fetch('/plaid/transactions', {
-      // TODO: required to send cookies
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-      .then((response) => {
-        console.log('successful fetch of transaction data', response);
-        response.json()
-          .then(function(json) {
-            console.log(json);
-          });
-      })
-      .catch((err) => {
-        console.log('error in fetching transaction data', err);
-      });
-  }
+  // getTransactionData() {
+  //   fetch('/plaid/transactions', {
+  //     // TODO: required to send cookies
+  //     credentials: 'same-origin',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //   })
+  //     .then((response) => {
+  //       console.log('successful fetch of transaction data', response);
+  //       response.json()
+  //         .then(function(json) {
+  //           console.log(json);
+  //         });
+  //     })
+  //     .catch((err) => {
+  //       console.log('error in fetching transaction data', err);
+  //     });
+  // }
 
   onPlaidClick() {
     // will sign a user into an Item and store the access token into the database (used to access institutional data)
@@ -113,7 +113,6 @@ class Login extends React.Component {
           onClick={this.onPlaidClick}
         >Add Accounts to Plaid</button>
         <button onClick={this.getAccountData}>Account data</button>
-        <button onClick={this.getTransactionData}>Transaction data</button>
       </div>
     );
   }

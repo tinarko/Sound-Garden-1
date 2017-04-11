@@ -142,7 +142,7 @@ module.exports = {
         plaidInstitutions = response;
         for (var i = 0; i < response.length; i++) {
           // promises.push(client.getTransactions(response[i].access_token, periodStart, periodEnd)
-          promises.push(client.getTransactions(response[i].access_token, '2017-03-01', '2017-04-15')
+          promises.push(client.getTransactions(response[i].access_token, '2017-03-10', '2017-04-10')
             .then(function(data) {
               console.log('entered then');
               return data.transactions;

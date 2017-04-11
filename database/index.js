@@ -61,9 +61,6 @@ module.exports = {
   },
 
   getUserBudgets: function (userid, cb) {
-    //need category name and amount from user
-    //obtain user id where name = whichever
-
     var queryString = 'select categorytypes.name, budgetcategories.goalvalue, budgetcategories.actualvalue from categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id AND users.userid = 1 AND MONTH(budgets.month) = MONTH(CURRENT_DATE());';
 
     connection.query(queryString, userid, function (err, results) {

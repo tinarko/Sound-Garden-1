@@ -65,9 +65,19 @@ INSERT INTO users (userid, name) VALUES (1, 'Chris');
 INSERT INTO budgets (id, user_id, month, goalvalue, actualvalue) VALUES (1, 1, NOW(), 600.00, 250.00);
 INSERT INTO budgets (id, user_id, month, goalvalue, actualvalue) VALUES (2, 1, '2017-03-08 14:41:50', 1000, 700);
 INSERT INTO categorytypes (id, name) VALUES (1, 'Restaurants');
-INSERT INTO categorytypes (id, name) VALUES (2, 'Gas and Transportation');
+INSERT INTO categorytypes (id, name) VALUES (2, 'Fast Food');
+INSERT INTO categorytypes (id, name) VALUES (3, 'Coffee Shop');
+INSERT INTO categorytypes (id, name) VALUES (4, 'Groceries');
+INSERT INTO categorytypes (id, name) VALUES (5, 'Entertainment');
+INSERT INTO categorytypes (id, name) VALUES (6, 'Travel');
+INSERT INTO categorytypes (id, name) VALUES (7, 'Other');
 INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (1, 1, 1, 500.00, 200.00);
-INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (2, 1, 2, 100.00, 50.00);
+INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (2, 1, 2, 400.00, 50.00);
+INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (3, 1, 3, 100.00, 50.00);
+INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (4, 1, 4, 100.00, 50.00);
+INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (5, 1, 5, 50.00, 50.00);
+INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (6, 1, 6, 200.00, 50.00);
+INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (7, 1, 7, 500.00, 50.00);
 
 
 -- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (3, 2, 1, 700.00, 500.00);
