@@ -11,7 +11,7 @@ class Budget extends React.Component {
   }
 
   componentWillMount () {
-    let { dispatch, getBudgets, getTransactionData} = this.props;
+    let { dispatch, getBudgets, getTransactionData, handleIncrement, handleDecrement} = this.props;
     // this.getUserBudgets(1);
     getBudgets(1);
 
@@ -28,16 +28,13 @@ class Budget extends React.Component {
 
   render () {
 
-    let totalSpent = 500;
-    let totalBudget = 600;
-
     return (
       <div>
         <div>
           Placeholder for Graphs
         </div>
     
-        <BudgetCategoryList budget= {this.props.budget}/>
+        <BudgetCategoryList budget= {this.props.budget} handleIncrement={this.props.handleIncrement} handleDecrement = {this.props.handleDecrement} />
         
       </div>
 
@@ -54,7 +51,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getBudgets: (userid) => { dispatch(getUserBudgets(userid)); },
-    getTransactionData: (year, month) => { dispatch(getTransactionData(year, month)); }
+    getTransactionData: (year, month) => { dispatch(getTransactionData(year, month)); },
+    handleIncrement: () => { dispatch(incrementBudget()); },
+    handleDecrement: () => { dispatch(decrementBudget()); }
   };
 };
 export default connect (mapStateToProps, mapDispatchToProps) (Budget);

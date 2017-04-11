@@ -145,7 +145,9 @@ module.exports = {
           promises.push(client.getTransactions(response[i].access_token, '2017-03-10', '2017-04-10')
             .then(function(data) {
               console.log('entered then');
+              console.log('transactions data =======', data);
               return data.transactions;
+              
             })
             .catch(function(error) {
               return error;

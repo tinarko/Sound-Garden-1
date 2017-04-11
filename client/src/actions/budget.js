@@ -113,6 +113,7 @@ export const getTransactionData = (year, month) => {
             }
             console.log('categoryObject', categoryObject);
             dispatch(receivedTransactionData(categoryObject));
+            // dispatch(receivedTransactionData(json));
           });
       })
       .catch((err) => {

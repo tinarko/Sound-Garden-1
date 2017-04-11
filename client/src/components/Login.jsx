@@ -29,26 +29,6 @@ class Login extends React.Component {
       });
   }
 
-  // getTransactionData() {
-  //   fetch('/plaid/transactions', {
-  //     // TODO: required to send cookies
-  //     credentials: 'same-origin',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //   })
-  //     .then((response) => {
-  //       console.log('successful fetch of transaction data', response);
-  //       response.json()
-  //         .then(function(json) {
-  //           console.log(json);
-  //         });
-  //     })
-  //     .catch((err) => {
-  //       console.log('error in fetching transaction data', err);
-  //     });
-  // }
-
   onPlaidClick() {
     // will sign a user into an Item and store the access token into the database (used to access institutional data)
     Plaid.create({

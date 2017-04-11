@@ -9,6 +9,8 @@ class BudgetCategoryList extends React.Component {
     super(props);
   }
 
+
+
   render () {
 
     let month = 'April'; 
@@ -35,4 +37,6 @@ class BudgetCategoryList extends React.Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+});
 export default BudgetCategoryList;
