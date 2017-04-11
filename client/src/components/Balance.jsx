@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import * as balance from './../actions/balance.js';
 
 class Balance extends React.Component {
@@ -6,8 +7,11 @@ class Balance extends React.Component {
     super(props);
   }
 
+  // works with componentWillMount as well
   componentDidMount() {
-    balance.getBalance();
+    console.log(this.props);
+    // dispatch function is in props
+    this.props.dispatch(balance.getBalance());
   }
 
   render () {
@@ -19,4 +23,11 @@ class Balance extends React.Component {
   }
 }
 
-export default Balance;
+// takes pieces of store and adds as props
+export default connect ((state) => {
+  return {
+    balance: state.balance.balance,
+    fetching: state.balance.fetching,
+    fetched: state.balance.fetched,
+  };
+}) (Balance);
