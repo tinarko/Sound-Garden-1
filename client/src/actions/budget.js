@@ -93,7 +93,6 @@ export const getTransactionData = (year, month) => {
               // 'Food and Drink': 0,
               'Other': 0
             };
-            console.log('console.log json', json);
             for (var key in json) {
               for (var i = 0; i < json[key].length; i++) {
                 if (json[key][i]['category']) {

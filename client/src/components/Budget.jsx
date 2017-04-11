@@ -11,10 +11,7 @@ class Budget extends React.Component {
   }
 
   componentWillMount () {
-    console.log('props1', this.props);
     let { dispatch, getBudgets, getTransactionData} = this.props;
-    console.log('props2', this.props);
-
     // this.getUserBudgets(1);
     getBudgets(1);
 
@@ -39,13 +36,9 @@ class Budget extends React.Component {
         <div>
           Placeholder for Graphs
         </div>
-        <div>
-        Total Spent: {totalSpent}
-        </div>
-        <div>
-        Total Budget: {totalBudget}
-        </div>
-        <BudgetCategoryList budgetcategories= {this.props.budgetcategories}/>
+    
+        <BudgetCategoryList budget= {this.props.budget}/>
+        
       </div>
 
     );
@@ -54,7 +47,7 @@ class Budget extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    budgetcategories: state.budget.budgets
+    budget: state.budget
   };
 };
 

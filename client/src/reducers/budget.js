@@ -17,9 +17,15 @@ const budget = (state = initialState, action) => {
       fetchingBudgets: true
     }
     case 'RECEIVED_BUDGETS':
+      console.log('action.budgets', action.budgets);
+      var newBudgetTotal = 0;
+      for (var i = 0; i <action.budgets.length; i++) {
+        newBudgetTotal = newBudgetTotal + action.budgets[i].goalvalue;
+      }
       return {
         ...state,
-        budgets: action.budgets
+        budgets: action.budgets,
+        totalBudget: newBudgetTotal
       };
     case 'FETCH_BUDGETS_ERROR':
       return {
@@ -52,10 +58,15 @@ const budget = (state = initialState, action) => {
           }
         }
 
-        console.log('newArray after transformation', newArray);
+        var newTotalSpent = 0;
+        for (var key in action.transactions) {
+          newTotalSpent = newTotalSpent + action.transactions[key];
+        }
+
       return {
         ...state,
-        budgets: newArray
+        budgets: newArray,
+        totalSpent: newTotalSpent
       };
     case 'FETCH_TRANSACTIONS_ERROR':
       return {

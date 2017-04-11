@@ -7,7 +7,6 @@ import { getUserBudgets } from '../actions/budget.js';
 class BudgetCategoryList extends React.Component {
   constructor (props) {
     super(props);
-    console.log('this.props in BudgetList', this.props);
   }
 
   render () {
@@ -17,9 +16,18 @@ class BudgetCategoryList extends React.Component {
     return (
       <div>
         <h2> Budget for {month} </h2>
-        {this.props.budgetcategories.map ((budgetcategory) => {
+        <div>
+        Total Spent: {this.props.budget.totalSpent}
+        </div>
+        <div>
+        Total Budget: {this.props.budget.totalBudget}
+        </div>
+        <br />
+        <div>
+        {this.props.budget.budgets.map ((budgetcategory) => {
           return <BudgetCategory budgetcategory = {budgetcategory}/>;
         }) }
+        </div>
         
       </div>
 
