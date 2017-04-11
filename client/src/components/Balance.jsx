@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as balance from './../actions/balance.js';
+import BalanceList from './BalanceList.jsx';
 
 class Balance extends React.Component {
   constructor(props) {
@@ -9,16 +10,26 @@ class Balance extends React.Component {
 
   // works with componentWillMount as well
   componentDidMount() {
-    console.log(this.props);
     // dispatch function is in props
     this.props.dispatch(balance.getBalance());
   }
 
   render () {
-
+    let balance = null;
+    if (this.props.fetching) {
+      // serve loading
+    } else if (this.props.fetched) {
+      balance = (
+        <div className="balance-list">
+          {Object.keys(this.props.balance).map((key) => {
+            return <BalanceList name={key} balance={this.props.balance[key]}/>;
+          })}
+        </div>);
+    }
     return (
       <div>
         <h1>Balance</h1>
+        {balance}
       </div>
     );
   }
