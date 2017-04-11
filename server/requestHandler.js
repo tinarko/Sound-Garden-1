@@ -100,20 +100,18 @@ module.exports = {
             }
             // categorize the account data for the client
             for (var item in accountData) {
-              console.log(item, accountData)
+              accountTypes[item] = {};
               // initializes the object
               for (let i = 0; i < accountData[item].length; i++) {
                 // iterate through each account
                 var accountSubtype = accountData[item][i].subtype;
                 // if the account type is NOT present, initialize the array
-                if (!accountTypes[accountSubtype]) {
-                  accountTypes[accountSubtype] = [{
-                    institution_name: item,
+                if (!accountTypes[item][accountSubtype]) {
+                  accountTypes[item][accountSubtype] = [{
                     account: accountData[item][i],
                   }];
                 } else {
-                  accountTypes[accountSubtype].push({
-                    institution_name: item,
+                  accountTypes[item][accountSubtype].push({
                     account: accountData[item][i],
                   });
                 }
