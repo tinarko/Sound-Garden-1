@@ -26,8 +26,12 @@ class BudgetCategoryList extends React.Component {
         </div>
         <br />
         <div>
-        {this.props.budget.budgets.map ((budgetcategory) => {
-          return <BudgetCategory budgetcategory = {budgetcategory}/>;
+        {this.props.budget.budgets.map ((budgetcategory, index) => {
+          return <BudgetCategory budgetcategory = {budgetcategory}
+                                 key = {index} 
+                                 index = {index} 
+                                 handleIncrement={this.props.handleIncrement} 
+                                 handleDecrement = {this.props.handleDecrement}/>;
         }) }
         </div>
         
@@ -37,6 +41,4 @@ class BudgetCategoryList extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-});
 export default BudgetCategoryList;

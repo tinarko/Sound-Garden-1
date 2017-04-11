@@ -23,7 +23,6 @@ export const fetchUserBudgetsError = (error) => {
 export const getUserBudgets = (userid) => {
   return (dispatch) => {
     dispatch(fetchingBudgets());
-    console.log(userid);
     fetch(`/budget/getuserbudgets/${userid}`, {
       method: 'GET',
       headers: {
@@ -93,14 +92,16 @@ export const getTransactionData = (year, month) => {
   };
 };
 
-export const incrementBudget = () => {
+export const incrementBudget = (index) => {
   return {
-    type: 'INCREMENT_BUDGET'
+    type: 'INCREMENT_BUDGET',
+    index: index
   };
 };
 
-export const decrementBudget = () => {
+export const decrementBudget = (index) => {
   return {
-    type: 'DECREMENT_BUDGET'
+    type: 'DECREMENT_BUDGET',
+    index:index
   };
 };

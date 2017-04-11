@@ -16,6 +16,7 @@ const budget = (state = initialState, action) => {
       ...state,
       fetchingBudgets: true
     }
+
     case 'RECEIVED_BUDGETS':
       console.log('action.budgets', action.budgets);
       var newBudgetTotal = 0;
@@ -27,16 +28,19 @@ const budget = (state = initialState, action) => {
         budgets: action.budgets,
         totalBudget: newBudgetTotal
       };
+
     case 'FETCH_BUDGETS_ERROR':
       return {
         ...state,
         error: action.error
       };
+
     case 'FETCHING_TRANSACTION_DATA':
       return {
         ...state,
         fetchingTransactions: true
       }
+
     case 'RECEIVED_TRANSACTIONS':
       var newArray = state.budgets; 
 
@@ -68,6 +72,7 @@ const budget = (state = initialState, action) => {
         budgets: newArray,
         totalSpent: newTotalSpent
       };
+
     case 'FETCH_TRANSACTIONS_ERROR':
       return {
         ...state,
@@ -75,9 +80,21 @@ const budget = (state = initialState, action) => {
       }
 
     case 'INCREMENT_BUDGET':
-      return state + 10;
+      var newBudget = state.budgets;
+      newBudget[action.index]['goalvalue'] = newBudget[action.index]['goalvalue'] + 10;
+      return {
+        ...state,
+        budgets: newBudget
+      };
+
     case 'DECREMENT_BUDGET':
-      return state - 10;
+      var newBudget = state.budgets;
+      newBudget[action.index]['goalvalue'] = newBudget[action.index]['goalvalue'] - 10;
+      return {
+        ...state,
+        budgets: newBudget
+      };
+
     default:
       return state;
   }

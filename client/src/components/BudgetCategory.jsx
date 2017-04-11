@@ -6,6 +6,7 @@ import { incrementBudget, decrementBudget } from '../actions/budget.js';
 class BudgetCategory extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props);
   }
 
   render() {
@@ -17,8 +18,8 @@ class BudgetCategory extends React.Component {
         {this.props.budgetcategory.name}
         <div>
         Budget Goal: {this.props.budgetcategory.goalvalue}
-        <button onClick={(e) => { this.props.handleIncrement(); } }> + </button> 
-        <button onClick={(e) => { this.props.handleDecrement(); } }> - </button>
+        <button onClick={(e) => { this.props.handleIncrement(this.props.index); } }> + </button> 
+        <button onClick={(e) => { this.props.handleDecrement(this.props.index); } }> - </button>
         </div>
         <div>
         Spent this Month: {this.props.budgetcategory.actualvalue}
@@ -30,17 +31,18 @@ class BudgetCategory extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    budget: state.budget
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     budget: state.budget
+//   };
+// };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    handleIncrement: () => { dispatch(incrementBudget()); },
-    handleDecrement: () => { dispatch(decrementBudget()); }
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     handleIncrement: (index) => { dispatch(incrementBudget(index)); },
+//     handleDecrement: (index) => { dispatch(decrementBudget(index)); }
+//   };
+// };
 
-export default connect (mapStateToProps, mapDispatchToProps) (BudgetCategory);
+// export default connect (mapStateToProps, mapDispatchToProps) (BudgetCategory);
+export default BudgetCategory;
