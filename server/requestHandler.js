@@ -4,13 +4,6 @@ var plaid = require('plaid');
 var Promise = require('bluebird');
 
 var db = require('./../database/index');
-var config = require('./../config/config');
-
-// var PLAID_CLIENT_ID  = config.plaid.clientID;
-// var PLAID_SECRET     = config.plaid.clientSecret;
-// var PLAID_PUBLIC_KEY = config.plaid.publicKey;
-// // TODO: adjust environment as product life cycle advances
-// var PLAID_ENV        = config.plaid.plaidEnv;
 
 var PLAID_CLIENT_ID  = process.env.PLAID_clientID;
 var PLAID_SECRET     = process.env.PLAID_clientSecret;
@@ -137,6 +130,21 @@ module.exports = {
           res.status(200).send(results);
         }
       });
+    }
+  },
+
+  'creditcards': {
+    getUserCreditcards: (req, res) => {
+      console.log('entered request handler');
+      db.getUserCreditcards(req.params.userid, (err, results) => {
+        console.log('userid', req.params.userid);
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          console.log('results:', results);
+          res.status(200).send(results);
+        }
+      })
     }
   }
 };

@@ -41,27 +41,17 @@ CREATE TABLE items (
   PRIMARY KEY(id)
 );
 
-CREATE TABLE users_cctypes (
+CREATE TABLE creditcards (
   id int NOT NULL AUTO_INCREMENT,
-  user_id varchar(255) NOT NULL,
-  cctype_id int NOT NULL,
+  ccname varchar(255),
+  userid int NOT NULL,
+  gas varchar(255),
+  groceries varchar(255),
+  travel varchar(255),
+  wholesale varchar(255),
   PRIMARY KEY (id)
 );
 
-CREATE TABLE cctypes (
-  id int NOT NULL AUTO_INCREMENT,
-  institution_name varchar(255),
-  APR int NOT NULL,
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE cccategories (
-  id int NOT NULL AUTO_INCREMENT,
-  cccategory_name varchar (255),
-  cctype_id int NOT NULL,
-  cashback_percent int NOT NULL,
-  PRIMARY KEY (id)
-);
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < schema.sql
@@ -85,13 +75,8 @@ INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue
 -- below is dummy data Tina was using. Feel free to remove
 
 INSERT INTO users (userid, name) VALUES (2, 'Tina'); 
-INSERT INTO users_cctypes (user_id, cctype_id) VALUES (2, 1);
-INSERT INTO users_cctypes (user_id, cctype_id) VALUES (2, 2);
-INSERT INTO users_cctypes (user_id, cctype_id) VALUES (2, 3);
-INSERT INTO cctypes (id, institution_name, APR) VALUES (1, 'Wells Fargo', 1);
-INSERT INTO cctypes (id, institution_name, APR) VALUES (2, 'Bank of America', 2);
-INSERT INTO cctypes (id, institution_name, APR) VALUES (3, 'Chase', 3);
-
+INSERT INTO creditcards (userid, ccname, gas, groceries, travel, wholesale) VALUES (2, 'Plaid Diamond 12.5% APR Interest Credit Card', 5, 5, 5, 5);
+INSERT INTO creditcards (userid, ccname, gas, groceries, travel, wholesale) VALUES (2, 'Test', 1, 2, 3, 5);
 
 
 

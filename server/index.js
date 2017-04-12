@@ -11,8 +11,6 @@ var passport = require('passport');
 
 // import passport authentication strategies
 var authentication = require('./authentication');
-// var config = require('./../config/config');
-var db = require('./../database/index');
 var requestHandler = require('./requestHandler');
 
 var app = express();
@@ -47,6 +45,7 @@ app.get('/auth/facebook/return',
   });
 
 app.get('/budget/getuserbudgets/:id', requestHandler.budget.getUserBudgets);
+app.get('/creditcards/getcreditcards/:userid', requestHandler.creditcards.getUserCreditcards);
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);
 app.get('/plaid/accounts', requestHandler.plaid.accounts);
 

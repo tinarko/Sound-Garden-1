@@ -71,6 +71,22 @@ module.exports = {
         cb(null, results);
       }
     });
+  },
+
+  getUserCreditcards: (userid, cb) => {
+    var query = 'select * from creditcards where userid = ?';
+    connection.query(query, userid, (err, results) => {
+      if (results.length === 0) {
+        // eventually, create empty initiated values
+        console.log('NOTHING IS IN HERE!');
+        cb(err, null);
+      } else {
+        console.log('YEAH! FROM DB!', results);
+        cb(null, results);
+      }
+    });
   }
+
+
 
 };
