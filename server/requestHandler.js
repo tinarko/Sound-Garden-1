@@ -138,7 +138,6 @@ module.exports = {
       var promises = [];
       var transactionData = {};
       var plaidInstitutions = [];
-      var counter = 1;
       db.getPlaidItems(userid, function(err, response) {
         plaidInstitutions = response;
         for (var i = 0; i < response.length; i++) {
@@ -208,8 +207,22 @@ module.exports = {
 
   'budget': {
     getUserBudgets: function (req, res) {
-      console.log('in request Handler');
-      db.getUserBudgets(req.params.id, function(err, results) {
+      var userid = req.session.passport.user;
+      console.log('userid', userid);
+      // db.getUserBudgets(req.params.id, function(err, results) {
+      db.getUserBudgets(userid, function(err, results) {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          console.log('results:', results);
+          res.status(200).send(results);
+        }
+      });
+    },
+    updateBudgetAmount: function(req, res) {
+      console.log('req.body', req.body);
+      var userid = req.session.passport.user;
+      db.updateUserBudgetCategory(req.body.goalvalue, userid, req.body.categoryname, function(err, results) {
         if (err) {
           res.status(500).send(err);
         } else {

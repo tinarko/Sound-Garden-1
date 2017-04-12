@@ -81,7 +81,7 @@ export const getTransactionData = (year, month) => {
       .then((response) => {
         console.log('successful fetch of transaction data', response);
         response.json()
-          .then(function(json) {
+          .then((json) => {
             dispatch(receivedTransactionData(json));
           });
       })
@@ -95,13 +95,42 @@ export const getTransactionData = (year, month) => {
 export const incrementBudget = (index) => {
   return {
     type: 'INCREMENT_BUDGET',
-    index: index
+    index
   };
 };
 
 export const decrementBudget = (index) => {
   return {
     type: 'DECREMENT_BUDGET',
-    index:index
+    index
   };
 };
+
+export const postUpdatedBudget = (goalvalue, userid, categoryname) => {
+  return (dispatch) => {
+    fetch('/budget/updatebudgetcategory', {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin',
+      body: {
+        categoryname: categoryname,
+        goalvalue: goalvalue
+      }
+    })
+    .then((response) => {
+      console.log('successful post for updating budget amount', response);
+      response.json()
+        .then((json) => {
+          // dispatch(postedUpdatedBudget());
+        });
+    })
+    .catch((err) => {
+      console.log('error in updating budget amount', err);
+      // dispatch(updateBudgetError(err));
+    })
+    ;
+  };
+
+}

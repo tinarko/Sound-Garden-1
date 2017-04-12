@@ -61,7 +61,8 @@ module.exports = {
   },
 
   getUserBudgets: function (userid, cb) {
-    var queryString = 'select categorytypes.name, budgetcategories.goalvalue, budgetcategories.actualvalue from categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id AND users.userid = 1 AND MONTH(budgets.month) = MONTH(CURRENT_DATE());';
+    var queryString = 
+    'select categorytypes.name, budgetcategories.goalvalue, budgetcategories.actualvalue from categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id AND users.userid = ? AND MONTH(budgets.month) = MONTH(CURRENT_DATE());';
 
     connection.query(queryString, userid, function (err, results) {
       if (results.length === 0) {
@@ -77,6 +78,17 @@ module.exports = {
     connection.query(query, userid, (err, results) => {
       if (results.length === 0) {
         // TO DO: create empty initiated values
+        cb(err, null);
+      } else {
+        cb(null, results);
+      }
+    });
+  },
+  
+  updateUserBudgetCategory: function(goalvalue, userid, categoryname, cb) {
+    var queryString = 'update categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id SET budgetcategories.goalvalue = ? WHERE users.userid = ? AND categorytypes.name = ?;';
+    connection.query (queryString, [goalvalue, userid, categoryname], function(err, results) {
+      if (err) {
         cb(err, null);
       } else {
         cb(null, results);

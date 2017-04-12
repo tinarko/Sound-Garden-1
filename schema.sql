@@ -13,7 +13,7 @@ CREATE TABLE users (
 
 CREATE TABLE budgets (
   id int NOT NULL AUTO_INCREMENT,
-  user_id int NOT NULL,
+  user_id varchar(255) NOT NULL,
   goalvalue decimal(7,2),
   actualvalue decimal(7,2),
   month timestamp,
@@ -61,9 +61,9 @@ CREATE TABLE creditcards (
  
 -- below is Dummy Data Chris was using. Feel free to remove
 
-INSERT INTO users (userid, name) VALUES (1, 'Chris'); 
-INSERT INTO budgets (id, user_id, month, goalvalue, actualvalue) VALUES (1, 1, NOW(), 600.00, 250.00);
-INSERT INTO budgets (id, user_id, month, goalvalue, actualvalue) VALUES (2, 1, '2017-03-08 14:41:50', 1000, 700);
+INSERT INTO users (userid, name) VALUES ('1', 'Chris'); 
+INSERT INTO budgets (id, user_id, month, goalvalue, actualvalue) VALUES (1, '1', NOW(), 600.00, 250.00);
+INSERT INTO budgets (id, user_id, month, goalvalue, actualvalue) VALUES (2, '1', '2017-03-08 14:41:50', 1000, 700);
 INSERT INTO categorytypes (id, name) VALUES (1, 'Restaurants');
 INSERT INTO categorytypes (id, name) VALUES (2, 'Fast Food');
 INSERT INTO categorytypes (id, name) VALUES (3, 'Coffee Shop');
@@ -80,13 +80,16 @@ INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue
 INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (7, 1, 7, 500.00, 0);
 
 
--- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (3, 2, 1, 700.00, 500.00);
--- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (4, 2, 2, 300.00, 200.00);
+-- INSERT INTO budgets (id, user_id, month) VALUES (3, '10158485476085052', NOW());
+-- INSERT INTO budgets (id, user_id, month) VALUES (4, '10158485476085052', '2017-03-08 14:41:50');
 
-
--- INSERT INTO budgets (id, user_id, month, goalvalue, actualvalue) VALUES (2, 2, NOW(), 700.00, 210.00);
--- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue, month) VALUES (3, 2, 1, 550.00, 200.00, NOW());
--- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue, month) VALUES (4, 2, 2, 150.00, 10.00, NOW());
+-- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (8, 3, 1, 300.00, 0);
+-- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (9, 3, 2, 300.00, 0);
+-- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (10, 3, 3, 300.00, 0);
+-- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (11, 3, 4, 300.00, 0);
+-- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (12, 3, 5, 350.00, 0);
+-- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (13, 3, 6, 300.00, 0);
+-- INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (14, 3, 7, 1500.00, 0);
 
 
 
