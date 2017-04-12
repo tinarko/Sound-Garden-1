@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import BudgetCategory from './BudgetCategory.jsx';
 import { connect } from 'react-redux';
-import { toggleAddBudgetCategoryInput } from '../actions/budget.js';
+import { toggleAddBudgetCategoryInput, categoryNameInputChange, categoryGoalInputChange } from '../actions/budget.js';
 
 class BudgetCategoryList extends React.Component {
   constructor (props) {
@@ -10,23 +10,41 @@ class BudgetCategoryList extends React.Component {
   }
 
   componentWillMount () {
-    let { dispatch, toggleAddBudgetCategoryInput} = this.props;
+    let { toggleAddBudgetCategoryInput} = this.props;
   }
 
+  handleInputChange (event) {
+    let { categoryNameInputChange, categoryGoalInputChange} = this.props;
+    if (event.target.name === 'addcategoryname') {
+      categoryNameInputChange(event.target.value);
+    } else if (event.target.name === 'addcategorybudget') {
+      categoryGoalInputChange(event.target.value);
+    }
+  }
 
+  handleSubmit (event) {
+    event.preventDefault();
+    this.props.handleBudgetChange(this.props.budget.addcategorybudget, this.props.budget.addcategoryname, this.props.budget.budgets.length, 'newValue');
+  }
+  
   render () {
 
     let month = 'April';
     let toggleButtonForm = null;
     if (this.props.budget.showaddbudgetcategoryform) {
-      toggleButtonForm = <form onSubmit= {(e) => this.props.toggleAddBudgetCategoryInput()}>
+      toggleButtonForm = <form 
+        onSubmit= {(event) => {
+          this.props.toggleAddBudgetCategoryInput();
+          this.handleSubmit(event);
+        }
+      }>
           <label> 
           Category Name:
-            <input type="text"/>
+            <input type="text" name= "addcategoryname" value={this.props.budget.addcategoryname} onChange={this.handleInputChange.bind(this)}/>
           </label>
           <label> 
           Budget Amount: 
-            <input type="text"/>
+            <input type="text" name ="addcategorybudget" value={this.props.budget.addcategorybudget} onChange={this.handleInputChange.bind(this)}/>
           </label>
           <input type="submit" value="Submit"/>
         </form>;
@@ -66,6 +84,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     toggleAddBudgetCategoryInput: () => { dispatch(toggleAddBudgetCategoryInput()); },
+    categoryNameInputChange: (categoryName) => { dispatch(categoryNameInputChange(categoryName)); },
+    categoryGoalInputChange: (goalValue) => { dispatch(categoryGoalInputChange(goalValue)); }
   };
 };
 

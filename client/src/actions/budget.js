@@ -119,6 +119,7 @@ export const postUpdatedBudget = (goalvalue, categoryname, index, change) => {
       console.log('successful post for updating budget amount', response);
       response.json()
         .then((json) => {
+          console.log('json==============', json);
           if (change === 'increment') {
             dispatch(incrementBudget(index));
           } else if (change === 'decrement') {
@@ -140,3 +141,34 @@ export const toggleAddBudgetCategoryInput = () => {
     type: 'TOGGLE_ADD_BUDGET_CATEGORY_INPUT'
   };
 };
+
+export const categoryNameInputChange = (categoryName) => {
+  return {
+    type: 'CATEGORY_NAME_INPUT_CHANGE',
+    categoryName
+  };
+};
+
+export const categoryGoalInputChange = (goalValue) => {
+  return {
+    type: 'CATEGORY_GOAL_INPUT_CHANGE',
+    goalValue
+  };
+};
+
+
+export const postNewBudgetCategory = (goalvalue, categoryname) => {
+  return (dispatch) => {
+    fetch ('/budget/addbudgetcategory', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify({
+        categoryname: categoryname,
+        goalvalue: goalvalue
+      })
+    });
+  };
+}

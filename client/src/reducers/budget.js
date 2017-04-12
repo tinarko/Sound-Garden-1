@@ -4,6 +4,8 @@ const initialState = {
   error: null, 
   totalBudget: 0,
   showaddbudgetcategoryform: false,
+  addcategoryname: '',
+  addcategorybudget: '',
 };
 
 
@@ -104,6 +106,18 @@ const budget = (state = initialState, action) => {
       return {
         ...state,
         showaddbudgetcategoryform: toggleShow
+      };
+
+    case 'CATEGORY_NAME_INPUT_CHANGE':
+      return {
+        ...state,
+        addcategoryname: action.categoryName
+      };
+
+    case 'CATEGORY_GOAL_INPUT_CHANGE':
+      return {
+        ...state,
+        addcategorybudget: action.goalValue
       };
 
     default:

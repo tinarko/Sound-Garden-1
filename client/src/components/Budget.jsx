@@ -35,7 +35,7 @@ class Budget extends React.Component {
           Placeholder for Graphs
         </div>
     
-        <BudgetCategoryList budget= {this.props.budget} handleChange={this.props.handleChange} toggleAddBudgetCategoryInput={this.props.toggleAddBudgetCategoryInput}/>
+        <BudgetCategoryList budget= {this.props.budget} handleBudgetChange={this.props.handleBudgetChange} toggleAddBudgetCategoryInput={this.props.toggleAddBudgetCategoryInput}/>
         
       </div>
 
@@ -54,7 +54,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getBudgets: () => { dispatch(getUserBudgets()); },
     getTransactionData: (year, month) => { dispatch(getTransactionData(year, month)); },
-    handleChange: (goalvalue, categoryname, index, change) => { dispatch(postUpdatedBudget(goalvalue, categoryname, index, change)); },
+    handleBudgetChange: (goalvalue, categoryname, index, change) => { dispatch(postUpdatedBudget(goalvalue, categoryname, index, change)); },
     // toggleAddBudgetCategoryInput: () => { dispatch(toggleAddBudgetCategoryInput()); }
   };
 };

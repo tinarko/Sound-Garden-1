@@ -210,15 +210,21 @@ module.exports = {
     },
     updateBudgetAmount: function(req, res) {
       var userid = req.session.passport.user;
+      console.log('req.body', req.body);
       var updatedvalue;
       if (req.body.change === 'increment') {
         updatedvalue = req.body.goalvalue + 10;
       } else if (req.body.change === 'decrement') {
         updatedvalue = req.body.goalvalue - 10;
+      } else {
+        updatedvalue = parseFloat(req.body.goalvalue);
       }
       db.updateUserBudgetCategory([updatedvalue, userid, req.body.categoryname], function(err, results) {
+        console.log('results in updateUserBudgetCategory', results);
         if (err) {
           res.status(500).send(err);
+        } else if (results.affectedRows === 0) {
+          console.log('Need to insert');
         } else {
           res.status(200).send(results);
         }
