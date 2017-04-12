@@ -119,9 +119,8 @@ module.exports = {
     },
     transactions: function (req, res) {
       var userid = req.session.passport.user;
-      var periodStart = `${req.params.year}-${req.params.month}-01`
+      var periodStart = `${req.params.year}-${req.params.month}-01`;
       // console.log('begin of month', periodStart);
-      // console.log('typeof begin of month', typeof periodStart);
 
       var today = new Date ();
       var month = (today.getMonth() + 1).toString();
@@ -222,7 +221,13 @@ module.exports = {
     updateBudgetAmount: function(req, res) {
       console.log('req.body', req.body);
       var userid = req.session.passport.user;
-      db.updateUserBudgetCategory(req.body.goalvalue, userid, req.body.categoryname, function(err, results) {
+      var updatedvalue;
+      if (req.body.change === 'increment') {
+        updatedvalue = req.body.goalvalue + 10;
+      } else if (req.body.change === 'decrement') {
+        updatedvalue = req.body.goalvalue - 10;
+      }
+      db.updateUserBudgetCategory([updatedvalue, userid, req.body.categoryname], function(err, results) {
         if (err) {
           res.status(500).send(err);
         } else {

@@ -106,7 +106,7 @@ export const decrementBudget = (index) => {
   };
 };
 
-export const postUpdatedBudget = (goalvalue, userid, categoryname) => {
+export const postUpdatedBudget = (goalvalue, categoryname, index, change) => {
   return (dispatch) => {
     fetch('/budget/updatebudgetcategory', {
       method: 'POST', 
@@ -114,16 +114,23 @@ export const postUpdatedBudget = (goalvalue, userid, categoryname) => {
         'Content-Type': 'application/json'
       },
       credentials: 'same-origin',
-      body: {
+      body: JSON.stringify({
         categoryname: categoryname,
-        goalvalue: goalvalue
-      }
+        goalvalue: goalvalue,
+        index: index,
+        change: change
+      })
     })
     .then((response) => {
       console.log('successful post for updating budget amount', response);
       response.json()
         .then((json) => {
           // dispatch(postedUpdatedBudget());
+          if (change === 'increment') {
+            dispatch(incrementBudget(index));
+          } else if (change === 'decrement') {
+            dispatch(decrementBudget(index));
+          }
         });
     })
     .catch((err) => {
@@ -133,4 +140,4 @@ export const postUpdatedBudget = (goalvalue, userid, categoryname) => {
     ;
   };
 
-}
+};

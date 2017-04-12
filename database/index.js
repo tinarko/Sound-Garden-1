@@ -85,10 +85,11 @@ module.exports = {
     });
   },
   
-  updateUserBudgetCategory: function(goalvalue, userid, categoryname, cb) {
+  updateUserBudgetCategory: function(params, cb) {
     var queryString = 'update categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id SET budgetcategories.goalvalue = ? WHERE users.userid = ? AND categorytypes.name = ?;';
-    connection.query (queryString, [goalvalue, userid, categoryname], function(err, results) {
+    connection.query(queryString, [params[0], params[1], params[2]], function(err, results, field) {
       if (err) {
+        console.log('errored in index.js in db');
         cb(err, null);
       } else {
         cb(null, results);

@@ -81,18 +81,24 @@ const budget = (state = initialState, action) => {
 
     case 'INCREMENT_BUDGET':
       var newBudget = state.budgets;
+      var newBudgetTotal = state.totalBudget;
       newBudget[action.index]['goalvalue'] = newBudget[action.index]['goalvalue'] + 10;
+      newBudgetTotal = newBudgetTotal + 10;
       return {
         ...state,
-        budgets: newBudget
+        budgets: newBudget,
+        totalBudget: newBudgetTotal
       };
 
     case 'DECREMENT_BUDGET':
       var newBudget = state.budgets;
+      var newBudgetTotal = state.totalBudget;
       newBudget[action.index]['goalvalue'] = newBudget[action.index]['goalvalue'] - 10;
+      newBudgetTotal = newBudgetTotal - 10;
       return {
         ...state,
-        budgets: newBudget
+        budgets: newBudget,
+        totalBudget: newBudgetTotal
       };
 
     default:

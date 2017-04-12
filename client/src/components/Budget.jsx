@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import BudgetCategoryList from './BudgetCategoryList.jsx';
-import { getUserBudgets, getTransactionData, incrementBudget, decrementBudget } from '../actions/budget.js';
+import { getUserBudgets, getTransactionData, incrementBudget, decrementBudget, postUpdatedBudget} from '../actions/budget.js';
 // import { receivedUserBudgets, fetchUserBudgetsError } from '../actions/budget.js';
 
 class Budget extends React.Component {
@@ -34,7 +34,7 @@ class Budget extends React.Component {
           Placeholder for Graphs
         </div>
     
-        <BudgetCategoryList budget= {this.props.budget} handleIncrement={this.props.handleIncrement} handleDecrement = {this.props.handleDecrement} />
+        <BudgetCategoryList budget= {this.props.budget} handleChange={this.props.handleChange}/>
         
       </div>
 
@@ -52,8 +52,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getBudgets: (userid) => { dispatch(getUserBudgets(userid)); },
     getTransactionData: (year, month) => { dispatch(getTransactionData(year, month)); },
-    handleIncrement: (index) => { dispatch(incrementBudget(index)); },
-    handleDecrement: (index) => { dispatch(decrementBudget(index)); }
+    // handleIncrement: (index) => { dispatch(incrementBudget(index)); },
+    handleChange: (goalvalue, categoryname, index, change) => { dispatch(postUpdatedBudget(goalvalue, categoryname, index, change)); },
+    // handleDecrement: (index) => { dispatch(decrementBudget(index)); }
   };
 };
 export default connect (mapStateToProps, mapDispatchToProps) (Budget);

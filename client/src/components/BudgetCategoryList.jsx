@@ -28,10 +28,8 @@ class BudgetCategoryList extends React.Component {
         <div>
         {this.props.budget.budgets.map ((budgetcategory, index) => {
           return <BudgetCategory budgetcategory = {budgetcategory}
-                                 key = {index} 
                                  index = {index} 
-                                 handleIncrement={this.props.handleIncrement} 
-                                 handleDecrement = {this.props.handleDecrement}/>;
+                                 handleChange={this.props.handleChange}/>;
         }) }
         </div>
         

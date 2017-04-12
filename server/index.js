@@ -46,6 +46,7 @@ app.get('/auth/facebook/return',
 
 app.get('/budget/getuserbudgets/:id', requestHandler.budget.getUserBudgets);
 app.get('/creditcards/getcreditcards/:userid', requestHandler.creditcards.getUserCreditcards);
+app.post('/budget/updatebudgetcategory', requestHandler.budget.updateBudgetAmount);
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);
 app.get('/plaid/accounts', requestHandler.plaid.accounts);
 app.get('/plaid/transactions/:year/:month', requestHandler.plaid.transactions);
