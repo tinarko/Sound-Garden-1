@@ -1,6 +1,6 @@
 // reducers accept previous state and action
 export default (state = {
-  balance: null,
+  balance: {},
   error: null,
   fetching: false,
   fetched: false,

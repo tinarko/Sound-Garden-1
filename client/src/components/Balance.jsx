@@ -15,20 +15,23 @@ class Balance extends React.Component {
   }
 
   render () {
-    console.log(this.props.balance);
     let balance = null;
     if (this.props.fetching) {
       // serve loading
     } else if (this.props.fetched) {
       balance = (
-        <div className="balance-list">
-          {/*{Object.keys(this.props.balance).map((key, index) => {
-            return <BalanceList 
-              name={key}
-              balance={this.props.balance[key]}
-              key={index}
-            />;
-          })}*/}
+        <div className="balance">
+          {Object.keys(this.props.balance).map((key, index) => {
+            return (
+              <div>
+                <h1>{key}</h1>
+                <BalanceList 
+                  name={key}
+                  balance={this.props.balance[key]}
+                  key={index}
+                />
+              </div>);
+          })}
         </div>);
     }
     return (
