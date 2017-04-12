@@ -34,6 +34,7 @@ export const getCreditcards = () => {
     dispatch(fetchingCreditcards());
     fetch('/creditcards/getcreditcards', {
       method: 'GET',
+      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json'
       },
