@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import BudgetCategoryList from './BudgetCategoryList.jsx';
-import { getUserBudgets, getTransactionData, incrementBudget, decrementBudget, postUpdatedBudget} from '../actions/budget.js';
+import { getUserBudgets, getTransactionData, incrementBudget, decrementBudget, postUpdatedBudget, toggleAddBudgetCategoryInput } from '../actions/budget.js';
+// import { getTransactionData } from '../actions/transactions.js';
 
 class Budget extends React.Component {
   constructor (props) {
@@ -34,7 +35,7 @@ class Budget extends React.Component {
           Placeholder for Graphs
         </div>
     
-        <BudgetCategoryList budget= {this.props.budget} handleChange={this.props.handleChange}/>
+        <BudgetCategoryList budget= {this.props.budget} handleChange={this.props.handleChange} toggleAddBudgetCategoryInput={this.props.toggleAddBudgetCategoryInput}/>
         
       </div>
 
@@ -44,15 +45,17 @@ class Budget extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    budget: state.budget
+    budget: state.budget,
+    // transactions: state.transactions
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getBudgets: (userid) => { dispatch(getUserBudgets(userid)); },
+    getBudgets: () => { dispatch(getUserBudgets()); },
     getTransactionData: (year, month) => { dispatch(getTransactionData(year, month)); },
     handleChange: (goalvalue, categoryname, index, change) => { dispatch(postUpdatedBudget(goalvalue, categoryname, index, change)); },
+    // toggleAddBudgetCategoryInput: () => { dispatch(toggleAddBudgetCategoryInput()); }
   };
 };
 export default connect (mapStateToProps, mapDispatchToProps) (Budget);

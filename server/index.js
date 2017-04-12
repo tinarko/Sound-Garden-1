@@ -51,12 +51,13 @@ app.get('/creditcards/getcreditcards', requestHandler.creditcards.getUserCreditc
 app.post('/creditcards/changecashbackpercent', requestHandler.creditcards.changeCashbackPercent);
 app.post('/creditcards/createcashbackcategory', requestHandler.creditcards.createCashbackCategory);
 
+app.post('/budget/addbudgetcategory', requestHandler.budget.addBudgetCategory);
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);
 app.get('/plaid/accounts', requestHandler.plaid.accounts);
 app.get('/plaid/transactions/:year/:month', requestHandler.plaid.transactions);
 
-app.get('*', (req,res) => {
-  res.sendFile(path.resolve(__dirname,'..','client', 'index.html'));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'client', 'index.html'));
 });
 
 let port = process.env.PORT || 1337;

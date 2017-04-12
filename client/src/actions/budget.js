@@ -20,10 +20,10 @@ export const fetchUserBudgetsError = (error) => {
   };
 };
 
-export const getUserBudgets = (userid) => {
+export const getUserBudgets = () => {
   return (dispatch) => {
     dispatch(fetchingBudgets());
-    fetch(`/budget/getuserbudgets/${userid}`, {
+    fetch('/budget/getuserbudgets', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -133,4 +133,10 @@ export const postUpdatedBudget = (goalvalue, categoryname, index, change) => {
     ;
   };
 
+};
+
+export const toggleAddBudgetCategoryInput = () => {
+  return {
+    type: 'TOGGLE_ADD_BUDGET_CATEGORY_INPUT'
+  };
 };

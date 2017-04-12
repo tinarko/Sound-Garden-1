@@ -6,12 +6,9 @@ import { incrementBudget, decrementBudget } from '../actions/budget.js';
 class BudgetCategory extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
   }
 
   render() {
-
-    let actualSpending = 200;
 
     return (
       <div className="budgetCategory">

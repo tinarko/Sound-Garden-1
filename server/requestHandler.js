@@ -223,6 +223,9 @@ module.exports = {
           res.status(200).send(results);
         }
       });
+    },
+    addBudgetCategory: function(req, res) {
+      var userid = req.session.passport.user;
     }
   },
 

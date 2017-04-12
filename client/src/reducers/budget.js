@@ -2,9 +2,8 @@ const initialState = {
   budgets: [],
   fetchingBudgets: false,
   error: null, 
-  fetchingTransactions: false,
-  totalSpent: 0,
-  totalBudget: 0
+  totalBudget: 0,
+  showaddbudgetcategoryform: false,
 };
 
 
@@ -19,7 +18,7 @@ const budget = (state = initialState, action) => {
     case 'RECEIVED_BUDGETS':
       console.log('action.budgets', action.budgets);
       var newBudgetTotal = 0;
-      for (var i = 0; i <action.budgets.length; i++) {
+      for (var i = 0; i < action.budgets.length; i++) {
         newBudgetTotal = newBudgetTotal + action.budgets[i].goalvalue;
       }
       return {
@@ -98,6 +97,13 @@ const budget = (state = initialState, action) => {
         ...state,
         budgets: newBudget,
         totalBudget: newBudgetTotal
+      };
+
+    case 'TOGGLE_ADD_BUDGET_CATEGORY_INPUT':
+      var toggleShow = !state.showaddbudgetcategoryform;
+      return {
+        ...state,
+        showaddbudgetcategoryform: toggleShow
       };
 
     default:
