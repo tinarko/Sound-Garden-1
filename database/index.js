@@ -77,11 +77,9 @@ module.exports = {
     var query = 'select * from creditcards where userid = ?';
     connection.query(query, userid, (err, results) => {
       if (results.length === 0) {
-        // eventually, create empty initiated values
-        console.log('NOTHING IS IN HERE!');
+        // TO DO: create empty initiated values
         cb(err, null);
       } else {
-        console.log('YEAH! FROM DB!', results);
         cb(null, results);
       }
     });

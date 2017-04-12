@@ -9,9 +9,11 @@ class CCCashback extends React.Component {
     super(props);
   }
 
-  componentWillMount() {
-    this.props.dispatch(getCreditcards());
-    console.log('mount', this.props.creditcards);
+  componentWillMount () {
+    let { dispatch, getCreditcards } = this.props;
+    let userid = this.props.userid || 2;
+    getCreditcards(userid);
+    // this.getUserBudgets(1);
   }
 
   render () {
@@ -41,6 +43,11 @@ const mapStateToProps = (state) => {
   };
 };
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getCreditcards: () => { dispatch(getCreditcards()); }
+  };
+};
 
 
-export default connect (mapStateToProps) (CCCashback);
+export default connect (mapStateToProps, mapDispatchToProps) (CCCashback);

@@ -135,13 +135,10 @@ module.exports = {
 
   'creditcards': {
     getUserCreditcards: (req, res) => {
-      console.log('entered request handler');
       db.getUserCreditcards(req.params.userid, (err, results) => {
-        console.log('userid', req.params.userid);
         if (err) {
           res.status(500).send(err);
         } else {
-          console.log('results:', results);
           res.status(200).send(results);
         }
       })

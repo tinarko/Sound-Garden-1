@@ -13,6 +13,7 @@ const creditcards = (state = initialState, action) => {
       fetchingCreditcards: true
     }
     case 'RECEIVED_CREDITCARDS':
+    console.log('state before creditcards', state);
       return {
         ...state,
         creditcards: action.creditcards
