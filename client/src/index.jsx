@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 
 import store from './store.js';
 import Balance from './components/balance/Balance.jsx';
+import Transactions from './components/Transactions.jsx';
 import Budget from './components/Budget.jsx';
 import CCCashback from './components/CCCashback.jsx';
 import Login from './components/Login.jsx';
@@ -39,6 +40,7 @@ class App extends React.Component {
           <Route path="/ccCashback" component={CCCashback}/>
           <Route path="/portfolio" component={Portfolio}/>
           <Route path="/emailNotifications" component={EmailNotifications}/>
+          <Route path="/transactions" component={Transactions}/>
         </div>
       </Router>
     );

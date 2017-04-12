@@ -14,6 +14,7 @@ const Navbar = () => {
       <li><Link to="/ccCashback">CC Selector</Link></li>
       <li><Link to="/portfolio">Portfolio</Link></li>
       <li><Link to="/emailNotifications">Email Notifications</Link></li>
+      <li><Link to="/transactions">Transactions</Link></li>
       <li><Link to="/">Logout</Link></li>
     </ul>
   );
