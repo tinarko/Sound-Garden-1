@@ -228,7 +228,10 @@ module.exports = {
 
   'creditcards': {
     getUserCreditcards: (req, res) => {
-      db.getUserCreditcards(req.params.userid, (err, results) => {
+      // var userid = req.session.passport.user || 2;
+      var userid = 2;
+      console.log('USERID WHEREFORT ART THOU', userid);
+      db.getUserCreditcards(userid, (err, results) => {
         if (err) {
           res.status(500).send(err);
         } else {

@@ -27,11 +27,11 @@ export const toggleCashbackSetup = () => {
   };
 };
 
-export const getCreditcards = (userid) => {
-  userid = userid || 2;
+export const getCreditcards = () => {
+  // userid = userid || 2;
   return (dispatch) => {
     dispatch(fetchingCreditcards());
-    fetch(`/creditcards/getcreditcards/${userid}`, {
+    fetch('/creditcards/getcreditcards', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

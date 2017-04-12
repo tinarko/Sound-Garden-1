@@ -44,8 +44,8 @@ app.get('/auth/facebook/return',
     res.redirect('/');
   });
 
-app.get('/budget/getuserbudgets/:id', requestHandler.budget.getUserBudgets);
-app.get('/creditcards/getcreditcards/:userid', requestHandler.creditcards.getUserCreditcards);
+app.get('/budget/getuserbudgets', requestHandler.budget.getUserBudgets);
+app.get('/creditcards/getcreditcards', requestHandler.creditcards.getUserCreditcards);
 app.post('/budget/updatebudgetcategory', requestHandler.budget.updateBudgetAmount);
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);
 app.get('/plaid/accounts', requestHandler.plaid.accounts);

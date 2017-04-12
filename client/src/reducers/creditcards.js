@@ -1,6 +1,5 @@
 const initialState = {
   creditcards: [],
-  userid: 2,
   fetchingCreditcards: false,
   cashbacksetup: false
 };
