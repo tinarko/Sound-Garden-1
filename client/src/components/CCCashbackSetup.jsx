@@ -2,27 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import cashbackpercent from '../actions/cashbackpercent';
-import creditcards from '../actions/creditcards';
 
 class CCCashbackSetup extends React.Component {
   constructor (props) {
     super(props);
   }
 
-  componentWillMount() {
-    this.props.dispatch(creditcards.getCreditcards());
-  }
+  // componentWillMount() {
+  //   this.props.dispatch(creditcards.getCreditcards());
+  // }
 
   render () {
 
+    console.log('props', this.props);
+
     return (
       <div>
-        <h2> CashbackSetup </h2>
-
-        <p>{this.props.cashbackpercent}</p>
-        <button onClick={this.props.handleDecrement}>-</button>
-        <button onClick={this.props.handleIncrement}>+</button>
-        <p>{this.props.creditcards}</p>
+        { this.props.creditcard.ccname }
+        <p>{this.props.cashbackpercent} %
+          <button onClick={this.props.handleDecrement}>-</button>
+          <button onClick={this.props.handleIncrement}>+</button>
+        </p>
       </div>
     )
   }
@@ -31,7 +31,6 @@ class CCCashbackSetup extends React.Component {
 const mapStateToProps = (state) => {
   return {
     cashbackpercent: state.cashbackpercent,
-    creditcards: state.creditcards
   };
 };
 
@@ -43,3 +42,5 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default connect (mapStateToProps, mapDispatchToProps) (CCCashbackSetup);
+
+// export default CCCashbackSetup;

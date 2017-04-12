@@ -13,26 +13,27 @@ class CCCashback extends React.Component {
     let { dispatch, getCreditcards } = this.props;
     let userid = this.props.userid || 2;
     getCreditcards(userid);
-    // this.getUserBudgets(1);
   }
 
   render () {
-    console.log('props creditcards', this.props.creditcards);
+    var creditcards = this.props.creditcards.creditcards.map( (creditcard, index) => {
+              return (<li><CCCashbackSetup creditcard={creditcard} key={index}/></li>);
+            });
+
     return (
       <div>
-
         <h1>Credit Card Selector</h1>
-
-        <h3>Setup</h3>
+        <h3>Credit Card Cashback % Setup</h3>
+        <ul>
+          { creditcards }
+        </ul>
         
       </div>
     );
   }
 }
+          // {creditcards}
 
-        // {this.props.creditcards.map((creditcard) => {
-        //   return <CCCashbackSetup creditcard={creditcard}/>
-        // })}
         // <CCSuggestion/>
         // <GoogleMap />
 

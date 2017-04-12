@@ -17,7 +17,7 @@ export const receivedCreditcards = (creditcards) => {
  export const fetchCreditcardsError = (error) => {
   return {
     type: 'FETCH_CREDITCARDS_ERROR',
-    error: error
+    creditcards: error
   };
 };
 
@@ -35,7 +35,6 @@ export const getCreditcards = (userid) => {
       return response.json()
     })
     .then((json) => {
-      console.log('json', json);
       dispatch(receivedCreditcards(json));
     })
     .catch((err) => {
