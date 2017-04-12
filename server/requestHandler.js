@@ -118,9 +118,9 @@ module.exports = {
       });
     },
     transactions: function (req, res) {
+      //TODO: account for modularity for calendar time
       var userid = req.session.passport.user;
       var periodStart = `${req.params.year}-${req.params.month}-01`;
-      // console.log('begin of month', periodStart);
 
       var today = new Date ();
       var month = (today.getMonth() + 1).toString();
@@ -132,7 +132,6 @@ module.exports = {
       var day = today.getDate().toString();
 
       var periodEnd = year + '-' + month + '-' + day;
-      console.log('todayDate', periodEnd);
 
       var promises = [];
       var transactionData = {};
@@ -140,10 +139,10 @@ module.exports = {
       db.getPlaidItems(userid, function(err, response) {
         plaidInstitutions = response;
         for (var i = 0; i < response.length; i++) {
+          
           // promises.push(client.getTransactions(response[i].access_token, periodStart, periodEnd)
           promises.push(client.getTransactions(response[i].access_token, '2017-03-10', '2017-04-10')
             .then(function(data) {
-              console.log('transactions data =======', data.transactions.length);
               return data.transactions;
 
             })
@@ -154,47 +153,41 @@ module.exports = {
         }
         Promise.all(promises)
         .then(function(results) {
-          console.log('these are the results of the promise all', results[0].length, results[1].length);
-          // for (var j = 0; j < plaidInstitutions.length; j++) {
-          //   transactionData[plaidInstitutions[j].institution_name] = results[j];
-          // }
           var transactions = [];
           results.forEach(function(array) {
             for (var i = 0; i < array.length; i++) {
               transactions.push(array[i]);
             }
           });
-          console.log('transactions.length', transactions.length);
-
+          //TODO: refactor to dynamically add categories, instead of hardcoded ones
           var categoryObject = {
-              'Restaurants': 0,
-              'Fast Food': 0,
-              'Coffee Shop': 0,
-              'Groceries': 0,
-              'Entertainment': 0,
-              'Travel': 0,
-              // 'Food and Drink': 0,
-              'Other': 0
-            };
+            'Restaurants': 0,
+            'Fast Food': 0,
+            'Coffee Shop': 0,
+            'Groceries': 0,
+            'Entertainment': 0,
+            'Travel': 0,
+            // 'Food and Drink': 0,
+            'Other': 0
+          };
             
-            for (var i = 0; i < transactions.length; i++) {
-              if (transactions[i]['category']) {
-                for (var j = 0; j < transactions[i]['category'].length; j++) {
-                  var categoryName = transactions[i]['category'][j];
-                  if(categoryName in categoryObject) {
-                    categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'];
-                  } else if (categoryName === 'Transfer' || categoryName === 'Deposit' ) {
-                    continue;
-                  } else {
-                    categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'];
-                  }
+          for (var i = 0; i < transactions.length; i++) {
+            if (transactions[i]['category']) {
+              for (var j = 0; j < transactions[i]['category'].length; j++) {
+                var categoryName = transactions[i]['category'][j];
+                if (categoryName in categoryObject) {
+                  categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'];
+                } else if (categoryName === 'Transfer' || categoryName === 'Deposit' ) {
+                  continue;
+                } else {
+                  categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'];
                 }
-              } else {
-                categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'];
               }
+            } else {
+              categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'];
             }
+          }
           
-          // return res.json(transactions);
           return res.json(categoryObject);
         })
         .catch(function(error) {
@@ -207,19 +200,15 @@ module.exports = {
   'budget': {
     getUserBudgets: function (req, res) {
       var userid = req.session.passport.user;
-      console.log('userid', userid);
-      // db.getUserBudgets(req.params.id, function(err, results) {
       db.getUserBudgets(userid, function(err, results) {
         if (err) {
           res.status(500).send(err);
         } else {
-          console.log('results:', results);
           res.status(200).send(results);
         }
       });
     },
     updateBudgetAmount: function(req, res) {
-      console.log('req.body', req.body);
       var userid = req.session.passport.user;
       var updatedvalue;
       if (req.body.change === 'increment') {
@@ -231,7 +220,6 @@ module.exports = {
         if (err) {
           res.status(500).send(err);
         } else {
-          console.log('results:', results);
           res.status(200).send(results);
         }
       });

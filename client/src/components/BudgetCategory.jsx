@@ -32,18 +32,6 @@ class BudgetCategory extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     budget: state.budget
-//   };
-// };
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     handleIncrement: (index) => { dispatch(incrementBudget(index)); },
-//     handleDecrement: (index) => { dispatch(decrementBudget(index)); }
-//   };
-// };
 
-// export default connect (mapStateToProps, mapDispatchToProps) (BudgetCategory);
 export default BudgetCategory;

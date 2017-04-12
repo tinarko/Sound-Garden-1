@@ -9,7 +9,6 @@ const initialState = {
 
 
 const budget = (state = initialState, action) => {
-  // var newState= {...state, newChange: newValue}
   switch (action.type) {
     case 'FETCHING_BUDGETS':
     return {

@@ -31,12 +31,6 @@ export const getUserBudgets = (userid) => {
       credentials: 'same-origin',
 
     })
-    //note to self: investigate why commented out code is different from the one below...
-    // .then((results) => {
-    //   console.log('results', results);
-    //   console.log('results.json() in getUserBudgets action', results.json());
-    //   return results.json();
-    // })
     .then(response => response.json())
     .then((json) => {
       dispatch(receivedUserBudgets(json));
@@ -125,7 +119,6 @@ export const postUpdatedBudget = (goalvalue, categoryname, index, change) => {
       console.log('successful post for updating budget amount', response);
       response.json()
         .then((json) => {
-          // dispatch(postedUpdatedBudget());
           if (change === 'increment') {
             dispatch(incrementBudget(index));
           } else if (change === 'decrement') {

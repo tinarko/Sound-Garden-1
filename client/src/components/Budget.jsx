@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import BudgetCategoryList from './BudgetCategoryList.jsx';
 import { getUserBudgets, getTransactionData, incrementBudget, decrementBudget, postUpdatedBudget} from '../actions/budget.js';
-// import { receivedUserBudgets, fetchUserBudgetsError } from '../actions/budget.js';
 
 class Budget extends React.Component {
   constructor (props) {
@@ -12,8 +11,9 @@ class Budget extends React.Component {
 
   componentWillMount () {
     let { dispatch, getBudgets, getTransactionData, handleIncrement, handleDecrement} = this.props;
-    // this.getUserBudgets(1);
-    getBudgets(1);
+
+    // this.getUserBudgets();
+    getBudgets();
 
     var today = new Date ();
     var month = (today.getMonth() + 1).toString();
@@ -52,9 +52,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getBudgets: (userid) => { dispatch(getUserBudgets(userid)); },
     getTransactionData: (year, month) => { dispatch(getTransactionData(year, month)); },
-    // handleIncrement: (index) => { dispatch(incrementBudget(index)); },
     handleChange: (goalvalue, categoryname, index, change) => { dispatch(postUpdatedBudget(goalvalue, categoryname, index, change)); },
-    // handleDecrement: (index) => { dispatch(decrementBudget(index)); }
   };
 };
 export default connect (mapStateToProps, mapDispatchToProps) (Budget);
