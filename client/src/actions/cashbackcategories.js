@@ -8,17 +8,17 @@ export const fetchingCashbackCategories = () => {
   };
 };
 
-export const receivedCashbackCategories = (cccategories) => {
+export const receivedCashbackCategories = (cashbackcategories) => {
   return {
     type: 'RECEIVED_CASHBACK_CATEGORIES',
-    cccategories: cccategories
+    cashbackcategories: cashbackcategories
   };
 };
 
  export const fetchCashbackCategoriesError = (error) => {
   return {
-    type: 'FETCH_CREDITCARDS_ERROR',
-    cccategories: error
+    type: 'FETCH_CASHBACK_ERROR',
+    cashbackcategories: error
   };
 };
 
@@ -26,7 +26,7 @@ export const receivedCashbackCategories = (cccategories) => {
 export const getCashbackCategories = (ccid) => {
   return (dispatch) => {
 
-    dispatch(fetchingCreditcards());
+    dispatch(fetchingCashbackCategories());
     fetch(`/creditcards/getcashbackcategories/${ccid}`, {
       method: 'GET',
       headers: {

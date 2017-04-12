@@ -13,8 +13,7 @@ class CCCashback extends React.Component {
   }
 
   componentWillMount () {
-    let { dispatch, getCreditcards } = this.props;
-    getCreditcards();
+    this.props.getCreditcards();
   }
 
   render () {

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import cashbackpercent from '../actions/cashbackpercent';
 
-class CCCategories extends React.Component {
+class CashbackCategory extends React.Component {
   constructor (props) {
     super(props);
   }
@@ -36,5 +36,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect (mapStateToProps, mapDispatchToProps) (CCCategories);
+export default connect (mapStateToProps, mapDispatchToProps) (CashbackCategory);
 

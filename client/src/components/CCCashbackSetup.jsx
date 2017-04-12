@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 
-import CCCategories from './CCCategories';
+import CashbackCategory from './CashbackCategory';
+
+import { getCashbackCategories } from '../actions/cashbackcategories.js';
 
 class CCCashbackSetup extends React.Component {
   constructor (props) {
@@ -10,14 +12,22 @@ class CCCashbackSetup extends React.Component {
   }
 
 componentWillMount () {
-    console.log('PROPs!', this.props);
+    var ccid = this.props.creditcard.id;
+    this.props.getCashbackCategories(ccid);
   }
 
   render () {
+    var cashbackcategories = this.props.cashbackcategories.cashbackcategories;
     return (
       <div>
         <h3>{ this.props.creditcard.ccname }</h3>
-
+        <ul>
+          { cashbackcategories.map( (cashbackcategory, index) => { 
+            return (<li><CashbackCategory cashbackcategory={cashbackcategory} key={index}/></li>)
+          }) }
+          
+        </ul>
+        
       </div>
     )
   }
@@ -25,17 +35,19 @@ componentWillMount () {
 
 const mapStateToProps = (state) => {
   return {
-    // cashbackpercent: state.cashbackpercent,
+    cashbackcategories: state.cashbackcategories
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // handleIncrement: () => { dispatch(cashbackpercent.incrementCashbackPercent()); },
-    // handleDecrement: () => { dispatch(cashbackpercent.decrementCashbackPercent()); }
+    getCashbackCategories: (ccid) => { dispatch(getCashbackCategories(ccid)); }
   };
 };
 
+// export default connect (mapDispatchToProps) (CCCashbackSetup);
 export default connect (mapStateToProps, mapDispatchToProps) (CCCashbackSetup);
 
-// export default CCCashbackSetup;
+
+
+
