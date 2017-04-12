@@ -21,6 +21,12 @@ export const receivedCreditcards = (creditcards) => {
   };
 };
 
+export const toggleCashbackSetup = () => {
+  return {
+    type: 'TOGGLE_CASHBACK_SETUP'
+  };
+};
+
 export const getCreditcards = (userid) => {
   userid = userid || 2;
   return (dispatch) => {

@@ -18,7 +18,7 @@ class CCCashbackSetup extends React.Component {
 
     return (
       <div>
-        { this.props.creditcard.ccname }
+        <h3>{ this.props.creditcard.ccname }</h3>
         <p>{this.props.cashbackpercent} %
           <button onClick={this.props.handleDecrement}>-</button>
           <button onClick={this.props.handleIncrement}>+</button>

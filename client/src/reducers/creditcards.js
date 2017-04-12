@@ -1,7 +1,8 @@
 const initialState = {
   creditcards: [],
   userid: 2,
-  fetchingCreditcards: false
+  fetchingCreditcards: false,
+  cashbacksetup: false
 };
 
 const creditcards = (state = initialState, action) => {
@@ -23,6 +24,12 @@ const creditcards = (state = initialState, action) => {
       return {
         ...state,
         error: action.error
+      };
+      break;
+    case 'TOGGLE_CASHBACK_SETUP':
+      return {
+        ...state,
+        cashbacksetup: !state.cashbacksetup
       };
       break;
     default:
