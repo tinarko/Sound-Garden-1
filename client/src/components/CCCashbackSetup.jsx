@@ -1,28 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import cashbackpercent from '../actions/cashbackpercent';
+
+import CCCategories from './CCCategories';
 
 class CCCashbackSetup extends React.Component {
   constructor (props) {
     super(props);
   }
 
-  // componentWillMount() {
-  //   this.props.dispatch(creditcards.getCreditcards());
-  // }
+componentWillMount () {
+    console.log('PROPs!', this.props);
+  }
 
   render () {
-
-    console.log('props', this.props);
-
     return (
       <div>
         <h3>{ this.props.creditcard.ccname }</h3>
-        <p>{this.props.cashbackpercent} %
-          <button onClick={this.props.handleDecrement}>-</button>
-          <button onClick={this.props.handleIncrement}>+</button>
-        </p>
+
       </div>
     )
   }
@@ -30,14 +25,14 @@ class CCCashbackSetup extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    cashbackpercent: state.cashbackpercent,
+    // cashbackpercent: state.cashbackpercent,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleIncrement: () => { dispatch(cashbackpercent.incrementCashbackPercent()); },
-    handleDecrement: () => { dispatch(cashbackpercent.decrementCashbackPercent()); }
+    // handleIncrement: () => { dispatch(cashbackpercent.incrementCashbackPercent()); },
+    // handleDecrement: () => { dispatch(cashbackpercent.decrementCashbackPercent()); }
   };
 };
 

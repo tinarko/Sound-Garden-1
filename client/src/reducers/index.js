@@ -3,6 +3,7 @@ import balance from './balance.js';
 import budget from './budget.js';
 import cashbackpercent from './cashbackpercent';
 import creditcards from './creditcards';
+import cashbackcategories from './cashbackcategories';
 
 //implement lines below when there are actually other reducers in folder
 // import * as reducers from './reducers';
@@ -11,6 +12,7 @@ import creditcards from './creditcards';
 export default combineReducers({
   balance,
   budget,
+  cashbackcategories,
   cashbackpercent,
   creditcards
 });

@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
+
 import CCCashbackSetup from './CCCashbackSetup.jsx'
+
 import { getCreditcards } from '../actions/creditcards';
 import { toggleCashbackSetup } from '../actions/creditcards';
 

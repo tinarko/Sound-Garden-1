@@ -237,7 +237,17 @@ module.exports = {
         } else {
           res.status(200).send(results);
         }
-      })
+      });
+    },
+    getCashbackCategories: (req, res) => {
+      var ccid = req.params.ccid;
+      db.getCashbackCategories(ccid, (err, results) => {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.status(200).send(results);
+        }
+      });
     }
   }
 };
