@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as balance from './../actions/balance.js';
+import * as balance from './../../actions/balance.js';
 import BalanceList from './BalanceList.jsx';
 
 class Balance extends React.Component {
