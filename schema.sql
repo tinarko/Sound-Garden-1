@@ -46,7 +46,7 @@ CREATE TABLE items (
 CREATE TABLE creditcards (
   id int NOT NULL AUTO_INCREMENT,
   ccname varchar(255),
-  userid bigint NOT NULL
+  userid bigint NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -54,6 +54,7 @@ CREATE TABLE cccategories (
   id int NOT NULL AUTO_INCREMENT,
   categoryname varchar(255),
   value int NOT NULL,
+  ccid int NOT NULL,
   PRIMARY KEY (id)
 );
 
@@ -93,13 +94,13 @@ CREATE TABLE cccategories (
 -- below is dummy data Tina was using. Feel free to remove
 
 INSERT INTO users (userid, name) VALUES (2, 'Tina'); 
-INSERT INTO creditcards (userid, ccname, gas, groceries, travel, wholesale) VALUES (2, 'Plaid Diamond 12.5% APR Interest Credit Card', 5, 5, 5, 5);
-INSERT INTO creditcards (userid, ccname, gas, groceries, travel, wholesale) VALUES (2, 'Test', 1, 2, 3, 5);
+INSERT INTO creditcards (userid, ccname) VALUES (2, 'Plaid Diamond 12.5% APR Interest Credit Card');
+INSERT INTO creditcards (userid, ccname) VALUES (2, 'Test');
 INSERT INTO cccategories (categoryname, value, ccid) VALUES ('groceries', 5, 1);
 INSERT INTO cccategories (categoryname, value, ccid) VALUES ('gas', 5, 1);
 INSERT INTO cccategories (categoryname, value, ccid) VALUES ('shoes', 5, 1);
-INSERT INTO cccategories (categoryname, value, ccid) VALUES ('groceries', 3, 1);
-INSERT INTO cccategories (categoryname, value, ccid) VALUES ('gas', 3, 1);
-INSERT INTO cccategories (categoryname, value, ccid) VALUES ('travel', 3, 1);
+INSERT INTO cccategories (categoryname, value, ccid) VALUES ('groceries', 3, 2);
+INSERT INTO cccategories (categoryname, value, ccid) VALUES ('gas', 3, 2);
+INSERT INTO cccategories (categoryname, value, ccid) VALUES ('travel', 3, 2);
 
 
