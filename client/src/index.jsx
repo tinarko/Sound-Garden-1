@@ -8,7 +8,7 @@ import {
 import { Provider } from 'react-redux';
 
 import store from './store.js';
-import Balance from './components/Balance.jsx';
+import Balance from './components/balance/Balance.jsx';
 import Budget from './components/Budget.jsx';
 import CCSelector from './components/CCSelector.jsx';
 import Login from './components/Login.jsx';
