@@ -219,30 +219,40 @@ module.exports = {
       } else {
         updatedvalue = parseFloat(req.body.goalvalue);
       }
+      //check to see if budget category exists for user
       db.updateUserBudgetCategory([updatedvalue, userid, req.body.categoryname], function(err, results) {
         if (err) {
           res.status(500).send(err);
+        //if does not exist
         } else if (results.affectedRows === 0) {
-          db.insertBudgetCategory ([updatedvalue, userid, req.body.categoryname], function(err, results) {
+          //check if budget category name exists in database
+          db.checkForCategoryName (req.body.categoryname, function(err, results) {
             if (err) {
               res.status(500).send(err);
-            } else {
-              console.log('RESULTS', results);
-              db.getCategoryID(req.body.categoryname, function (err, categoryid) {
+            } else if (results) {
+              //if exists, use this budget category name to create a budget listing for user
+              db.insertUserBudget([updatedvalue, userid, results.id], function(err, finalResults) {
                 if (err) {
                   res.status(500).send(err);
                 } else {
-                  db.insertUserBudget([updatedvalue, userid, categoryid], function(err, finalResults) {
+                  res.status(201).send(finalResults);
+                }
+              });
+            } else {
+              //if it does not exist, insert a budget category name and use this newly inserted category name to create budget listing for user
+              db.insertBudgetCategory ([updatedvalue, userid, req.body.categoryname], function(err, results) {
+                if (err) {
+                  res.status(500).send(err);
+                } else {
+                  db.insertUserBudget([updatedvalue, userid, results.insertId], function(err, finalResults) {
                     if (err) {
                       res.status(500).send(err);
                     } else {
                       res.status(201).send(finalResults);
                     }
                   });
-                  // res.status(201).send(categoryid);
                 }
               });
-              // res.status(201).send(results);
             }
           });
         } else {

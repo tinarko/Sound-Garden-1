@@ -152,20 +152,31 @@ module.exports = {
     });
   },
 
-  getCategoryID: function (categoryname, cb) {
-    var queryString = 'select id from categorytypes where name = ?';
-    connection.query (queryString, categoryname, function(err, results) {
+  // getCategoryID: function (categoryname, cb) {
+  //   var queryString = 'select id from categorytypes where name = ?';
+  //   connection.query (queryString, categoryname, function(err, results) {
+  //     if (err, null) {
+  //       cb(err, null);
+  //     } else {
+  //       console.log(results[0]);
+  //       cb (null, results[0]);
+  //     }
+  //   });
+  // },
+
+  checkForCategoryName: function (categoryname, cb) {
+    var queryString = 'select * from categorytypes where name = ?';
+    connection.query (queryString, categoryname, function (err, results) {
       if (err, null) {
         cb(err, null);
       } else {
-        console.log(results[0]);
-        cb (null, results[0]);
+        cb(null, results[0]);
       }
     });
   },
 
   insertUserBudget: function(params, cb) {
-    var categoryid = params[2].id;
+    var categoryid = params[2];
     var updatedvalue = params[0];
     var userid = params[1];
 
