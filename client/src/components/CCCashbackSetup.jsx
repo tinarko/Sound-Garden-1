@@ -43,6 +43,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     getCashbackCategories: (ccid) => { dispatch(getCashbackCategories(ccid)); }
+    // createCashbackCategory: (ccid) => { dispatch(createCashbackCateogryKickoff(ccid, name, percent)); }
   };
 };
 

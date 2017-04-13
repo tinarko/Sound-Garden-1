@@ -23,6 +23,7 @@ export const changeCashbackPercentError = () => {
   };
 }
 
+
 export const changeCashbackPercent = (catid, percent, action, ccid) => {
   return (dispatch) => {
     fetch('/creditcards/changecashbackpercent', {
@@ -52,3 +53,41 @@ export const changeCashbackPercent = (catid, percent, action, ccid) => {
   };
 };
 
+export const createCashbackCategoryError = () => {
+  return {
+    type: 'CREATE_CASHBACK_CATEGORY_ERROR'
+  };
+}
+
+export const createCashbackCategory = (ccid, name, percent) => {
+  return {
+    type: 'CREATE_CASHBACK_CATEGORY',
+    ccid: ccid, 
+    name: name,
+    percent: percent
+  };
+}
+
+export const createCashbackCategoryKickoff = (ccid, name, percent) => {
+  return (dispatch) => {
+    fetch('/creditcards/createcashbackcategory', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify({
+        ccid: ccid, 
+        name: name, 
+        percent: percent
+      })
+    })
+    .then(response => {
+      dispatch(createCashbackCategory(ccid, name, percent));
+    })
+    .catch((err) => {
+      console.log('error in get', err);
+      dispatch(createCashbackCategoryError(err));
+    });
+  };
+};

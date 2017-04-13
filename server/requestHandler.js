@@ -257,5 +257,18 @@ module.exports = {
         }
       });
     },
+    createCashbackCategory: (req, res) => {
+      var ccid = req.body.ccid;
+      var name = req.body.name;
+      var percent = req.body.percent;
+
+      db.createCashbackCategory(ccid, name, percent, (err, results) => {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.status(200).send(results);
+        }
+      });
+    }
   }
 };

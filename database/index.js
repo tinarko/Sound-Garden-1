@@ -107,6 +107,26 @@ module.exports = {
       }
     })
   },
+
+  createCashbackCategory: function(ccid, name, percent, cb) {
+    var query = 'INSERT INTO cccategories (categoryname, value, ccid) VALUES (?, ?, ?)';
+    if (!name){
+      var params = ['test', 100, 2];
+    } else {
+      var params = [name, percent, ccid];
+      
+    }
+
+    connection.query(query, params, (err, results) => {
+      if (err) {
+        cb(err, null);
+      } else {
+        console.log(results);
+        cb(null, results);
+      }
+    })
+  },
+
   updateUserBudgetCategory: function(params, cb) {
     var queryString = 'update categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id SET budgetcategories.goalvalue = ? WHERE users.userid = ? AND categorytypes.name = ?;';
     connection.query(queryString, [params[0], params[1], params[2]], function(err, results, field) {
@@ -117,6 +137,6 @@ module.exports = {
         cb(null, results);
       }
     });
-  }
+  },
 
 };
