@@ -220,11 +220,9 @@ module.exports = {
         updatedvalue = parseFloat(req.body.goalvalue);
       }
       db.updateUserBudgetCategory([updatedvalue, userid, req.body.categoryname], function(err, results) {
-        // console.log('results in updateUserBudgetCategory', results);
         if (err) {
           res.status(500).send(err);
         } else if (results.affectedRows === 0) {
-          console.log('Need to insert');
           db.insertBudgetCategory ([updatedvalue, userid, req.body.categoryname], function(err, results) {
             if (err) {
               res.status(500).send(err);
