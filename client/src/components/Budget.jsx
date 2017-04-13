@@ -13,8 +13,6 @@ class Budget extends React.Component {
   componentWillMount () {
     let { dispatch, getBudgets, getTransactionData, handleIncrement, handleDecrement} = this.props;
 
-    // this.getUserBudgets();
-    getBudgets();
 
     var today = new Date ();
     var month = (today.getMonth() + 1).toString();
@@ -23,7 +21,7 @@ class Budget extends React.Component {
     }
     var year = today.getFullYear().toString();
 
-    // this.getTransactionData(year, month);
+    getBudgets(year, month);
     getTransactionData(year, month);
   }
 
@@ -52,7 +50,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getBudgets: () => { dispatch(getUserBudgets()); },
+    getBudgets: (year, month) => { dispatch(getUserBudgets(year, month)); },
     getTransactionData: (year, month) => { dispatch(getTransactionData(year, month)); },
     handleBudgetChange: (goalvalue, categoryname, index, change) => { dispatch(postUpdatedBudget(goalvalue, categoryname, index, change)); },
     // toggleAddBudgetCategoryInput: () => { dispatch(toggleAddBudgetCategoryInput()); }

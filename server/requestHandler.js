@@ -140,8 +140,8 @@ module.exports = {
         plaidInstitutions = response;
         for (var i = 0; i < response.length; i++) {
           
-          // promises.push(client.getTransactions(response[i].access_token, periodStart, periodEnd)
-          promises.push(client.getTransactions(response[i].access_token, '2017-03-10', '2017-04-10')
+          promises.push(client.getTransactions(response[i].access_token, periodStart, periodEnd)
+          // promises.push(client.getTransactions(response[i].access_token, '2017-03-10', '2017-04-10')
             .then(function(data) {
               return data.transactions;
 
@@ -201,11 +201,48 @@ module.exports = {
   'budget': {
     getUserBudgets: function (req, res) {
       var userid = req.session.passport.user;
-      db.getUserBudgets(userid, function(err, results) {
+      //check if (current) month budget exists for signed in user
+      db.checkIfMonthBudgetExists ([userid, req.params.year, req.params.month], function(err, results) {
         if (err) {
           res.status(500).send(err);
+        } else if (results.length === 0 ) {
+          //after knowing budget does not exist for current month, insert new budget table for said month
+          db.insertUserMonthBudget([userid, req.params.year, req.params.month], function(err, results) {
+            if (err) {
+              res.status(500).send(err);
+            } else {
+              // //check previous month for budget categories and pre populated current month budget
+              // var today = new Date ();
+              // //set to last month
+              // today.setMonth(today.getMonth() - 1);
+              // console.log('today', today);
+              // var month = (today.getMonth() + 1).toString();
+              // if (month.length < 2) {
+              //   month = '0'.concat(month);
+              // }
+              // var year = today.getFullYear().toString();
+
+              // db.checkIfMonthBudgetExists ([user.id, year, month], function (err, results) {
+              //   if (err) {
+              //     res.status(500).send(err);
+              //   } else if (results) {
+              //     console.log('results');
+              //     //continue here
+              //   }
+              // });
+              res.status(200).send(results);
+            }
+          });
+
         } else {
-          res.status(200).send(results);
+          console.log('getting user budgets');
+          db.getUserBudgets([userid, req.params.year, req.params.month], function(err, results) {
+            if (err) {
+              res.status(500).send(err);
+            } else {
+              res.status(200).send(results);
+            }
+          });
         }
       });
     },
@@ -260,9 +297,6 @@ module.exports = {
         }
       });
     },
-    addBudgetCategory: function(req, res) {
-      var userid = req.session.passport.user;
-    }
   },
 
   'creditcards': {

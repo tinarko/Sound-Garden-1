@@ -44,14 +44,14 @@ app.get('/auth/facebook/return',
     res.redirect('/');
   });
 
-app.get('/budget/getuserbudgets', requestHandler.budget.getUserBudgets);
+app.get('/budget/getuserbudgets/:year/:month', requestHandler.budget.getUserBudgets);
 app.post('/budget/updatebudgetcategory', requestHandler.budget.updateBudgetAmount);
 
 app.get('/creditcards/getcreditcards', requestHandler.creditcards.getUserCreditcards);
 app.post('/creditcards/changecashbackpercent', requestHandler.creditcards.changeCashbackPercent);
 app.post('/creditcards/createcashbackcategory', requestHandler.creditcards.createCashbackCategory);
 
-app.post('/budget/addbudgetcategory', requestHandler.budget.addBudgetCategory);
+// app.post('/budget/addbudgetcategory', requestHandler.budget.addBudgetCategory);
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);
 app.get('/plaid/accounts', requestHandler.plaid.accounts);
 app.get('/plaid/transactions/:year/:month', requestHandler.plaid.transactions);

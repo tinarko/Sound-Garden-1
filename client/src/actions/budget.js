@@ -20,10 +20,10 @@ export const fetchUserBudgetsError = (error) => {
   };
 };
 
-export const getUserBudgets = () => {
+export const getUserBudgets = (year, month) => {
   return (dispatch) => {
     dispatch(fetchingBudgets());
-    fetch('/budget/getuserbudgets', {
+    fetch(`/budget/getuserbudgets/${year}/${month}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -125,13 +125,19 @@ export const postUpdatedBudget = (goalvalue, categoryname, index, change) => {
       console.log('successful post for updating budget amount', response);
       response.json()
         .then((json) => {
-          console.log('json==============', json);
+          var today = new Date ();
+          var month = (today.getMonth() + 1).toString();
+          if (month.length < 2) {
+            month = '0'.concat(month);
+          }
+          var year = today.getFullYear().toString();
+
           if (change === 'increment') {
             dispatch(incrementBudget(index));
           } else if (change === 'decrement') {
             dispatch(decrementBudget(index));
           } else if (change === 'newValue') {
-            dispatch(getUserBudgets());
+            dispatch(getUserBudgets(year, month));
           }
         });
     })

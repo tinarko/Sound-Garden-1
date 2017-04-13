@@ -65,16 +65,16 @@ CREATE TABLE cccategories (
  
 -- below is Dummy Data Chris was using. Feel free to remove
 
-INSERT INTO users (userid, name) VALUES ('1', 'Chris'); 
-INSERT INTO budgets (id, user_id, month, goalvalue, actualvalue) VALUES (1, '1', NOW(), 600.00, 250.00);
-INSERT INTO budgets (id, user_id, month, goalvalue, actualvalue) VALUES (2, '1', '2017-03-08 14:41:50', 1000, 700);
-INSERT INTO categorytypes (id, name) VALUES (1, 'Restaurants');
-INSERT INTO categorytypes (id, name) VALUES (2, 'Fast Food');
-INSERT INTO categorytypes (id, name) VALUES (3, 'Coffee Shop');
-INSERT INTO categorytypes (id, name) VALUES (4, 'Groceries');
-INSERT INTO categorytypes (id, name) VALUES (5, 'Entertainment');
-INSERT INTO categorytypes (id, name) VALUES (6, 'Travel');
-INSERT INTO categorytypes (id, name) VALUES (7, 'Other');
+-- INSERT INTO users (userid, name) VALUES ('1', 'Chris'); 
+-- INSERT INTO budgets (id, user_id, month, goalvalue, actualvalue) VALUES (1, '1', NOW(), 600.00, 250.00);
+-- INSERT INTO budgets (id, user_id, month, goalvalue, actualvalue) VALUES (2, '1', '2017-03-08 14:41:50', 1000, 700);
+-- INSERT INTO categorytypes (id, name) VALUES (1, 'Restaurants');
+-- INSERT INTO categorytypes (id, name) VALUES (2, 'Fast Food');
+-- INSERT INTO categorytypes (id, name) VALUES (3, 'Coffee Shop');
+-- INSERT INTO categorytypes (id, name) VALUES (4, 'Groceries');
+-- INSERT INTO categorytypes (id, name) VALUES (5, 'Entertainment');
+-- INSERT INTO categorytypes (id, name) VALUES (6, 'Travel');
+-- INSERT INTO categorytypes (id, name) VALUES (7, 'Other');
 
 
 -- INSERT INTO budgets (id, user_id, month) VALUES (3, '10158485476085052', NOW());
@@ -102,5 +102,6 @@ INSERT INTO cccategories (categoryname, value, ccid) VALUES ('shoes', 5, 1);
 INSERT INTO cccategories (categoryname, value, ccid) VALUES ('groceries', 3, 2);
 INSERT INTO cccategories (categoryname, value, ccid) VALUES ('gas', 3, 2);
 INSERT INTO cccategories (categoryname, value, ccid) VALUES ('travel', 3.5, 2);
+
 
 
