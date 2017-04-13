@@ -12,15 +12,10 @@ class CCCashbackSetup extends React.Component {
   }
 
 componentWillMount () {
-    // var ccid = this.props.creditcard.id;
-    // this.props.getCashbackCategories(ccid);
   }
 
   render () {
     var creditcard = this.props.creditcard;
-    // var cashbackcategories = this.props.cashbackcategories.cashbackcategories;
-    // console.log('ccid', this.props.creditcard.id);
-    // console.log('cashbackcategories', cashbackcategories);
     return (
       <div>
         <h3>{ creditcard.ccname }</h3>
@@ -28,9 +23,10 @@ componentWillMount () {
           { creditcard.categories.map( (category, index) => { 
             return (<li><CashbackCategory category={category} key={index}/></li>)
           }) }
-          
+          <li><input/> <button>Add a new category</button></li>
         </ul>
         
+
       </div>
     )
   }
@@ -48,7 +44,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-// export default connect (mapDispatchToProps) (CCCashbackSetup);
 export default connect (mapStateToProps, mapDispatchToProps) (CCCashbackSetup);
 
 

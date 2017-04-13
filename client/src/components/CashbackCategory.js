@@ -15,7 +15,7 @@ class CashbackCategory extends React.Component {
     // console.log(this.props.cashbackcategory);
     return (
       <div>
-        <p>{this.props.category.name} {this.props.category.percent} % 
+        <p>{this.props.category.name}: {this.props.category.percent} % 
           <button onClick={this.props.handleDecrement}>-</button>
           <button onClick={this.props.handleIncrement}>+</button>
         </p>
