@@ -74,7 +74,7 @@ module.exports = {
   },
 
   getUserCreditcards: (userid, cb) => {
-    var query = 'SELECT ccid, ccname, categoryname, value FROM users \
+    var query = 'SELECT ccid, cccategories.id as catid, ccname, categoryname, value FROM users \
       JOIN creditcards ON creditcards.userid = users.userid \
       JOIN cccategories ON creditcards.id = cccategories.ccid \
       WHERE users.userid = ?;';
@@ -87,6 +87,25 @@ module.exports = {
         cb(null, results);
       }
     });
+  },
+
+  changeCashbackCategories: (catid, percent, action, cb) => {
+    var updatedPercent;
+    if (action === 'increment') {
+      updatedPercent = percent + 0.5;
+    } else {
+      updatedPercent = percent - 0.5;
+    }
+    var params = [updatedPercent, catid];
+    var query = 'update cccategories set value = ? where id = ?';
+
+    connection.query(query, params, (err, results) => {
+      if (err) {
+        cb(err, null);
+      } else {
+        cb(null, results);
+      }
+    })
   },
 
   getCashbackCategories: (ccid, cb) => {

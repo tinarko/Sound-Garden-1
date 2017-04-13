@@ -48,7 +48,8 @@ app.get('/budget/getuserbudgets', requestHandler.budget.getUserBudgets);
 app.post('/budget/updatebudgetcategory', requestHandler.budget.updateBudgetAmount);
 
 app.get('/creditcards/getcreditcards', requestHandler.creditcards.getUserCreditcards);
-app.get('/creditcards/getcashbackcategories/:ccid', requestHandler.creditcards.getCashbackCategories);
+// app.get('/creditcards/getcashbackcategories/:ccid', requestHandler.creditcards.getCashbackCategories);
+app.get('/creditcards/changecashbackcategories', requestHandler.creditcards.changeCashbackCategories);
 
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);
 app.get('/plaid/accounts', requestHandler.plaid.accounts);

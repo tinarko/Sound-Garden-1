@@ -23,7 +23,11 @@ componentWillMount () {
           { creditcard.categories.map( (category, index) => { 
             return (<li><CashbackCategory category={category} key={index}/></li>)
           }) }
-          <li><input/> <button>Add a new category</button></li>
+          <li>
+            Category: <input type="text"/> 
+            Cashback %: <input type="number"/> 
+            <button>Add</button>
+          </li>
         </ul>
         
 

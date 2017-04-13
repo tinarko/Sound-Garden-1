@@ -5,35 +5,7 @@ const initialState = {
 };
 
 const creditcards = (state = initialState, action) => {
-//   // var newState= {...state, newChange: newValue}
-//   onst initialState = {
-//   // cashbackcategories: [],
-//   fetchingCashbackCategories: false,
-//   creditcards: {cashbackcategories:[]}
-// };
-
-// const cashbackcategories = (state = initialState, action) => {
   switch (action.type) {
-    
-    // case 'FETCHING_CASHBACK_CATEGORIES':
-    //   return {
-    //     ...state,
-    //     fetchingCashbackCategories: true
-    //   };
-    //   break;
-
-    // case 'RECEIVED_CASHBACK_CATEGORIES':
-    //   return {
-    //     ...state,
-    //     cashbackcategories: action.cashbackcategories
-    //   };
-    //   break;
-    // case 'FETCH_CASHBACK_ERROR':
-    //   return {
-    //     ...state,
-    //     error: action.error
-    //   };
-    //   break;
 
     case 'FETCHING_CREDITCARDS':
       return {
@@ -59,8 +31,9 @@ const creditcards = (state = initialState, action) => {
         cashbacksetup: !state.cashbacksetup
       };
       break;
-      
+
     case 'INCREMENT_CASHBACK_PERCENT':
+      
       return state + 0.5;
       break;
     case 'DECREMENT_CASHBACK_PERCENT':
@@ -74,3 +47,22 @@ const creditcards = (state = initialState, action) => {
 export default creditcards;
 
 
+    // case 'FETCHING_CASHBACK_CATEGORIES':
+    //   return {
+    //     ...state,
+    //     fetchingCashbackCategories: true
+    //   };
+    //   break;
+
+    // case 'RECEIVED_CASHBACK_CATEGORIES':
+    //   return {
+    //     ...state,
+    //     cashbackcategories: action.cashbackcategories
+    //   };
+    //   break;
+    // case 'FETCH_CASHBACK_ERROR':
+    //   return {
+    //     ...state,
+    //     error: action.error
+    //   };
+    //   break;

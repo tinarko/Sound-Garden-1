@@ -53,6 +53,7 @@ export const getCreditcards = () => {
   };
 };
 
+
 // reorganize the db results to a format that makes more sense on state
 var setCC = function (array) {
   var results = [];
@@ -82,12 +83,15 @@ var setCC = function (array) {
       
       results[resultsIndex].categories.push({
         name: array[i].categoryname,
-        percent: array[i].value
+        percent: array[i].value, 
+        catid: array[i].catid
       });
     }
   }
 
   return results;
 };
+
+
 
 

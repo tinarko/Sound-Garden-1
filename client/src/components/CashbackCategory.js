@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import cashbackpercent from '../actions/cashbackpercent';
+import { changeCashbackPercent } from '../actions/cashbackpercent';
 
 class CashbackCategory extends React.Component {
   constructor (props) {
@@ -12,12 +12,14 @@ class CashbackCategory extends React.Component {
   // }
 
   render () {
-    // console.log(this.props.cashbackcategory);
+    var catid = this.props.category.catid;
+    var percent = this.props.category.percent;
+    var catname = this.props.category.name;
     return (
       <div>
-        <p>{this.props.category.name}: {this.props.category.percent} % 
-          <button onClick={this.props.handleDecrement}>-</button>
-          <button onClick={this.props.handleIncrement}>+</button>
+        <p>{catname}: {percent} % 
+          <button onClick={this.props.handleChange(catid, percent, 'decrement')}>-</button>
+          <button onClick={this.props.handleChange(catid, percent, 'increment')}>+</button>
         </p>
       </div>
     )
@@ -26,14 +28,13 @@ class CashbackCategory extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    cashbackpercent: state.cashbackpercent,
+    // cashbackpercent: state.cashbackpercent,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleIncrement: () => { dispatch(cashbackpercent.incrementCashbackPercent()); },
-    handleDecrement: () => { dispatch(cashbackpercent.decrementCashbackPercent()); }
+    handleChange: (catid, percent, action) => { dispatch(changeCashbackPercent(catid, percent, action)); },
   };
 };
 
