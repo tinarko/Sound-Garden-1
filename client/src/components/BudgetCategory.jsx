@@ -27,6 +27,7 @@ class BudgetCategory extends React.Component {
           this.props.budgetcategory.name, 
           this.props.index, 'increment'); 
         } }> + </button> 
+
         </div>
         <div>
         Spent this Month: {this.props.budgetcategory.actualvalue}

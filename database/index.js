@@ -138,5 +138,56 @@ module.exports = {
       }
     });
   },
+<<<<<<< HEAD
+=======
+
+  insertBudgetCategory: function(params, cb) {
+    var queryString = 'insert into categorytypes (name) values (?)';
+    connection.query(queryString, params[2], function(err, results) {
+      if (err, null) {
+        cb(err, null);
+      } else {
+        cb(null, results);
+      }
+    });
+  },
+
+  getCategoryID: function (categoryname, cb) {
+    var queryString = 'select id from categorytypes where name = ?';
+    connection.query (queryString, categoryname, function(err, results) {
+      if (err, null) {
+        cb(err, null);
+      } else {
+        console.log(results[0]);
+        cb (null, results[0]);
+      }
+    });
+  },
+
+  insertUserBudget: function(params, cb) {
+    var categoryid = params[2].id;
+    var updatedvalue = params[0];
+    var userid = params[1];
+
+    console.log('insertUserBudget params:', categoryid, updatedvalue, userid);
+    var queryString = 'insert into budgetcategories (budget_id, category_id, goalvalue) select budgets.id, ?, ? from categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id where Month(budgets.month) = MONTH(CURRENT_DATE()) and users.userid = ? limit 1;';
+    connection.query (queryString, [categoryid, updatedvalue, userid], function(err, results) {
+      if (err, null) {
+        cb(err, null);
+      } else {
+        console.log(results);
+        cb (null, results);
+      }
+    });
+      // 'insert into budgetcategories (budget_id, category_id, goalvalue) select budgets.id, $categoryid, $goalvalue from categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id where Month(budgets.month) = MONTH(CURRENT_DATE()) and users.userid = ?';
+
+      // 'insert into budgetcategories (budget_id, category_id, goalvalue) select budgets.id, categorytypes.id, 159.00 from categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id where Month(budgets.month) = MONTH(CURRENT_DATE()) and users.userid = ? AND categorytypes.name = ?;';
+
+      // 'insert into budgetcategories (budget_id, category_id, goalvalue)\
+      // select budgets.id, categorytypes.id, 159.00 \
+      // from categorytypes inner join budgetcategories inner join budgets inner join users \
+      // on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id where Month(budgets.month) = MONTH(CURRENT_DATE()) and users.userid = ? AND categorytypes.name = ?;';
+  }
+>>>>>>> (feat) Implement Database Insertion on Category Add: Need to Render Dynamically
 
 };

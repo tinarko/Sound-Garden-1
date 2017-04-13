@@ -189,6 +189,7 @@ module.exports = {
           }
           
           return res.json(categoryObject);
+          // return res.json(results);
         })
         .catch(function(error) {
           return res.json({error: 'error in getting transaction data from plaid clients'});
@@ -210,7 +211,6 @@ module.exports = {
     },
     updateBudgetAmount: function(req, res) {
       var userid = req.session.passport.user;
-      console.log('req.body', req.body);
       var updatedvalue;
       if (req.body.change === 'increment') {
         updatedvalue = req.body.goalvalue + 10;
@@ -225,8 +225,30 @@ module.exports = {
           res.status(500).send(err);
         } else if (results.affectedRows === 0) {
           console.log('Need to insert');
+          db.insertBudgetCategory ([updatedvalue, userid, req.body.categoryname], function(err, results) {
+            if (err) {
+              res.status(500).send(err);
+            } else {
+              db.getCategoryID(req.body.categoryname, function (err, categoryid) {
+                if (err) {
+                  res.status(500).send(err);
+                } else {
+                  console.log('categoryid', categoryid);
+                  db.insertUserBudget([updatedvalue, userid, categoryid], function(err, finalResults) {
+                    if (err) {
+                      res.status(500).send(err);
+                    } else {
+                      res.status(201).send(finalResults);
+                    }
+                  });
+                  // res.status(201).send(categoryid);
+                }
+              });
+              // res.status(201).send(results);
+            }
+          });
         } else {
-          res.status(200).send(results);
+          // res.status(201).send(results);
         }
       });
     },

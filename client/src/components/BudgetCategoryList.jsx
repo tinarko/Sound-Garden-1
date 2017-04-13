@@ -66,7 +66,7 @@ class BudgetCategoryList extends React.Component {
         {this.props.budget.budgets.map ((budgetcategory, index) => {
           return <BudgetCategory budgetcategory = {budgetcategory}
                                  index = {index} 
-                                 handleChange={this.props.handleChange}/>;
+                                 handleBudgetChange={this.props.handleBudgetChange}/>;
         }) }
         </div> 
         {toggleButtonForm}
