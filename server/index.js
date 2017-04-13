@@ -49,7 +49,7 @@ app.post('/budget/updatebudgetcategory', requestHandler.budget.updateBudgetAmoun
 
 app.get('/creditcards/getcreditcards', requestHandler.creditcards.getUserCreditcards);
 // app.get('/creditcards/getcashbackcategories/:ccid', requestHandler.creditcards.getCashbackCategories);
-app.get('/creditcards/changecashbackcategories', requestHandler.creditcards.changeCashbackCategories);
+app.post('/creditcards/changecashbackpercent', requestHandler.creditcards.changeCashbackPercent);
 
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);
 app.get('/plaid/accounts', requestHandler.plaid.accounts);

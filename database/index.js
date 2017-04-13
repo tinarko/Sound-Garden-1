@@ -107,22 +107,6 @@ module.exports = {
       }
     })
   },
-
-  getCashbackCategories: (ccid, cb) => {
-    var query = 'select categoryname, value from cccategories left join creditcards on creditcards.id = cccategories.ccid where creditcards.id = ?';
-    connection.query(query, ccid, (err, results) => {
-      if (results.length === 0) {
-        cb(err, null);
-      } else {
-        cb(null, results);
-      }
-    });
-  },
-  
-  // updateCashbackCategory: (ccid, category, percent, cb) => {
-  //   var query = ''
-  // }
-
   updateUserBudgetCategory: function(params, cb) {
     var queryString = 'update categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id SET budgetcategories.goalvalue = ? WHERE users.userid = ? AND categorytypes.name = ?;';
     connection.query(queryString, [params[0], params[1], params[2]], function(err, results, field) {

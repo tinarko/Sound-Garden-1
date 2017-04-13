@@ -244,10 +244,11 @@ module.exports = {
         }
       });
     },
-    changeCashbackCategories: (req, res) => {
+    changeCashbackPercent: (req, res) => {
       var catid = req.body.catid;
       var percent = req.body.percent;
       var action = req.body.action;
+
       db.changeCashbackCategories(catid, percent, action, (err, results) => {
         if (err) {
           res.status(500).send(err);
@@ -256,15 +257,15 @@ module.exports = {
         }
       });
     },
-    getCashbackCategories: (req, res) => {
-      var ccid = req.params.ccid;
-      db.getCashbackCategories(ccid, (err, results) => {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          res.status(200).send(results);
-        }
-      });
-    }
+    // getCashbackCategories: (req, res) => {
+    //   var ccid = req.params.ccid;
+    //   db.getCashbackCategories(ccid, (err, results) => {
+    //     if (err) {
+    //       res.status(500).send(err);
+    //     } else {
+    //       res.status(200).send(results);
+    //     }
+    //   });
+    // }
   }
 };

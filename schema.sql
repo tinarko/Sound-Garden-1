@@ -53,7 +53,7 @@ CREATE TABLE creditcards (
 CREATE TABLE cccategories (
   id int NOT NULL AUTO_INCREMENT,
   categoryname varchar(255),
-  value int NOT NULL,
+  value decimal (18,2) NOT NULL,
   ccid int NOT NULL,
   PRIMARY KEY (id)
 );
@@ -101,6 +101,6 @@ INSERT INTO cccategories (categoryname, value, ccid) VALUES ('gas', 5, 1);
 INSERT INTO cccategories (categoryname, value, ccid) VALUES ('shoes', 5, 1);
 INSERT INTO cccategories (categoryname, value, ccid) VALUES ('groceries', 3, 2);
 INSERT INTO cccategories (categoryname, value, ccid) VALUES ('gas', 3, 2);
-INSERT INTO cccategories (categoryname, value, ccid) VALUES ('travel', 3, 2);
+INSERT INTO cccategories (categoryname, value, ccid) VALUES ('travel', 3.5, 2);
 
 

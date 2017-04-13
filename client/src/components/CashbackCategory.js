@@ -15,11 +15,12 @@ class CashbackCategory extends React.Component {
     var catid = this.props.category.catid;
     var percent = this.props.category.percent;
     var catname = this.props.category.name;
+    var ccid = this.props.cc;
     return (
       <div>
         <p>{catname}: {percent} % 
-          <button onClick={this.props.handleChange(catid, percent, 'decrement')}>-</button>
-          <button onClick={this.props.handleChange(catid, percent, 'increment')}>+</button>
+          <button onClick={(e) => {this.props.handleChange(catid, percent, 'decrement', ccid)}}>-</button>
+          <button onClick={(e) => {this.props.handleChange(catid, percent, 'increment', ccid)}}>+</button>
         </p>
       </div>
     )
@@ -34,7 +35,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleChange: (catid, percent, action) => { dispatch(changeCashbackPercent(catid, percent, action)); },
+    handleChange: (catid, percent, action, ccid) => { dispatch(changeCashbackPercent(catid, percent, action, ccid)); },
   };
 };
 

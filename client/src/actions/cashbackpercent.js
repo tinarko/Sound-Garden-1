@@ -1,15 +1,19 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-export const incrementCashbackPercent = () => {
+export const incrementCashbackPercent = (ccid, catid) => {
   return {
-    type: 'INCREMENT_CASHBACK_PERCENT'
+    type: 'INCREMENT_CASHBACK_PERCENT',
+    ccid: ccid,
+    catid: catid
   };
 };
 
-export const decrementCashbackPercent = () => {
+export const decrementCashbackPercent = (ccid, catid) => {
   return {
-    type: 'DECREMENT_CASHBACK_PERCENT'
+    type: 'DECREMENT_CASHBACK_PERCENT',
+    ccid: ccid,
+    catid: catid
   };
 }
 
@@ -19,7 +23,7 @@ export const changeCashbackPercentError = () => {
   };
 }
 
-export const changeCashbackPercent = (catid, percent, action) => {
+export const changeCashbackPercent = (catid, percent, action, ccid) => {
   return (dispatch) => {
     fetch('/creditcards/changecashbackpercent', {
       method: 'POST',
@@ -27,20 +31,17 @@ export const changeCashbackPercent = (catid, percent, action) => {
         'Content-Type': 'application/json'
       },
       credentials: 'same-origin',
-      data: {
+      body: JSON.stringify({
         catid: catid,
         percent: percent,
         action: action
-      }
+      })
     })
     .then(response => {
-      return response.json();
-    })
-    .then((json) => {
       if (action === 'increment'){
-        dispatch(incrementCashbackPercent(json));
+        dispatch(incrementCashbackPercent(ccid, catid));
       } else {
-        dispatch(decrementCashbackPercent(json));
+        dispatch(decrementCashbackPercent(ccid, catid));
       }
       // results = setCC(json);
     })

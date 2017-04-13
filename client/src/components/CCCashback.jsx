@@ -36,6 +36,9 @@ class CCCashback extends React.Component {
         return (
         <div>
           <h1>Credit Card Selector</h1>
+          <h3>Are you at this location?</h3>
+          <p>Map Placeholder</p>
+          
           <button onClick={this.props.toggleCashbackSetup}>Credit Card Cashback % Setup</button>
         </div> );
     }

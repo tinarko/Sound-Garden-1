@@ -33,36 +33,55 @@ const creditcards = (state = initialState, action) => {
       break;
 
     case 'INCREMENT_CASHBACK_PERCENT':
-      
-      return state + 0.5;
+      var ccid = action.ccid;
+      var catid = action.catid;
+      var cc = state.cc.slice();
+      for (var i = 0; i < cc.length; i++) {
+        if (cc[i].ccid === ccid) {
+          for (var j = 0; j < cc[i].categories.length; j++) {
+            if (cc[i].categories[j].catid === catid) {
+              cc[i].categories[j].percent += 0.5;
+              break;
+            }
+          }
+        }
+        break;
+      }
+      console.log('cc is now', cc);
+      return {
+        ...state,
+        cc: cc
+      };
       break;
     case 'DECREMENT_CASHBACK_PERCENT':
-      return state - 0.5;
+      var ccid = action.ccid;
+      var catid = action.catid;
+      var cc = state.cc.slice();
+      for (var i = 0; i < cc.length; i++) {
+        if (cc[i].ccid === ccid) {
+          for (var j = 0; j < cc[i].categories.length; j++) {
+            if (cc[i].categories[j].catid === catid) {
+              cc[i].categories[j].percent -= 0.5;
+              break;
+            }
+          }
+        }
+        break;
+      }
+      console.log('cc is now', cc);
+      return {
+        ...state,
+        cc: cc
+      };
       break;
+    case 'CHANGE_CASHBACK_PERCENT_ERROR':
+      return {
+        ...state,
+        error: action.error
+      }
     default:
       return state;
     }
 };
 
 export default creditcards;
-
-
-    // case 'FETCHING_CASHBACK_CATEGORIES':
-    //   return {
-    //     ...state,
-    //     fetchingCashbackCategories: true
-    //   };
-    //   break;
-
-    // case 'RECEIVED_CASHBACK_CATEGORIES':
-    //   return {
-    //     ...state,
-    //     cashbackcategories: action.cashbackcategories
-    //   };
-    //   break;
-    // case 'FETCH_CASHBACK_ERROR':
-    //   return {
-    //     ...state,
-    //     error: action.error
-    //   };
-    //   break;
