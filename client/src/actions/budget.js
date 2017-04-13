@@ -100,6 +100,12 @@ export const decrementBudget = (index) => {
   };
 };
 
+export const addBudgetCategory = () => {
+  return {
+    type: 'ADD_BUDGET_CATEGORY',
+  };
+};
+
 export const postUpdatedBudget = (goalvalue, categoryname, index, change) => {
   return (dispatch) => {
     fetch('/budget/updatebudgetcategory', {
@@ -124,6 +130,8 @@ export const postUpdatedBudget = (goalvalue, categoryname, index, change) => {
             dispatch(incrementBudget(index));
           } else if (change === 'decrement') {
             dispatch(decrementBudget(index));
+          } else if (change === 'newValue') {
+            dispatch(getUserBudgets());
           }
         });
     })
@@ -157,18 +165,19 @@ export const categoryGoalInputChange = (goalValue) => {
 };
 
 
-export const postNewBudgetCategory = (goalvalue, categoryname) => {
-  return (dispatch) => {
-    fetch ('/budget/addbudgetcategory', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'same-origin',
-      body: JSON.stringify({
-        categoryname: categoryname,
-        goalvalue: goalvalue
-      })
-    });
-  };
-}
+
+// export const postNewBudgetCategory = (goalvalue, categoryname) => {
+//   return (dispatch) => {
+//     fetch ('/budget/addbudgetcategory', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       credentials: 'same-origin',
+//       body: JSON.stringify({
+//         categoryname: categoryname,
+//         goalvalue: goalvalue
+//       })
+//     });
+//   };
+// };

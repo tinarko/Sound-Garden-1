@@ -120,6 +120,12 @@ const budget = (state = initialState, action) => {
         addcategorybudget: action.goalValue
       };
 
+    // case 'ADD_BUDGET_CATEGORY': 
+    //   return {
+    //     ...state,
+        
+    //   }
+
     default:
       return state;
   }
