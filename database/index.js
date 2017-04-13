@@ -74,7 +74,11 @@ module.exports = {
   },
 
   getUserCreditcards: (userid, cb) => {
-    var query = 'select * from creditcards where userid = ?';
+    var query = 'SELECT ccid, ccname, categoryname, value FROM users \
+      JOIN creditcards ON creditcards.userid = users.userid \
+      JOIN cccategories ON creditcards.id = cccategories.ccid \
+      WHERE users.userid = ?;';
+
     connection.query(query, userid, (err, results) => {
       if (results.length === 0) {
         // TO DO: create empty initiated values
@@ -111,8 +115,5 @@ module.exports = {
       }
     });
   }
-
-
-
 
 };

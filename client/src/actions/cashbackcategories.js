@@ -31,10 +31,11 @@ export const getCashbackCategories = (ccid) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      credentials: 'same-origin'
     })
     .then(response => {
-      return response.json()
+      return response.json();
     })
     .then((json) => {
       dispatch(receivedCashbackCategories(json));
