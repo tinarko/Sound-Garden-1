@@ -36,6 +36,7 @@ const creditcards = (state = initialState, action) => {
       var ccid = action.ccid;
       var catid = action.catid;
       var cc = state.cc.slice();
+      console.log('state.cc', state.cc);
       for (var i = 0; i < cc.length; i++) {
         if (cc[i].ccid === ccid) {
           for (var j = 0; j < cc[i].categories.length; j++) {
