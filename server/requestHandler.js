@@ -246,7 +246,7 @@ module.exports = {
             }
           });
         } else {
-          // res.status(201).send(results);
+          res.status(201).send(results);
         }
       });
     },
