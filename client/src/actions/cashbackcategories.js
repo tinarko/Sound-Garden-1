@@ -11,14 +11,14 @@ export const fetchingCashbackCategories = () => {
 export const receivedCashbackCategories = (cashbackcategories) => {
   return {
     type: 'RECEIVED_CASHBACK_CATEGORIES',
-    cashbackcategories: cashbackcategories
+    cc: cashbackcategories
   };
 };
 
  export const fetchCashbackCategoriesError = (error) => {
   return {
     type: 'FETCH_CASHBACK_ERROR',
-    cashbackcategories: error
+    cc: error
   };
 };
 

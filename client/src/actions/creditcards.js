@@ -10,14 +10,14 @@ export const fetchingCreditcards = () => {
 export const receivedCreditcards = (creditcards) => {
   return {
     type: 'RECEIVED_CREDITCARDS',
-    creditcards: creditcards
+    cc: creditcards
   };
 };
 
  export const fetchCreditcardsError = (error) => {
   return {
     type: 'FETCH_CREDITCARDS_ERROR',
-    creditcards: error
+    cc: error
   };
 };
 
@@ -49,6 +49,3 @@ export const getCreditcards = () => {
     });
   };
 };
-
-
-

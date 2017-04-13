@@ -96,6 +96,10 @@ module.exports = {
     });
   },
   
+  // updateCashbackCategory: (ccid, category, percent, cb) => {
+  //   var query = ''
+  // }
+
   updateUserBudgetCategory: function(params, cb) {
     var queryString = 'update categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id SET budgetcategories.goalvalue = ? WHERE users.userid = ? AND categorytypes.name = ?;';
     connection.query(queryString, [params[0], params[1], params[2]], function(err, results, field) {

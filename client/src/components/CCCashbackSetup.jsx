@@ -18,6 +18,8 @@ componentWillMount () {
 
   render () {
     var cashbackcategories = this.props.cashbackcategories.cashbackcategories;
+    console.log('ccid', this.props.creditcard.id);
+    console.log('cashbackcategories', cashbackcategories);
     return (
       <div>
         <h3>{ this.props.creditcard.ccname }</h3>
