@@ -238,14 +238,7 @@ module.exports = {
         cb (null, results);
       }
     });
-      // 'insert into budgetcategories (budget_id, category_id, goalvalue) select budgets.id, $categoryid, $goalvalue from categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id where Month(budgets.month) = MONTH(CURRENT_DATE()) and users.userid = ?';
-
-      // 'insert into budgetcategories (budget_id, category_id, goalvalue) select budgets.id, categorytypes.id, 159.00 from categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id where Month(budgets.month) = MONTH(CURRENT_DATE()) and users.userid = ? AND categorytypes.name = ?;';
-
-      // 'insert into budgetcategories (budget_id, category_id, goalvalue)\
-      // select budgets.id, categorytypes.id, 159.00 \
-      // from categorytypes inner join budgetcategories inner join budgets inner join users \
-      // on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id where Month(budgets.month) = MONTH(CURRENT_DATE()) and users.userid = ? AND categorytypes.name = ?;';
+      
   }
 
 };
