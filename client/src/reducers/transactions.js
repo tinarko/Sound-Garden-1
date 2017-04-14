@@ -1,5 +1,8 @@
 export default (state = {
   transactions: {},
+  focusedInput: null,
+  startDate: null,
+  endDate: null,
   error: null,
   fetching: false,
   fetched: false,
@@ -29,6 +32,20 @@ export default (state = {
         transactions: action.payload
       };
       break;
+    }
+    // calendar focus changes
+    case 'CALENDAR_ITEM_FOCUSED': {
+      return state = {
+        ...state,
+        focusedInput: action.payload
+      };
+    }
+    case 'CALENDAR_DATES_CHANGED': {
+      return state = {
+        ...states,
+        startDate: payload.startDate,
+        endDate: payloadtype.endDate,
+      }
     }
     default: 
       return state;
