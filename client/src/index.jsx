@@ -5,6 +5,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import 'react-dates/lib/css/_datepicker.css';
 import { Provider } from 'react-redux';
 
 import store from './store.js';

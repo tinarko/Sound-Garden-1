@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import Calendar from './Calendar.jsx';
 import TransactionsGraph from './TransactionsGraph.jsx';
 import * as transactions from './../actions/transactions.js';
 
@@ -16,6 +17,7 @@ class Transactions extends React.Component {
     return (
       <div>
         <h3>transactions</h3>
+        <Calendar />        
         <TransactionsGraph />
       </div>
     );
