@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 
 import CCCashbackSetup from './CCCashbackSetup.jsx'
 
-import { getCreditcards } from '../actions/creditcards';
-import { toggleCashbackSetup } from '../actions/creditcards';
+import { getCreditcards, toggleCashbackSetup } from '../actions/creditcards';
 
 class CCCashback extends React.Component {
   constructor(props) {
@@ -25,8 +24,8 @@ class CCCashback extends React.Component {
 
       return (
         <div>
-          <h1>Credit Card Selector</h1>
-          <button onClick={this.props.toggleCashbackSetup}>Credit Card Cashback % Setup</button>
+          <h1>Credit Card Selector - Setup</h1>
+          <button onClick={this.props.toggleCashbackSetup}>Select Credit Card for Max Cashback</button>
           <ul>
             { creditcards }
           </ul>
@@ -36,7 +35,9 @@ class CCCashback extends React.Component {
         return (
         <div>
           <h1>Credit Card Selector</h1>
-          <h3>Are you at this location?</h3>
+          <h3>Are you at this location? --insert business name-- </h3>
+          <h4>If so, please use your --insert credit card-- to get the most cash back!</h4>
+          <h4>If not, please indicate where you are on the map below:</h4>
           <p>Map Placeholder</p>
           
           <button onClick={this.props.toggleCashbackSetup}>Credit Card Cashback % Setup</button>
@@ -45,10 +46,6 @@ class CCCashback extends React.Component {
 
   }
 }
-          // {creditcards}
-
-        // <CCSuggestion/>
-        // <GoogleMap />
 
 const mapStateToProps = (state) => {
   return {

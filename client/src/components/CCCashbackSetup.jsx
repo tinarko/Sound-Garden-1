@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import CashbackCategory from './CashbackCategory';
 
-import { createCashbackCategoryKickoff } from '../actions/cashbackpercent';
+import { createCashbackCategoryKickoff } from '../actions/createcashbackcategory';
 
 class CCCashbackSetup extends React.Component {
   constructor (props) {
@@ -52,6 +52,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createCashbackCategoryKickoff: (ccid, name, percent) => { dispatch(createCashbackCategoryKickoff(ccid, name, percent)); },
+    handleCategoryChange: (val) => { dispatch(handleCategoryChange(val)); }
   };
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { changeCashbackPercent } from '../actions/cashbackpercent';
+import { changeCashbackPercent } from '../actions/changecashbackpercent';
 
 
 class CashbackCategory extends React.Component {
