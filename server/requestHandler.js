@@ -77,7 +77,7 @@ module.exports = {
             .then(function(data) {
               // IMPORTANT: data contains accounts and item (bank) information
               // TODO: only need accounts information for now.
-              return data;
+              return data.accounts;
             })
             .catch(function(error) {
               return error;
@@ -111,7 +111,6 @@ module.exports = {
                 }
               }
             }
-            console.log(accountTypes)
             return res.json(accountTypes);
           })
           .catch(function(error) {
