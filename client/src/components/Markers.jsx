@@ -17,6 +17,8 @@ const Markers = (props) => {
           stroke="#3f4186"
           strokeWidth="3px"
           key={i}
+          onMouseOver={props.showToolTip}
+          onMouseOut={props.hideToolTip}
         />);
       })}
     </g>

@@ -2,10 +2,55 @@ import React from 'react';
 import * as d3 from 'd3';
 import Markers from './Markers.jsx';
 import Axis from './Axis.jsx';
+import ToolTip from './ToolTip.jsx';
 
 class TransactionsGraph extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      tooltip: {
+        display: false,
+        data: {
+          key: '',
+          value: '',
+        }
+      }
+    };
+    this.showToolTip = this.showToolTip.bind(this);
+    this.hideToolTip = this.hideToolTip.bind(this);
+  }
+
+  showToolTip (e) {
+    // TODO: refactor to action
+    console.log('hi')
+    console.log(e);
+    this.setState({
+      tooltip: {
+        display: true,
+        data: {
+          // key: data.day,
+          // value: data.count
+        },
+        pos: {
+          x: e.target.getAttribute('cx'),
+          y: e.target.getAttribute('cy'),
+        }
+      }
+    });
+  }
+
+  hideToolTip (e) {
+    this.setState({
+      tooltip: {
+        display: {
+          display: false,
+          data: {
+            key: '',
+            value: ''
+          }
+        }
+      }
+    });
   }
 
   render() {
@@ -70,7 +115,14 @@ class TransactionsGraph extends React.Component {
         <svg width={styles.width} height={styles.height}>
           <g transform={transform}>
             <path className="line" d={line(data)} strokeLinecap="round" />
-            <Markers data={data} x={x} y={y}/>
+            <Markers 
+              data={data} 
+              x={x} 
+              y={y}
+              showToolTip={this.showToolTip}
+              hideToolTip={this.hideToolTip}
+            />
+            <ToolTip tooltip={this.state.tooltip} />
             <Axis h={h} axis={yAxis} axisType="y" />
             <Axis h={h} axis={xAxis} axisType="x" />
           </g>
