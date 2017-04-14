@@ -15,14 +15,14 @@ class BudgetCategory extends React.Component {
         {this.props.budgetcategory.name}
         <div>
         Budget Goal: 
-        <button onClick={(e) => { this.props.handleChange(
+        <button onClick={(e) => { this.props.handleBudgetChange(
           this.props.budgetcategory.goalvalue, 
           this.props.budgetcategory.name, 
           this.props.index, 
           'decrement'); 
         } }> - </button>
         {this.props.budgetcategory.goalvalue}
-        <button onClick={(e) => { this.props.handleChange(
+        <button onClick={(e) => { this.props.handleBudgetChange(
           this.props.budgetcategory.goalvalue, 
           this.props.budgetcategory.name, 
           this.props.index, 'increment'); 

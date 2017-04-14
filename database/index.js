@@ -168,8 +168,7 @@ module.exports = {
       }
     });
   },
-<<<<<<< HEAD
-=======
+
 
   insertBudgetCategory: function(params, cb) {
     var queryString = 'insert into categorytypes (name) values (?)';
@@ -223,6 +222,5 @@ module.exports = {
       // from categorytypes inner join budgetcategories inner join budgets inner join users \
       // on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id where Month(budgets.month) = MONTH(CURRENT_DATE()) and users.userid = ? AND categorytypes.name = ?;';
   }
->>>>>>> (feat) Implement Database Insertion on Category Add: Need to Render Dynamically
 
 };
