@@ -59,12 +59,13 @@ export const createCashbackCategoryError = () => {
   };
 }
 
-export const createCashbackCategory = (ccid, name, percent) => {
+export const createCashbackCategory = (ccid, name, percent, catid) => {
   return {
     type: 'CREATE_CASHBACK_CATEGORY',
     ccid: ccid, 
     name: name,
-    percent: percent
+    percent: percent,
+    catid: catid
   };
 }
 
@@ -83,7 +84,9 @@ export const createCashbackCategoryKickoff = (ccid, name, percent) => {
       })
     })
     .then(response => {
-      dispatch(createCashbackCategory(ccid, name, percent));
+      console.log('response', response);
+      var catid = response.insertId;
+      dispatch(createCashbackCategory(ccid, name, percent, catid));
     })
     .catch((err) => {
       console.log('error in get', err);

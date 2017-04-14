@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { changeCashbackPercent } from '../actions/cashbackpercent';
 
+
 class CashbackCategory extends React.Component {
   constructor (props) {
     super(props);
   }
 
-  // componentWillMount() {
-  // }
+  componentWillMount() {
+  }
 
   render () {
     var catid = this.props.category.catid;

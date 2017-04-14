@@ -138,12 +138,8 @@ module.exports = {
 
   createCashbackCategory: function(ccid, name, percent, cb) {
     var query = 'INSERT INTO cccategories (categoryname, value, ccid) VALUES (?, ?, ?)';
-    if (!name) {
-      var params = ['test', 100, 2];
-    } else {
-      var params = [name, percent, ccid];
-      
-    }
+
+    var params = [name, percent, ccid];
 
     connection.query(query, params, (err, results) => {
       if (err) {

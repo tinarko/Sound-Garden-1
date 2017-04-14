@@ -82,21 +82,26 @@ const creditcards = (state = initialState, action) => {
       }
 
     case 'CREATE_CASHBACK_CATEGORY':
+      var catid = action.catid;
       var ccid = action.ccid;
       var name = action.name;
       var percent = action.percent;
+
       var cc = state.cc.slice();
       for (var i = 0; i < cc.length; i++) {
         if (cc[i].ccid === ccid) {
           cc[i].categories.push({
             name: name,
-            percent: percent
+            percent: percent,
+            catid: catid
           });
         }
         break;
       }
+      console.log('updated cc', cc);
       return {
-        ...state
+        ...state,
+        cc: cc
       }
       break;
     default:

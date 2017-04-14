@@ -18,7 +18,7 @@ class CCCashback extends React.Component {
 
   render () {
     var creditcards = this.props.creditcards.cc.map( (cc, index) => {
-              return (<li><CCCashbackSetup creditcard={cc} key={index}/></li>);
+              return (<li key={index}><CCCashbackSetup creditcard={cc}/></li>);
             });
 
     if (this.props.creditcards.cashbacksetup) {

@@ -4,27 +4,36 @@ import { connect } from 'react-redux';
 
 import CashbackCategory from './CashbackCategory';
 
+import { createCashbackCategoryKickoff } from '../actions/cashbackpercent';
+
 class CCCashbackSetup extends React.Component {
   constructor (props) {
     super(props);
   }
 
-componentWillMount () {
+  componentWillMount () {
   }
 
   render () {
     var creditcard = this.props.creditcard;
+    var ccid = creditcard.ccid;
+
+    var name = 'testing';
+    var percent = 50;
+    
+    console.log(ccid, name, percent);
+
     return (
       <div>
         <h3>{ creditcard.ccname }</h3>
         <ul>
           { creditcard.categories.map( (category, index) => { 
-            return (<li><CashbackCategory cc={creditcard.ccid} category={category} key={index}/></li>)
+            return (<li key={index}><CashbackCategory cc={ccid} category={category}/></li>)
           }) }
           <li>
             Category: <input type="text"/> 
             Cashback %: <input type="number"/> 
-            <button>Add</button>
+            <button onClick={(e) => {this.props.createCashbackCategoryKickoff(ccid, name, percent)}}>Add</button>
           </li>
         </ul>
         
@@ -42,8 +51,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCashbackCategories: (ccid) => { dispatch(getCashbackCategories(ccid)); }
-    // createCashbackCategory: (ccid) => { dispatch(createCashbackCateogryKickoff(ccid, name, percent)); }
+    createCashbackCategoryKickoff: (ccid, name, percent) => { dispatch(createCashbackCategoryKickoff(ccid, name, percent)); },
   };
 };
 
