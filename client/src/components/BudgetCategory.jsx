@@ -9,7 +9,7 @@ class BudgetCategory extends React.Component {
   }
 
   render() {
-
+    let actualValue = this.props.budgetcategory.actualvalue || 0;
     return (
       <div className="budgetCategory">
         {this.props.budgetcategory.name}
@@ -30,7 +30,7 @@ class BudgetCategory extends React.Component {
 
         </div>
         <div>
-        Spent this Month: {this.props.budgetcategory.actualvalue}
+        Spent this Month: {actualValue}
         </div>
         <br />
       </div>

@@ -138,6 +138,7 @@ export const postUpdatedBudget = (goalvalue, categoryname, index, change) => {
             dispatch(decrementBudget(index));
           } else if (change === 'newValue') {
             dispatch(getUserBudgets(year, month));
+            dispatch(getTransactionData(year, month));
           }
         });
     })

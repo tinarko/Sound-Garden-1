@@ -8,10 +8,21 @@ import { getUserBudgets, getTransactionData, incrementBudget, decrementBudget, p
 class Budget extends React.Component {
   constructor (props) {
     super(props);
+    let { dispatch, getBudgets, getTransactionData, handleIncrement, handleDecrement} = this.props;
+    var today = new Date ();
+    var month = (today.getMonth() + 1).toString();
+    if (month.length < 2) {
+      month = '0'.concat(month);
+    }
+    var year = today.getFullYear().toString();
+
+    getBudgets(year, month);
+    getTransactionData(year, month);
   }
 
   componentWillMount () {
     let { dispatch, getBudgets, getTransactionData, handleIncrement, handleDecrement} = this.props;
+    //
 
 
     var today = new Date ();

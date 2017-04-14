@@ -160,34 +160,55 @@ module.exports = {
             }
           });
           //TODO: refactor to dynamically add categories, instead of hardcoded ones
-          var categoryObject = {
-            'Restaurants': 0,
-            'Fast Food': 0,
-            'Coffee Shop': 0,
-            'Groceries': 0,
-            'Entertainment': 0,
-            'Travel': 0,
-            // 'Food and Drink': 0,
-            'Other': 0
-          };
+          // var categoryObject = {
+          //   'Restaurants': 0,
+          //   'Fast Food': 0,
+          //   'Coffee Shop': 0,
+          //   'Groceries': 0,
+          //   'Entertainment': 0,
+          //   'Travel': 0,
+          //   // 'Food and Drink': 0,
+          //   'Other': 0
+          // };
             
+          // for (var i = 0; i < transactions.length; i++) {
+          //   if (transactions[i]['category']) {
+          //     for (var j = 0; j < transactions[i]['category'].length; j++) {
+          //       var categoryName = transactions[i]['category'][j];
+          //       if (categoryName in categoryObject) {
+          //         categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'];
+          //       } else if (categoryName === 'Transfer' || categoryName === 'Deposit' ) {
+          //         continue;
+          //       } else {
+          //         categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'];
+          //       }
+          //     }
+          //   } else {
+          //     categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'];
+          //   }
+          // }
+
+          var categoryObject = {}; 
           for (var i = 0; i < transactions.length; i++) {
             if (transactions[i]['category']) {
-              for (var j = 0; j < transactions[i]['category'].length; j++) {
-                var categoryName = transactions[i]['category'][j];
-                if (categoryName in categoryObject) {
-                  categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'];
-                } else if (categoryName === 'Transfer' || categoryName === 'Deposit' ) {
-                  continue;
-                } else {
-                  categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'];
-                }
+              var categoryName = transactions[i]['category'][0];
+              console.log('categoryName', categoryName);
+              if (transactions[i]['category'].length > 0) {
+                categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'] || transactions[i]['amount'];
+              } else if (categoryName === 'Transfer' || categoryName === 'Deposit' ) {
+                //do nothing
+              } else {
+                categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'] || transactions[i]['amount'];
               }
             } else {
-              categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'];
+              categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'] || transactions[i]['amount'];
             }
           }
-          
+
+          // console.log('categoryObject', categoryObject);
+
+          console.log('==================transactions', transactions);
+          console.log('==================results', results);
           return res.json(categoryObject);
           // return res.json(results);
         })
@@ -230,7 +251,38 @@ module.exports = {
               //     //continue here
               //   }
               // });
-              res.status(200).send(results);
+              console.log('results in InsertUserMonth', results);
+              //insert default categories into newly made budget if deffault does not exist
+              var budgetId = results.insertId;
+              db.checkForCategoryName ('Restaurants', function(err, results) {
+                if (err) {
+                  res.status(500).send(err);
+                } else if (!results) {
+                  db.insertDefaultCategories (function(err, results) {
+                    if (err) {
+                      res.status(500).send(err);
+                    } else {
+                      // res.status(200).send(results);
+                      db.insertDefaultUserBudgets (budgetId, function(err, results) {
+                        if (err) {
+                          res.status(500).send(err);
+                        } else {
+                          res.status(200).send(results);
+                        }
+                      });
+                    }
+                  });
+                } else {
+                  db.insertDefaultUserBudgets (budgetId, function(err, results) {
+                    if (err) {
+                      res.status(500).send(err);
+                    } else {
+                      res.status(200).send(results);
+                    }
+                  });
+                }
+              });
+              // res.status(200).send(results);
             }
           });
 
@@ -277,7 +329,7 @@ module.exports = {
               });
             } else {
               //if it does not exist, insert a budget category name and use this newly inserted category name to create budget listing for user
-              db.insertBudgetCategory ([updatedvalue, userid, req.body.categoryname], function(err, results) {
+              db.insertBudgetCategory ([req.body.categoryname], function(err, results) {
                 if (err) {
                   res.status(500).send(err);
                 } else {

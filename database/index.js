@@ -138,7 +138,7 @@ module.exports = {
 
   createCashbackCategory: function(ccid, name, percent, cb) {
     var query = 'INSERT INTO cccategories (categoryname, value, ccid) VALUES (?, ?, ?)';
-    if (!name){
+    if (!name) {
       var params = ['test', 100, 2];
     } else {
       var params = [name, percent, ccid];
@@ -172,7 +172,7 @@ module.exports = {
 
   insertBudgetCategory: function(params, cb) {
     var queryString = 'insert into categorytypes (name) values (?)';
-    connection.query(queryString, params[2], function(err, results) {
+    connection.query(queryString, params[0], function(err, results) {
       if (err, null) {
         cb(err, null);
       } else {
@@ -188,6 +188,31 @@ module.exports = {
         cb(err, null);
       } else {
         cb(null, results[0]);
+      }
+    });
+  },
+
+  insertDefaultCategories: function (cb) {
+    var defaultCategories = ['Food and Drink', 'Travel', 'Groceries', 'Entertainment', 'Other'];
+    var queryString = 'insert into categorytypes (name) values (?), (?), (?), (?), (?)';
+
+    connection.query(queryString, defaultCategories, function(err, results) {
+      if (err, null) {
+        cb(err, null);
+      } else {
+        cb(null, results);
+      }
+    });
+  },
+
+  insertDefaultUserBudgets: function (budgetid, cb) {
+    var queryString = 'insert into budgetcategories (budget_id, category_id, goalvalue) values (?, 1, 100), (?, 2, 100), (?, 3, 100), (?, 4, 100), (?, 5, 100)';
+
+    connection.query(queryString, [budgetid, budgetid, budgetid, budgetid, budgetid], function(err, results) {
+      if (err, null) {
+        cb(err, null);
+      } else {
+        cb(null, results);
       }
     });
   },
