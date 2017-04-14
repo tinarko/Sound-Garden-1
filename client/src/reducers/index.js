@@ -11,8 +11,6 @@ import transactions from './transactions.js';
 export default combineReducers({
   balance,
   budget,
-  creditcards
-  cashbackpercent,
   creditcards,
   transactions
 });
