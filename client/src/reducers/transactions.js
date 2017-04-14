@@ -42,9 +42,9 @@ export default (state = {
     }
     case 'CALENDAR_DATES_CHANGED': {
       return state = {
-        ...states,
-        startDate: payload.startDate,
-        endDate: payloadtype.endDate,
+        ...state,
+        startDate: action.payload.startDate,
+        endDate: action.payload.endDate,
       }
     }
     default: 

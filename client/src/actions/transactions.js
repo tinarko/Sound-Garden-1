@@ -23,8 +23,6 @@ export const getTransactions = () => {
 };
 
 export const setCalendarFocusedInput = (focusedInput) => {
-  console.log("hi")
-  console.log(focusedInput)
   return {
     type: 'CALENDAR_ITEM_FOCUSED',
     payload: focusedInput

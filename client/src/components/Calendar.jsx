@@ -13,6 +13,7 @@ class Calendar extends React.Component {
   onDatesChange({ startDate, endDate }) {
     // this.setState({ startDate, endDate });
     // this.props.setSelectedDate({ startDate, endDate });
+    console.log('on date change', arguments)
     this.props.dispatch(transactions.setSelectedDate({startDate, endDate}));
   }
 
