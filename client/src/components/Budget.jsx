@@ -22,8 +22,6 @@ class Budget extends React.Component {
 
   componentWillMount () {
     let { dispatch, getBudgets, getTransactionData, handleIncrement, handleDecrement} = this.props;
-    //
-
 
     var today = new Date ();
     var month = (today.getMonth() + 1).toString();

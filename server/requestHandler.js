@@ -193,10 +193,8 @@ module.exports = {
             if (transactions[i]['category']) {
               var categoryName = transactions[i]['category'][0];
               console.log('categoryName', categoryName);
-              if (transactions[i]['category'].length > 0) {
+              if (transactions[i]['category'].length > 0 && categoryName !== 'Payment') {
                 categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'] || transactions[i]['amount'];
-              } else if (categoryName === 'Transfer' || categoryName === 'Deposit' ) {
-                //do nothing
               } else {
                 categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'] || transactions[i]['amount'];
               }
@@ -207,10 +205,10 @@ module.exports = {
 
           // console.log('categoryObject', categoryObject);
 
-          console.log('==================transactions', transactions);
-          console.log('==================results', results);
+          // console.log('==================transactions', transactions);
+          // console.log('==================results', results);
           return res.json(categoryObject);
-          // return res.json(results);
+          // return res.json(transactions);
         })
         .catch(function(error) {
           return res.json({error: 'error in getting transaction data from plaid clients'});
