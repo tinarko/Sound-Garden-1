@@ -16,7 +16,7 @@ class Transactions extends React.Component {
     return (
       <div>
         <h3>transactions</h3>
-        <TransactionsGraph {...this.state}/>
+        <TransactionsGraph />
       </div>
     );
   }

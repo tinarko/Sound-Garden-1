@@ -77,7 +77,7 @@ module.exports = {
             .then(function(data) {
               // IMPORTANT: data contains accounts and item (bank) information
               // TODO: only need accounts information for now.
-              return data.accounts;
+              return data;
             })
             .catch(function(error) {
               return error;
@@ -88,6 +88,7 @@ module.exports = {
         var accountTypes = {};
         Promise.all(promises)
           .then(function(results) {
+            console.log(results);
             for (var j = 0; j < plaidInstitutions.length; j++) {
               accountData[plaidInstitutions[j].institution_name] = results[j];
             }
@@ -110,6 +111,7 @@ module.exports = {
                 }
               }
             }
+            console.log(accountTypes)
             return res.json(accountTypes);
           })
           .catch(function(error) {
