@@ -159,35 +159,8 @@ module.exports = {
               transactions.push(array[i]);
             }
           });
-          //TODO: refactor to dynamically add categories, instead of hardcoded ones
-          // var categoryObject = {
-          //   'Restaurants': 0,
-          //   'Fast Food': 0,
-          //   'Coffee Shop': 0,
-          //   'Groceries': 0,
-          //   'Entertainment': 0,
-          //   'Travel': 0,
-          //   // 'Food and Drink': 0,
-          //   'Other': 0
-          // };
-            
-          // for (var i = 0; i < transactions.length; i++) {
-          //   if (transactions[i]['category']) {
-          //     for (var j = 0; j < transactions[i]['category'].length; j++) {
-          //       var categoryName = transactions[i]['category'][j];
-          //       if (categoryName in categoryObject) {
-          //         categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'];
-          //       } else if (categoryName === 'Transfer' || categoryName === 'Deposit' ) {
-          //         continue;
-          //       } else {
-          //         categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'];
-          //       }
-          //     }
-          //   } else {
-          //     categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'];
-          //   }
-          // }
 
+          //refactored to dynamically add categories
           var categoryObject = {}; 
           for (var i = 0; i < transactions.length; i++) {
             if (transactions[i]['category']) {
@@ -202,11 +175,6 @@ module.exports = {
               categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'] || transactions[i]['amount'];
             }
           }
-
-          // console.log('categoryObject', categoryObject);
-
-          // console.log('==================transactions', transactions);
-          // console.log('==================results', results);
           return res.json(categoryObject);
           // return res.json(transactions);
         })
@@ -249,7 +217,7 @@ module.exports = {
               //     //continue here
               //   }
               // });
-              console.log('results in InsertUserMonth', results);
+      
               //insert default categories into newly made budget if deffault does not exist
               var budgetId = results.insertId;
               db.checkForCategoryName ('Restaurants', function(err, results) {
