@@ -123,12 +123,12 @@ const budget = (state = initialState, action) => {
       };
 
     case 'MONTH_VALUE_CHANGE': 
-      var newYearMonth = state.mvalue;
-      newYearMonth.year = action.yearValue;
-      newYearMonth.month = action.monthValue;
+      // var newYearMonth = state.mvalue;
+      // newYearMonth.year = action.yearValue;
+      // newYearMonth.month = action.monthValue;
       return {
         ...state,
-        mvalue: newYearMonth
+        mvalue: action.yearMonthObject
       };
 
     case 'TOGGLE_YEAR_MONTH_SELECTION':

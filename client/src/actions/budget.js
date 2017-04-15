@@ -171,11 +171,12 @@ export const categoryGoalInputChange = (goalValue) => {
   };
 };
 
-export const yearMonthChange = (yearValue, monthValue) => {
+export const yearMonthChange = (yearMonthObject) => {
   return {
     type: 'MONTH_VALUE_CHANGE',
-    yearValue: yearValue,
-    monthValue: monthValue
+    // yearValue: yearValue,
+    // monthValue: monthValue
+    yearMonthObject: yearMonthObject
   };
 };
 

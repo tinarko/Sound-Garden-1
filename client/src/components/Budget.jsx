@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import MonthPicker from 'react-month-picker/lib/month-picker.js';
 // import MonthPicker from 'month-picker';
-// import MonthBox from 
 import BudgetCategoryList from './BudgetCategoryList.jsx';
 import { getUserBudgets, getTransactionData, incrementBudget, decrementBudget, postUpdatedBudget, yearMonthChange, toggleYearMonthSelection } from '../actions/budget.js';
 // import { getTransactionData } from '../actions/transactions.js';
@@ -23,7 +22,11 @@ class Budget extends React.Component {
 
     let monthValue = today.getMonth() + 1;
     let yearValue = today.getFullYear();
-    this.props.yearMonthChange(yearValue, monthValue);
+    this.props.yearMonthChange({year: yearValue, month: monthValue});
+    // this.props.yearMonthChange({year: 2016, month: 1});
+    // this.props.yearMonthChange(2016, 1);
+    // this.props.yearMonthChange = this.props.yearMonthChange.bind(this);
+
 
   }
 
@@ -41,9 +44,19 @@ class Budget extends React.Component {
   }
 
   handleAMonthDismiss (value) {
-    
+    console.log('invoked dismiss');
+    console.log('value', value);
+    this.props.yearMonthChange(value);
   }
 
+  handleYearMonthChange (value) {
+    console.log('invoked change');
+    this.props.yearMonthChange(value);
+  }
+
+  handleClickCurrent () {
+    this.refs.pickAMonth.show();
+  }
   render () {
 
     let today = new Date ();
@@ -55,24 +68,32 @@ class Budget extends React.Component {
     let currentMonth = months[(this.props.budget.mvalue.month - 1)];
 
     var yearMonthSelector;
-    if (this.props.budget.toggleyearmonthselection) {
-      yearMonthSelector = <MonthPicker 
+    // if (this.props.budget.toggleyearmonthselection) {
+    //   yearMonthSelector = <MonthPicker 
+    //       ref="pickAMonth" 
+    //       years={3}
+    //       value={this.props.budget.mvalue}
+    //       lang ={months}
+    //       onChange = {}
+    //       onDismiss={this.handleAMonthDismiss}>
+    //       </MonthPicker>;
+    // } else {
+    //   yearMonthSelector = <div></div>;
+    // }
+    return (
+      <div>
+       <h2> Budget</h2>
+        <div className="box" onClick = {this.handleClickCurrent.bind(this)}>
+          <label>{this.props.budget.mvalue.month} {this.props.budget.mvalue.year} </label>
+        </div>
+        <MonthPicker 
           ref="pickAMonth" 
           years={3}
           value={this.props.budget.mvalue}
           lang ={months}
-          onDismiss={this.handleAMonthDismiss}>
-          </MonthPicker>;
-    } else {
-      yearMonthSelector = <div></div>;
-    }
-    return (
-      <div>
-       <h2> Budget</h2>
-        <div className="box" onClick = {() => { this.props.toggleYearMonthSelection(); } }>
-          <label>{this.props.budget.mvalue.month} {this.props.budget.mvalue.year} </label>
-        </div>
-        {yearMonthSelector}
+       
+          onDismiss={this.handleAMonthDismiss.bind(this)}>
+          </MonthPicker>
         <div>
           Placeholder for Graphs
         </div>
@@ -98,7 +119,7 @@ const mapDispatchToProps = (dispatch) => {
     handleBudgetChange: (goalvalue, categoryname, index, change) => { 
       dispatch(postUpdatedBudget(goalvalue, categoryname, index, change)); 
     },
-    yearMonthChange: (year, month) => { dispatch(yearMonthChange(year, month)); },
+    yearMonthChange: (yearMonthObject) => { dispatch(yearMonthChange(yearMonthObject)); },
     toggleYearMonthSelection: () => { dispatch (toggleYearMonthSelection()); }
   };
 };
