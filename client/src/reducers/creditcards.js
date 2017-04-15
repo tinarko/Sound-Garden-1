@@ -25,6 +25,12 @@ const creditcards = (state = initialState, action) => {
         error: action.error
       };
       break;
+    case 'GET_CREDITCARDS_ERROR':
+      return {
+        ...state,
+        error: action.error
+      };
+      break;
     case 'TOGGLE_CASHBACK_SETUP':
       return {
         ...state,

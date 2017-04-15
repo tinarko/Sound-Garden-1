@@ -15,9 +15,16 @@ export const receivedCreditcards = (creditcards) => {
   };
 };
 
- export const fetchCreditcardsError = (error) => {
+export const fetchCreditcardsError = (error) => {
   return {
     type: 'FETCH_CREDITCARDS_ERROR',
+    cc: error
+  };
+};
+
+export const createCreditcardsError = (error) => {
+  return {
+    type: 'CREATE_CREDITCARDS_ERROR',
     cc: error
   };
 };
@@ -28,22 +35,40 @@ export const toggleCashbackSetup = () => {
   };
 };
 
+export const createCreditcardsKickoff = () => {
+  return (dispatch) => {
+    fetch('/creditcards/createcreditcards', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin',
+    }).then(response => {
+      dispatch(getCreditcards());
+    })
+    .catch((err) => {
+      console.log('error in get', err);
+      dispatch(createCreditcardsError(err));
+    });
+  }
+};
+
 export const getCreditcards = () => {
   // userid = userid || 2;
   return (dispatch) => {
     dispatch(fetchingCreditcards());
     fetch('/creditcards/getcreditcards', {
       method: 'GET',
-      credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json'
       },
-      credentials: 'same-origin'
+      credentials: 'same-origin',
     })
     .then(response => {
       return response.json();
     })
     .then((json) => {
+      console.log('WHY?!?!?!', json);
       dispatch(receivedCreditcards(json));
     })
     .catch((err) => {

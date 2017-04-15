@@ -62,6 +62,7 @@ app.get('/creditcards/getcreditcards', requestHandler.creditcards.getUserCreditc
 app.post('/creditcards/changecashbackpercent', requestHandler.creditcards.changeCashbackPercent);
 app.post('/creditcards/createcashbackcategory', requestHandler.creditcards.createCashbackCategory);
 app.delete('/creditcards/deletecashbackcategory/:catid', requestHandler.creditcards.deleteCashbackCategory);
+app.get('/creditcards/createcreditcards', requestHandler.creditcards.createCreditCards);
 
 app.get('/google/geolocate', requestHandler.google.geolocate);
 app.post('/google/places', requestHandler.google.places);

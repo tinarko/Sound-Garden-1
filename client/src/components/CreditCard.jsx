@@ -68,8 +68,8 @@ class CreditCard extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-};
+// const mapStateToProps = (state) => {
+// };
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -79,7 +79,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect (mapStateToProps, mapDispatchToProps) (CreditCard);
+export default connect (null, mapDispatchToProps) (CreditCard);
 
 
 

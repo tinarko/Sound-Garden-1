@@ -5,16 +5,20 @@ import { connect } from 'react-redux';
 import CreditCard from './CreditCard.jsx'
 import GoogleMap from './GoogleMap.jsx';
 
-import { getCreditcards, toggleCashbackSetup } from '../actions/creditcards';
+import { createCreditcardsKickoff, toggleCashbackSetup } from '../actions/creditcards';
 
 class CCCashback extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount () {
-    this.props.getCreditcards();
+  componentDidMount() {
+    this.props.createCreditcardsKickoff();
   }
+
+  // componentWillMount () {
+  //   this.props.getCreditcards();
+  // }
 
   render () {
     var creditcards = this.props.creditcards.cc.map( (cc, index) => {
@@ -56,7 +60,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCreditcards: () => { dispatch(getCreditcards()); },
+    createCreditcardsKickoff: () => { dispatch(createCreditcardsKickoff()); },
+    // getCreditcards: () => { dispatch(getCreditcards()); },
     toggleCashbackSetup: () => {dispatch(toggleCashbackSetup()); }
   };
 };
