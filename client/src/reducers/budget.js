@@ -6,8 +6,7 @@ const initialState = {
   showaddbudgetcategoryform: false,
   addcategoryname: '',
   addcategorybudget: '',
-  mvalue: {year: null, month: null},
-  toggleyearmonthselection: false
+  mvalue: {year: null, month: null}
 };
 
 

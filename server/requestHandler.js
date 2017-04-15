@@ -215,7 +215,7 @@ module.exports = {
           for (var i = 0; i < transactions.length; i++) {
             if (transactions[i]['category']) {
               var categoryName = transactions[i]['category'][0];
-              if (transactions[i]['category'].length > 0 && categoryName !== 'Payment') {
+              if (transactions[i]['category'].length > 0 && categoryName !== 'Payment' && categoryName !== 'Transfer') {
                 categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'] || transactions[i]['amount'];
               } else {
                 categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'] || transactions[i]['amount'];
