@@ -155,7 +155,6 @@ module.exports = {
       });
     },
     transactions: function (req, res) {
-      //TODO: account for modularity for calendar time
       var userid = req.session.passport.user;
       var periodStart = `${req.params.year}-${req.params.month}-01`;
 
@@ -193,7 +192,6 @@ module.exports = {
         for (var i = 0; i < response.length; i++) {
           
           promises.push(client.getTransactions(response[i].access_token, periodStart, periodEnd)
-          // promises.push(client.getTransactions(response[i].access_token, '2017-03-10', '2017-04-10')
             .then(function(data) {
               return data.transactions;
 
@@ -249,27 +247,7 @@ module.exports = {
             if (err) {
               res.status(500).send(err);
             } else {
-              // //check previous month for budget categories and pre populated current month budget
-              // var today = new Date ();
-              // //set to last month
-              // today.setMonth(today.getMonth() - 1);
-              // console.log('today', today);
-              // var month = (today.getMonth() + 1).toString();
-              // if (month.length < 2) {
-              //   month = '0'.concat(month);
-              // }
-              // var year = today.getFullYear().toString();
-
-              // db.checkIfMonthBudgetExists ([user.id, year, month], function (err, results) {
-              //   if (err) {
-              //     res.status(500).send(err);
-              //   } else if (results) {
-              //     console.log('results');
-              //     //continue here
-              //   }
-              // });
-      
-              //insert default categories into newly made budget if deffault does not exist
+              //insert default categories into newly made budget if default does not exist
               var budgetId = results.insertId;
               db.checkForCategoryName ('Restaurants', function(err, results) {
                 if (err) {
@@ -308,12 +286,10 @@ module.exports = {
                           res.status(200).send(finalResults);
                         }
                       });
-                      // res.status(200).send(results);
                     }
                   });
                 }
               });
-              // res.status(200).send(results);
             }
           });
 

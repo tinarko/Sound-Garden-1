@@ -12,17 +12,10 @@ class Budget extends React.Component {
     super(props);
     
     let today = new Date ();
-    // let month = (today.getMonth() + 1).toString();
-    // if (month.length < 2) {
-    //   month = '0'.concat(month);
-    // }
-    // let year = today.getFullYear().toString();
-    // this.props.getBudgets(year, month);
-    // this.props.getTransactionData(year, month);
-
     let monthValue = today.getMonth() + 1;
     let yearValue = today.getFullYear();
     this.props.yearMonthChange({year: yearValue, month: monthValue});
+
   }
 
   componentWillMount () {
@@ -41,7 +34,6 @@ class Budget extends React.Component {
   handleAMonthDismiss (value) {
     this.props.yearMonthChange(value);
 
-    // this.props.getBudgets(value.year, value.month);
     var monthString;
     if (value.month < 10) {
       monthString = '0'.concat(value.month);
@@ -51,7 +43,6 @@ class Budget extends React.Component {
     var yearString = value.year.toString();
 
     this.props.getBudgets(yearString, monthString);
-    // this.props.getTransactionData(value.year, value.month);
     this.props.getTransactionData(yearString, monthString);
   }
 
@@ -100,7 +91,6 @@ class Budget extends React.Component {
 const mapStateToProps = (state) => {
   return {
     budget: state.budget,
-    // transactions: state.transactions
   };
 };
 

@@ -234,6 +234,7 @@ module.exports = {
     var monthString = params[4];
 
     console.log('insertUserBudget params:', categoryid, updatedvalue, userid, yearString, monthString);
+    
     var queryString = 
     'insert into budgetcategories (budget_id, category_id, goalvalue) \
     select budgets.id, ?, ? from categorytypes inner join budgetcategories inner join budgets inner join users \
@@ -241,7 +242,6 @@ module.exports = {
     AND budgetcategories.category_id = categorytypes.id \
     where users.userid = ? and YEAR(budgets.month) = ? AND MONTH(budgets.month) = ? limit 1;';
 
-    // 'insert into budgetcategories (budget_id, category_id, goalvalue) select budgets.id, ?, ? from categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id where users.userid = ? and YEAR(budgets.month) = ? AND MONTH(budgets.month) = ? limit 1;
     connection.query (queryString, [categoryid, updatedvalue, userid, yearString, monthString], function(err, results) {
       if (err, null) {
         cb(err, null);

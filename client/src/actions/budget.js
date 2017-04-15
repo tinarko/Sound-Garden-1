@@ -33,9 +33,7 @@ export const getUserBudgets = (year, month) => {
     })
     .then(response => response.json())
     .then((json) => {
-      // if (Array.isArray(json)) {
-        dispatch(receivedUserBudgets(json));
-      // }
+      dispatch(receivedUserBudgets(json));
     })
     .catch((err) => {
       console.log('error in get', err);
@@ -178,8 +176,6 @@ export const categoryGoalInputChange = (goalValue) => {
 export const yearMonthChange = (yearMonthObject) => {
   return {
     type: 'MONTH_VALUE_CHANGE',
-    // yearValue: yearValue,
-    // monthValue: monthValue
     yearMonthObject: yearMonthObject
   };
 };
