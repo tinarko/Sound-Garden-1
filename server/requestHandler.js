@@ -425,7 +425,6 @@ module.exports = {
           res.status(200).json(results);
         }
       });
-
     },
 
     createCreditCards: function(req, res) {
@@ -441,6 +440,7 @@ module.exports = {
         userid = 2;
         console.log('YOU ARE NOT LOGGED IN... SHOWING TEST CREDIT CARDS');
       }
+
       var promises = [];
       var accountData = {};
       // store names Items (for names) in plaidInstitutions
@@ -527,9 +527,8 @@ module.exports = {
           .catch(function(error) {
             return res.json({error: 'error in getting account data from plaid clients'});
           });
-      });
 
-
+      })
 
     },
 
@@ -561,5 +560,4 @@ module.exports = {
       console.log(req.body);
     }
   }
-
 };
