@@ -118,6 +118,28 @@ module.exports = {
           });
       });
     },
+    allTransactions: function(req, res) {
+      var userid = req.session.passport.user;
+      console.log('we are in all transactions')
+      var endDate = req.body.startDate.substring(0, 10);
+      var startDate = req.body.endDate.substring(0, 10);
+      
+      var promises = [];
+      db.getPlaidItems(userid, function(err, response) {
+        for (var i = 0; i < response.length; i++) {
+          promises.push(client.getTransactions(response[i].access_token, startDate, endDate))
+            .then(function(data) {
+              // writing name of the instution to the data
+              // data.accounts
+              return data.transactions;
+            })
+            .catch(function(error) {
+              return error;
+            });
+        }  
+      });
+      return res.json({});
+    },
     transactions: function (req, res) {
       //TODO: account for modularity for calendar time
       var userid = req.session.passport.user;

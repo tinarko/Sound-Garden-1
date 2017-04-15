@@ -56,7 +56,8 @@ app.delete('/creditcards/deletecashbackcategory/:catid', requestHandler.creditca
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);
 app.get('/plaid/accounts', requestHandler.plaid.accounts);
 app.get('/plaid/transactions/:year/:month', requestHandler.plaid.transactions);
-app.get('/pladi/transactions/', requestHandler);
+app.post('/plaid/allTransactions/', requestHandler.plaid.allTransactions);
+// app.get('/plaid/allTransactions/', requestHandler.plaid.allTransactions);
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'client', 'index.html'));

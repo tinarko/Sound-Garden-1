@@ -1,12 +1,18 @@
 export const getTransactions = (dates) => {
+  console.log('we are trying to gettransactions')
   return (dispatch) => {
     dispatch({type: 'GET_TRANSACTIONS_START'});
-    fetch('/plaid/transactions', {
+    fetch('/plaid/allTransactions', {
       // TODO: required to send cookies
+      method: 'POST',
       credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json'
       },
+      body: JSON.stringify({
+        startDate: dates.startDate,
+        endDate: dates.endDate,
+      }),
     })
       .then((response) => {
         console.log('successful fetch of transactions data', response);

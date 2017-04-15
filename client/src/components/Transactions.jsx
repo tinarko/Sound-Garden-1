@@ -10,12 +10,14 @@ class Transactions extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('------------next props here', nextProps)
     if (nextProps.startDate && nextProps.endDate) {
       // send ajax call on updated start and end date
-      // this.props.dispatch(transactions.getTransactions({
-      //   startDate: this.nextProps.startDate,
-      //   endDate: this.nextProps.endDate,
-      // }));
+      this.props.dispatch(transactions.getTransactions({
+        startDate: nextProps.startDate,
+        endDate: nextProps.endDate,
+      }));
+      // console.log(nextProps.startDate.toISOString().substring(0, 10));
     }
   }
 
