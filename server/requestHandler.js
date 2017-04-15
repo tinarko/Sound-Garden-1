@@ -127,16 +127,17 @@ module.exports = {
       var promises = [];
       db.getPlaidItems(userid, function(err, response) {
         for (var i = 0; i < response.length; i++) {
-          promises.push(client.getTransactions(response[i].access_token, startDate, endDate))
+          console.log(response);
+          promises.push(client.getTransactions(response[i].access_token, startDate, endDate)
             .then(function(data) {
-              // writing name of the instution to the data
-              // data.accounts
               return data.transactions;
+
             })
             .catch(function(error) {
               return error;
-            });
-        }  
+            })
+          );
+        }
       });
       return res.json({});
     },

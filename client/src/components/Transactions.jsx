@@ -8,19 +8,7 @@ class Transactions extends React.Component {
   constructor(props) {
     super(props);
   }
-
-  componentWillReceiveProps(nextProps) {
-    console.log('------------next props here', nextProps)
-    if (nextProps.startDate && nextProps.endDate) {
-      // send ajax call on updated start and end date
-      this.props.dispatch(transactions.getTransactions({
-        startDate: nextProps.startDate,
-        endDate: nextProps.endDate,
-      }));
-      // console.log(nextProps.startDate.toISOString().substring(0, 10));
-    }
-  }
-
+  
   render() {
     return (
       <div>
