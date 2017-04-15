@@ -251,6 +251,41 @@ module.exports = {
       }
     });
       
+  },
+
+  checkCreditcard: function(userid, ccname, cb) {
+    var query = `select * from creditcards where userid = ${userid} and ccname like "${ccname}";`;
+    connection.query (query, (err, results) => {
+      if (err, null) {
+        cb(err, null);
+      } else {
+        console.log(results);
+        cb (null, results);
+      }
+    });
+  },
+
+  createCreditcard: function(userid, ccname, cb) {
+    var query = 'insert into creditcards (userid, ccname) values (?, ?);';
+    var params = [userid, ccname];
+    console.log('TIME TO INSERT!');
+    connection.query (query, params, (err, results) => {
+      if (err, null) {
+        cb(err, null);
+      } else {
+        console.log('results at db', results);
+        var ccid = results.insertId;
+        var cashbackquery = 'INSERT INTO cccategories (categoryname, value, ccid) VALUES (groceries, 3, ?)';
+        connection.query(cashbackquery, ccid, (err, results) => {
+          if (err, null) {
+            cb(err, null);
+          } else {
+            console.log(results);
+            cb (null, results);
+          }
+        });
+      }
+    });
   }
 
 };

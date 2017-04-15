@@ -370,14 +370,17 @@ module.exports = {
 
   'creditcards': {
     getUserCreditcards: (req, res) => {
-      var userid = 2;
-      // var userid;
-      // if (req.session.passport) {
-      //   userid = req.session.passport.user.id;
+
+      // var userid = 2;
+      var userid;
+      if (req.session.passport) {
+        userid = Number(req.session.passport.user);
+        console.log('you are logged in with userid:', userid);
         
-      // } else {
-      //   userid = 2;
-      // }
+      } else {
+        userid = 2;
+        console.log('YOU ARE NOT LOGGED IN... SHOWING TEST CREDIT CARDS');
+      }
       db.getUserCreditcards(userid, (err, results) => {
         if (err) {
           res.status(500).send(err);
@@ -422,7 +425,117 @@ module.exports = {
           res.status(200).json(results);
         }
       });
-    }
+
+    },
+
+    createCreditCards: function(req, res) {
+      // TODO: must supply access_token
+      // Query database to retrieve all Plaid items associated with userid
+        // iterate through access tokens and retrieve data through Plaid client
+        // add data to object and send response
+      var userid;
+      if (req.session.passport) {
+        userid = Number(req.session.passport.user);
+        console.log('you are logged in with userid:', userid);
+      } else {
+        userid = 2;
+        console.log('YOU ARE NOT LOGGED IN... SHOWING TEST CREDIT CARDS');
+      }
+      var promises = [];
+      var accountData = {};
+      // store names Items (for names) in plaidInstitutions
+      var plaidInstitutions = [];
+
+      db.getPlaidItems(userid, function(err, response) {
+        // note: specific information per account received after access_token is used
+        plaidInstitutions = response;
+        for (var i = 0; i < response.length; i++) {
+          promises.push(client.getAccounts(response[i].access_token)
+            .then(function(data) {
+              // IMPORTANT: data contains accounts and item (bank) information
+              // TODO: only need accounts information for now.
+              return data.accounts;
+            })
+            .catch(function(error) {
+              return error;
+              // return res.json({error: 'error in getting account data from plaid client'});
+            })
+          );
+        }
+        var accountTypes = {};
+        Promise.all(promises)
+          .then(function(results) {
+            console.log(results);
+            for (var j = 0; j < plaidInstitutions.length; j++) {
+              accountData[plaidInstitutions[j].institution_name] = results[j];
+            }
+            // categorize the account data for the client
+            for (var item in accountData) {
+              accountTypes[item] = {};
+              // initializes the object
+              for (let i = 0; i < accountData[item].length; i++) {
+                // iterate through each account
+                var accountSubtype = accountData[item][i].subtype;
+                // if the account type is NOT present, initialize the array
+                if (!accountTypes[item][accountSubtype]) {
+                  accountTypes[item][accountSubtype] = [{
+                    account: accountData[item][i],
+                  }];
+                } else {
+                  accountTypes[item][accountSubtype].push({
+                    account: accountData[item][i],
+                  });
+                }
+              }
+            }
+
+            //
+            console.log('when creating credit cards, here is raw data', accountTypes);
+            // parse through accountTypes to find credit cards for this user. 
+            var banks = accountTypes;
+            var creditcards = [];
+            for (bank in banks) {
+              for (var i = 0; i < banks[bank].credit.length; i++) {
+                creditcards.push(bank + ' - ' + banks[bank].credit[i].account.official_name);
+              }
+            }
+            console.log('creditcards', creditcards);
+            // insert creditcards into creditcard table
+            return db.checkCreditcard(userid, creditcards[1], (err, results) => {
+              if (err) {
+                return res.status(500).send(err);
+              } else {
+                // console.log('checkCreditcard RESULTS', results);
+                // credit card does not exist
+                if (results.length === 0) {
+                  db.createCreditcard(userid, creditcards[1], (err, results) => {
+                    if (err) {
+                      console.log('err creating credit card..:', err);
+                      return res.status(500).send(err);
+                    } else {
+                      console.log('created credit card:', results);
+                      return res.status(200).json(results);
+                    }
+                  })
+                // else, credit card already exists
+                } else {
+                  return res.status(200).json('credit cards initiated');
+                }
+              }
+            });
+          })
+          .catch(function(error) {
+            return res.json({error: 'error in getting account data from plaid clients'});
+          });
+      });
+
+
+
+    },
+
+
+
+
   },
   
   'google': {
@@ -448,4 +561,5 @@ module.exports = {
       console.log(req.body);
     }
   }
+
 };
