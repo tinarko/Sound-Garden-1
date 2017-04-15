@@ -349,11 +349,7 @@ module.exports = {
       });
     },
     createCashbackCategory: (req, res) => {
-      // var ccid = req.body.ccid;
-      // var name = req.body.name;
-      // var percent = req.body.percent;
-
-      var ccid = 2;
+      var ccid = req.body.ccid;
       var name = req.body.name;
       var percent = req.body.percent;
 
@@ -363,6 +359,16 @@ module.exports = {
         } else {
           // console.log('results.insertId at reqHandler', results.insertId);
           res.status(200).json(results.insertId);
+        }
+      });
+    },
+    deleteCashbackCategory: (req, res) => {
+      var catid = req.params.catid;
+      db.deleteCashbackCategory(catid, (err, results) => {
+        if (err) {
+          res.status(500).send(err);
+        } else {
+          res.status(200).json(results);
         }
       });
     }

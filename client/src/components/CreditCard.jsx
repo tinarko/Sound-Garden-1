@@ -25,13 +25,13 @@ class CreditCard extends React.Component {
   }
 
   handlePercentChange (percent) {
+    percent = Number(percent);
     this.setState({number: percent});
   }
 
   render () {
     var creditcard = this.props.creditcard;
     var ccid = creditcard.ccid;
-    console.log('ccindex at creditcard', this.props.ccindex);
     
     return (
       <li>

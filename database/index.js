@@ -105,7 +105,7 @@ module.exports = {
     var query = 'SELECT ccid, cccategories.id as catid, ccname, categoryname, value FROM users \
       JOIN creditcards ON creditcards.userid = users.userid \
       JOIN cccategories ON creditcards.id = cccategories.ccid \
-      WHERE users.userid = ?;';
+      WHERE users.userid = ? order by ccid, categoryname;';
 
     connection.query(query, userid, (err, results) => {
       if (results.length === 0) {
@@ -133,7 +133,7 @@ module.exports = {
       } else {
         cb(null, results);
       }
-    })
+    });
   },
 
   createCashbackCategory: function(ccid, name, percent, cb) {
@@ -147,7 +147,19 @@ module.exports = {
       } else {
         cb(null, results);
       }
-    })
+    });
+  },
+
+  deleteCashbackCategory: function(catid, cb) {
+    var query = 'delete from cccategories where id = ?';
+
+    connection.query(query, catid, (err, results) => {
+      if (err) {
+        cb(err, null);
+      } else {
+        cb(null, results);
+      }
+    });
   },
 
   updateUserBudgetCategory: function(params, cb) {

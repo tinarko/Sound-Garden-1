@@ -50,6 +50,7 @@ app.post('/budget/updatebudgetcategory', requestHandler.budget.updateBudgetAmoun
 app.get('/creditcards/getcreditcards', requestHandler.creditcards.getUserCreditcards);
 app.post('/creditcards/changecashbackpercent', requestHandler.creditcards.changeCashbackPercent);
 app.post('/creditcards/createcashbackcategory', requestHandler.creditcards.createCashbackCategory);
+app.delete('/creditcards/deletecashbackcategory/:catid', requestHandler.creditcards.deleteCashbackCategory);
 
 // app.post('/budget/addbudgetcategory', requestHandler.budget.addBudgetCategory);
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);

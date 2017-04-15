@@ -44,6 +44,7 @@ export const getCreditcards = () => {
     })
     .then((json) => {
       // results = setCC(json);
+      console.log('cc!!', json);
       dispatch(receivedCreditcards(json));
     })
     .catch((err) => {

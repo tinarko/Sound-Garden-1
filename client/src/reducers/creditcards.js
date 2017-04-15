@@ -135,6 +135,12 @@ const creditcards = (state = initialState, action) => {
         percent: percent
       };
       break;
+    case 'DELETE_CASHBACK_CATEGORY':
+      var catid = action.catid;
+      return {
+        ...state
+      }
+      break;
     default:
       return state;
     }

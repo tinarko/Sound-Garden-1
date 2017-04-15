@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { changeCashbackPercent } from '../actions/changecashbackpercent';
+import { deleteCashbackCategoryKickoff } from '../actions/deletecashbackcategory';
 
 
 class CashbackCategory extends React.Component {
@@ -29,6 +30,9 @@ class CashbackCategory extends React.Component {
             <button onClick={ (e) => {
               this.props.handleChange(ccindex, catindex, percent, 'increment', catid)
             } } > + </button>
+            <button onClick={(e) => {
+              this.props.deleteCashbackCategoryKickoff(catid)
+            } }>Delete</button>
           </p>
         </div>
       </li>
@@ -44,7 +48,12 @@ class CashbackCategory extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleChange: (ccindex, catindex, percent, action, catid) => { dispatch(changeCashbackPercent(ccindex, catindex, percent, action, catid)); },
+    handleChange: (ccindex, catindex, percent, action, catid) => { 
+      dispatch(changeCashbackPercent(ccindex, catindex, percent, action, catid)); 
+    },
+    deleteCashbackCategoryKickoff: (catid) => {
+      dispatch(deleteCashbackCategoryKickoff(catid));
+    }
   };
 };
 
