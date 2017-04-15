@@ -129,10 +129,11 @@ module.exports = {
       db.getPlaidItems(userid, function(err, response) {
         // TODO: need to use LET declaration to maintain block scope
         for (let i = 0; i < response.length; i++) {
-          promises.push(client.getTransactions(response[i].access_token, startDate, endDate)
+          promises.push(client.getTransactions(response[i].access_token, '2017-03-10', '2017-04-10')
             .then(function(data) {
-              var recomposedData = {};
-              recomposedData[response[i].institution_name] = data.transactions;
+              data.transactions.forEach(function(value) {
+                value.institution_name = response[i].institution_name;
+              });
               return data.transactions;
 
             })
@@ -141,14 +142,14 @@ module.exports = {
             })
           );
         }
+        Promise.all(promises)
+          .then(function(data) {
+            return res.json(data);
+          })
+          .catch(function(error) {
+            return res.json({error: error});
+          });
       });
-      Promise.all(promises)
-        .then(function(data) {
-          return res.json(data);
-        })
-        .catch(function(error) {
-          return res.json({error: error});
-        });
     },
     transactions: function (req, res) {
       //TODO: account for modularity for calendar time

@@ -18,6 +18,7 @@ export const getTransactions = (dates) => {
         console.log('successful fetch of transactions data', response);
         response.json()
           .then((json) => {
+            console.log(json);
             dispatch({type: 'GET_TRANSACTIONS_FULFILLED', payload: json});
           });
       })
