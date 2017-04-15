@@ -144,7 +144,7 @@ module.exports = {
           .then(function(data) {
             var result = []
             data.forEach(function(transactions) {
-              result = result.concat(transactions)
+              result = result.concat(transactions);
             });
             console.log(result.length);
             return res.json(result);

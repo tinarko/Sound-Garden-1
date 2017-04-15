@@ -28,8 +28,8 @@ class TransactionsGraph extends React.Component {
       tooltip: {
         display: true,
         data: {
-          key: this.props.data.date,
-          value: this.props.data.amount
+          key: e.target.getAttribute('data-key'),
+          value: e.target.getAttribute('data-value')
         },
         pos: {
           x: e.target.getAttribute('cx'),
@@ -85,6 +85,7 @@ class TransactionsGraph extends React.Component {
 
     const line = d3.line()
       .x(function(d) {
+        console.log('invoked by line:::::::::|||||||', d)
         return x(d.date);
       })
       .y(function(d) {

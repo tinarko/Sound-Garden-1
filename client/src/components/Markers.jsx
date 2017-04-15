@@ -19,6 +19,8 @@ const Markers = (props) => {
           key={i}
           onMouseOver={props.showToolTip}
           onMouseOut={props.hideToolTip}
+          data-key={`${d.name}`}
+          data-value={`$${d.amount}`}
         />);
       })}
     </g>
