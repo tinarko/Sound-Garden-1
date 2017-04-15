@@ -29,7 +29,7 @@ class BudgetCategoryList extends React.Component {
   
   render () {
 
-    let month = 'April';
+    // let month = 'April';
     let toggleButtonForm = null;
     if (this.props.budget.showaddbudgetcategoryform) {
       toggleButtonForm = <form 
@@ -54,7 +54,6 @@ class BudgetCategoryList extends React.Component {
 
     return (
       <div>
-        <h2> Budget for {month} </h2>
         <div>
         Total Spent: {this.props.budget.totalSpent}
         </div>

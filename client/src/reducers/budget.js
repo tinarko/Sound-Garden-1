@@ -6,7 +6,8 @@ const initialState = {
   showaddbudgetcategoryform: false,
   addcategoryname: '',
   addcategorybudget: '',
-  month: null,
+  mvalue: {year: null, month: null},
+  toggleyearmonthselection: false
 };
 
 
@@ -121,11 +122,21 @@ const budget = (state = initialState, action) => {
         addcategorybudget: action.goalValue
       };
 
-    // case 'ADD_BUDGET_CATEGORY': 
-    //   return {
-    //     ...state,
-        
-    //   }
+    case 'MONTH_VALUE_CHANGE': 
+      var newYearMonth = state.mvalue;
+      newYearMonth.year = action.yearValue;
+      newYearMonth.month = action.monthValue;
+      return {
+        ...state,
+        mvalue: newYearMonth
+      };
+
+    case 'TOGGLE_YEAR_MONTH_SELECTION':
+      var toggleShow = !state.toggleyearmonthselection
+      return {
+        ...state,
+        toggleyearmonthselection: toggleShow
+      }
 
     default:
       return state;

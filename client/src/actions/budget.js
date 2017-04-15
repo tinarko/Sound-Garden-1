@@ -171,20 +171,18 @@ export const categoryGoalInputChange = (goalValue) => {
   };
 };
 
+export const yearMonthChange = (yearValue, monthValue) => {
+  return {
+    type: 'MONTH_VALUE_CHANGE',
+    yearValue: yearValue,
+    monthValue: monthValue
+  };
+};
 
+export const toggleYearMonthSelection = (boolean) => {
+  return {
+    type: 'TOGGLE_YEAR_MONTH_SELECTION',
+    boolean
+  };
+};
 
-// export const postNewBudgetCategory = (goalvalue, categoryname) => {
-//   return (dispatch) => {
-//     fetch ('/budget/addbudgetcategory', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       credentials: 'same-origin',
-//       body: JSON.stringify({
-//         categoryname: categoryname,
-//         goalvalue: goalvalue
-//       })
-//     });
-//   };
-// };
