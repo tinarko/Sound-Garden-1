@@ -43,7 +43,6 @@ class CCCashback extends React.Component {
           <h3>Are you at this location? --insert business name-- </h3>
           <h4>If so, please use your --insert credit card-- to get the most cash back!</h4>
           <h4>If not, please indicate where you are on the map below:</h4>
-          <GoogleMap />
           
           <button onClick={this.props.toggleCashbackSetup}>Credit Card Cashback % Setup</button>
         </div> );
@@ -58,6 +57,7 @@ const mapStateToProps = (state) => {
   };
 };
 
+          // <GoogleMap />
 const mapDispatchToProps = (dispatch) => {
   return {
     createCreditcardsKickoff: () => { dispatch(createCreditcardsKickoff()); },
