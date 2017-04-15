@@ -23,7 +23,6 @@ module.exports = {
   },
 
   saveUser: function(data, cb) {
-    console.log(data._json.name)
     var profile = [
       data.id, 
       data._json.name, 

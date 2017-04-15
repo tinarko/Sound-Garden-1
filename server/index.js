@@ -48,7 +48,8 @@ app.get('/auth/auth0/return', passport.authenticate('auth0', {
   failureRedirect: '/auth/auth0'
 }),
   (req, res) => {
-    res.cookie('advisorly', req.session.passport.user.userid);
+    //TODO: encrypt cookie
+    res.cookie('advisorly', req.session.passport.user.id);
     res.redirect('/');
   });
 app.get('/auth/logout', authentication.logout);

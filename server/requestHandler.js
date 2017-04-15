@@ -31,7 +31,7 @@ module.exports = {
         }
         var ACCESS_TOKEN = tokenResponse.access_token;
         var institutionName = req.body.metadata.institution.name;
-        var userid = req.session.passport.user;
+        var userid = req.session.passport.user.id;
         // TODO: userid only present after sign in
 
         // check if the item exists update item, if not, add the item
@@ -64,7 +64,7 @@ module.exports = {
       // Query database to retrieve all Plaid items associated with userid
         // iterate through access tokens and retrieve data through Plaid client
         // add data to object and send response
-      var userid = req.session.passport.user;
+      var userid = req.session.passport.user.id;
       var promises = [];
       var accountData = {};
       // store names Items (for names) in plaidInstitutions
@@ -119,7 +119,7 @@ module.exports = {
       });
     },
     allTransactions: function(req, res) {
-      var userid = req.session.passport.user;
+      var userid = req.session.passport.user.id;
       var endDate = req.body.endDate;
       var startDate = req.body.startDate;
       var promises = [];
@@ -155,7 +155,7 @@ module.exports = {
       });
     },
     transactions: function (req, res) {
-      var userid = req.session.passport.user;
+      var userid = req.session.passport.user.id;
       var periodStart = `${req.params.year}-${req.params.month}-01`;
 
       var today = new Date ();
@@ -236,7 +236,7 @@ module.exports = {
 
   'budget': {
     getUserBudgets: function (req, res) {
-      var userid = req.session.passport.user;
+      var userid = req.session.passport.user.id;
       //check if (current) month budget exists for signed in user
       db.checkIfMonthBudgetExists ([userid, req.params.year, req.params.month], function(err, results) {
         if (err) {
@@ -306,7 +306,7 @@ module.exports = {
       });
     },
     updateBudgetAmount: function(req, res) {
-      var userid = req.session.passport.user;
+      var userid = req.session.passport.user.id;
 
       var monthString;
       if (req.body.month < 10) {
@@ -373,7 +373,7 @@ module.exports = {
       var userid = 2;
       // var userid;
       // if (req.session.passport) {
-      //   userid = req.session.passport.user;
+      //   userid = req.session.passport.user.id;
         
       // } else {
       //   userid = 2;
