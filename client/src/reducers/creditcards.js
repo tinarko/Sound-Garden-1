@@ -2,8 +2,6 @@ const initialState = {
   cc: [],
   fetchingCreditcards: false,
   cashbacksetup: false,
-  // catname: '',
-  // percent: 0
 };
 
 const creditcards = (state = initialState, action) => {

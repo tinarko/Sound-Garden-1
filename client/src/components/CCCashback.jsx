@@ -43,7 +43,6 @@ class CCCashback extends React.Component {
           <button onClick={this.props.toggleCashbackSetup}>Credit Card Cashback % Setup</button>
         </div> );
     }
-
   }
 }
 

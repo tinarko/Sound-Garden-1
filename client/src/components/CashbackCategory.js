@@ -19,7 +19,6 @@ class CashbackCategory extends React.Component {
     var percent = this.props.category.percent;
     var catname = this.props.category.name;
     var catid = this.props.catid;
-    // var ccid = this.props.ccid;
 
     return (
       <li>

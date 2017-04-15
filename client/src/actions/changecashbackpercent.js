@@ -43,7 +43,6 @@ export const changeCashbackPercent = (ccindex, catindex, percent, action, catid)
       } else {
         dispatch(decrementCashbackPercent(ccindex, catindex));
       }
-      // results = setCC(json);
     })
     .catch((err) => {
       console.log('error in get', err);

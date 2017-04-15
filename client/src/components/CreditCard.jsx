@@ -16,10 +16,6 @@ class CreditCard extends React.Component {
     };
   }
 
-  componentWillMount () {
-    // console.log(this.props);
-  }
-
   handleCategoryChange (catname) {
     this.setState({catname: catname});
   }
@@ -47,7 +43,6 @@ class CreditCard extends React.Component {
                 catindex={index} 
                 category={category}
                 catid={category.catid}
-                ccid={ccid}
               />
             )
           }) }
@@ -74,11 +69,6 @@ class CreditCard extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  // console.log('state', state);
-  // return {
-  //   percent: state.percent,
-  //   catname: state.catname
-  // };
 };
 
 const mapDispatchToProps = (dispatch) => {
