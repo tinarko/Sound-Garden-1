@@ -136,9 +136,16 @@ const creditcards = (state = initialState, action) => {
       };
       break;
     case 'DELETE_CASHBACK_CATEGORY':
-      var catid = action.catid;
+      var ccindex = action.ccindex;
+      var catindex = action.catindex;
+
+      var newCC = JSON.parse(JSON.stringify(state.cc));
+
+      newCC[ccindex].categories.splice(catindex, 1);
+
       return {
-        ...state
+        ...state,
+        cc: newCC
       }
       break;
     default:

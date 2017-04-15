@@ -19,6 +19,7 @@ class CashbackCategory extends React.Component {
     var percent = this.props.category.percent;
     var catname = this.props.category.name;
     var catid = this.props.catid;
+    // var ccid = this.props.ccid;
 
     return (
       <li>
@@ -31,7 +32,7 @@ class CashbackCategory extends React.Component {
               this.props.handleChange(ccindex, catindex, percent, 'increment', catid)
             } } > + </button>
             <button onClick={(e) => {
-              this.props.deleteCashbackCategoryKickoff(catid)
+              this.props.deleteCashbackCategoryKickoff(ccindex, catindex, catid)
             } }>Delete</button>
           </p>
         </div>
@@ -51,8 +52,8 @@ const mapDispatchToProps = (dispatch) => {
     handleChange: (ccindex, catindex, percent, action, catid) => { 
       dispatch(changeCashbackPercent(ccindex, catindex, percent, action, catid)); 
     },
-    deleteCashbackCategoryKickoff: (catid) => {
-      dispatch(deleteCashbackCategoryKickoff(catid));
+    deleteCashbackCategoryKickoff: (ccindex, catindex, catid) => {
+      dispatch(deleteCashbackCategoryKickoff(ccindex, catindex, catid));
     }
   };
 };

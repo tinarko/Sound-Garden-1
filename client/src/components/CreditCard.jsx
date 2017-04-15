@@ -47,6 +47,7 @@ class CreditCard extends React.Component {
                 catindex={index} 
                 category={category}
                 catid={category.catid}
+                ccid={ccid}
               />
             )
           }) }

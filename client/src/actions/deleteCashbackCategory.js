@@ -1,10 +1,11 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-export const deleteCashbackCategory = (catid) => {
+export const deleteCashbackCategory = (ccindex, catindex) => {
   return {
     type: 'DELETE_CASHBACK_CATEGORY',
-    catid: catid
+    ccindex: ccindex,
+    catindex: catindex
   };
 };
 
@@ -14,7 +15,7 @@ export const deleteCasbhackCategoryError = () => {
   };
 };
 
-export const deleteCashbackCategoryKickoff = (catid) => {
+export const deleteCashbackCategoryKickoff = (ccindex, catindex, catid) => {
   return (dispatch) => {
     var url = '/creditcards/deletecashbackcategory/' + catid;
     fetch(url, {
@@ -25,7 +26,7 @@ export const deleteCashbackCategoryKickoff = (catid) => {
       credentials: 'same-origin',
     })
     .then(response => {
-      dispatch(deleteCashbackCategory(catid));
+      dispatch(deleteCashbackCategory(ccindex, catindex));
     })
     .catch((err) => {
       console.log('error in get', err);
