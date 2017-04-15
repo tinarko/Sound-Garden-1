@@ -1,7 +1,9 @@
 const initialState = {
   cc: [],
   fetchingCreditcards: false,
-  cashbacksetup: false
+  cashbacksetup: false,
+  catname: '',
+  percent: 0
 };
 
 const creditcards = (state = initialState, action) => {
@@ -31,48 +33,62 @@ const creditcards = (state = initialState, action) => {
         cashbacksetup: !state.cashbacksetup
       };
       break;
-
     case 'INCREMENT_CASHBACK_PERCENT':
-      var ccid = action.ccid;
-      var catid = action.catid;
-      var cc = state.cc.slice();
-      console.log('state.cc', state.cc);
-      for (var i = 0; i < cc.length; i++) {
-        if (cc[i].ccid === ccid) {
-          for (var j = 0; j < cc[i].categories.length; j++) {
-            if (cc[i].categories[j].catid === catid) {
-              cc[i].categories[j].percent += 0.5;
-              break;
-            }
-          }
+      var ccindex = action.ccindex;
+      var catindex = action.catindex;
+      var newCat = Object.assign({}, state.cc[ccindex].categories[catindex]);
+      newCat.percent+=0.5;
+
+      var allTheCCs = state.cc.map((cc, ccIndex)=>{
+        if (ccIndex === ccindex) {
+          return { 
+            ccid: state.cc[ccIndex].ccid, 
+            ccname: state.cc[ccIndex].ccname,
+            categories: state.cc[ccIndex].categories.map((cat, catIndex) => {
+              if (catIndex === catindex) {
+                return newCat;
+              } else {
+                return cat;
+              }
+            })
+          };
+        } else {
+          return cc;
         }
-        break;
-      }
-      console.log('cc is now', cc);
+      });
+
       return {
         ...state,
-        cc: cc
+        cc: allTheCCs
       };
       break;
     case 'DECREMENT_CASHBACK_PERCENT':
-      var ccid = action.ccid;
-      var catid = action.catid;
-      var cc = state.cc.slice();
-      for (var i = 0; i < cc.length; i++) {
-        if (cc[i].ccid === ccid) {
-          for (var j = 0; j < cc[i].categories.length; j++) {
-            if (cc[i].categories[j].catid === catid) {
-              cc[i].categories[j].percent -= 0.5;
-              break;
-            }
-          }
+      var ccindex = action.ccindex;
+      var catindex = action.catindex;
+      var newCat = Object.assign({}, state.cc[ccindex].categories[catindex]);
+      newCat.percent-=0.5;
+
+      var allTheCCs = state.cc.map((cc, ccIndex)=>{
+        if (ccIndex === ccindex) {
+          return { 
+            ccid: state.cc[ccIndex].ccid, 
+            ccname: state.cc[ccIndex].ccname,
+            categories: state.cc[ccIndex].categories.map((cat, catIndex) => {
+              if (catIndex === catindex) {
+                return newCat;
+              } else {
+                return cat;
+              }
+            })
+          };
+        } else {
+          return cc;
         }
-        break;
-      }
-      console.log('cc is now', cc);
+      });
+
       return {
         ...state,
-        cc: cc
+        cc: allTheCCs
       };
       break;
     case 'CHANGE_CASHBACK_PERCENT_ERROR':
@@ -80,7 +96,7 @@ const creditcards = (state = initialState, action) => {
         ...state,
         error: action.error
       }
-
+      break;
     case 'CREATE_CASHBACK_CATEGORY':
       var catid = action.catid;
       var ccid = action.ccid;
@@ -102,7 +118,22 @@ const creditcards = (state = initialState, action) => {
       return {
         ...state,
         cc: cc
-      }
+      };
+      break;
+    case 'EDIT_CATEGORY_NAME':
+      console.log('HI!');
+      var catname = action.catname;
+      return {
+        ...state,
+        catname: catname
+      };
+      break;
+    case 'EDIT_CASHBACK_PERCENT':
+      var percent = action.percent;
+      return {
+        ...state,
+        percent: percent
+      };
       break;
     default:
       return state;

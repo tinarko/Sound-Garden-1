@@ -361,7 +361,8 @@ module.exports = {
         if (err) {
           res.status(500).send(err);
         } else {
-          res.status(200).send(results);
+          // console.log('results.insertId at reqHandler', results.insertId);
+          res.status(200).json(results.insertId);
         }
       });
     }

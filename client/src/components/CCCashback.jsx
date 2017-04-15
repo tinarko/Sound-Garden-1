@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 
-import CCCashbackSetup from './CCCashbackSetup.jsx'
+import CreditCard from './CreditCard.jsx'
 
 import { getCreditcards, toggleCashbackSetup } from '../actions/creditcards';
 
@@ -17,7 +17,7 @@ class CCCashback extends React.Component {
 
   render () {
     var creditcards = this.props.creditcards.cc.map( (cc, index) => {
-              return (<li key={index}><CCCashbackSetup creditcard={cc}/></li>);
+              return (<CreditCard creditcard={cc} key={index} ccindex={index}/>);
             });
 
     if (this.props.creditcards.cashbacksetup) {

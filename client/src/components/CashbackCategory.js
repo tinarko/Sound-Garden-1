@@ -13,32 +13,42 @@ class CashbackCategory extends React.Component {
   }
 
   render () {
-    var catid = this.props.category.catid;
+    var ccindex = this.props.ccindex;
+    var catindex = this.props.catindex;
     var percent = this.props.category.percent;
     var catname = this.props.category.name;
-    var ccid = this.props.cc;
+    var catid = this.props.catid;
+
     return (
-      <div>
-        <p>{catname}: {percent} % 
-          <button onClick={(e) => {this.props.handleChange(catid, percent, 'decrement', ccid)}}>-</button>
-          <button onClick={(e) => {this.props.handleChange(catid, percent, 'increment', ccid)}}>+</button>
-        </p>
-      </div>
+      <li>
+        <div>
+          <p>{catname}: {percent} % 
+            <button onClick={ (e) => {
+              this.props.handleChange(ccindex, catindex, percent, 'decrement', catid)
+            } } > - </button>
+            <button onClick={ (e) => {
+              this.props.handleChange(ccindex, catindex, percent, 'increment', catid)
+            } } > + </button>
+          </p>
+        </div>
+      </li>
     )
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    // cashbackpercent: state.cashbackpercent,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     // cashbackpercent: state.cashbackpercent,
+//   };
+// };
 
 const mapDispatchToProps = (dispatch) => {
+  console.log('category');
   return {
-    handleChange: (catid, percent, action, ccid) => { dispatch(changeCashbackPercent(catid, percent, action, ccid)); },
+    handleChange: (ccindex, catindex, percent, action, catid) => { dispatch(changeCashbackPercent(ccindex, catindex, percent, action, catid)); },
   };
 };
 
-export default connect (mapStateToProps, mapDispatchToProps) (CashbackCategory);
+// export default connect (mapStateToProps, mapDispatchToProps) (CashbackCategory);
+export default connect (null, mapDispatchToProps) (CashbackCategory);
 

@@ -1,10 +1,23 @@
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
-
 export const createCashbackCategoryError = () => {
   return {
     type: 'CREATE_CASHBACK_CATEGORY_ERROR'
+  };
+};
+
+export const handleCategoryChange = (catname) => {
+  return {
+    type: 'EDIT_CATEGORY_NAME',
+    catname: catname
+  };
+};
+
+export const handlePercentChange = (percent) => {
+  return {
+    type: 'EDIT_CASHBACK_PERCENT',
+    percent: percent
   };
 };
 
@@ -33,9 +46,9 @@ export const createCashbackCategoryKickoff = (ccid, name, percent) => {
       })
     })
     .then(response => {
-      console.log('response', response);
-      var catid = response.insertId;
-      console.log('catid', catid);
+      return response.json();
+    })
+    .then((catid) => {
       dispatch(createCashbackCategory(ccid, name, percent, catid));
     })
     .catch((err) => {
