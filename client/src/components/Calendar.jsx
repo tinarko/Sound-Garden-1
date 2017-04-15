@@ -15,8 +15,8 @@ class Calendar extends React.Component {
     // populate transactions
     if (startDate && endDate) {
       this.props.dispatch(transactions.getTransactions({
-        startDate: startDate,
-        endDate: endDate,
+        startDate: startDate.toISOString().substring(0, 10),
+        endDate: endDate.toISOString().substring(0, 10),
       }));
     }
     this.props.dispatch(transactions.setSelectedDate({startDate, endDate}));

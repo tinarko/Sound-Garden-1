@@ -121,15 +121,18 @@ module.exports = {
     allTransactions: function(req, res) {
       var userid = req.session.passport.user;
       console.log('we are in all transactions')
-      var endDate = req.body.startDate.substring(0, 10);
-      var startDate = req.body.endDate.substring(0, 10);
+      var endDate = req.body.startDate;
+      var startDate = req.body.endDate;
       
+      console.log(startDate, endDate);
       var promises = [];
       db.getPlaidItems(userid, function(err, response) {
-        for (var i = 0; i < response.length; i++) {
-          console.log(response);
+        // TODO: need to use LET declaration to maintain block scope
+        for (let i = 0; i < response.length; i++) {
           promises.push(client.getTransactions(response[i].access_token, startDate, endDate)
             .then(function(data) {
+              var recomposedData = {};
+              recomposedData[response[i].institution_name] = data.transactions;
               return data.transactions;
 
             })
@@ -139,7 +142,13 @@ module.exports = {
           );
         }
       });
-      return res.json({});
+      Promise.all(promises)
+        .then(function(data) {
+          return res.json(data);
+        })
+        .catch(function(error) {
+          return res.json({error: error});
+        });
     },
     transactions: function (req, res) {
       //TODO: account for modularity for calendar time
