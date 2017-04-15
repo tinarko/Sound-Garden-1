@@ -165,10 +165,25 @@ module.exports = {
         month = '0'.concat(month);
       }
       var year = today.getFullYear().toString();
-
       var day = today.getDate().toString();
-
-      var periodEnd = year + '-' + month + '-' + day;
+      if (day.length < 2) {
+        day = '0'.concat(day);
+      }
+      if (month === req.params.month && year === req.params.year) {
+        var periodEnd = year + '-' + month + '-' + day;
+      } else {
+        var oldDate = new Date(parseInt(req.params.year), parseInt(req.params.month), 0);
+        var oldMonth = (oldDate.getMonth() + 1).toString();
+        if (oldMonth.length < 2) {
+          oldMonth = '0'.concat(oldMonth);
+        }
+        var oldYear = oldDate.getFullYear().toString();
+        var oldDay = oldDate.getDate().toString();
+        if (oldDay.length < 2) {
+          oldDay = '0'.concat(oldDay);
+        }
+        var periodEnd = oldYear + '-' + oldMonth + '-' + oldDay;
+      }
 
       var promises = [];
       var transactionData = {};
@@ -202,7 +217,6 @@ module.exports = {
           for (var i = 0; i < transactions.length; i++) {
             if (transactions[i]['category']) {
               var categoryName = transactions[i]['category'][0];
-              console.log('categoryName', categoryName);
               if (transactions[i]['category'].length > 0 && categoryName !== 'Payment') {
                 categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'] || transactions[i]['amount'];
               } else {

@@ -182,10 +182,3 @@ export const yearMonthChange = (yearMonthObject) => {
   };
 };
 
-export const toggleYearMonthSelection = (boolean) => {
-  return {
-    type: 'TOGGLE_YEAR_MONTH_SELECTION',
-    boolean
-  };
-};
-
