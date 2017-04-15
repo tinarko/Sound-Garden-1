@@ -23,11 +23,6 @@ class Budget extends React.Component {
     let monthValue = today.getMonth() + 1;
     let yearValue = today.getFullYear();
     this.props.yearMonthChange({year: yearValue, month: monthValue});
-    // this.props.yearMonthChange({year: 2016, month: 1});
-    // this.props.yearMonthChange(2016, 1);
-    // this.props.yearMonthChange = this.props.yearMonthChange.bind(this);
-
-
   }
 
   componentWillMount () {
@@ -44,9 +39,13 @@ class Budget extends React.Component {
   }
 
   handleAMonthDismiss (value) {
-    console.log('invoked dismiss');
-    console.log('value', value);
     this.props.yearMonthChange(value);
+
+
+    // this.props.getBudgets(value.year, value.month);
+    this.props.getBudgets('2017', '02');
+    this.props.getTransactionData(value.year, value.month);
+    this.props.getTransactionData('2017', '02');
   }
 
   handleYearMonthChange (value) {
@@ -67,19 +66,6 @@ class Budget extends React.Component {
     // let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let currentMonth = months[(this.props.budget.mvalue.month - 1)];
 
-    var yearMonthSelector;
-    // if (this.props.budget.toggleyearmonthselection) {
-    //   yearMonthSelector = <MonthPicker 
-    //       ref="pickAMonth" 
-    //       years={3}
-    //       value={this.props.budget.mvalue}
-    //       lang ={months}
-    //       onChange = {}
-    //       onDismiss={this.handleAMonthDismiss}>
-    //       </MonthPicker>;
-    // } else {
-    //   yearMonthSelector = <div></div>;
-    // }
     return (
       <div>
        <h2> Budget</h2>
@@ -91,7 +77,6 @@ class Budget extends React.Component {
           years={3}
           value={this.props.budget.mvalue}
           lang ={months}
-       
           onDismiss={this.handleAMonthDismiss.bind(this)}>
           </MonthPicker>
         <div>

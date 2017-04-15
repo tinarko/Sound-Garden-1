@@ -91,8 +91,9 @@ module.exports = {
   },
 
   insertUserMonthBudget: function (params, cb) {
-    var queryString = 'insert into budgets (user_id, month) values (?, NOW())';
-    connection.query(queryString, params[0], function(err, results) {
+    var timestamp = params[1] + '-' + params[2] + '-01 12:00:00';
+    var queryString = 'insert into budgets (user_id, month) values (?, ?);';
+    connection.query(queryString, [params[0], timestamp], function(err, results) {
       if (err) {
         cb(err, null);
       } else {
