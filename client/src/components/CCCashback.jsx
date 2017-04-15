@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 
 import CreditCard from './CreditCard.jsx'
+import GoogleMap from './GoogleMap.jsx';
 
 import { getCreditcards, toggleCashbackSetup } from '../actions/creditcards';
 
@@ -38,7 +39,7 @@ class CCCashback extends React.Component {
           <h3>Are you at this location? --insert business name-- </h3>
           <h4>If so, please use your --insert credit card-- to get the most cash back!</h4>
           <h4>If not, please indicate where you are on the map below:</h4>
-          <p>Map Placeholder</p>
+          <GoogleMap />
           
           <button onClick={this.props.toggleCashbackSetup}>Credit Card Cashback % Setup</button>
         </div> );

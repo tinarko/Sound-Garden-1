@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
-import crimeImg from '../img/security.png';
+import { connect } from 'react-redux';
+// import crimeImg from '../img/security.png';
 
 class GoogleMap extends React.Component {
   constructor(props) {
@@ -63,13 +64,13 @@ class GoogleMap extends React.Component {
   }
 
   createMarkers(map) {
-    const pinIcon = new google.maps.MarkerImage(
-        crimeImg,
-        null, /* size is determined at runtime */
-        null, /* origin is 0,0 */
-        null, /* anchor is bottom center of the scaled image */
-        new google.maps.Size(40, 40),
-    );
+    // const pinIcon = new google.maps.MarkerImage(
+    //     crimeImg,
+    //     null, /* size is determined at runtime */
+    //     null, /* origin is 0,0 */
+    //     null, /* anchor is bottom center of the scaled image */
+    //     new google.maps.Size(40, 40),
+    // );
     if (this.props.crimeData.length) {
       this.props.crimeData.forEach((value) => {
         const infowindow = new google.maps.InfoWindow({
@@ -90,6 +91,7 @@ class GoogleMap extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div className="google-map">
         <div ref="map" className="map" />
@@ -97,6 +99,9 @@ class GoogleMap extends React.Component {
   }
 }
 
-GoogleMap.propTypes = propTypes;
-GoogleMap.defaultProps = defaultProps;
-export default GoogleMap;
+export default connect((state) => {
+  return {
+    places: state.googlemap.places,
+    geolocation: state.googlemap.geolocation
+  };
+})(GoogleMap);
