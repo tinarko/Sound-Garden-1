@@ -9,16 +9,11 @@ class BudgetCategoryList extends React.Component {
     super(props);
   }
 
-  componentWillMount () {
-    let { toggleAddBudgetCategoryInput} = this.props;
-  }
-
   handleInputChange (event) {
-    let { categoryNameInputChange, categoryGoalInputChange} = this.props;
     if (event.target.name === 'addcategoryname') {
-      categoryNameInputChange(event.target.value);
+      this.props.categoryNameInputChange(event.target.value);
     } else if (event.target.name === 'addcategorybudget') {
-      categoryGoalInputChange(event.target.value);
+      this.props.categoryGoalInputChange(event.target.value);
     }
   }
 
@@ -61,10 +56,10 @@ class BudgetCategoryList extends React.Component {
     return (
       <div>
         <div>
-        Total Spent: {this.props.budget.totalSpent}
+        Total Spent: ${this.props.budget.totalSpent}
         </div>
         <div>
-        Total Budget: {this.props.budget.totalBudget}
+        Total Budget: ${this.props.budget.totalBudget}
         </div>
         <br />
         <div>
@@ -83,11 +78,6 @@ class BudgetCategoryList extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     toggleAddBudgetCategoryInput: () => { dispatch(toggleAddBudgetCategoryInput()); },
@@ -96,5 +86,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect (mapStateToProps, mapDispatchToProps) (BudgetCategoryList);
+export default connect (mapDispatchToProps) (BudgetCategoryList);
 // export default BudgetCategoryList;
