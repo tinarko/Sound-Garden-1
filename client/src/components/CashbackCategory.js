@@ -43,7 +43,6 @@ class CashbackCategory extends React.Component {
 // };
 
 const mapDispatchToProps = (dispatch) => {
-  console.log('category');
   return {
     handleChange: (ccindex, catindex, percent, action, catid) => { dispatch(changeCashbackPercent(ccindex, catindex, percent, action, catid)); },
   };

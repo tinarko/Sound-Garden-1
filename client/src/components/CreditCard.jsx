@@ -5,22 +5,33 @@ import { connect } from 'react-redux';
 import CashbackCategory from './CashbackCategory';
 
 import { createCashbackCategoryKickoff } from '../actions/createcashbackcategory';
-import { handleCategoryChange } from '../actions/createcashbackcategory';
+// import { handleCategoryChange } from '../actions/createcashbackcategory';
 
 class CreditCard extends React.Component {
   constructor (props) {
     super(props);
+    this.state = {
+      catname: '',
+      number: 0
+    };
   }
 
   componentWillMount () {
-    console.log(this.props);
+    // console.log(this.props);
+  }
+
+  handleCategoryChange (catname) {
+    this.setState({catname: catname});
+  }
+
+  handlePercentChange (percent) {
+    this.setState({number: percent});
   }
 
   render () {
     var creditcard = this.props.creditcard;
     var ccid = creditcard.ccid;
-    var name = 'testing';
-    var percent = 50;
+    console.log('ccindex at creditcard', this.props.ccindex);
     
     return (
       <li>
@@ -40,9 +51,19 @@ class CreditCard extends React.Component {
             )
           }) }
           <li>
-            Category: <input type="text" name="catname" value={this.props.catname} onChange={(e)=>handleCategoryChange(e.target.value)}/> 
-            Cashback %: <input type="number"/> 
-            <button onClick={(e) => {this.props.createCashbackCategoryKickoff(ccid, name, percent)}}>Add</button>
+            Category: 
+            <input type="text" 
+                   value={this.props.catname} 
+                   onChange={ (e) => { this.handleCategoryChange(e.target.value) } }/> 
+            Cashback %: 
+            <input type="number"
+                   value={this.props.number}
+                   onChange={ (e) => { this.handlePercentChange(e.target.value) } }/> 
+            <button 
+              onClick={ (e) => 
+              { this.props.createCashbackCategoryKickoff(this.props.ccindex, ccid, this.state.catname, this.state.number) } }>
+              Add
+            </button>
           </li>
         </ul>
       </div>
@@ -52,18 +73,18 @@ class CreditCard extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log('state', state);
-  return {
-    // cashbackcategories: state.cashbackcategories
-    percent: state.percent,
-    catname: state.catname
-  };
+  // console.log('state', state);
+  // return {
+  //   percent: state.percent,
+  //   catname: state.catname
+  // };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createCashbackCategoryKickoff: (ccid, name, percent) => { dispatch(createCashbackCategoryKickoff(ccid, name, percent)); },
-    handleCategoryChange: (catname) => { dispatch(handleCategoryChange(catname)); }
+    createCashbackCategoryKickoff: (ccindex, ccid, name, percent) => { dispatch(createCashbackCategoryKickoff(ccindex, ccid, name, percent)); },
+    // handleCategoryChange: (catname) => { dispatch(handleCategoryChange(catname)); },
+    // handlePercentChange: (percent) => { dispatch(handlePercentChange(percent)); }
   };
 };
 

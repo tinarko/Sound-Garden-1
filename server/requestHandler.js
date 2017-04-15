@@ -354,8 +354,8 @@ module.exports = {
       // var percent = req.body.percent;
 
       var ccid = 2;
-      var name = 'test';
-      var percent = 100;
+      var name = req.body.name;
+      var percent = req.body.percent;
 
       db.createCashbackCategory(ccid, name, percent, (err, results) => {
         if (err) {

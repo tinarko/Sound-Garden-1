@@ -2,8 +2,8 @@ const initialState = {
   cc: [],
   fetchingCreditcards: false,
   cashbacksetup: false,
-  catname: '',
-  percent: 0
+  // catname: '',
+  // percent: 0
 };
 
 const creditcards = (state = initialState, action) => {
@@ -99,29 +99,29 @@ const creditcards = (state = initialState, action) => {
       break;
     case 'CREATE_CASHBACK_CATEGORY':
       var catid = action.catid;
-      var ccid = action.ccid;
+      var ccindex = action.ccindex;
       var name = action.name;
       var percent = action.percent;
 
-      var cc = state.cc.slice();
-      for (var i = 0; i < cc.length; i++) {
-        if (cc[i].ccid === ccid) {
-          cc[i].categories.push({
-            name: name,
-            percent: percent,
-            catid: catid
-          });
-        }
-        break;
-      }
-      console.log('updated cc', cc);
+      var newCC = JSON.parse(JSON.stringify(state.cc));
+
+      console.log('ccindex', ccindex);
+
+      newCC[ccindex].categories.push({
+        catid: catid, 
+        name: name,
+        percent: percent
+      });
+
+      console.log('old', state.cc, 'new', newCC);
+
       return {
         ...state,
-        cc: cc
+        cc: newCC
       };
       break;
     case 'EDIT_CATEGORY_NAME':
-      console.log('HI!');
+      console.log('CATEGORY NAME EDITED!');
       var catname = action.catname;
       return {
         ...state,
