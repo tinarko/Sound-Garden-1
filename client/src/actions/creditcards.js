@@ -68,7 +68,7 @@ export const getCreditcards = () => {
       return response.json();
     })
     .then((json) => {
-      console.log('WHY?!?!?!', json);
+      console.log('json from getCreditcards in action', json);
       dispatch(receivedCreditcards(json));
     })
     .catch((err) => {

@@ -275,13 +275,19 @@ module.exports = {
       } else {
         console.log('results at db', results);
         var ccid = results.insertId;
-        var cashbackquery = 'INSERT INTO cccategories (categoryname, value, ccid) VALUES (groceries, 3, ?)';
-        connection.query(cashbackquery, ccid, (err, results) => {
+        console.log('ccid', ccid);
+        var cashbackquery = `INSERT INTO cccategories (categoryname, value, ccid) VALUES ('groceries', 3, ${ccid})`;
+        connection.query(cashbackquery, (err, results) => {
           if (err, null) {
             cb(err, null);
           } else {
-            console.log(results);
-            cb (null, results);
+            var catid = results.insertId;
+            console.log('results', results);
+            var data = {
+              catid: catid,
+              ccid: ccid
+            };
+            cb (null, data);
           }
         });
       }

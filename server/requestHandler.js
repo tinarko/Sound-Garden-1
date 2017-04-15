@@ -501,14 +501,17 @@ module.exports = {
             }
             console.log('creditcards', creditcards);
             // insert creditcards into creditcard table
-            return db.checkCreditcard(userid, creditcards[1], (err, results) => {
+            // *** TEST***
+            var creditcards = ['huan bank', 'tina bank'];
+            // Promise map
+            return db.checkCreditcard(userid, creditcards[0], (err, results) => {
               if (err) {
                 return res.status(500).send(err);
               } else {
                 // console.log('checkCreditcard RESULTS', results);
                 // credit card does not exist
                 if (results.length === 0) {
-                  db.createCreditcard(userid, creditcards[1], (err, results) => {
+                  db.createCreditcard(userid, creditcards[0], (err, results) => {
                     if (err) {
                       console.log('err creating credit card..:', err);
                       return res.status(500).send(err);
@@ -527,14 +530,8 @@ module.exports = {
           .catch(function(error) {
             return res.json({error: 'error in getting account data from plaid clients'});
           });
-
-      })
-
+      });
     },
-
-
-
-
   },
   
   'google': {
