@@ -12,7 +12,7 @@ const Markers = (props) => {
         return (<circle className="graph-circles" 
           r="5" 
           cx={props.x(d.date)} 
-          cy={props.y(d.count)} 
+          cy={props.y(d.amount)} 
           fill="blue"
           stroke="#3f4186"
           strokeWidth="3px"

@@ -120,11 +120,8 @@ module.exports = {
     },
     allTransactions: function(req, res) {
       var userid = req.session.passport.user;
-      console.log('we are in all transactions')
       var endDate = req.body.endDate;
       var startDate = req.body.startDate;
-      
-      console.log(startDate, endDate);
       var promises = [];
       db.getPlaidItems(userid, function(err, response) {
         // TODO: need to use LET declaration to maintain block scope
@@ -134,6 +131,7 @@ module.exports = {
               data.transactions.forEach(function(value) {
                 value.institution_name = response[i].institution_name;
               });
+              console.log(data.transactions.length);
               return data.transactions;
 
             })
@@ -144,7 +142,12 @@ module.exports = {
         }
         Promise.all(promises)
           .then(function(data) {
-            return res.json(data);
+            var result = []
+            data.forEach(function(transactions) {
+              result = result.concat(transactions)
+            });
+            console.log(result.length);
+            return res.json(result);
           })
           .catch(function(error) {
             return res.json({error: error});

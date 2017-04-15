@@ -28,8 +28,8 @@ class TransactionsGraph extends React.Component {
       tooltip: {
         display: true,
         data: {
-          // key: data.day,
-          // value: data.count
+          key: this.props.data.date,
+          value: this.props.data.amount
         },
         pos: {
           x: e.target.getAttribute('cx'),
@@ -54,16 +54,7 @@ class TransactionsGraph extends React.Component {
   }
 
   render() {
-    const data=[
-        {day:'02-11-2016',count:180},
-        {day:'02-12-2016',count:250},
-        {day:'02-13-2016',count:150},
-        {day:'02-14-2016',count:496},
-        {day:'02-15-2016',count:140},
-        {day:'02-16-2016',count:380},
-        {day:'02-17-2016',count:100},
-        {day:'02-18-2016',count:150}
-    ];
+    // console.log('inside of graphing-----------------', this.props.data)
     // styles generally from props
     const styles = {
       width: 800,
@@ -74,21 +65,21 @@ class TransactionsGraph extends React.Component {
     const h = styles.height - (margin.top + margin.bottom);
     const transform = `translate(${margin.left}, ${margin.top})`;
 
-    const parseDate = d3.timeParse('%m-%d-%Y');
-    data.forEach(function(d) {
-      d.date = parseDate(d.day);
+    const parseDate = d3.timeParse('%Y-%m-%d');
+    this.props.data.forEach(function(d, i) {
+      d.date = parseDate(d.date);
     });
 
     // x and y are scales for the data (line)
     const x = d3.scaleTime()
-      .domain(d3.extent(data, function(d) {
+      .domain(d3.extent(this.props.data, function(d) {
         return d.date;
       }))
       .range([0, w]);
 
     const y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) {
-        return d.count + 100;
+      .domain([0, d3.max(this.props.data, function(d) {
+        return d.amount;
       })])
       .range([h, 0]);
 
@@ -97,7 +88,7 @@ class TransactionsGraph extends React.Component {
         return x(d.date);
       })
       .y(function(d) {
-        return y(d.count);
+        return y(d.amount);
       })
       .curve(d3.curveCardinal);
     const yAxis = d3.axisLeft()
@@ -106,7 +97,7 @@ class TransactionsGraph extends React.Component {
       .tickSize(-w);
     const xAxis = d3.axisBottom()
       .scale(x)
-      .tickValues(data.map(function(d, i) {
+      .tickValues(this.props.data.map(function(d, i) {
         return d.date;
       }));
 
@@ -114,9 +105,9 @@ class TransactionsGraph extends React.Component {
       <div>
         <svg width={styles.width} height={styles.height}>
           <g transform={transform}>
-            <path className="line" d={line(data)} strokeLinecap="round" />
+            <path className="line" d={line(this.props.data)} strokeLinecap="round" />
             <Markers 
-              data={data} 
+              data={this.props.data} 
               x={x} 
               y={y}
               showToolTip={this.showToolTip}

@@ -14,8 +14,8 @@ class Transactions extends React.Component {
       <div>
         <h3>transactions</h3>
         <Calendar />
-        {this.props.startDate && this.props.endDate &&
-          <TransactionsGraph />
+        {this.props.startDate && this.props.endDate && this.props.transactions.length &&
+          <TransactionsGraph data={this.props.transactions}/>
         }
       </div>
     );
