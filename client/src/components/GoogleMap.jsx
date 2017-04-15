@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+
 // import crimeImg from '../img/security.png';
 
 class GoogleMap extends React.Component {
@@ -9,6 +10,7 @@ class GoogleMap extends React.Component {
 
   componentDidMount() {
     // call to geolocate
+
     const directionsDisplay = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService;
     this.map = this.createMap();

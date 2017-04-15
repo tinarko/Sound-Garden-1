@@ -1,6 +1,6 @@
 export const getLocation = () => {
   // post request to google geolocate api
-  //  AIzaSyAbAk9QJ60TPVXM0Ior7QDZ5ItsOqIIjnU (geolocate/maps --> visualization)
+  //  AIzaSyDmTpCBlT0ib4dNTKVRpww0xE2fvL5zHuw (geolocate/maps --> visualization)
   //  AIzaSyCNxqMIVkgQDmSiOKHNq_OhdX84T-9qRS0 (places) api key
   fetch('/google/geolocate', {
     method: 'GET',

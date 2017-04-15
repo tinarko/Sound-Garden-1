@@ -86,8 +86,8 @@ class Login extends React.Component {
         {/* TODO: pass loggedIn prop here && check
         // read the token, if they are signed in: render button to add stuff to plaid OR go to balances
         // else show this button*/}
-        <form action="/auth/facebook" method="GET">
-          <button >Login with Facebook</button>
+        <form action="/auth/auth0" method="GET">
+          <button >Login with Auth0</button>
         </form>
         <button id="link-button"
           onClick={this.onPlaidClick}
