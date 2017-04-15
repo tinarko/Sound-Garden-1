@@ -33,7 +33,9 @@ export const getUserBudgets = (year, month) => {
     })
     .then(response => response.json())
     .then((json) => {
-      dispatch(receivedUserBudgets(json));
+      // if (Array.isArray(json)) {
+        dispatch(receivedUserBudgets(json));
+      // }
     })
     .catch((err) => {
       console.log('error in get', err);

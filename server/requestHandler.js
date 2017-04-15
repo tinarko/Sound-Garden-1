@@ -284,7 +284,14 @@ module.exports = {
                         if (err) {
                           res.status(500).send(err);
                         } else {
-                          res.status(200).send(results);
+                          // res.status(200).send(results);
+                          db.getUserBudgets([userid, req.params.year, req.params.month], function(err, finalResults) {
+                            if (err) {
+                              res.status(500).send(err);
+                            } else {
+                              res.status(200).send(finalResults);
+                            }
+                          });
                         }
                       });
                     }
@@ -294,7 +301,14 @@ module.exports = {
                     if (err) {
                       res.status(500).send(err);
                     } else {
-                      res.status(200).send(results);
+                      db.getUserBudgets([userid, req.params.year, req.params.month], function(err, finalResults) {
+                        if (err) {
+                          res.status(500).send(err);
+                        } else {
+                          res.status(200).send(finalResults);
+                        }
+                      });
+                      // res.status(200).send(results);
                     }
                   });
                 }

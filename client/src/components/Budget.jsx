@@ -12,13 +12,13 @@ class Budget extends React.Component {
     super(props);
     
     let today = new Date ();
-    let month = (today.getMonth() + 1).toString();
-    if (month.length < 2) {
-      month = '0'.concat(month);
-    }
-    let year = today.getFullYear().toString();
-    this.props.getBudgets(year, month);
-    this.props.getTransactionData(year, month);
+    // let month = (today.getMonth() + 1).toString();
+    // if (month.length < 2) {
+    //   month = '0'.concat(month);
+    // }
+    // let year = today.getFullYear().toString();
+    // this.props.getBudgets(year, month);
+    // this.props.getTransactionData(year, month);
 
     let monthValue = today.getMonth() + 1;
     let yearValue = today.getFullYear();
@@ -77,7 +77,7 @@ class Budget extends React.Component {
       <div>
        <h2> Budget</h2>
         <div className="box" onClick = {this.handleClickCurrent.bind(this)}>
-          <label>{this.props.budget.mvalue.month} {this.props.budget.mvalue.year} </label>
+          <label>{currentMonth} {this.props.budget.mvalue.year} </label>
         </div>
         <MonthPicker 
           ref="pickAMonth" 
