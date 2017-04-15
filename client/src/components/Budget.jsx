@@ -87,7 +87,7 @@ class Budget extends React.Component {
           onDismiss={this.handleAMonthDismiss.bind(this)}>
           </MonthPicker>
         <div>
-          Placeholder for Graphs
+          
         </div>
         <BudgetCategoryList budget= {this.props.budget} handleBudgetChange={this.props.handleBudgetChange} toggleAddBudgetCategoryInput={this.props.toggleAddBudgetCategoryInput}/>
         

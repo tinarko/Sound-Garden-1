@@ -86,5 +86,5 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect (mapDispatchToProps) (BudgetCategoryList);
+export default connect (null, mapDispatchToProps) (BudgetCategoryList);
 // export default BudgetCategoryList;

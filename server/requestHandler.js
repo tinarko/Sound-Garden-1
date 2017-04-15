@@ -360,7 +360,7 @@ module.exports = {
                 if (err) {
                   res.status(500).send(err);
                 } else {
-                  db.insertUserBudget([updatedvalue, userid, results.insertId], function(err, finalResults) {
+                  db.insertUserBudget([updatedvalue, userid, results.insertId, yearString, monthString], function(err, finalResults) {
                     if (err) {
                       res.status(500).send(err);
                     } else {
