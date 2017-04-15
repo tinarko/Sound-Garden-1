@@ -423,5 +423,29 @@ module.exports = {
         }
       });
     }
+  },
+  
+  'google': {
+    geolocate: (req, res) => {
+      console.log('google geolocate', process.env.GOOGLE_geolocate_apiKey);
+      fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.GOOGLE_geolocate_apiKey}`, {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+        .then((response) => {
+          console.log('response from google', response);
+          res.send(response);
+        })
+        .catch((error) => {
+          res.send(error);
+        });
+    },
+
+    places: (req, res) => {
+      console.log(req.body);
+    }
   }
 };

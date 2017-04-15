@@ -52,6 +52,9 @@ app.post('/creditcards/changecashbackpercent', requestHandler.creditcards.change
 app.post('/creditcards/createcashbackcategory', requestHandler.creditcards.createCashbackCategory);
 app.delete('/creditcards/deletecashbackcategory/:catid', requestHandler.creditcards.deleteCashbackCategory);
 
+app.get('/google/geolocate', requestHandler.google.geolocate);
+app.post('/google/places', requestHandler.google.places);
+
 // app.post('/budget/addbudgetcategory', requestHandler.budget.addBudgetCategory);
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);
 app.get('/plaid/accounts', requestHandler.plaid.accounts);

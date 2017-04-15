@@ -1,82 +1,102 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { PropTypes } from 'react';
+import crimeImg from '../img/security.png';
 
-// import Map, {GoogleApiWrapper} from '../../src/index'
-import GoogleMapReact from 'google-maps-react';
+class GoogleMap extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-export default class GoogleMap extends React.Component {
+  componentDidMount() {
+    // call to geolocate
+    const directionsDisplay = new google.maps.DirectionsRenderer();
+    const directionsService = new google.maps.DirectionsService;
+    this.map = this.createMap();
+    directionsDisplay.setMap(this.map);
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     lat: null,
-  //     lng: null
-  //   };
-  //   window.markers = [];
-  // }
+    // this.createMarkers(this.map);
+    // this.calcRoute(directionsService, directionsDisplay);
+  }
 
-  // getCurrentLocation(cb) {
-  //   var options = {
-  //     enableHighAccuracy: true,
-  //     timeout: 5000,
-  //     maximumAge: 0
-  //   };
-  //   navigator.geolocation.getCurrentPosition((location) => {
-  //     this.setState({
-  //       lat: location.coords.latitude,
-  //       lng: location.coords.longitude
-  //     });
+  createMap() {
+    const geoLocation = new google.maps.LatLng(this.props.geoLocation.lat, this.props.geoLocation.lng);
+    const mapOptions = {
+      zoom: 14,
+      center: geoLocation,
+    }
+    return new google.maps.Map(this.refs.map, mapOptions);
+  }
 
-  //     if (cb) {
-  //       cb('Done fetching location, ready.');
-  //     }
-  //   }, (err) => {
-  //     console.log('error occurred: ', err);
-  //   }, options);
-  // }
+  calcRoute(directionsService, directionsDisplay) {
+    if (this.props.mapDestinations && this.props.mapDestinations.length > 1) {
+      const destinations = [];
+      this.props.mapDestinations.forEach((value) => {
+        destinations.push({
+          location: value.location.display_address[0] + value.location.display_address[1],
+          stopover: true,
+        });
+      });
 
-  // componentDidMount() {
-  //   this.getCurrentLocation((ready) => {
-  //     if (ready) {
-  //       // one time map render on page ready
-  //       this.renderMap();
-  //     }
-  //   });
-  // }
+      const directionsRequest = {
+        origin: destinations[0].location,
+        destination: destinations[destinations.length - 1].location,
+        waypoints: destinations.slice(1, destinations.length - 1),
 
-  // renderMap() {
-  //   let currLoc = {lat: this.state.lat, lng: this.state.lng};
-  //   // save map to window to be able to redraw as current location changes
-  //   window.map = new google.maps.Map(document.getElementById('map'), {
-  //     zoom: 15,
-  //     center: currLoc
+        optimizeWaypoints: true,
+        provideRouteAlternatives: false,
+        travelMode: this.state.travelMode,
+        drivingOptions: {
+          departureTime: new Date, 
+          trafficModel: 'pessimistic',
+        },
+        unitSystem: google.maps.UnitSystem.IMPERIAL,
+      };
 
-  //   });
-  //   window.marker = new google.maps.Marker({
-  //     position: currLoc,
-  //     map: map
-  //   });
+      directionsService.route(directionsRequest, (result, status) => {
+        if (status == 'OK') {
+          directionsDisplay.setDirections(result);
+        } else {
+          console.log(status);
+          console.log('there was an error regarding the directions service');
+        }
+      });
+    }
+  }
 
-  //   marker.setAnimation(google.maps.Animation.BOUNCE);
-  // }
+  createMarkers(map) {
+    const pinIcon = new google.maps.MarkerImage(
+        crimeImg,
+        null, /* size is determined at runtime */
+        null, /* origin is 0,0 */
+        null, /* anchor is bottom center of the scaled image */
+        new google.maps.Size(40, 40),
+    );
+    if (this.props.crimeData.length) {
+      this.props.crimeData.forEach((value) => {
+        const infowindow = new google.maps.InfoWindow({
+          content: `<div>${value.type}</div>`,
+        });
+        const marker = new google.maps.Marker({
+          animation: google.maps.Animation.DROP,
+          position: new google.maps.LatLng(value.lat, value.lon),
+          map,
+          icon: pinIcon,
+        });
+        google.maps.event.addListener(marker, 'mouseover', () => {
+          infowindow.open(map, marker);
+          setTimeout(() => { infowindow.close(); }, '1500');
+        });
+      });
+    }
+  }
 
   render() {
     return (
-      <div>
-        <div id="map"></div>
-        <script>
-          var map;
-          {function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-              center: {lat: -34.397, lng: 150.644},
-              zoom: 8
-            });
-          }}
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBiOV6kWR0gDT-oDu4wcp_P-3M3J1biHzc&callback=initMap"
-                async defer></script>
-      </div>
-    );
+      <div className="google-map">
+        <div ref="map" className="map" />
+      </div>);
   }
-
 }
+
+GoogleMap.propTypes = propTypes;
+GoogleMap.defaultProps = defaultProps;
+export default GoogleMap;

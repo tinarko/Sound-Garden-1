@@ -8,14 +8,14 @@ export default (state = {
 }, action) => {
   switch (action.type) {
     case 'GET_BALANCE_START': {
-      return state = {
+      return {
         ...state, 
         fetching: true
       };
       break;
     }
     case 'GET_BALANCE_ERROR': {
-      return state = {
+      return {
         ...state,
         fetching: false,
         error: action.payload
@@ -23,7 +23,7 @@ export default (state = {
       break;
     }
     case 'GET_BALANCE_FULFILLED': {
-      return state = {
+      return {
         ...state,
         fetching: false,
         fetched: true,

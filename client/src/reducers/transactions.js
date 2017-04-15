@@ -10,14 +10,14 @@ export default (state = {
 }, action) => {
   switch (action.type) {
     case 'GET_TRANSACTIONS_START': {
-      return state = {
+      return {
         ...state, 
         fetching: true
       };
       break;
     }
     case 'GET_TRANSACTIONS_ERROR': {
-      return state = {
+      return {
         ...state,
         fetching: false,
         error: action.payload
@@ -25,7 +25,7 @@ export default (state = {
       break;
     }
     case 'GET_TRANSACTIONS_FULFILLED': {
-      return state = {
+      return {
         ...state,
         fetching: false,
         fetched: true,
@@ -35,13 +35,13 @@ export default (state = {
     }
     // calendar focus changes
     case 'CALENDAR_ITEM_FOCUSED': {
-      return state = {
+      return {
         ...state,
         focusedInput: action.payload
       };
     }
     case 'CALENDAR_DATES_CHANGED': {
-      return state = {
+      return {
         ...state,
         startDate: action.payload.startDate,
         endDate: action.payload.endDate,
