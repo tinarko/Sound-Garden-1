@@ -9,16 +9,24 @@ class Transactions extends React.Component {
     super(props);
   }
 
-  ComponentDidMount() {
-    // this.props.dispatch(transactions.getTransactions());
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.startDate && nextProps.endDate) {
+      // send ajax call on updated start and end date
+      // this.props.dispatch(transactions.getTransactions({
+      //   startDate: this.nextProps.startDate,
+      //   endDate: this.nextProps.endDate,
+      // }));
+    }
   }
 
   render() {
     return (
       <div>
         <h3>transactions</h3>
-        <Calendar />        
-        <TransactionsGraph />
+        <Calendar />
+        {this.props.startDate && this.props.endDate &&
+          <TransactionsGraph />
+        }
       </div>
     );
   }
@@ -27,6 +35,8 @@ class Transactions extends React.Component {
 export default connect((state) => {
   return {
     transactions: state.transactions.transactions,
+    startDate: state.transactions.startDate,
+    endDate: state.transactions.endDate,
     fetching: state.transactions.fetching,
     fetched: state.transactions.fetched,
   };

@@ -1,4 +1,4 @@
-export const getTransactions = () => {
+export const getTransactions = (dates) => {
   return (dispatch) => {
     dispatch({type: 'GET_TRANSACTIONS_START'});
     fetch('/plaid/transactions', {
