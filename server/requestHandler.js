@@ -501,31 +501,41 @@ module.exports = {
             }
             console.log('creditcards', creditcards);
             // insert creditcards into creditcard table
-            // *** TEST***
-            var creditcards = ['huan bank', 'tina bank'];
+
+            // TEST stuff
+            // creditcards = ['this','that','or the other'];
+            
             // Promise map
-            return db.checkCreditcard(userid, creditcards[0], (err, results) => {
-              if (err) {
-                return res.status(500).send(err);
-              } else {
-                // console.log('checkCreditcard RESULTS', results);
-                // credit card does not exist
-                if (results.length === 0) {
-                  db.createCreditcard(userid, creditcards[0], (err, results) => {
-                    if (err) {
-                      console.log('err creating credit card..:', err);
-                      return res.status(500).send(err);
-                    } else {
-                      console.log('created credit card:', results);
-                      return res.status(200).json(results);
-                    }
-                  })
-                // else, credit card already exists
+            Promise.map(creditcards, (creditcard) => {
+
+              return db.checkCreditcard(userid, creditcard, (err, results) => {
+                if (err) {
+                  return res.status(500).send(err);
                 } else {
-                  return res.status(200).json('credit cards initiated');
+                  // console.log('checkCreditcard RESULTS', results);
+                  // credit card does not exist
+                  if (results.length === 0) {
+                    db.createCreditcard(userid, creditcard, (err, results) => {
+                      if (err) {
+                        console.log('err creating credit card..:', err);
+                        // return res.status(500).send(err);
+                      } else {
+                        console.log('created credit card:', results);
+                      }
+                    })
+                  // else, credit card already exists
+                  } else {
+                    // return res.status(200).json('credit cards initiated');
+                  }
                 }
-              }
-            });
+              });
+
+            })
+            .then(results => {
+              console.log('got here!', results);
+              res.sendStatus(200);
+            })
+
           })
           .catch(function(error) {
             return res.json({error: 'error in getting account data from plaid clients'});
