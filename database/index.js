@@ -23,10 +23,11 @@ module.exports = {
   },
 
   saveUser: function(data, cb) {
+    console.log(data._json.name)
     var profile = [
       data.id, 
-      data.name, 
-      data.email
+      data._json.name, 
+      data._json.email
     ];
     var query = 'insert into users(userid, name, email) value(?, ?, ?)';
     connection.query(query, profile, function(err, results, field) {

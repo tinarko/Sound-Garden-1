@@ -47,7 +47,7 @@ passport.use(new Auth0Strategy({
       done(null, profile);
     } else {
       console.log('this is if NOT existinguser');
-      db.saveUser(profile._json, (err, newUser) => {
+      db.saveUser(profile, (err, newUser) => {
         if (err) {
           // TODO: error handle invalid save of user
         }
@@ -60,12 +60,10 @@ passport.use(new Auth0Strategy({
 // serialize and deserialize User to save and retrieve user data from session
 // stores user in session
 passport.serializeUser((user, done) => {
-  console.log('serializing', user);
   done(null, user);
 });
 
 passport.deserializeUser((user, done) => {
-  console.log('deserializing', user);
   done(null, user);
 });
 
