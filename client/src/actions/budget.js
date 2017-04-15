@@ -106,7 +106,7 @@ export const addBudgetCategory = () => {
   };
 };
 
-export const postUpdatedBudget = (goalvalue, categoryname, index, change) => {
+export const postUpdatedBudget = (goalvalue, categoryname, index, change, year, month) => {
   return (dispatch) => {
     fetch('/budget/updatebudgetcategory', {
       method: 'POST', 
@@ -118,7 +118,9 @@ export const postUpdatedBudget = (goalvalue, categoryname, index, change) => {
         categoryname: categoryname,
         goalvalue: goalvalue,
         index: index,
-        change: change
+        change: change,
+        year: year,
+        month: month
       })
     })
     .then((response) => {

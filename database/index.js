@@ -166,8 +166,8 @@ module.exports = {
   updateUserBudgetCategory: function(params, cb) {
     var queryString = 'update categorytypes inner join budgetcategories inner join budgets inner join users \
     on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id \
-    SET budgetcategories.goalvalue = ? WHERE users.userid = ? AND categorytypes.name = ?;';
-    connection.query(queryString, [params[0], params[1], params[2]], function(err, results, field) {
+    SET budgetcategories.goalvalue = ? WHERE users.userid = ? AND categorytypes.name = ? AND YEAR(budgets.month) = ? AND MONTH(budgets.month) = ?';
+    connection.query(queryString, params, function(err, results, field) {
       if (err) {
         console.log('errored in index.js in db');
         cb(err, null);
@@ -226,19 +226,23 @@ module.exports = {
   },
 
   insertUserBudget: function(params, cb) {
+    console.log('params', params);
     var categoryid = params[2];
     var updatedvalue = params[0];
     var userid = params[1];
+    var yearString = params[3];
+    var monthString = params[4];
 
-    console.log('insertUserBudget params:', categoryid, updatedvalue, userid);
+    console.log('insertUserBudget params:', categoryid, updatedvalue, userid, yearString, monthString);
     var queryString = 
     'insert into budgetcategories (budget_id, category_id, goalvalue) \
     select budgets.id, ?, ? from categorytypes inner join budgetcategories inner join budgets inner join users \
     on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id \
     AND budgetcategories.category_id = categorytypes.id \
-    where Month(budgets.month) = MONTH(CURRENT_DATE()) and users.userid = ? limit 1;';
+    where users.userid = ? and YEAR(budgets.month) = ? AND MONTH(budgets.month) = ? limit 1;';
 
-    connection.query (queryString, [categoryid, updatedvalue, userid], function(err, results) {
+    // 'insert into budgetcategories (budget_id, category_id, goalvalue) select budgets.id, ?, ? from categorytypes inner join budgetcategories inner join budgets inner join users on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id where users.userid = ? and YEAR(budgets.month) = ? AND MONTH(budgets.month) = ? limit 1;
+    connection.query (queryString, [categoryid, updatedvalue, userid, yearString, monthString], function(err, results) {
       if (err, null) {
         cb(err, null);
       } else {

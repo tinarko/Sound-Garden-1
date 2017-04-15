@@ -19,13 +19,18 @@ class BudgetCategory extends React.Component {
           this.props.budgetcategory.goalvalue, 
           this.props.budgetcategory.name, 
           this.props.index, 
-          'decrement'); 
+          'decrement',
+          this.props.year,
+          this.props.month); 
         } }> - </button>
         {this.props.budgetcategory.goalvalue}
         <button onClick={(e) => { this.props.handleBudgetChange(
           this.props.budgetcategory.goalvalue, 
           this.props.budgetcategory.name, 
-          this.props.index, 'increment'); 
+          this.props.index, 
+          'increment',
+          this.props.year,
+          this.props.month); 
         } }> + </button> 
 
         </div>

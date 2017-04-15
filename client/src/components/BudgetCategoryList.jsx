@@ -24,7 +24,13 @@ class BudgetCategoryList extends React.Component {
 
   handleSubmit (event) {
     event.preventDefault();
-    this.props.handleBudgetChange(this.props.budget.addcategorybudget, this.props.budget.addcategoryname, this.props.budget.budgets.length, 'newValue');
+    this.props.handleBudgetChange(
+      this.props.budget.addcategorybudget, 
+      this.props.budget.addcategoryname, 
+      this.props.budget.budgets.length, 
+      'newValue', 
+      this.props.budget.mvalue.year,
+      this.props.budget.mvalue.month);
   }
   
   render () {
@@ -65,7 +71,9 @@ class BudgetCategoryList extends React.Component {
         {this.props.budget.budgets.map ((budgetcategory, index) => {
           return <BudgetCategory budgetcategory = {budgetcategory}
                                  index = {index} 
-                                 handleBudgetChange={this.props.handleBudgetChange}/>;
+                                 handleBudgetChange={this.props.handleBudgetChange}
+                                 year = {this.props.budget.mvalue.year}
+                                 month ={this.props.budget.mvalue.month}/>;
         }) }
         </div> 
         {toggleButtonForm}

@@ -41,11 +41,18 @@ class Budget extends React.Component {
   handleAMonthDismiss (value) {
     this.props.yearMonthChange(value);
 
-
     // this.props.getBudgets(value.year, value.month);
-    this.props.getBudgets('2017', '02');
-    this.props.getTransactionData(value.year, value.month);
-    this.props.getTransactionData('2017', '02');
+    var monthString;
+    if (value.month < 10) {
+      monthString = '0'.concat(value.month);
+    } else {
+      monthString = value.month.toString();
+    }
+    var yearString = value.year.toString();
+
+    this.props.getBudgets(yearString, monthString);
+    // this.props.getTransactionData(value.year, value.month);
+    this.props.getTransactionData(yearString, monthString);
   }
 
   handleYearMonthChange (value) {
@@ -101,8 +108,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getBudgets: (year, month) => { dispatch(getUserBudgets(year, month)); },
     getTransactionData: (year, month) => { dispatch(getTransactionData(year, month)); },
-    handleBudgetChange: (goalvalue, categoryname, index, change) => { 
-      dispatch(postUpdatedBudget(goalvalue, categoryname, index, change)); 
+    handleBudgetChange: (goalvalue, categoryname, index, change, year, month) => { 
+      dispatch(postUpdatedBudget(goalvalue, categoryname, index, change, year, month)); 
     },
     yearMonthChange: (yearMonthObject) => { dispatch(yearMonthChange(yearMonthObject)); },
     toggleYearMonthSelection: () => { dispatch (toggleYearMonthSelection()); }

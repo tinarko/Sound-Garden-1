@@ -303,6 +303,16 @@ module.exports = {
     },
     updateBudgetAmount: function(req, res) {
       var userid = req.session.passport.user;
+
+      var monthString;
+      if (req.body.month < 10) {
+        monthString = '0'.concat(req.body.month);
+      } else {
+        monthString = req.body.month.toString();
+      }
+      var yearString = req.body.year.toString();
+      console.log('req.body', req.body);
+
       var updatedvalue;
       if (req.body.change === 'increment') {
         updatedvalue = req.body.goalvalue + 10;
@@ -312,7 +322,7 @@ module.exports = {
         updatedvalue = parseFloat(req.body.goalvalue);
       }
       //check to see if budget category exists for user
-      db.updateUserBudgetCategory([updatedvalue, userid, req.body.categoryname], function(err, results) {
+      db.updateUserBudgetCategory([updatedvalue, userid, req.body.categoryname, yearString, monthString], function(err, results) {
         if (err) {
           res.status(500).send(err);
         //if does not exist
@@ -323,7 +333,7 @@ module.exports = {
               res.status(500).send(err);
             } else if (results) {
               //if exists, use this budget category name to create a budget listing for user
-              db.insertUserBudget([updatedvalue, userid, results.id], function(err, finalResults) {
+              db.insertUserBudget([updatedvalue, userid, results.id, yearString, monthString], function(err, finalResults) {
                 if (err) {
                   res.status(500).send(err);
                 } else {
