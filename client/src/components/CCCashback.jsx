@@ -47,6 +47,7 @@ class CCCashback extends React.Component {
           <h1>Credit Card Selector</h1>
           <br/>
           <h3>Are you at this location? //business name// </h3>
+          <br/>
           <p>If so, please use your //credit card// to get the most cash back!</p>
           <br/>
           <RaisedButton label="Setup" onClick={this.props.toggleCashbackSetup} />

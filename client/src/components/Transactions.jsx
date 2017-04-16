@@ -12,7 +12,8 @@ class Transactions extends React.Component {
   render() {
     return (
       <div>
-        <h3>transactions</h3>
+        <h1>Transactions</h1>
+        <br/>
         <Calendar />
         {this.props.startDate && this.props.endDate && this.props.transactions.length &&
           <TransactionsGraph data={this.props.transactions}/>

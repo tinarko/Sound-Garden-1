@@ -66,7 +66,8 @@ class Budget extends React.Component {
 
     return (
       <div>
-       <h2>Budget</h2>
+       <h1>Budget</h1>
+       <br/>
         <div className="box">
           <label>{currentMonth} {this.props.budget.mvalue.year} </label>
           <button onClick={this.handleClickCurrent.bind(this)}> Select Time Period </button>
