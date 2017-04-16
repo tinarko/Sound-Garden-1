@@ -1,6 +1,9 @@
 import React from 'react';
 import config from './../../../config/config.js';
 
+//styling
+import RaisedButton from 'material-ui/RaisedButton';
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -87,12 +90,15 @@ class Login extends React.Component {
         // read the token, if they are signed in: render button to add stuff to plaid OR go to balances
         // else show this button*/}
         <form action="/auth/auth0" method="GET">
-          <button >Login with Auth0</button>
+          <button >Login</button>
         </form>
-        <button id="link-button"
-          onClick={this.onPlaidClick}
-        >Add Accounts to Plaid</button>
-        <button onClick={this.getAccountData}>Account data</button>
+        <br />
+        <RaisedButton id="link-button"
+          onClick={this.onPlaidClick} label="Add Accounts to Plaid" />
+          <br />
+          <br/ >
+        <RaisedButton onClick={this.getAccountData} label="Check account data" />
+
       </div>
     );
   }
