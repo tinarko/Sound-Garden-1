@@ -374,7 +374,7 @@ module.exports = {
       // var userid = 2;
       var userid;
       if (req.session.passport) {
-        userid = Number(req.session.passport.user);
+        userid = req.session.passport.user;
         console.log('you are logged in with userid:', userid);
         
       } else {
@@ -434,7 +434,7 @@ module.exports = {
         // add data to object and send response
       var userid;
       if (req.session.passport) {
-        userid = Number(req.session.passport.user);
+        userid = req.session.passport.user;
         console.log('you are logged in with userid:', userid);
       } else {
         userid = 2;
@@ -490,7 +490,7 @@ module.exports = {
             }
 
             //
-            console.log('when creating credit cards, here is raw data', accountTypes);
+            // console.log('when creating credit cards, here is raw data', accountTypes);
             // parse through accountTypes to find credit cards for this user. 
             var banks = accountTypes;
             var creditcards = [];
@@ -499,7 +499,7 @@ module.exports = {
                 creditcards.push(bank + ' - ' + banks[bank].credit[i].account.official_name);
               }
             }
-            console.log('creditcards', creditcards);
+            console.log('creditcards *********', creditcards);
             // insert creditcards into creditcard table
 
             // TEST stuff
@@ -507,7 +507,6 @@ module.exports = {
             
             // Promise map
             Promise.map(creditcards, (creditcard) => {
-
               return db.checkCreditcard(userid, creditcard, (err, results) => {
                 if (err) {
                   return res.status(500).send(err);
@@ -532,7 +531,7 @@ module.exports = {
 
             })
             .then(results => {
-              console.log('got here!', results);
+              console.log('got through promises!', results);
               res.sendStatus(200);
             })
 
