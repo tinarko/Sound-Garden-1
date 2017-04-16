@@ -46,7 +46,7 @@ CREATE TABLE items (
 CREATE TABLE creditcards (
   id int NOT NULL AUTO_INCREMENT,
   ccname varchar(255),
-  userid bigint NOT NULL,
+  userid varchar (255),
   PRIMARY KEY (id)
 );
 
