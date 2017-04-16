@@ -23,7 +23,7 @@ class CashbackCategory extends React.Component {
     return (
       <li>
         <div>
-          <p>{catname}: {percent} % 
+          <p>• {catname}: {percent} % 
             <button onClick={ (e) => {
               this.props.handleChange(ccindex, catindex, percent, 'decrement', catid)
             } } > - </button>
@@ -60,3 +60,17 @@ const mapDispatchToProps = (dispatch) => {
 // export default connect (mapStateToProps, mapDispatchToProps) (CashbackCategory);
 export default connect (null, mapDispatchToProps) (CashbackCategory);
 
+/*
+ <RaisedButton label="-"  onClick={ (e) => {
+              this.props.handleChange(ccindex, catindex, percent, 'decrement', catid)
+            } }/>
+
+            <RaisedButton label="+"  onClick={ (e) => {
+              this.props.handleChange(ccindex, catindex, percent, 'increment', catid)
+            } }/>
+
+            <RaisedButton label="Delete"  onClick={(e) => {
+              this.props.deleteCashbackCategoryKickoff(ccindex, catindex, catid)
+            } }/>
+
+*/

@@ -7,6 +7,9 @@ import GoogleMap from './GoogleMap.jsx';
 
 import { createCreditcardsKickoff, toggleCashbackSetup } from '../actions/creditcards';
 
+//styling
+import RaisedButton from 'material-ui/RaisedButton';
+
 class CCCashback extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +25,7 @@ class CCCashback extends React.Component {
 
   render () {
     var creditcards = this.props.creditcards.cc.map( (cc, index) => {
-              return (<CreditCard creditcard={cc} key={index} ccindex={index}/>);
+              return (<CreditCard className="component" creditcard={cc} key={index} ccindex={index}/>);
             });
 
     if (this.props.creditcards.cashbacksetup) {
@@ -30,21 +33,24 @@ class CCCashback extends React.Component {
       return (
         <div>
           <h1>Credit Card Selector - Setup</h1>
-          <button onClick={this.props.toggleCashbackSetup}>Select Credit Card for Max Cashback</button>
+          <br/>
+          <RaisedButton label="Back" onClick={this.props.toggleCashbackSetup} />
           <ul>
             { creditcards }
           </ul>
+          <br/>
           
         </div> );
     } else {
         return (
         <div>
           <h1>Credit Card Selector</h1>
-          <h3>Are you at this location? --insert business name-- </h3>
-          <h4>If so, please use your --insert credit card-- to get the most cash back!</h4>
-          <h4>If not, please indicate where you are on the map below:</h4>
+          <br/>
+          <h3>Are you at this location? //business name// </h3>
+          <p>If so, please use your //credit card// to get the most cash back!</p>
+          <br/>
+          <RaisedButton label="Setup" onClick={this.props.toggleCashbackSetup} />
           
-          <button onClick={this.props.toggleCashbackSetup}>Credit Card Cashback % Setup</button>
         </div> );
     }
   }

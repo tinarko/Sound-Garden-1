@@ -28,7 +28,6 @@ import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
 const styles = {
   container: {
@@ -60,9 +59,8 @@ class App extends React.Component {
         <div>
           <Router>
             <div>
-              <Link to="/"><h1>FinancialAdvisorly</h1></Link>
               <Navbar />
-              
+
               <hr/>
 
               <Route exact path="/" component={Login}/>

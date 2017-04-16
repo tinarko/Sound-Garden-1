@@ -7,6 +7,8 @@ import CashbackCategory from './CashbackCategory';
 import { createCashbackCategoryKickoff } from '../actions/createcashbackcategory';
 // import { handleCategoryChange } from '../actions/createcashbackcategory';
 
+import RaisedButton from 'material-ui/RaisedButton';
+
 class CreditCard extends React.Component {
   constructor (props) {
     super(props);
@@ -30,40 +32,41 @@ class CreditCard extends React.Component {
     var ccid = creditcard.ccid;
     
     return (
-      <li>
       <div>
-        <h3>{ creditcard.ccname }</h3>
-        <ul>
-          { creditcard.categories.map( (category, index) => { 
-            return (
-              <CashbackCategory 
-                ccindex={this.props.key} 
-                key={index} 
-                ccindex={this.props.ccindex} 
-                catindex={index} 
-                category={category}
-                catid={category.catid}
-              />
-            )
-          }) }
-          <li>
-            Category: 
-            <input type="text" 
-                   value={this.props.catname} 
-                   onChange={ (e) => { this.handleCategoryChange(e.target.value) } }/> 
-            Cashback %: 
-            <input type="number"
-                   value={this.props.number}
-                   onChange={ (e) => { this.handlePercentChange(e.target.value) } }/> 
-            <button 
-              onClick={ (e) => 
-              { this.props.createCashbackCategoryKickoff(this.props.ccindex, ccid, this.state.catname, this.state.number) } }>
-              Add
-            </button>
-          </li>
-        </ul>
+        <br/>
+        <li>
+          <h3>{ creditcard.ccname }</h3>
+          <ul>
+            { creditcard.categories.map( (category, index) => { 
+              return (
+                <CashbackCategory 
+                  ccindex={this.props.key} 
+                  key={index} 
+                  ccindex={this.props.ccindex} 
+                  catindex={index} 
+                  category={category}
+                  catid={category.catid}
+                />
+              )
+            }) }
+            <li>
+              <p>• Category: 
+                <input type="text" 
+                       value={this.props.catname} 
+                       onChange={ (e) => { this.handleCategoryChange(e.target.value) } }/> 
+                Cashback %: 
+                <input type="number"
+                       value={this.props.number}
+                       onChange={ (e) => { this.handlePercentChange(e.target.value) } }/> 
+
+                <RaisedButton label="Add" onClick={ (e) => 
+                  { this.props.createCashbackCategoryKickoff(
+                    this.props.ccindex, ccid, this.state.catname, this.state.number) } } />
+              </p>
+            </li>
+          </ul>
+        </li>
       </div>
-      </li>
     )
   }
 }

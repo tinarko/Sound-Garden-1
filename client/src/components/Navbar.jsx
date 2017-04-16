@@ -5,18 +5,21 @@ import {
   Link
 } from 'react-router-dom';
 
+// import budget from './NavIcons/budget.jpeg';
+// import cashback from './NavIcons/cashback.png';
+
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import FlatButton from 'material-ui/FlatButton';
 
 const Navbar = () => {
   return (
     <Toolbar>
+      <FlatButton label="FinancialAdvisorly"  containerElement={<Link to="/" />} secondary={true}/>
       <FlatButton label="Balance" containerElement={<Link to="/Balance" />} />
       <FlatButton label="Budget" containerElement={<Link to="/budget" />} />
-      <FlatButton label="Credit Card Cashback" containerElement={<Link to="/ccCashback" />} />
-      <FlatButton label="Portfolio" containerElement={<Link to="/portfolio" />} />
+      <FlatButton label="Cashback" containerElement={<Link to="/ccCashback" />} />
       <FlatButton label="Transactions" containerElement={<Link to="/transactions" />} />
-      <FlatButton label="Logout" containerElement={<Link to="/" />} />
+      <FlatButton label="Logout" containerElement={<Link to="/" />}/>
     </Toolbar>
   );
 };
