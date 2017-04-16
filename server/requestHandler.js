@@ -374,12 +374,12 @@ module.exports = {
       // var userid = 2;
       var userid;
       if (req.session.passport) {
-        userid = req.session.passport.user;
+        userid = req.session.passport.user.id;
         console.log('you are logged in with userid:', userid);
         
       } else {
         userid = 2;
-        console.log('YOU ARE NOT LOGGED IN... SHOWING TEST CREDIT CARDS');
+        console.log('YOU ARE NOT LOGGED IN');
       }
       db.getUserCreditcards(userid, (err, results) => {
         if (err) {
@@ -434,11 +434,11 @@ module.exports = {
         // add data to object and send response
       var userid;
       if (req.session.passport) {
-        userid = req.session.passport.user;
+        userid = req.session.passport.user.id;
         console.log('you are logged in with userid:', userid);
       } else {
         userid = 2;
-        console.log('YOU ARE NOT LOGGED IN... SHOWING TEST CREDIT CARDS');
+        console.log('YOU ARE NOT LOGGED IN');
       }
 
       var promises = [];
@@ -511,7 +511,7 @@ module.exports = {
                 if (err) {
                   return res.status(500).send(err);
                 } else {
-                  // console.log('checkCreditcard RESULTS', results);
+                  console.log('checkCreditcard RESULTS', results);
                   // credit card does not exist
                   if (results.length === 0) {
                     db.createCreditcard(userid, creditcard, (err, results) => {
