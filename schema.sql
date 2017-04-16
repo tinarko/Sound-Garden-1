@@ -94,8 +94,8 @@ CREATE TABLE cccategories (
 -- below is dummy data Tina was using. Feel free to remove
 
 -- INSERT INTO users (userid, name) VALUES (2, 'Tina'); 
--- INSERT INTO creditcards (userid, ccname) VALUES (2, 'Plaid Diamond 12.5% APR Interest Credit Card');
--- INSERT INTO creditcards (userid, ccname) VALUES (2, 'Test');
+-- INSERT INTO creditcards (userid, ccname) VALUES ('blah', 'Plaid Diamond 12.5% APR Interest Credit Card');
+-- INSERT INTO creditcards (userid, ccname) VALUES ('blah, 'Test');
 -- INSERT INTO cccategories (categoryname, value, ccid) VALUES ('groceries', 5, 1);
 -- INSERT INTO cccategories (categoryname, value, ccid) VALUES ('gas', 5, 1);
 -- INSERT INTO cccategories (categoryname, value, ccid) VALUES ('shoes', 5, 1);
