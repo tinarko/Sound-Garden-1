@@ -10,21 +10,23 @@ export const getLocation = () => {
     },
   })
     .then((response) => {
-      console.log(response);
-      response.json();
-      // .then((data) => {
-      //   console.log('data here from geolocate');
-      //   fetch('/google/places', {
-      //     method: 'POST',
-      //     credentials: 'same-origin',
-      //     headers: {
-      //       'Content-Type': 'application/json'
-      //     },
-      //     body: {
-      //       location: response,
-      //     }
-      //   });
-      // })
+      response.json()
+      .then((data) => {
+        console.log('data here from geolocate', data);
+        // fetch('/google/places', {
+        //   method: 'POST',
+        //   credentials: 'same-origin',
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   },
+        //   body: {
+        //     location: response,
+        //   }
+        // });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     })
     .catch((error) => {
       // TODO: error handle

@@ -2,6 +2,7 @@ var envvar = require('envvar');
 var moment = require('moment');
 var plaid = require('plaid');
 var Promise = require('bluebird');
+var request = require('request');
 
 var db = require('./../database/index');
 
@@ -545,21 +546,17 @@ module.exports = {
   
   'google': {
     geolocate: (req, res) => {
-      console.log('google geolocate', process.env.GOOGLE_geolocate_apiKey);
-      fetch(`https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.GOOGLE_geolocate_apiKey}`, {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-        .then((response) => {
-          console.log('response from google', response);
-          res.send(response);
-        })
-        .catch((error) => {
+      var url = `https://www.googleapis.com/geolocation/v1/geolocate?key=${process.env.GOOGLE_geolocate_apiKey}`;
+      request({
+        uri: url,
+        method: 'POST'
+      }, function(error, response, body) {
+        if (error) {
           res.send(error);
-        });
+        } else {
+          res.send(body);
+        }
+      });
     },
 
     places: (req, res) => {
