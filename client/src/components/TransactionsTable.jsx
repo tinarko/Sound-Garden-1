@@ -27,7 +27,7 @@ class TransactionsTable extends Component {
     this.props.data.forEach((value) => {
       tableData.push({
         name: value.name,
-        amount: value.amount,
+        amount: `$${value.amount}`,
         institution_name: value.institution_name,
         date: value.date.toString().slice(0,10),
       });

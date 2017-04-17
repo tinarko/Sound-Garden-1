@@ -80,29 +80,22 @@ class TransactionsGraph extends React.Component {
       })])
       .range([h, 0]);
 
-    const line = d3.line()
-      .x(function(d) {
-        return x(d.date);
-      })
-      .y(function(d) {
-        return y(d.amount);
-      })
-      .curve(d3.curveCardinal);
     const yAxis = d3.axisLeft()
       .scale(y)
       .ticks(10)
       .tickSize(-w);
     const xAxis = d3.axisBottom()
       .scale(x)
-      .tickValues(this.props.data.map(function(d, i) {
-        return d.date;
-      }));
-
+      .ticks(10);
+      // .tickValues(this.props.data.map(function(d, i) {
+      //   return d.date;
+      // }))
+    const cValue = function(d) {return d.insitution_name;};
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
     return (
       <div>
         <svg width={styles.width} height={styles.height}>
           <g transform={transform}>
-            <path className="line" d={line(this.props.data)} strokeLinecap="round" />
             <Markers 
               data={this.props.data} 
               x={x} 
@@ -110,7 +103,7 @@ class TransactionsGraph extends React.Component {
               showToolTip={this.showToolTip}
               hideToolTip={this.hideToolTip}
             />
-            <ToolTip tooltip={this.state.tooltip} />
+            <ToolTip tooltip={this.state.tooltip} />*/}
             <Axis h={h} axis={yAxis} axisType="y" />
             <Axis h={h} axis={xAxis} axisType="x" />
           </g>

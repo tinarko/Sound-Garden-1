@@ -20,9 +20,8 @@ class Calendar extends React.Component {
         calendarEndDate: endDate,
         calendarStartDate: startDate
       }));
-    } else {
-      this.props.dispatch(transactions.setSelectedDate({startDate, endDate}));
-    }
+    } 
+    this.props.dispatch(transactions.setSelectedDate({startDate, endDate}));
   }
 
   onFocusChange(focusedInput) {
