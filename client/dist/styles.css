@@ -117,3 +117,11 @@ li {
   height: 28px;
   pointer-events: none;
 }
+
+.balance-list-credit {
+  color: red;
+}
+
+.balance-list-cash {
+  color: green;
+}
