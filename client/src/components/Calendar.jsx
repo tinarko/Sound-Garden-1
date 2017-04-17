@@ -20,7 +20,7 @@ class Calendar extends React.Component {
         calendarEndDate: endDate,
         calendarStartDate: startDate
       }));
-    } else 
+    } else {
       this.props.dispatch(transactions.setSelectedDate({startDate, endDate}));
     }
   }

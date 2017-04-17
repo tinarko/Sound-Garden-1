@@ -1,5 +1,4 @@
 export const getTransactions = (dates) => {
-  console.log('we are trying to gettransactions')
   return (dispatch) => {
     dispatch({type: 'GET_TRANSACTIONS_START'});
     fetch('/plaid/allTransactions', {
