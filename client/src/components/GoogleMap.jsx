@@ -10,60 +10,24 @@ class GoogleMap extends React.Component {
   }
 
   componentDidMount() {
-    // call to geolocate
     this.props.dispatch(googlemap.getLocation());
-    const directionsDisplay = new google.maps.DirectionsRenderer();
-    const directionsService = new google.maps.DirectionsService;
-    this.map = this.createMap();
-    directionsDisplay.setMap(this.map);
+    if (this.props.geolocation) {
+      const directionsDisplay = new google.maps.DirectionsRenderer();
+      const directionsService = new google.maps.DirectionsService;
+      this.map = this.createMap();
+      directionsDisplay.setMap(this.map);
+    }
 
     // this.createMarkers(this.map);
-    // this.calcRoute(directionsService, directionsDisplay);
   }
 
   createMap() {
-    const geoLocation = new google.maps.LatLng(this.props.geoLocation.lat, this.props.geoLocation.lng);
+    const geolocation = new google.maps.LatLng(this.props.geolocation.lat, this.props.geolocation.lng);
     const mapOptions = {
       zoom: 14,
-      center: geoLocation,
-    }
+      center: geolocation,
+    };
     return new google.maps.Map(this.refs.map, mapOptions);
-  }
-
-  calcRoute(directionsService, directionsDisplay) {
-    if (this.props.mapDestinations && this.props.mapDestinations.length > 1) {
-      const destinations = [];
-      this.props.mapDestinations.forEach((value) => {
-        destinations.push({
-          location: value.location.display_address[0] + value.location.display_address[1],
-          stopover: true,
-        });
-      });
-
-      const directionsRequest = {
-        origin: destinations[0].location,
-        destination: destinations[destinations.length - 1].location,
-        waypoints: destinations.slice(1, destinations.length - 1),
-
-        optimizeWaypoints: true,
-        provideRouteAlternatives: false,
-        travelMode: this.state.travelMode,
-        drivingOptions: {
-          departureTime: new Date, 
-          trafficModel: 'pessimistic',
-        },
-        unitSystem: google.maps.UnitSystem.IMPERIAL,
-      };
-
-      directionsService.route(directionsRequest, (result, status) => {
-        if (status == 'OK') {
-          directionsDisplay.setDirections(result);
-        } else {
-          console.log(status);
-          console.log('there was an error regarding the directions service');
-        }
-      });
-    }
   }
 
   createMarkers(map) {
