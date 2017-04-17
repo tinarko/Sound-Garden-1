@@ -22,9 +22,9 @@ class Transactions extends React.Component {
 
   render() {
     let information = null;
-    if (this.props.startDate && this.props.endDate && this.props.transactions.showGraph) {
+    if (this.props.startDate && this.props.endDate && this.props.showGraph) {
       information = <TransactionsGraph data={this.props.transactions} />;
-    } else if (this.props.startDate && this.props.endDate && this.props.transactions.showTable) {
+    } else if (this.props.startDate && this.props.endDate && this.props.showTable) {
       information = <TransactionsTable data={this.props.transactions} />;
     }
     return (

@@ -22,8 +22,6 @@ class TransactionsGraph extends React.Component {
 
   showToolTip (e) {
     // TODO: refactor to action
-    console.log('hi')
-    console.log(e);
     this.setState({
       tooltip: {
         display: true,
@@ -54,7 +52,6 @@ class TransactionsGraph extends React.Component {
   }
 
   render() {
-    // console.log('inside of graphing-----------------', this.props.data)
     // styles generally from props
     const styles = {
       width: 800,
@@ -85,7 +82,6 @@ class TransactionsGraph extends React.Component {
 
     const line = d3.line()
       .x(function(d) {
-        console.log('invoked by line:::::::::|||||||', d)
         return x(d.date);
       })
       .y(function(d) {
