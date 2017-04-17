@@ -19,7 +19,11 @@ export const getTransactions = (dates) => {
         response.json()
           .then((json) => {
             console.log(json);
-            dispatch({type: 'GET_TRANSACTIONS_FULFILLED', payload: json});
+            dispatch({type: 'GET_TRANSACTIONS_FULFILLED', payload: {
+              transactions: json,
+              endDate: dates.calendarEndDate,
+              startDate: dates.calendarStartDate
+            }});
           });
       })
       .catch((err) => {

@@ -1,6 +1,6 @@
 export default (state = {
   // types of payloads and default state must match
-  transactions: [],
+  transactions: null,
   focusedInput: null,
   startDate: null,
   endDate: null,
@@ -27,12 +27,14 @@ export default (state = {
       break;
     }
     case 'GET_TRANSACTIONS_FULFILLED': {
-      console.log('in reducer', action.payload)
+      const transactions = action.payload.transactions.slice();
       return {
         ...state,
         fetching: false,
         fetched: true,
-        transactions: action.payload, 
+        transactions: transactions, 
+        endDate: action.payload.endDate,
+        startDate: action.payload.startDate
       };
       break;
     }
