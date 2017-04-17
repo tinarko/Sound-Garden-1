@@ -1,35 +1,49 @@
 export const getLocation = () => {
-  // post request to google geolocate api
-  //  AIzaSyDmTpCBlT0ib4dNTKVRpww0xE2fvL5zHuw (geolocate/maps --> visualization)
-  //  AIzaSyCNxqMIVkgQDmSiOKHNq_OhdX84T-9qRS0 (places) api key
-  fetch('/google/geolocate', {
-    method: 'GET',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-  })
-    .then((response) => {
-      response.json()
-      .then((data) => {
-        console.log('data here from geolocate', data);
-        // fetch('/google/places', {
-        //   method: 'POST',
-        //   credentials: 'same-origin',
-        //   headers: {
-        //     'Content-Type': 'application/json'
-        //   },
-        //   body: {
-        //     location: response,
-        //   }
-        // });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  return (dispatch) => {
+    // obtain geolocation
+    fetch('/google/geolocate', {
+      method: 'GET',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
     })
-    .catch((error) => {
-      // TODO: error handle
-      console.log(error);
-    });
-}
+      .then((response) => {
+        response.json()
+        .then((geolocation) => {
+          console.log('geolocation here from geolocate', geolocation);
+          // obtain nearby stores
+          fetch('/google/places', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              location: geolocation,
+            })
+          })
+            .then((response) => {
+              response.json()
+              .then((placesData) => {
+                console.log(geolocation, placesData);
+                dispatch({type: 'FETCHED_GOOGLE_DATA', payload: {
+                  geolocation: geolocation.location,
+                  places: placesData.results
+                }});
+              });
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      })
+      .catch((error) => {
+        // TODO: error handle
+        console.log(error);
+      });
+  };
+};
