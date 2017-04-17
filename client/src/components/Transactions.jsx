@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Calendar from './Calendar.jsx';
+import RaisedButton from 'material-ui/RaisedButton';
 import TransactionsGraph from './TransactionsGraph.jsx';
 import TransactionsTable from './TransactionsTable.jsx';
 import * as transactions from './../actions/transactions.js';
@@ -31,8 +32,8 @@ class Transactions extends React.Component {
       <div>
         <h1>Transactions</h1>
         <br/>
-        <button onClick={this.onTableClick}>Show Table</button>
-        <button onClick={this.onGraphClick}>Show Graph</button>
+        <RaisedButton onClick={this.onTableClick}>Show Table</RaisedButton>
+        <RaisedButton onClick={this.onGraphClick}>Show Graph</RaisedButton>
         <Calendar />
         {information}
       </div>

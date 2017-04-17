@@ -29,10 +29,9 @@ class GoogleMap extends React.Component {
   createMap() {
     const geolocation = new google.maps.LatLng(this.props.geolocation.lat, this.props.geolocation.lng);
     const mapOptions = {
-      zoom: 14,
+      zoom: 15,
       center: geolocation,
     };
-    console.log('CREATING A NEW MAP HERE======');
     return new google.maps.Map(this.refs.map, mapOptions);
   }
 
