@@ -6,7 +6,8 @@ export default (state = {
   error: null,
   fetching: false,
   fetched: false,
-
+  showGraph: true,
+  showTable: false,
 }, action) => {
   switch (action.type) {
     case 'GET_TRANSACTIONS_START': {
@@ -45,6 +46,22 @@ export default (state = {
         ...state,
         startDate: action.payload.startDate,
         endDate: action.payload.endDate,
+      }
+    }
+    case 'SHOW_GRAPH': {
+      console.log('trying to show the graph');
+      return {
+        ...state,
+        showGraph: true,
+        showTable: false
+      }
+    }
+    case 'SHOW_TABLE': {
+      console.log('trying to show the table');
+      return {
+        ...state,
+        showGraph: false,
+        showTable: true,
       }
     }
     default: 

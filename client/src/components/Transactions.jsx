@@ -2,22 +2,39 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Calendar from './Calendar.jsx';
 import TransactionsGraph from './TransactionsGraph.jsx';
+import TransactionsTable from './TransactionsTable.jsx';
 import * as transactions from './../actions/transactions.js';
 
 class Transactions extends React.Component {
   constructor(props) {
     super(props);
+    this.onGraphClick = this.onGraphClick.bind(this);
+    this.onTableClick = this.onTableClick.bind(this);
   }
   
+  onGraphClick() {
+    this.props.dispatch({type: 'SHOW_GRAPH'});
+  }
+
+  onTableClick() {
+    this.props.dispatch({type: 'SHOW_TABLE'});
+  }
+
   render() {
+    let information = null;
+    if (this.props.startDate && this.props.endDate && this.props.transactions.showGraph) {
+      information = <TransactionsGraph data={this.props.transactions} />;
+    } else if (this.props.startDate && this.props.endDate && this.props.transactions.showTable) {
+      information = <TransactionsTable data={this.props.transactions} />;
+    }
     return (
       <div>
         <h1>Transactions</h1>
         <br/>
+        <button onClick={this.onTableClick}>Show Table</button>
+        <button onClick={this.onGraphClick}>Show Graph</button>
         <Calendar />
-        {this.props.startDate && this.props.endDate && this.props.transactions.length &&
-          <TransactionsGraph data={this.props.transactions}/>
-        }
+        {information}
       </div>
     );
   }
@@ -26,6 +43,8 @@ class Transactions extends React.Component {
 export default connect((state) => {
   return {
     transactions: state.transactions.transactions,
+    showGraph: state.transactions.showGraph,
+    showTable: state.transactions.showTable,
     startDate: state.transactions.startDate,
     endDate: state.transactions.endDate,
     fetching: state.transactions.fetching,
