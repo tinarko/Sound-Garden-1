@@ -15,11 +15,12 @@ const Navbar = () => {
   return (
     <Toolbar>
       <FlatButton label="FinancialAdvisorly"  containerElement={<Link to="/" />} secondary={true}/>
+      <a href="/auth/auth0"><FlatButton label="Login" /></a>
       <FlatButton label="Balance" containerElement={<Link to="/Balance" />} />
       <FlatButton label="Budget" containerElement={<Link to="/budget" />} />
       <FlatButton label="Cashback" containerElement={<Link to="/ccCashback" />} />
       <FlatButton label="Transactions" containerElement={<Link to="/transactions" />} />
-      <FlatButton label="Logout" containerElement={<Link to="/" />}/>
+      <a href="/auth/logout"><FlatButton label="Logout" /></a>
     </Toolbar>
   );
 };

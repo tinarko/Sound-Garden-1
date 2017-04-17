@@ -32,8 +32,8 @@ class Transactions extends React.Component {
       <div>
         <h1>Transactions</h1>
         <br/>
-        <RaisedButton onClick={this.onTableClick}>Show Table</RaisedButton>
-        <RaisedButton onClick={this.onGraphClick}>Show Graph</RaisedButton>
+        <RaisedButton label="Show Table" onClick={this.onTableClick}/>
+        <RaisedButton label="Show Graph" onClick={this.onGraphClick}/>
         <Calendar />
         {information}
       </div>
