@@ -13,13 +13,15 @@ class Calendar extends React.Component {
 
   onDatesChange({ startDate, endDate }) {
     // populate transactions
+    console.log(startDate, endDate)
     if (startDate && endDate) {
       this.props.dispatch(transactions.getTransactions({
         startDate: startDate.toISOString().substring(0, 10),
         endDate: endDate.toISOString().substring(0, 10),
       }));
+    } else {
+      this.props.dispatch(transactions.setSelectedDate({startDate, endDate}));
     }
-    this.props.dispatch(transactions.setSelectedDate({startDate, endDate}));
   }
 
   onFocusChange(focusedInput) {
