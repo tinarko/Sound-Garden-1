@@ -58,10 +58,10 @@ class CreditCard extends React.Component {
                 <input type="number"
                        value={this.props.number}
                        onChange={ (e) => { this.handlePercentChange(e.target.value) } }/> 
-
-                <RaisedButton label="Add" onClick={ (e) => 
+                <button onClick={ (e) => 
                   { this.props.createCashbackCategoryKickoff(
-                    this.props.ccindex, ccid, this.state.catname, this.state.number) } } />
+                    this.props.ccindex, ccid, this.state.catname, this.state.number) } }>Add
+                </button>
               </p>
             </li>
           </ul>
@@ -87,3 +87,6 @@ export default connect (null, mapDispatchToProps) (CreditCard);
 
 
 
+                // <RaisedButton label="Add" onClick={ (e) => 
+                //   { this.props.createCashbackCategoryKickoff(
+                //     this.props.ccindex, ccid, this.state.catname, this.state.number) } } />
