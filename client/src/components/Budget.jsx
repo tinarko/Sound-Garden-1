@@ -2,10 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import MonthPicker from 'react-month-picker/lib/month-picker.js';
-// import MonthPicker from 'month-picker';
 import BudgetCategoryList from './BudgetCategoryList.jsx';
 import { getUserBudgets, getTransactionData, incrementBudget, decrementBudget, postUpdatedBudget, yearMonthChange, toggleYearMonthSelection } from '../actions/budget.js';
 // import { getTransactionData } from '../actions/transactions.js';
+
+import RaisedButton from 'material-ui/RaisedButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import IconButton from 'material-ui/IconButton';
+import ActionDateRange from 'material-ui/svg-icons/action/date-range';
+
 
 class Budget extends React.Component {
   constructor (props) {
@@ -63,14 +68,17 @@ class Budget extends React.Component {
     let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     // let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let currentMonth = months[(this.props.budget.mvalue.month - 1)];
+    let currentTime = currentMonth + ' ' + this.props.budget.mvalue.year; 
 
     return (
       <div>
        <h1>Budget</h1>
        <br/>
         <div className="box">
-          <label>{currentMonth} {this.props.budget.mvalue.year} </label>
-          <button onClick={this.handleClickCurrent.bind(this)}> Select Time Period </button>
+          <label> {currentTime} </label>
+          <IconButton mini= {true} onClick={this.handleClickCurrent.bind(this)}>
+            <ActionDateRange/>
+          </IconButton>
         </div>
         <MonthPicker 
           ref="pickAMonth" 
@@ -79,9 +87,7 @@ class Budget extends React.Component {
           lang ={months}
           onDismiss={this.handleAMonthDismiss.bind(this)}>
           </MonthPicker>
-        <div>
-          
-        </div>
+        <br />
         <BudgetCategoryList budget= {this.props.budget} handleBudgetChange={this.props.handleBudgetChange} toggleAddBudgetCategoryInput={this.props.toggleAddBudgetCategoryInput}/>
         
       </div>

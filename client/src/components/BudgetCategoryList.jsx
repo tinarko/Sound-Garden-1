@@ -4,6 +4,9 @@ import BudgetCategory from './BudgetCategory.jsx';
 import { connect } from 'react-redux';
 import { toggleAddBudgetCategoryInput, categoryNameInputChange, categoryGoalInputChange } from '../actions/budget.js';
 
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
+
 class BudgetCategoryList extends React.Component {
   constructor (props) {
     super(props);
@@ -34,23 +37,24 @@ class BudgetCategoryList extends React.Component {
     let toggleButtonForm = null;
     if (this.props.budget.showaddbudgetcategoryform) {
       toggleButtonForm = <form 
-        onSubmit= {(event) => {
+        onSubmit= {(e) => {
           this.props.toggleAddBudgetCategoryInput();
-          this.handleSubmit(event);
+          this.handleSubmit(e);
         }
       }>
           <label> 
           Category Name:
-            <input type="text" name= "addcategoryname" value={this.props.budget.addcategoryname} onChange={this.handleInputChange.bind(this)}/>
+            <TextField type="text" name= "addcategoryname" hintText="Ex: Housing" value={this.props.budget.addcategoryname} onChange={this.handleInputChange.bind(this)}/>
           </label>
+          <br/>
           <label> 
           Budget Amount: 
-            <input type="text" name ="addcategorybudget" value={this.props.budget.addcategorybudget} onChange={this.handleInputChange.bind(this)}/>
+            <TextField type="text" name ="addcategorybudget" hintText="$" value={this.props.budget.addcategorybudget} onChange={this.handleInputChange.bind(this)}/>
           </label>
-          <input type="submit" value="Submit"/>
+          <RaisedButton label ='Submit' type ="submit"/>
         </form>;
     } else {
-      toggleButtonForm = <button onClick = {(e) => { this.props.toggleAddBudgetCategoryInput(); } }> Add Category </button>;
+      toggleButtonForm = <RaisedButton label= 'Add Category' onClick={(e) => { this.props.toggleAddBudgetCategoryInput(); } } />;
     }
 
     return (

@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { incrementBudget, decrementBudget } from '../actions/budget.js';
 
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import IconButton from 'material-ui/IconButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentAddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
+import ContentRemoveCircleOutline from 'material-ui/svg-icons/content/remove-circle-outline';
+
 class BudgetCategory extends React.Component {
   constructor(props) {
     super(props);
@@ -12,26 +18,30 @@ class BudgetCategory extends React.Component {
     let actualValue = this.props.budgetcategory.actualvalue || 0;
     return (
       <div className="budgetCategory">
-        {this.props.budgetcategory.name}
+        <h3>{this.props.budgetcategory.name} </h3>
         <div>
         Budget Goal: 
-        <button onClick={(e) => { this.props.handleBudgetChange(
+        <IconButton onClick={(e) => { this.props.handleBudgetChange(
           this.props.budgetcategory.goalvalue, 
           this.props.budgetcategory.name, 
           this.props.index, 
           'decrement',
           this.props.year,
           this.props.month); 
-        } }> - </button>
+        } }> 
+          <ContentRemoveCircleOutline/>
+        </IconButton>
         ${this.props.budgetcategory.goalvalue}
-        <button onClick={(e) => { this.props.handleBudgetChange(
+        <IconButton onClick={(e) => { this.props.handleBudgetChange(
           this.props.budgetcategory.goalvalue, 
           this.props.budgetcategory.name, 
           this.props.index, 
           'increment',
           this.props.year,
           this.props.month); 
-        } }> + </button> 
+        } }> 
+          <ContentAddCircleOutline/>
+        </IconButton> 
 
         </div>
         <div>
