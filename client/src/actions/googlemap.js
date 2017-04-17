@@ -11,7 +11,6 @@ export const getLocation = () => {
       .then((response) => {
         response.json()
         .then((geolocation) => {
-          console.log('geolocation here from geolocate', geolocation);
           // obtain nearby stores
           fetch('/google/places', {
             method: 'POST',
@@ -26,7 +25,6 @@ export const getLocation = () => {
             .then((response) => {
               response.json()
               .then((placesData) => {
-                console.log(geolocation, placesData);
                 dispatch({type: 'FETCHED_GOOGLE_DATA', payload: {
                   geolocation: geolocation.location,
                   places: placesData.results

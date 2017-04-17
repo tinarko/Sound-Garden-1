@@ -7,18 +7,23 @@ import * as googlemap from './../actions/googlemap.js';
 class GoogleMap extends React.Component {
   constructor(props) {
     super(props);
+    this.createMap = this.createMap.bind(this);
+    this.createMarkers = this.createMarkers.bind(this);
   }
 
   componentDidMount() {
     this.props.dispatch(googlemap.getLocation());
+  }
+
+  componentDidUpdate() {
+    // originally in componentDidMount
     if (this.props.geolocation) {
       const directionsDisplay = new google.maps.DirectionsRenderer();
       const directionsService = new google.maps.DirectionsService;
       this.map = this.createMap();
       directionsDisplay.setMap(this.map);
+      this.createMarkers(this.map);
     }
-
-    // this.createMarkers(this.map);
   }
 
   createMap() {
@@ -27,38 +32,51 @@ class GoogleMap extends React.Component {
       zoom: 14,
       center: geolocation,
     };
+    console.log('CREATING A NEW MAP HERE======');
     return new google.maps.Map(this.refs.map, mapOptions);
   }
 
   createMarkers(map) {
-    // const pinIcon = new google.maps.MarkerImage(
-    //     crimeImg,
-    //     null, /* size is determined at runtime */
-    //     null, /* origin is 0,0 */
-    //     null, /* anchor is bottom center of the scaled image */
-    //     new google.maps.Size(40, 40),
-    // );
-    if (this.props.crimeData.length) {
-      this.props.crimeData.forEach((value) => {
+    if (this.props.places.length) {
+      this.props.places.forEach((value) => {
+        console.log(value)
         const infowindow = new google.maps.InfoWindow({
-          content: `<div>${value.type}</div>`,
+          content: 
+          `<div>
+            <p>${value.name}</p>
+            <p>${value.types[0]}</p>
+          </div>`,
         });
         const marker = new google.maps.Marker({
           animation: google.maps.Animation.DROP,
-          position: new google.maps.LatLng(value.lat, value.lon),
-          map,
-          icon: pinIcon,
+          position: new google.maps.LatLng(value.geometry.location.lat, value.geometry.location.lng),
+          map: this.map,
+          icon: new google.maps.MarkerImage(
+            value.icon,
+            null,
+            null,
+            null,
+            new google.maps.Size(40, 40)
+          )
         });
         google.maps.event.addListener(marker, 'mouseover', () => {
           infowindow.open(map, marker);
-          setTimeout(() => { infowindow.close(); }, '1500');
+          setTimeout(() => { infowindow.close(); }, '1000');
         });
+      });
+    }
+    if (this.props.geolocation) {
+      const marker = new google.maps.Marker({
+        animation: google.maps.Animation.DROP,
+        position: new google.maps.LatLng(this.props.geolocation.lat, this.props.geolocation.lng),
+        map: this.map,
+        draggable: true,
+        tile: 'You!',
       });
     }
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className="google-map">
         <div ref="map" className="map" />
