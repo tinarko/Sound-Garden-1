@@ -37,11 +37,13 @@ class TransactionsTable extends Component {
       <div className="transactions-table">
         <DataTables
           height={'auto'}
-          selectable={false}
           showRowHover={false}
           columns={tableColumns}
           data={tableData}
           showCheckboxes={false}
+          selectable={true}
+          page={1}
+          count={100}
         />
       </div>
     );

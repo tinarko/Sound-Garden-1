@@ -9,6 +9,13 @@ export default (state = {
   fetched: false,
   showGraph: true,
   showTable: false,
+  tooltip: {
+    display: false,
+    data: {
+      key: '',
+      value: '',
+    }
+  }
 }, action) => {
   switch (action.type) {
     case 'GET_TRANSACTIONS_START': {
@@ -66,6 +73,18 @@ export default (state = {
         ...state,
         showGraph: false,
         showTable: true,
+      }
+    }
+    case 'SHOW_TOOLTIP': {
+      return {
+        ...state,
+        tooltip: action.payload
+      };
+    }
+    case 'HIDE_TOOLTIP': {
+      return {
+        ...state,
+        tooltip: action.payload
       }
     }
     default: 

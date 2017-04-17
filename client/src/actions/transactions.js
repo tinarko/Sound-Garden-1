@@ -45,3 +45,37 @@ export const setSelectedDate = (dates) => {
     payload: dates
   };
 };
+
+export const showToolTip = (e) => {
+  return {
+    type: 'SHOW_TOOLTIP',
+    payload: 
+    {
+      display: true,
+      data: {
+        key: e.target.getAttribute('data-key'),
+        value: e.target.getAttribute('data-value')
+      },
+      pos: {
+        x: e.target.getAttribute('cx'),
+        y: e.target.getAttribute('cy'),
+      }
+    }
+  };
+};
+
+export const hideToolTip = (e) => {
+  return {
+    type: 'HIDE_TOOLTIP',
+    payload:
+    {
+      display: {
+        display: false,
+        data: {
+          key: '',
+          value: ''
+        }
+      }
+    }
+  };
+};

@@ -1,54 +1,25 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import * as d3 from 'd3';
 import Markers from './Markers.jsx';
 import Axis from './Axis.jsx';
 import ToolTip from './ToolTip.jsx';
+import * as transactions from './../actions/transactions.js';
 
 class TransactionsGraph extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      tooltip: {
-        display: false,
-        data: {
-          key: '',
-          value: '',
-        }
-      }
-    };
     this.showToolTip = this.showToolTip.bind(this);
     this.hideToolTip = this.hideToolTip.bind(this);
   }
 
   showToolTip (e) {
     // TODO: refactor to action
-    this.setState({
-      tooltip: {
-        display: true,
-        data: {
-          key: e.target.getAttribute('data-key'),
-          value: e.target.getAttribute('data-value')
-        },
-        pos: {
-          x: e.target.getAttribute('cx'),
-          y: e.target.getAttribute('cy'),
-        }
-      }
-    });
+    this.props.dispatch(transactions.showToolTip(e));
   }
 
   hideToolTip (e) {
-    this.setState({
-      tooltip: {
-        display: {
-          display: false,
-          data: {
-            key: '',
-            value: ''
-          }
-        }
-      }
-    });
+    this.props.dispatch(transactions.hideToolTip(e));
   }
 
   render() {
@@ -103,7 +74,7 @@ class TransactionsGraph extends React.Component {
               showToolTip={this.showToolTip}
               hideToolTip={this.hideToolTip}
             />
-            <ToolTip tooltip={this.state.tooltip} />*/}
+            <ToolTip tooltip={this.props.tooltip} />*/}
             <Axis h={h} axis={yAxis} axisType="y" />
             <Axis h={h} axis={xAxis} axisType="x" />
           </g>
@@ -113,4 +84,8 @@ class TransactionsGraph extends React.Component {
   }
 }
 
-export default TransactionsGraph;
+export default connect((state) => {
+  return {
+    tooltip: state.transactions.tooltip
+  };
+})(TransactionsGraph);
