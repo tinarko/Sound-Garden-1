@@ -76,7 +76,7 @@ class Budget extends React.Component {
        <br/>
         <div className="box">
           <label> {currentTime} </label>
-          <IconButton mini= {true} onClick={this.handleClickCurrent.bind(this)}>
+          <IconButton onClick={this.handleClickCurrent.bind(this)}>
             <ActionDateRange/>
           </IconButton>
         </div>
