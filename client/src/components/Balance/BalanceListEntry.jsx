@@ -8,7 +8,7 @@ const BalanceListEntry = (props) => {
           <div>
             <h5>{account.account.name}</h5>
             <h5 className={(props.name==='credit' || props.name==='mortgage' || account.account.balances.available < 0) ? "balance-list-credit" : ""}>
-              {account.account.balances.available || account.account.balances.current}
+              Available: {account.account.balances.available || account.account.balances.current}
             </h5>
           </div>
         );
