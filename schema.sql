@@ -58,6 +58,13 @@ CREATE TABLE cccategories (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE friends (
+  id int NOT NULL AUTO_INCREMENT,
+  user_id varchar(255) NOT NULL,
+  friend_id varchar(255) NOT NULL,
+  PRIMARY KEY (id)
+)
+
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < schema.sql

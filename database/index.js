@@ -36,6 +36,52 @@ module.exports = {
     });
   },
 
+  // findFriends: function (userid, cb) {
+  //   var queryString = 'SELECT * FROM FRIENDS where user_id = ?';
+
+  //   connection.query(queryString, userid, function(err, resultsList) {
+  //     if (err) {
+  //       cb(err, null);
+  //     } else {
+  //       cb(null, resultsList);
+  //     }
+  //   });
+  // },
+
+  removeCurrentFriendJoins(userid, cb) {
+    var queryString = 'delete from friends where user_id = ?;';
+
+    connection.query(queryString, userid, function(err, result) {
+      if (err) {
+        cb(err, null);
+      } else {
+        cb(null, result);
+      }
+    }); 
+  },
+
+  addFriendJoins (userid, friendsList, cb) {
+    var queryString = 'insert into friends (user_id, friend_id) values ';
+
+    for (var i = 0; i < friendsList.length; i++) {
+      if (i === friendsList.length - 1) {
+        var addOn = `('${userid}', 'facebook|${friendsList[i].id}')`;
+      } else {
+        var addOn = `('${userid}', 'facebook|${friendsList[i].id}'),`;
+      }
+      queryString = queryString.concat(addOn); 
+    }
+
+    console.log('queryString:', queryString);
+    connection.query(queryString, userid, function(err, results) {
+      if (err) {
+        cb(err, null);
+      } else {
+        cb(null, results);
+      }
+    });
+  },
+
   updatePlaidItem: function(params, cb) {
     // update if the institution name already exists
     // refine to update off of account data
