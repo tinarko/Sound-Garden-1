@@ -39,7 +39,6 @@ module.exports = {
         db.updatePlaidItem([ACCESS_TOKEN, institutionName, userid], function(err, response) {
           // TODO: -------------------- never adds more than one row in current state
           // TODO: refine to update based off of account id
-          console.log(response);
           if (err) {
             console.log('error updating plaid item');
             return res.json({error: 'error updating plaid item'});
@@ -89,7 +88,6 @@ module.exports = {
         var accountTypes = {};
         Promise.all(promises)
           .then(function(results) {
-            console.log(results);
             for (var j = 0; j < plaidInstitutions.length; j++) {
               accountData[plaidInstitutions[j].institution_name] = results[j];
             }
@@ -316,7 +314,6 @@ module.exports = {
         monthString = req.body.month.toString();
       }
       var yearString = req.body.year.toString();
-      console.log('req.body', req.body);
 
       var updatedvalue;
       if (req.body.change === 'increment') {
