@@ -13,6 +13,9 @@ var passport = require('passport');
 var authentication = require('./authentication');
 var requestHandler = require('./requestHandler');
 
+var creditcards = require('./requestHandlers/creditcards.js');
+var cashback = require('./requestHandlers/cashback.js');
+
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -58,11 +61,12 @@ app.get('/auth/logout', authentication.logout);
 app.get('/budget/getuserbudgets/:year/:month', requestHandler.budget.getUserBudgets);
 app.post('/budget/updatebudgetcategory', requestHandler.budget.updateBudgetAmount);
 
-app.get('/creditcards/getcreditcards', requestHandler.creditcards.getUserCreditcards);
-app.post('/creditcards/changecashbackpercent', requestHandler.creditcards.changeCashbackPercent);
-app.post('/creditcards/createcashbackcategory', requestHandler.creditcards.createCashbackCategory);
-app.delete('/creditcards/deletecashbackcategory/:catid', requestHandler.creditcards.deleteCashbackCategory);
-app.get('/creditcards/createcreditcards', requestHandler.creditcards.createCreditCards);
+app.get('/creditcards/getcreditcards', creditcards.getUserCreditcards);
+app.get('/creditcards/createcreditcards', creditcards.createCreditCards);
+
+app.post('/cashback/changecashbackpercent', cashback.changeCashbackPercent);
+app.post('/cashback/createcashbackcategory', cashback.createCashbackCategory);
+app.delete('/cashback/deletecashbackcategory/:catid', cashback.deleteCashbackCategory);
 
 app.get('/google/geolocate', requestHandler.google.geolocate);
 app.post('/google/places', requestHandler.google.places);

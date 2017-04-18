@@ -103,14 +103,14 @@ module.exports = {
   },
 
   getUserCreditcards: (userid, cb) => {
-    var query = 'SELECT ccid, cccategories.id as catid, ccname, categoryname, value FROM users \
-      JOIN creditcards ON creditcards.userid = users.userid \
-      JOIN cccategories ON creditcards.id = cccategories.ccid \
-      WHERE users.userid = ? order by ccid, categoryname;';
 
-    connection.query(query, userid, (err, results) => {
+    var query = `SELECT ccid, cccategories.id as catid, ccname, categoryname, value FROM users \
+      JOIN creditcards ON creditcards.userid = users.userid \
+      JOIN cccategories ON creditcards.id = cccategories.ccid \ 
+      WHERE users.userid = "${userid}" order by ccid, categoryname;`;
+
+    connection.query(query, (err, results) => {
       if (results.length === 0) {
-        // TO DO: create empty initiated values
         cb(err, null);
       } else {
         cb(null, results);
