@@ -13,8 +13,6 @@ module.exports.geolocate = (req, res) => {
 };
 
 module.exports.places = (req, res) => {
-  console.log(req.body);
-  console.log(process.env.GOOGLE_places_apiKey);
   var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
   var lat = req.body.location.location.lat;
   var lng = req.body.location.location.lng;
