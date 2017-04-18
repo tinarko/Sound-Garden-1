@@ -192,8 +192,5 @@ module.exports = {
         cb (null, results);
       }
     });
-      
   },
-
-
 };

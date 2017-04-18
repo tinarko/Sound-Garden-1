@@ -12,10 +12,10 @@ var passport = require('passport');
 // import passport authentication strategies
 var authentication = require('./authentication');
 var requestHandler = require('./requestHandler');
-
 var creditcards = require('./requestHandlers/creditcards.js');
 var cashback = require('./requestHandlers/cashback.js');
 var google = require('./requestHandlers/google.js');
+var plaid = require('./requestHandlers/plaid.js');
 
 var app = express();
 app.use(bodyParser.json());
@@ -59,10 +59,10 @@ app.get('/google/geolocate', google.geolocate);
 app.post('/google/places', google.places);
 
 // app.post('/budget/addbudgetcategory', requestHandler.budget.addBudgetCategory);
-app.post('/plaid/access_token', requestHandler.plaid.accessToken);
-app.get('/plaid/accounts', requestHandler.plaid.accounts);
-app.get('/plaid/transactions/:year/:month', requestHandler.plaid.transactions);
-app.post('/plaid/allTransactions/', requestHandler.plaid.allTransactions);
+app.post('/plaid/access_token', plaid.accessToken);
+app.get('/plaid/accounts', plaid.accounts);
+app.get('/plaid/transactions/:year/:month', plaid.transactions);
+app.post('/plaid/allTransactions/', plaid.allTransactions);
 
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'client/dist', 'index.html'));
@@ -72,6 +72,5 @@ let port = process.env.PORT || 1337;
 
 app.listen(port, function() {
   console.log('listening on port ' + port + '!');
-
 });
 
