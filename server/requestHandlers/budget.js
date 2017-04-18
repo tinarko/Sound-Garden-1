@@ -1,4 +1,5 @@
 var db = require('./../../database/index.js');
+
 module.exports.getUserBudgets = function (req, res) {
   var userid = req.session.passport.user.id;
   //check if (current) month budget exists for signed in user

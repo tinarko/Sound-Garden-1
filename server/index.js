@@ -2,16 +2,13 @@ var dotenv = require('dotenv');
 var path = require('path');
 dotenv.load();
 dotenv.config({path: process.env.PWD + '/config.env'});
-
 var express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var passport = require('passport');
-
-// import passport authentication strategies
 var authentication = require('./authentication');
-var requestHandler = require('./requestHandler');
+var budget = require('./requestHandlers/budget.js');
 var creditcards = require('./requestHandlers/creditcards.js');
 var cashback = require('./requestHandlers/cashback.js');
 var google = require('./requestHandlers/google.js');
@@ -20,8 +17,6 @@ var plaid = require('./requestHandlers/plaid.js');
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-// session for authentication, parse cookies
 app.use(cookieParser('advisorly'));
 app.use(session({
   secret: 'financialAdvisorly',
@@ -30,9 +25,11 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 app.use(express.static(__dirname + './../client/dist'));
 
+/**
+ * Authentication Routes
+ */
 app.get('/auth/auth0', passport.authenticate('auth0'));
 app.get('/auth/auth0/return', passport.authenticate('auth0', {
   failureRedirect: '/auth/auth0'
@@ -44,21 +41,35 @@ app.get('/auth/auth0/return', passport.authenticate('auth0', {
   });
 app.get('/auth/logout', authentication.logout);
 
+/**
+ * Budget Routes
+ */
+app.get('/budget/getuserbudgets/:year/:month', budget.getUserBudgets);
+app.post('/budget/updatebudgetcategory', budget.updateBudgetAmount);
+// app.post('/budget/addbudgetcategory', budget.addBudgetCategory);
 
-app.get('/budget/getuserbudgets/:year/:month', requestHandler.budget.getUserBudgets);
-app.post('/budget/updatebudgetcategory', requestHandler.budget.updateBudgetAmount);
-
+/**
+ * Credit Card Routes
+ */
 app.get('/creditcards/getcreditcards', creditcards.getUserCreditcards);
 app.get('/creditcards/createcreditcards', creditcards.createCreditCards);
 
+/**
+ * Cashback Routes
+ */
 app.post('/cashback/changecashbackpercent', cashback.changeCashbackPercent);
 app.post('/cashback/createcashbackcategory', cashback.createCashbackCategory);
 app.delete('/cashback/deletecashbackcategory/:catid', cashback.deleteCashbackCategory);
 
+/**
+ * Google Maps routes
+ */
 app.get('/google/geolocate', google.geolocate);
 app.post('/google/places', google.places);
 
-// app.post('/budget/addbudgetcategory', requestHandler.budget.addBudgetCategory);
+/**
+ * Plaid routes
+ */
 app.post('/plaid/access_token', plaid.accessToken);
 app.get('/plaid/accounts', plaid.accounts);
 app.get('/plaid/transactions/:year/:month', plaid.transactions);
@@ -69,7 +80,6 @@ app.get('*', (req, res) => {
 });
 
 let port = process.env.PORT || 1337;
-
 app.listen(port, function() {
   console.log('listening on port ' + port + '!');
 });
