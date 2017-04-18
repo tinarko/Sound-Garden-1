@@ -104,24 +104,19 @@ module.exports.allTransactions = function(req, res) {
           });
           console.log(data.transactions.length);
           return data.transactions;
-
         })
         .catch(function(error) {
           return error;
         })
       );
     }
-    Promise.all(promises)
-      .then(function(data) {
-        var result = []
-        data.forEach(function(transactions) {
-          result = result.concat(transactions);
-        });
-        console.log(result.length);
-        return res.json(result);
+    Promise.map(promises)
+      .then(function(results) {
+        console.log(results.length);
+        return res.json(results);
       })
       .catch(function(error) {
-        return res.json({error: error});
+        return res.status(500).send(error);
       });
   });
 };
