@@ -89,7 +89,7 @@ class Budget extends React.Component {
           onDismiss={this.handleAMonthDismiss.bind(this)}>
           </MonthPicker>
         <br />
-        
+       
         <BudgetCategoryList budget= {this.props.budget} handleBudgetChange={this.props.handleBudgetChange} toggleAddBudgetCategoryInput={this.props.toggleAddBudgetCategoryInput}/>
         
       </div>
