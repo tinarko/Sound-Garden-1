@@ -1,4 +1,4 @@
-let dotenv = require('dotenv');
+var dotenv = require('dotenv');
 var path = require('path');
 dotenv.load();
 dotenv.config({path: process.env.PWD + '/config.env'});
@@ -15,6 +15,7 @@ var requestHandler = require('./requestHandler');
 
 var creditcards = require('./requestHandlers/creditcards.js');
 var cashback = require('./requestHandlers/cashback.js');
+var google = require('./requestHandlers/google.js');
 
 var app = express();
 app.use(bodyParser.json());
@@ -30,22 +31,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 app.use(express.static(__dirname + './../client/dist'));
 
-// app.get('/auth/facebook', 
-//   passport.authenticate('facebook', {scope: 'email'}));
-// app.get('/auth/facebook/return', 
-//   passport.authenticate('facebook', { 
-//     // successRedirect: '/',
-//     failureRedirect: '/auth/facebook', 
-//   }),
-//   (req, res) => {
-//     // write cookie can only be written without redirect
-//     // write userid as cookie
-//     res.cookie('advisorly', req.session.passport.user.userid);
-//     res.redirect('/');
-//   });
 app.get('/auth/auth0', passport.authenticate('auth0'));
 app.get('/auth/auth0/return', passport.authenticate('auth0', {
   failureRedirect: '/auth/auth0'
@@ -68,18 +55,17 @@ app.post('/cashback/changecashbackpercent', cashback.changeCashbackPercent);
 app.post('/cashback/createcashbackcategory', cashback.createCashbackCategory);
 app.delete('/cashback/deletecashbackcategory/:catid', cashback.deleteCashbackCategory);
 
-app.get('/google/geolocate', requestHandler.google.geolocate);
-app.post('/google/places', requestHandler.google.places);
+app.get('/google/geolocate', google.geolocate);
+app.post('/google/places', google.places);
 
 // app.post('/budget/addbudgetcategory', requestHandler.budget.addBudgetCategory);
 app.post('/plaid/access_token', requestHandler.plaid.accessToken);
 app.get('/plaid/accounts', requestHandler.plaid.accounts);
 app.get('/plaid/transactions/:year/:month', requestHandler.plaid.transactions);
 app.post('/plaid/allTransactions/', requestHandler.plaid.allTransactions);
-// app.get('/plaid/allTransactions/', requestHandler.plaid.allTransactions);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'client', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '..', 'client/dist', 'index.html'));
 });
 
 let port = process.env.PORT || 1337;
