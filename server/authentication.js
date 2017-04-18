@@ -11,23 +11,12 @@ passport.use(new Auth0Strategy({
 (accessToken, refreshToken, profile, done) => {
   console.log('accessToken:', accessToken);
   console.log('profile:', profile);
-  console.log('=========friends:', profile._json.context.mutual_friends);
+  console.log('friends:', profile._json.context.mutual_friends);
   db.findUser(profile.id, (err, existingUser) => {
     // TODO: error handle invalid search for profile.id
     //if user exists:
     if (existingUser !== false) {
       console.log('this is if existing user', existingUser);
-      // //first check if fb.friend length === data.friend length
-      // db.findFriends(existingUser.userid, (err, results) => {
-      //   console.log('results of findFriends', results);
-      //   //TODO: error handle
-      //   if (err) {
-
-      //   //if friend length from facebook data is equal the number of friends found on 
-      //   } else if (profile._json.context.mutual_friends.data.length === results.length) {
-      //     done(null, profile);
-      //   //else if not equal
-      //   } else {
       db.removeCurrentFriendJoins(existingUser.userid, (err, results) => {
         if (err) {
           //TODO: error handle
@@ -45,9 +34,6 @@ passport.use(new Auth0Strategy({
           }
         }
       });
-      //   }
-      // });
-      // done(null, profile);
     } else {
       console.log('this is if NOT existinguser');
       db.saveUser(profile, (err, newUser) => {
