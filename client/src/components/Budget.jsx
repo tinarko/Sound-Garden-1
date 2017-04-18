@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
+import BudgetBulletChart from './BudgetBulletChart.jsx';
 import MonthPicker from 'react-month-picker/lib/month-picker.js';
 import BudgetCategoryList from './BudgetCategoryList.jsx';
 import { getUserBudgets, getTransactionData, incrementBudget, decrementBudget, postUpdatedBudget, yearMonthChange, toggleYearMonthSelection } from '../actions/budget.js';
@@ -88,6 +89,7 @@ class Budget extends React.Component {
           onDismiss={this.handleAMonthDismiss.bind(this)}>
           </MonthPicker>
         <br />
+        <BudgetBulletChart/>
         <BudgetCategoryList budget= {this.props.budget} handleBudgetChange={this.props.handleBudgetChange} toggleAddBudgetCategoryInput={this.props.toggleAddBudgetCategoryInput}/>
         
       </div>
