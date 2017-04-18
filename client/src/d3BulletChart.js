@@ -97,12 +97,12 @@ d3.bullet = function() {
           g = d3.select(this);
 
       // Compute the new x-scale.
-      var x1 = d3.scaleLinear()
+      var x1 = d3.scale.linear()
           .domain([0, Math.max(rangez[0], markerz[0], measurez[0])])
           .range(reverse ? [width, 0] : [0, width]);
 
       // Retrieve the old x-scale, if this is an update.
-      var x0 = this.__chart__ || d3.scaleLinear()
+      var x0 = this.__chart__ || d3.scale.linear()
           .domain([0, Infinity])
           .range(x1.range());
 
@@ -228,7 +228,7 @@ d3.bullet = function() {
           .style("opacity", 1e-6)
           .remove();
     });
-    d3.timerFlush();
+    d3.timer.flush();
   }
 
   // left, right, top, bottom
