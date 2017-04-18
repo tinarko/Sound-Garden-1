@@ -1,11 +1,11 @@
-var db = require('./../../database/index');
+var cb = require('./../../database/cashback');
 
 exports.changeCashbackPercent = (req, res) => {
   var catid = req.body.catid;
   var percent = req.body.percent;
   var action = req.body.action;
 
-  db.changeCashbackCategories(catid, percent, action, (err, results) => {
+  cb.changeCashbackCategories(catid, percent, action, (err, results) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -19,7 +19,7 @@ exports.createCashbackCategory = (req, res) => {
   var name = req.body.name;
   var percent = req.body.percent;
 
-  db.createCashbackCategory(ccid, name, percent, (err, results) => {
+  cb.createCashbackCategory(ccid, name, percent, (err, results) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -31,7 +31,7 @@ exports.createCashbackCategory = (req, res) => {
 
 exports.deleteCashbackCategory = (req, res) => {
   var catid = req.params.catid;
-  db.deleteCashbackCategory(catid, (err, results) => {
+  cb.deleteCashbackCategory(catid, (err, results) => {
     if (err) {
       res.status(500).send(err);
     } else {

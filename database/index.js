@@ -7,9 +7,10 @@ var connection = mysql.createConnection({
   database : 'heroku_aa9603bdcb7e15e'
 });
 
-connection.connect();
 
 module.exports = {
+  connection: connection,
+
   findUser: function(userid, cb) {
     console.log('here is the profile', userid);
     var queryString = 'SELECT * FROM USERS where userid = ?';
@@ -102,66 +103,7 @@ module.exports = {
     });
   },
 
-  getUserCreditcards: (userid, cb) => {
-
-    var query = `SELECT ccid, cccategories.id as catid, ccname, categoryname, value FROM users \
-      JOIN creditcards ON creditcards.userid = users.userid \
-      JOIN cccategories ON creditcards.id = cccategories.ccid \ 
-      WHERE users.userid = "${userid}" order by ccid, categoryname;`;
-
-    connection.query(query, (err, results) => {
-      if (results.length === 0) {
-        cb(err, null);
-      } else {
-        cb(null, results);
-      }
-    });
-  },
-
-  changeCashbackCategories: (catid, percent, action, cb) => {
-    var updatedPercent;
-    if (action === 'increment') {
-      updatedPercent = percent + 0.5;
-    } else {
-      updatedPercent = percent - 0.5;
-    }
-    var params = [updatedPercent, catid];
-    var query = 'update cccategories set value = ? where id = ?';
-
-    connection.query(query, params, (err, results) => {
-      if (err) {
-        cb(err, null);
-      } else {
-        cb(null, results);
-      }
-    });
-  },
-
-  createCashbackCategory: function(ccid, name, percent, cb) {
-    var query = 'INSERT INTO cccategories (categoryname, value, ccid) VALUES (?, ?, ?)';
-
-    var params = [name, percent, ccid];
-
-    connection.query(query, params, (err, results) => {
-      if (err) {
-        cb(err, null);
-      } else {
-        cb(null, results);
-      }
-    });
-  },
-
-  deleteCashbackCategory: function(catid, cb) {
-    var query = 'delete from cccategories where id = ?';
-
-    connection.query(query, catid, (err, results) => {
-      if (err) {
-        cb(err, null);
-      } else {
-        cb(null, results);
-      }
-    });
-  },
+  
 
   updateUserBudgetCategory: function(params, cb) {
     var queryString = 'update categorytypes inner join budgetcategories inner join budgets inner join users \
@@ -253,48 +195,5 @@ module.exports = {
       
   },
 
-  checkCreditcard: function(userid, ccname, cb) {
-    console.log('userid', userid, 'ccname', ccname);
-    var query = `select * from creditcards where userid = "${userid}" and ccname like "${ccname}";`;
-    connection.query (query, (err, results) => {
-      if (err, null) {
-        cb(err, null);
-      } else {
-        console.log('check if credit card exists results', results);
-        cb (null, results);
-      }
-    });
-  },
-
-  createCreditcard: function(userid, ccname, cb) {
-    console.log('getting ready to add creditcards');
-    var query = `insert into creditcards (userid, ccname) values ("${userid}", "${ccname}");`;
-    // insert into creditcards (userid, ccname) values ("facebook|10211056100732598", "Bank of America - Plaid Diamond 12.5% APR Interest Credit Card");
-    // var params = [userid, ccname];
-    console.log('TIME TO INSERT!');
-    connection.query (query, (err, results) => {
-      if (err, null) {
-        cb(err, null);
-      } else {
-        console.log('results at db', results);
-        var ccid = results.insertId;
-        console.log('ccid', ccid);
-        var cashbackquery = `INSERT INTO cccategories (categoryname, value, ccid) VALUES ('groceries', 3, ${ccid});`;
-        connection.query(cashbackquery, (err, results) => {
-          if (err, null) {
-            cb(err, null);
-          } else {
-            var catid = results.insertId;
-            console.log('results', results);
-            var data = {
-              catid: catid,
-              ccid: ccid
-            };
-            cb (null, data);
-          }
-        });
-      }
-    });
-  }
 
 };

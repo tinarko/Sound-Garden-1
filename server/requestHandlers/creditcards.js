@@ -1,6 +1,8 @@
 var Promise = require('bluebird');
 
+var cc = require('./../../database/creditcards');
 var db = require('./../../database/index');
+
 var plaid = require('plaid');
 
 var PLAID_CLIENT_ID  = process.env.PLAID_clientID;
@@ -28,7 +30,7 @@ exports.getUserCreditcards = (req, res) => {
     userid = "facebook|10211056100732598";
     console.log('YOU ARE NOT LOGGED IN');
   }
-  db.getUserCreditcards(userid, (err, results) => {
+  cc.getUserCreditcards(userid, (err, results) => {
     if (err) {
       res.status(500).send(err);
     } else {
