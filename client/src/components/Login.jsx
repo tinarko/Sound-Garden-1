@@ -41,7 +41,6 @@ class Login extends React.Component {
       onExit: function(err, metadata) {
         console.log(metadata);
         if (err != null) {
-          // The user encountered a Plaid API error prior to exiting.
         }
       }
     }).open();
@@ -51,21 +50,15 @@ class Login extends React.Component {
     return (
       <div className="login">
         <h1>Welcome to Financial Advisorly!</h1>
-        <br />
         <h3>You are well on your way to saving big</h3>
-        <br/>
-        <br />
 
         <p>Add your bank accounts:</p>
-        <br/>
         <RaisedButton id="link-button"
           onClick={this.onPlaidClick} label="Add Bank Accounts" 
         />
-        <br />
-
       </div>
     );
   }
-};
+}
 
 export default Login;

@@ -4,39 +4,39 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-
-// import budget from './NavIcons/budget.jpeg';
-// import cashback from './NavIcons/cashback.png';
-
+import {connect} from 'react-redux';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import FlatButton from 'material-ui/FlatButton';
 
-const Navbar = () => {
+const Navbar = (props) => {
+  let view = null;
+  if (!decodeURI(document.cookie)) {
+    view = (
+      <div>
+        <FlatButton label="Balance" containerElement={<Link to="/Balance" />} />
+        <FlatButton label="Budget" containerElement={<Link to="/budget" />} />
+        <FlatButton label="Cashback" containerElement={<Link to="/ccCashback" />} />
+        <FlatButton label="Transactions" containerElement={<Link to="/transactions" />} />
+        <a href="/auth/logout"><FlatButton label="Logout" /></a>
+      </div>
+    );
+  } else {
+    view = (
+      <div>
+        <a href="/auth/auth0"><FlatButton label="Login" /></a>
+      </div>
+    );
+  }
   return (
     <Toolbar>
       <FlatButton label="FinancialAdvisorly"  containerElement={<Link to="/" />} secondary={true}/>
-      <a href="/auth/auth0"><FlatButton label="Login" /></a>
-      <FlatButton label="Balance" containerElement={<Link to="/Balance" />} />
-      <FlatButton label="Budget" containerElement={<Link to="/budget" />} />
-      <FlatButton label="Cashback" containerElement={<Link to="/ccCashback" />} />
-      <FlatButton label="Transactions" containerElement={<Link to="/transactions" />} />
-      <a href="/auth/logout"><FlatButton label="Logout" /></a>
+      {view}
     </Toolbar>
   );
 };
 
-export default Navbar;
+export default connect((state) => {
+  return {
 
-/*
-    <ul>
-      <li><Link to="/">Login</Link></li>
-      <li><Link to="/Balance">Balance</Link></li>
-      <li><Link to="/budget">Budget</Link></li>
-      <li><Link to="/ccCashback">CC Selector</Link></li>
-      <li><Link to="/portfolio">Portfolio</Link></li>
-      <li><Link to="/emailNotifications">Email Notifications</Link></li>
-      <li><Link to="/transactions">Transactions</Link></li>
-      <li><Link to="/">Logout</Link></li>
-    </ul>
-
-*/
+  };
+})(Navbar);

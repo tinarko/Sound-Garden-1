@@ -18,10 +18,8 @@ import Navbar from './components/Navbar.jsx';
 import Portfolio from './components/Portfolio.jsx';
 import EmailNotifications from './components/EmailNotifications.jsx';
 
-//styling
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
-
 import Dialog from 'material-ui/Dialog';
 import {cyan500} from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
@@ -54,6 +52,7 @@ class App extends React.Component {
   }
 
   render () {
+    console.log(this.props);
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>
