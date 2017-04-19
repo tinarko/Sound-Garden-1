@@ -110,10 +110,16 @@ module.exports.allTransactions = function(req, res) {
         })
       );
     }
-    Promise.map(promises)
+    Promise.map(promises, function(asyncResult) {
+      return asyncResult;
+    })
       .then(function(results) {
-        console.log(results.length);
-        return res.json(results);
+        var send = [];
+        results.forEach(function(bankTransactions) {
+          send = send.concat(bankTransactions);
+        });
+        console.log(send.length);
+        return res.json(send);
       })
       .catch(function(error) {
         return res.status(500).send(error);
