@@ -36,18 +36,6 @@ module.exports = {
     });
   },
 
-  // findFriends: function (userid, cb) {
-  //   var queryString = 'SELECT * FROM FRIENDS where user_id = ?';
-
-  //   connection.query(queryString, userid, function(err, resultsList) {
-  //     if (err) {
-  //       cb(err, null);
-  //     } else {
-  //       cb(null, resultsList);
-  //     }
-  //   });
-  // },
-
   removeCurrentFriendJoins(userid, cb) {
     var queryString = 'delete from friends where user_id = ?;';
 
