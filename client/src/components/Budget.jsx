@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import BudgetBulletChart from './BudgetBulletChart.jsx';
 import MonthPicker from 'react-month-picker/lib/month-picker.js';
 import BudgetCategoryList from './BudgetCategoryList.jsx';
-import { getUserBudgets, getTransactionData, incrementBudget, decrementBudget, postUpdatedBudget, yearMonthChange, toggleYearMonthSelection } from '../actions/budget.js';
+import BudgetFriends from './BudgetFriends.jsx';
+import { getUserBudgets, getTransactionData, incrementBudget, decrementBudget, 
+  postUpdatedBudget, yearMonthChange, toggleYearMonthSelection, showMyBudgets, showFriendBudgets } from '../actions/budget.js';
 // import { getTransactionData } from '../actions/transactions.js';
 
 import RaisedButton from 'material-ui/RaisedButton';
@@ -71,9 +73,18 @@ class Budget extends React.Component {
     let currentMonth = months[(this.props.budget.mvalue.month - 1)];
     let currentTime = currentMonth + ' ' + this.props.budget.mvalue.year; 
 
+    var budgetToggle;
+    if (this.props.budget.showMyBudgets && !this.props.budget.showFriendBudgets) {
+      budgetToggle = <BudgetCategoryList budget= {this.props.budget} handleBudgetChange={this.props.handleBudgetChange} toggleAddBudgetCategoryInput={this.props.toggleAddBudgetCategoryInput}/>;
+    } else {
+      budgetToggle = <BudgetFriends />;
+    }
+
     return (
       <div>
        <h1>Budget</h1>
+       <RaisedButton label='My Budgets' onClick={this.props.showMyBudgets}/>
+       <RaisedButton label='Friend Budgets' onClick={this.props.showFriendBudgets}/> 
        <br/>
         <div className="box">
           <label> {currentTime} </label>
@@ -89,8 +100,7 @@ class Budget extends React.Component {
           onDismiss={this.handleAMonthDismiss.bind(this)}>
           </MonthPicker>
         <br />
-       
-        <BudgetCategoryList budget= {this.props.budget} handleBudgetChange={this.props.handleBudgetChange} toggleAddBudgetCategoryInput={this.props.toggleAddBudgetCategoryInput}/>
+        {budgetToggle}
         
       </div>
 
@@ -101,6 +111,7 @@ class Budget extends React.Component {
 const mapStateToProps = (state) => {
   return {
     budget: state.budget,
+
   };
 };
 
@@ -112,7 +123,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(postUpdatedBudget(goalvalue, categoryname, index, change, year, month)); 
     },
     yearMonthChange: (yearMonthObject) => { dispatch(yearMonthChange(yearMonthObject)); },
-    toggleYearMonthSelection: () => { dispatch (toggleYearMonthSelection()); }
+    toggleYearMonthSelection: () => { dispatch (toggleYearMonthSelection()); },
+    showMyBudgets: () => { dispatch(showMyBudgets()); },
+    showFriendBudgets: () => { dispatch(showFriendBudgets()); }
   };
 };
 export default connect (mapStateToProps, mapDispatchToProps) (Budget);
