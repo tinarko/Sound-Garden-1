@@ -1,10 +1,10 @@
 import React from 'react';
-import BalanceListEntry from './BalanceListEntry.jsx';
+// import BalanceListEntry from './BalanceListEntry.jsx';
 
 const BalanceList = (props) => {
   return (
     <ol>
-      {Object.keys(props.balance).map((accountType, index) => {
+      {props.balance.map((accountType, index) => {
         // only display accountTypes with available balances
         return (
           <div className="balance-list">

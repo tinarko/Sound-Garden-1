@@ -56,34 +56,34 @@ module.exports.accounts = function(req, res) {
     for (let i = 0; i < response.length; i++) {
       promises.push(client.getAccounts(response[i].access_token)
         .then(function(data) {
-          return {
-            accounts: data.accounts,
-            institution_name: response[i].institution_name,
-          };
+          data.accounts.forEach(function(account) {
+            account.institution_name = response[i].institution_name
+          });
+          return data.accounts;
         })
         .catch(function(error) {
           return error;
         })
       );
     }
+
     Promise.map(promises, function(asyncResult) {
-      var accountTypes = {};
-      asyncResult.accounts.forEach(function(account) {
-        if (accountTypes[account.subtype]) {
-          accountTypes[account.subtype].push(account);
-        } else {
-          accountTypes[account.subtype] = [account];
-        }
-      });
-      return {
-        institution_name: asyncResult.institution_name,
-        accounts: accountTypes
-      };
+      return asyncResult;
     })
       .then(function(results) {
-        return res.json(results);
+        var send = [];
+        results.forEach(function(accounts) {
+          send = send.concat(accounts);
+        });
+
+        send.sort(function(a, b) {
+          // sorts unicode
+          return a.subtype.localeCompare(b.subtype);
+        });
+        return res.json(send);
       })
       .catch(function(error) {
+        console.log(error);
         return res.status(500).send(error);
       });
   });
