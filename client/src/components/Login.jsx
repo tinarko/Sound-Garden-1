@@ -6,26 +6,6 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.onPlaidClick = this.onPlaidClick.bind(this);
-    this.getAccountData = this.getAccountData.bind(this);
-  }
-
-  getAccountData() {
-    fetch('/plaid/accounts', {
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-      .then((response) => {
-        console.log('successful fetch of account data', response);
-        response.json()
-          .then(function(json) {
-            console.log(json);
-          });
-      })
-      .catch((err) => {
-        console.log('error in fetching account data', err);
-      });
   }
 
   onPlaidClick() {
