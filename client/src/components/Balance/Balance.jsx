@@ -24,14 +24,42 @@ class Balance extends React.Component {
         <div className="balance">
           <br/>
           {this.props.balance.map((item, index) => {
-            return (
-              <div>
-                <h3 className="institution-name">{item.institution_name}</h3>
-                <BalanceList 
-                  accounts={this.props.balance.accounts}
-                  key={index}
-                />
-              </div>);
+            if (this.props.balance[index - 1]) {
+              const prevType = this.props.balance[index - 1].subtype;
+              if (item.subtype === prevType) {
+                return (
+                  <div>
+                    <BalanceList 
+                      account={item}
+                      key={index}
+                    />
+                  </div>);
+              } else {
+                return (
+                  <div>
+                    <h3>{item.subtype}</h3>
+                    <ol>
+                      <BalanceList 
+                        account={item}
+                        key={index}
+                      />
+                    </ol>
+                  </div>
+                );
+              }
+            } else {
+              return (
+                <div>
+                  <h3>{item.subtype}</h3>
+                  <ol>
+                    <BalanceList 
+                      account={item}
+                      key={index}
+                    />
+                  </ol>
+                </div>
+              );
+            }
           })}
         </div>);
     }
@@ -45,7 +73,6 @@ class Balance extends React.Component {
   }
 }
 
-// takes pieces of store and adds as props
 export default connect ((state) => {
   return {
     balance: state.balance.balance,

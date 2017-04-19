@@ -3,22 +3,11 @@ import React from 'react';
 
 const BalanceList = (props) => {
   return (
-    <ol>
-      {props.balance.map((accountType, index) => {
-        // only display accountTypes with available balances
-        return (
-          <div className="balance-list">
-            <h2>
-              {accountType}
-            </h2>
-            <BalanceListEntry 
-              name={accountType} 
-              key={index} 
-              accounts={props.balance[accountType]}
-            />
-          </div>);
-      })}
-    </ol>
+    <li>
+      <div>
+        <h5>{props.account.institution_name + ' ' + props.account.name}</h5>
+      </div>
+    </li>
   );
 };
 
