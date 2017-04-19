@@ -67,5 +67,6 @@ passport.deserializeUser((user, done) => {
 
 exports.logout = (req, res) => {
   req.logout();
+  res.clearCookie('advisorly');
   res.redirect('/');
 };

@@ -4,13 +4,12 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import {connect} from 'react-redux';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import FlatButton from 'material-ui/FlatButton';
 
 const Navbar = (props) => {
   let view = null;
-  if (!decodeURI(document.cookie)) {
+  if (document.cookie.replace(/(?:(?:^|.*;\s*)advisorly\s*\=\s*([^;]*).*$)|^.*$/, "$1")) {
     view = (
       <div>
         <FlatButton label="Balance" containerElement={<Link to="/Balance" />} />
@@ -29,14 +28,10 @@ const Navbar = (props) => {
   }
   return (
     <Toolbar>
-      <FlatButton label="FinancialAdvisorly"  containerElement={<Link to="/" />} secondary={true}/>
+      <FlatButton label="FinancialAdvisorly" containerElement={<Link to="/" />} secondary={true}/>
       {view}
     </Toolbar>
   );
 };
 
-export default connect((state) => {
-  return {
-
-  };
-})(Navbar);
+export default Navbar;
