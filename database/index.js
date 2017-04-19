@@ -89,6 +89,7 @@ module.exports = {
   },
 
   getPlaidItems: function(userid, cb) {
+    // var query = 'select * from items, users where users.userid = ?';
     var query = 'select * from items where user_id = ?';
     connection.query(query, userid, function(err, results, field) {
       console.log('results from getPlaidItems', results);
