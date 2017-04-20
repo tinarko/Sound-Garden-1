@@ -83,9 +83,6 @@ class Budget extends React.Component {
     return (
       <div>
        <h1>Budget</h1>
-       <RaisedButton label='My Budgets' onClick={this.props.showMyBudgets}/>
-       <RaisedButton label='Friend Budgets' onClick={this.props.showFriendBudgets}/> 
-       <br/>
         <div className="box">
           <label> {currentTime} </label>
           <IconButton onClick={this.handleClickCurrent.bind(this)}>
@@ -100,8 +97,12 @@ class Budget extends React.Component {
           onDismiss={this.handleAMonthDismiss.bind(this)}>
           </MonthPicker>
         <br />
+       <RaisedButton label='My Budgets' onClick={this.props.showMyBudgets}/>
+       <RaisedButton label='Friend Budgets' onClick={this.props.showFriendBudgets}/> 
+       <br/>
+       <br/>
         {budgetToggle}
-        
+        <BudgetBulletChart/>
       </div>
 
     );

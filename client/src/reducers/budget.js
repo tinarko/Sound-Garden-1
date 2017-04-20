@@ -1,14 +1,37 @@
 const initialState = {
   budgets: [],
+  totalBudget: 0,
+  totalSpent: 0,
   fetchingBudgets: false,
   error: null, 
-  totalBudget: 0,
   showaddbudgetcategoryform: false,
   addcategoryname: '',
   addcategorybudget: '',
   mvalue: {year: null, month: null},
   showMyBudgets: true,
-  showFriendBudgets: false
+  showFriendBudgets: false,
+  friendsBudgets: []
+    // [ 
+    //   {
+    //     name: friend1
+    //     totalBudget:
+    //     totalTrans:
+    //     budgets: [ 
+    //     {
+    //       actual: 
+    //       goal:
+    //       category: 
+    //     },
+    //     {
+    //       actual: 
+    //       goal:
+    //       category: 
+    //     }
+    //     ]
+
+    //   },
+
+    // ]
 };
 
 
