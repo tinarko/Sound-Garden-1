@@ -8,18 +8,22 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
 import BudgetBulletChart from './BudgetBulletChart.jsx';
+import * as d3 from 'd3';
 
 class BudgetCategoryList extends React.Component {
   constructor (props) {
     super(props);
-    console.log('this.props in BudgetCategoryList1', this.props);
+    // console.log('this.props in BudgetCategoryList Constructor', this.props);
     //<BudgetBulletChart budget={this.props.budget}/>
   }
 
   componendDidMount() {
-    console.log('this.props in BudgetCategoryList2', this.props);
+    // console.log('this.props in BudgetCategoryList DidMount', this.props);
   }
 
+  componentDidUpdate() {
+    // console.log('this.props in BudgetCategoryList DidUpdate', this.props);
+  }
   handleInputChange (event) {
     if (event.target.name === 'addcategoryname') {
       this.props.categoryNameInputChange(event.target.value);
@@ -43,7 +47,7 @@ class BudgetCategoryList extends React.Component {
 
     // let month = 'April';
     let toggleButtonForm = null;
-    console.log('this.props in BudgetCategoryList3', this.props);
+    // console.log('this.props in BudgetCategoryList render', this.props);
     if (this.props.budget.showaddbudgetcategoryform) {
       toggleButtonForm = <form 
         onSubmit= {(e) => {
@@ -65,6 +69,8 @@ class BudgetCategoryList extends React.Component {
     } else {
       toggleButtonForm = <RaisedButton label= 'Add Category' onClick={(e) => { this.props.toggleAddBudgetCategoryInput(); } } />;
     }
+
+
 
     return (
       <div>
