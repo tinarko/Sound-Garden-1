@@ -56,6 +56,7 @@ d3BulletChart.create = (el, props) => {
 
 var data = [];
 if (props.budget.budgets.length > 0) {
+  console.log('entered correct bulletChart');
   data = [
   {'title': 'Revenue', 'subtitle': 'US$, in thousands', 'ranges': [150,225,300],'measures':[220,270],'markers':[250]},
   {'title': 'Revenue', 'subtitle': 'US$, in thousands', 'ranges': [150,225,300],'measures':[220,270],'markers':[250]},
@@ -71,7 +72,7 @@ if (props.budget.budgets.length > 0) {
   {'title': 'Data Unavailable', 'subtitle': '', 'ranges': [150,225,300],'measures':[220,270],'markers':[250]},
   // {'title': 'Test', 'subtitle': 'US$, in thousands', 'ranges': [150,225,300],'measures':[220,270],'markers':[250]}
   ];
-// }
+}
 
   // d3.json(exampleArray, function(error, data) {
   //   if (error) {
