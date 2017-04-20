@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import CreditCard from './CreditCard.jsx'
 import GoogleMap from './GoogleMap.jsx';
 
-import { createCreditcardsKickoff, toggleCashbackSetup } from '../actions/creditcards';
+import { createCreditcardsKickoff, toggleCashbackSetup, getCreditcards } from '../actions/creditcards';
 
 //styling
 import RaisedButton from 'material-ui/RaisedButton';
@@ -24,6 +24,7 @@ class CCCashback extends React.Component {
   // }
 
   render () {
+    console.log('cc', this.props.creditcards.cc);
     var creditcards = this.props.creditcards.cc.map( (cc, index) => {
               return (<CreditCard className="component" creditcard={cc} key={index} ccindex={index}/>);
             });
@@ -48,11 +49,12 @@ class CCCashback extends React.Component {
           <br/>
           <h3>Are you at this location? //business name// </h3>
           <br/>
-          <p>If so, please use your //credit card// to get the most cash back!</p>
+          <p>If so, please use your //credit card// for // X // % cash back!</p>
           <br/>
           <RaisedButton label="Setup" onClick={this.props.toggleCashbackSetup} />
           <GoogleMap />
-        </div> );
+        </div> 
+        );
     }
   }
 }

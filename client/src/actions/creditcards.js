@@ -8,10 +8,9 @@ export const fetchingCreditcards = () => {
 };
 
 export const receivedCreditcards = (creditcards) => {
-  var results = setCC(creditcards);
   return {
     type: 'RECEIVED_CREDITCARDS',
-    cc: results
+    cc: creditcards
   };
 };
 
@@ -36,6 +35,7 @@ export const toggleCashbackSetup = () => {
 };
 
 export const createCreditcardsKickoff = () => {
+  console.log('createCreditcardsKickoff');
   return (dispatch) => {
     fetch('/creditcards/createcreditcards', {
       method: 'GET',
@@ -44,6 +44,7 @@ export const createCreditcardsKickoff = () => {
       },
       credentials: 'same-origin',
     }).then(response => {
+      console.log('created creditcards?')
       dispatch(getCreditcards());
     })
     .catch((err) => {
@@ -54,7 +55,6 @@ export const createCreditcardsKickoff = () => {
 };
 
 export const getCreditcards = () => {
-  // userid = userid || 2;
   return (dispatch) => {
     dispatch(fetchingCreditcards());
     fetch('/creditcards/getcreditcards', {
@@ -78,44 +78,68 @@ export const getCreditcards = () => {
   };
 };
 
+// export const getUserCreditcards = () => {
+//   return (dispatch) => {
+//     dispatch(fetchingCreditcards());
+//     fetch('/creditcards/getusercreditcards', {
+//       method: 'GET',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       credentials: 'same-origin',
+//     })
+//     .then(response => {
+//       return response.json();
+//     })
+//     .then((json) => {
+//       console.log('json from getCreditcards in action', json);
+//       dispatch(receivedCreditcards(json));
+//     })
+//     .catch((err) => {
+//       console.log('error in get', err);
+//       dispatch(fetchCreditcardsError(err));
+//     });
+//   };
+// };
+
 
 // reorganize the db results to a format that makes more sense on state
-var setCC = function (array) {
-  var results = [];
+// var setCC = function (array) {
+//   var results = [];
 
-  if (array.length > 0) {
+//   if (array.length > 0) {
 
-    var ccid = array[0].ccid;
-    results[0] = {
-      ccid: ccid, 
-      ccname: array[0].ccname,
-      categories: []
-    };
+//     var ccid = array[0].ccid;
+//     results[0] = {
+//       ccid: ccid, 
+//       ccname: array[0].ccname,
+//       categories: []
+//     };
 
-    var resultsIndex = 0;
+//     var resultsIndex = 0;
 
-    for (var i = 0; i < array.length; i++) {
+//     for (var i = 0; i < array.length; i++) {
       
-      if (array[i].ccid !== ccid) {
-        ccid = array[i].ccid;
-        resultsIndex++;
-        results[resultsIndex] = {
-          ccid: ccid,
-          ccname: array[i].ccname,
-          categories: []
-        };
-      }
+//       if (array[i].ccid !== ccid) {
+//         ccid = array[i].ccid;
+//         resultsIndex++;
+//         results[resultsIndex] = {
+//           ccid: ccid,
+//           ccname: array[i].ccname,
+//           categories: []
+//         };
+//       }
       
-      results[resultsIndex].categories.push({
-        name: array[i].categoryname,
-        percent: array[i].value, 
-        catid: array[i].catid
-      });
-    }
-  }
+//       results[resultsIndex].categories.push({
+//         name: array[i].categoryname,
+//         percent: array[i].value, 
+//         catid: array[i].catid
+//       });
+//     }
+//   }
 
-  return results;
-};
+//   return results;
+// };
 
 
 

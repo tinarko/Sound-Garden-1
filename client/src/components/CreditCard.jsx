@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import CashbackCategory from './CashbackCategory';
 
-import { createCashbackCategoryKickoff } from '../actions/createcashbackcategory';
+import { createCashbackCategoryKickoff, getCashbackCategoriesKickoff } from '../actions/createcashbackcategory';
 // import { handleCategoryChange } from '../actions/createcashbackcategory';
 
 import RaisedButton from 'material-ui/RaisedButton';
@@ -16,6 +16,11 @@ class CreditCard extends React.Component {
       catname: '',
       number: 0
     };
+  }
+
+  componentDidMount () {
+    var ccid = this.props.creditcard.ccid;
+    this.props.getCashbackCategoriesKickoff(ccid);
   }
 
   handleCategoryChange (catname) {
@@ -41,8 +46,8 @@ class CreditCard extends React.Component {
               return (
                 <CashbackCategory 
                   ccindex={this.props.key} 
-                  key={index} 
                   ccindex={this.props.ccindex} 
+                  key={index} 
                   catindex={index} 
                   category={category}
                   catid={category.catid}
@@ -76,9 +81,12 @@ class CreditCard extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createCashbackCategoryKickoff: (ccindex, ccid, name, percent) => { dispatch(createCashbackCategoryKickoff(ccindex, ccid, name, percent)); },
+    createCashbackCategoryKickoff: (ccindex, ccid, name, percent) => { 
+      dispatch(createCashbackCategoryKickoff(ccindex, ccid, name, percent)); 
+    },
     // handleCategoryChange: (catname) => { dispatch(handleCategoryChange(catname)); },
     // handlePercentChange: (percent) => { dispatch(handlePercentChange(percent)); }
+    getCashbackCategoriesKickoff: (ccid) => { dispatch(getCashbackCategoriesKickoff(ccid)); }
   };
 };
 

@@ -2,12 +2,25 @@ var db = require ('./index.js');
 
 var connection = db.connection;
 
-exports.getUserCreditcards = (userid, cb) => {
+// exports.getUserCreditcards = (userid, cb) => {
 
-  var query = `SELECT ccid, cccategories.id as catid, ccname, categoryname, value FROM users \
-    JOIN creditcards ON creditcards.userid = users.userid \
-    JOIN cccategories ON creditcards.id = cccategories.ccid \ 
-    WHERE users.userid = "${userid}" order by ccid, categoryname;`;
+//   var query = `SELECT ccid, cccategories.id as catid, ccname, categoryname, value FROM users \
+//     JOIN creditcards ON creditcards.userid = users.userid \
+//     JOIN cccategories ON creditcards.id = cccategories.ccid \ 
+//     WHERE users.userid = "${userid}" order by ccid, categoryname;`;
+
+//   connection.query(query, (err, results) => {
+//     if (results.length === 0) {
+//       cb(err, null);
+//     } else {
+//       cb(null, results);
+//     }
+//   });
+// };
+
+exports.getCreditcards = (userid, cb) => {
+
+  var query = `SELECT * from creditcards where userid = "${userid}";` ;
 
   connection.query(query, (err, results) => {
     if (results.length === 0) {
@@ -32,7 +45,7 @@ exports.checkCreditcard = function(userid, ccname, cb) {
 };
 
 exports.createCreditcard = function(userid, ccname, cb) {
-  console.log('getting ready to add creditcards');
+  console.log('getting ready to add creditcards in db');
   var query = `insert into creditcards (userid, ccname) values ("${userid}", "${ccname}");`;
   // insert into creditcards (userid, ccname) values ("facebook|10211056100732598", "Bank of America - Plaid Diamond 12.5% APR Interest Credit Card");
   // var params = [userid, ccname];
@@ -41,23 +54,27 @@ exports.createCreditcard = function(userid, ccname, cb) {
     if (err, null) {
       cb(err, null);
     } else {
-      console.log('results at db', results);
-      var ccid = results.insertId;
-      console.log('ccid', ccid);
-      var cashbackquery = `INSERT INTO cccategories (categoryname, value, ccid) VALUES ('groceries', 3, ${ccid});`;
-      connection.query(cashbackquery, (err, results) => {
-        if (err, null) {
-          cb(err, null);
-        } else {
-          var catid = results.insertId;
-          console.log('results', results);
-          var data = {
-            catid: catid,
-            ccid: ccid
-          };
-          cb (null, data);
-        }
-      });
+      // console.log('results at db', results);
+      // var ccid = results.insertId;
+      // console.log('ccid', ccid);
+      // var cashbackquery = `INSERT INTO cccategories (categoryname, value, ccid) VALUES ('test', 0, ${ccid});`;
+      // connection.query(cashbackquery, (err, results) => {
+      //   if (err, null) {
+      //     cb(err, null);
+      //   } else {
+      //     var catid = results.insertId;
+      //     console.log('results', results);
+      //     var data = {
+      //       catid: catid,
+      //       ccid: ccid
+      //     };
+      //     cb (null, data);
+      //   }
+      // });
+
+
+      cb (null, results);
+      
     }
   });
 };

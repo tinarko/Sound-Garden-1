@@ -14,9 +14,24 @@ const creditcards = (state = initialState, action) => {
       };
       break;
     case 'RECEIVED_CREDITCARDS':
+      var checkCC = action.cc;
+      var resultsCC = state.cc;
+
+      var same = false;
+      for (var j = 0; j < checkCC.length; j++) {
+        for (var i = 0; i < resultsCC.length; i++) {
+          if (resultsCC[i].ccid  === checkCC[j].ccid) {
+            same = true;
+          }
+        }
+        if (!same) {
+          resultsCC.push(checkCC[j]);
+        }
+        same = false;
+      } 
       return {
         ...state,
-        cc: action.cc
+        cc: resultsCC
       };
       break;
     case 'FETCH_CREDITCARDS_ERROR':

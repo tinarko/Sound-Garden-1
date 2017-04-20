@@ -1,5 +1,27 @@
 var cb = require('./../../database/cashback');
 
+exports.getCashbackCategories = (req, res) => {
+  var catid = req.params.catid;
+
+  cb.getCashbackCategories(catid, (err, results) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      var categories = [];
+
+      for (var i = 0; i < results.length; i++) {
+        categories.push({
+          name: results[i].categoryname,
+          catid: results[i].id,
+          percent: results[i].value
+        });
+      }
+
+      res.status(200).json(categories);
+    }
+  });
+};
+
 exports.changeCashbackPercent = (req, res) => {
   var catid = req.body.catid;
   var percent = req.body.percent;

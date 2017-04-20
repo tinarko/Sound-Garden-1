@@ -54,12 +54,16 @@ app.post('/budget/updatebudgetcategory', budget.updateBudgetAmount);
 /**
  * Credit Card Routes
  */
-app.get('/creditcards/getcreditcards', creditcards.getUserCreditcards);
+app.get('/creditcards/getcreditcards', creditcards.getCreditcards);
+
+// app.get('/creditcards/getusercreditcards', creditcards.getUserCreditcards);
 app.get('/creditcards/createcreditcards', creditcards.createCreditCards);
 
 /**
  * Cashback Routes
  */
+app.get('/cashback/getcashbackcategories/:catid', cashback.getCashbackCategories);
+
 app.post('/cashback/changecashbackpercent', cashback.changeCashbackPercent);
 app.post('/cashback/createcashbackcategory', cashback.createCashbackCategory);
 app.delete('/cashback/deletecashbackcategory/:catid', cashback.deleteCashbackCategory);
@@ -78,9 +82,14 @@ app.get('/plaid/accounts', plaid.accounts);
 app.get('/plaid/transactions/:year/:month', plaid.transactions);
 app.post('/plaid/allTransactions/', plaid.allTransactions);
 
+/**
+ * Catch all for random URLs
+*/
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'client/dist', 'index.html'));
 });
+
+
 
 let port = process.env.PORT || 1337;
 app.listen(port, function() {

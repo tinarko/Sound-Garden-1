@@ -17,7 +17,7 @@ export const deleteCasbhackCategoryError = () => {
 
 export const deleteCashbackCategoryKickoff = (ccindex, catindex, catid) => {
   return (dispatch) => {
-    var url = '/creditcards/deletecashbackcategory/' + catid;
+    var url = '/cashback/deletecashbackcategory/' + catid;
     fetch(url, {
       method: 'DELETE',
       headers: {

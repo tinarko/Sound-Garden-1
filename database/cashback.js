@@ -3,6 +3,18 @@ var db = require ('./index.js');
 
 var connection = db.connection;
 
+exports.getCashbackCategories = (ccid, cb) => {
+  var query = `select * from cccategories where ccid = ${ccid}`;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, results);
+    }
+  });
+};
+
 exports.changeCashbackCategories = (catid, percent, action, cb) => {
   var updatedPercent;
   if (action === 'increment') {

@@ -4,6 +4,11 @@ import { connect } from 'react-redux';
 import { changeCashbackPercent } from '../actions/changecashbackpercent';
 import { deleteCashbackCategoryKickoff } from '../actions/deletecashbackcategory';
 
+import IconButton from 'material-ui/IconButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentAddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
+import ContentRemoveCircleOutline from 'material-ui/svg-icons/content/remove-circle-outline';
+
 
 class CashbackCategory extends React.Component {
   constructor (props) {
@@ -23,13 +28,18 @@ class CashbackCategory extends React.Component {
     return (
       <li>
         <div>
-          <p>• {catname}: {percent} % 
-            <button onClick={ (e) => {
+          <p>• {catname}: 
+            <IconButton onClick={ (e) => {
               this.props.handleChange(ccindex, catindex, percent, 'decrement', catid)
-            } } > - </button>
-            <button onClick={ (e) => {
+              } } > 
+              <ContentRemoveCircleOutline/>
+            </IconButton>
+            {percent} % 
+            <IconButton onClick={ (e) => {
               this.props.handleChange(ccindex, catindex, percent, 'increment', catid)
-            } } > + </button>
+              } } > 
+              <ContentAddCircleOutline/>
+            </IconButton>
             <button onClick={(e) => {
               this.props.deleteCashbackCategoryKickoff(ccindex, catindex, catid)
             } }>Delete</button>
