@@ -183,7 +183,6 @@ module.exports.transactions = function (req, res) {
         }
       });
 
-      //refactored to dynamically add categories
       var categoryObject = {}; 
       for (var i = 0; i < transactions.length; i++) {
         if (transactions[i]['category']) {

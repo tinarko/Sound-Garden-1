@@ -17,6 +17,7 @@ var plaid = require('./requestHandlers/plaid.js');
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(session({
   secret: 'financialAdvisorly',
   resave: false,
@@ -25,6 +26,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(authentication.read);
 app.use(express.static(__dirname + './../client/dist'));
 
 /**

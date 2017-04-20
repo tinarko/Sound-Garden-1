@@ -68,8 +68,15 @@ passport.deserializeUser((user, done) => {
   });
 });
 
+// remove cookie if not signed in 
+exports.read = (req, res, next) => {
+  if (!req.session.passport && req.cookies.advisorly) {
+    res.clearCookie('advisorly');
+  }
+  next();
+};
+
 exports.logout = (req, res) => {
-  // not always reliable req.logout();
   req.session.destroy(function (err) {
     res.clearCookie('advisorly');
     res.redirect('/');

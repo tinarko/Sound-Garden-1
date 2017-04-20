@@ -9,6 +9,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 const Navbar = (props) => {
   let view = null;
+  console.log(document.cookie.replace(/(?:(?:^|.*;\s*)advisorly\s*\=\s*([^;]*).*$)|^.*$/, "$1"))
   if (document.cookie.replace(/(?:(?:^|.*;\s*)advisorly\s*\=\s*([^;]*).*$)|^.*$/, "$1")) {
     view = (
       <div>
