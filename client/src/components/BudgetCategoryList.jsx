@@ -7,9 +7,17 @@ import { toggleAddBudgetCategoryInput, categoryNameInputChange, categoryGoalInpu
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 
+import BudgetBulletChart from './BudgetBulletChart.jsx';
+
 class BudgetCategoryList extends React.Component {
   constructor (props) {
     super(props);
+    console.log('this.props in BudgetCategoryList1', this.props);
+    //<BudgetBulletChart budget={this.props.budget}/>
+  }
+
+  componendDidMount() {
+    console.log('this.props in BudgetCategoryList2', this.props);
   }
 
   handleInputChange (event) {
@@ -35,6 +43,7 @@ class BudgetCategoryList extends React.Component {
 
     // let month = 'April';
     let toggleButtonForm = null;
+    console.log('this.props in BudgetCategoryList3', this.props);
     if (this.props.budget.showaddbudgetcategoryform) {
       toggleButtonForm = <form 
         onSubmit= {(e) => {
@@ -76,6 +85,8 @@ class BudgetCategoryList extends React.Component {
         }) }
         </div> 
         {toggleButtonForm}
+        <BudgetBulletChart budget={this.props.budget}/>
+
     </div>
 
     )

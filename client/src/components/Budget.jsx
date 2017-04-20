@@ -14,6 +14,9 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import IconButton from 'material-ui/IconButton';
 import ActionDateRange from 'material-ui/svg-icons/action/date-range';
 
+// import d3BulletChart from '../d3BulletChart.js';
+// import * as d3 from 'd3';
+
 
 class Budget extends React.Component {
   constructor (props) {
@@ -23,6 +26,15 @@ class Budget extends React.Component {
     let monthValue = today.getMonth() + 1;
     let yearValue = today.getFullYear();
     this.props.yearMonthChange({year: yearValue, month: monthValue});
+
+    let month = (today.getMonth() + 1).toString();
+    if (month.length < 2) {
+      month = '0'.concat(month);
+    }
+    let year = today.getFullYear().toString();
+
+    this.props.getBudgets(year, month);
+    this.props.getTransactionData(year, month);
 
   }
 
@@ -37,6 +49,9 @@ class Budget extends React.Component {
 
     this.props.getBudgets(year, month);
     this.props.getTransactionData(year, month);
+    // var el = ReactDOM.findDOMNode(this);
+    // d3BulletChart.create(el, this.props);
+
   }
 
   handleAMonthDismiss (value) {
@@ -102,7 +117,7 @@ class Budget extends React.Component {
        <br/>
        <br/>
         {budgetToggle}
-        <BudgetBulletChart/>
+        
       </div>
 
     );

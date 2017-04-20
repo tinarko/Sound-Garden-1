@@ -9,9 +9,13 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentAddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 import ContentRemoveCircleOutline from 'material-ui/svg-icons/content/remove-circle-outline';
 
+import BudgetBulletChart from './BudgetBulletChart.jsx';
+
 class BudgetCategory extends React.Component {
   constructor(props) {
     super(props);
+    console.log('this.props in budgetCategory', this.props);
+    //<BudgetBulletChart name={this.props.budgetcategory.name}/>
   }
 
   render() {
@@ -48,6 +52,7 @@ class BudgetCategory extends React.Component {
         Spent this Month: ${actualValue}
         </div>
         <br />
+        
       </div>
 
     );
