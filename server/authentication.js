@@ -62,11 +62,16 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((user, done) => {
-  done(null, user);
+  console.log('deserializing', user.id);
+  db.findUser(user.id, (err, results) => {
+    done(null, user);
+  });
 });
 
 exports.logout = (req, res) => {
-  req.logout();
-  res.clearCookie('advisorly');
-  res.redirect('/');
+  // not always reliable req.logout();
+  req.session.destroy(function (err) {
+    res.clearCookie('advisorly');
+    res.redirect('/');
+  });
 };

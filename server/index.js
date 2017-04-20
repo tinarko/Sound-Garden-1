@@ -17,11 +17,11 @@ var plaid = require('./requestHandlers/plaid.js');
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser('advisorly'));
 app.use(session({
   secret: 'financialAdvisorly',
-  resave: true,
+  resave: false,
   saveUninitialized: true,
+  cookie: { httpOnly: false }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -36,7 +36,7 @@ app.get('/auth/auth0/return', passport.authenticate('auth0', {
 }),
   (req, res) => {
     //TODO: encrypt cookie
-    res.cookie('advisorly', req.session.passport.user.id);
+    res.cookie('advisorly', 'loggedIn', { maxAge: 900000, httpOnly: false });
     res.redirect('/');
   });
 app.get('/auth/logout', authentication.logout);
