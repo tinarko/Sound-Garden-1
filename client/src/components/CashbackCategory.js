@@ -10,7 +10,6 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentAddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 import ContentRemoveCircleOutline from 'material-ui/svg-icons/content/remove-circle-outline';
 
-
 class CashbackCategory extends React.Component {
   constructor (props) {
     super(props);
@@ -70,7 +69,6 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-// export default connect (mapStateToProps, mapDispatchToProps) (CashbackCategory);
 export default connect (null, mapDispatchToProps) (CashbackCategory);
 
 
