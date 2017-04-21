@@ -5,11 +5,6 @@ import * as d3 from 'd3';
 
 class BudgetBulletChart extends React.Component {
 
-  // constructor (props) {
-  //   super(props);
-  //   console.log('this.props in BudgetBulletChart1', this.props);
-  // }
-
   //uncommenting this shows graph, but only with dummy data
   //this.props is not correct at this point
   componentDidMount() {
@@ -33,10 +28,6 @@ class BudgetBulletChart extends React.Component {
     // }
   }
   render () {
-    console.log('this.props in BudgetBullet Render', this.props);
-    // var el = ReactDOM.findDOMNode(this);
-    // console.log('el', el);
-    // d3BulletChart.create(el, this.props);
     return (
       <div className='chart'> </div>
     );
@@ -44,17 +35,3 @@ class BudgetBulletChart extends React.Component {
 }
 
 export default BudgetBulletChart;
-
-// var BudgetBulletChart = React.createClass ({
-
-//   componentDidMount: function() {
-//     var el = ReactDOM.findDOMNode(this);
-//     d3BulletChart.create(el);
-//   }, 
-
-//   render: function () {
-//     return (
-//       <div className='chart'> </div>
-//     );
-//   }
-// });
