@@ -59,7 +59,7 @@ if (props.budget.budgets.length > 0) {
   console.log('entered correct bulletChart');
 
   for (var i = 0; i < props.budget.budgets.length; i++) {
-    data.push({'title': props.budget.budgets[i].name, 'subtitle': '$', 'ranges': [150,225,300],'measures':[220,270],'markers':[250] });
+    data.push({'title': props.budget.budgets[i].name, 'subtitle': '$', 'ranges': [150,225,300],'measures':[props.budget.budgets[i].actualvalue, props.budget.budgets[i].actualvalue + 50],'markers':[props.budget.budgets[i].goalvalue] });
   }
 
   console.log('data in correct bulletChart', data);
@@ -81,9 +81,9 @@ if (props.budget.budgets.length > 0) {
   //     throw error;
   //   }
 
-  d3.selectAll("svg").remove();
+  d3.select('.graphPosition').selectAll('svg').remove();
 
-    var svg = d3.select('body').selectAll('svg')
+    var svg = d3.select('.graphPosition').selectAll('svg')
         .data(data)
       .enter().append('svg')
         .attr('class', 'bullet')
@@ -102,11 +102,11 @@ if (props.budget.budgets.length > 0) {
       // .merge(title)
         .text(function(d) { return d.title; });
 
-    // title.append('text')
-    //     .attr('class', 'subtitle')
-    //     .attr('dy', '1em')
-    //   .merge(title)
-    //     .text(function(d) { return d.subtitle; });
+    title.append('text')
+        .attr('class', 'subtitle')
+        .attr('dy', '1em')
+      .merge(title)
+        .text(function(d) { return d.subtitle; });
 
     d3.selectAll('button').on('click', function() {
       console.log('invoked click');
@@ -131,20 +131,20 @@ function randomizer(d) {
 }
   // });
 
-d3BulletChart.update = (props) => {
+// d3BulletChart.update = (props) => {
 
-  data = [
-  {'title': 'Revenue', 'subtitle': 'US$, in thousands', 'ranges': [150,225,300],'measures':[220,270],'markers':[250]},
-  {'title': 'Revenue', 'subtitle': 'US$, in thousands', 'ranges': [150,225,300],'measures':[220,270],'markers':[250]},
-  {'title': 'Revenue', 'subtitle': 'US$, in thousands', 'ranges': [150,225,300],'measures':[220,270],'markers':[250]}
-  ];
+//   data = [
+//   {'title': 'Revenue', 'subtitle': 'US$, in thousands', 'ranges': [150,225,300],'measures':[220,270],'markers':[250]},
+//   {'title': 'Revenue', 'subtitle': 'US$, in thousands', 'ranges': [150,225,300],'measures':[220,270],'markers':[250]},
+//   {'title': 'Revenue', 'subtitle': 'US$, in thousands', 'ranges': [150,225,300],'measures':[220,270],'markers':[250]}
+//   ];
 
 
-  var title = g.selectAll('text')
-    .data(data);
+//   var title = g.selectAll('text')
+//     .data(data);
 
-  // text.
-};
+//   // text.
+// };
 // (function() {
 
 // Chart design based on the recommendations of Stephen Few. Implementation

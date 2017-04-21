@@ -97,7 +97,8 @@ class Budget extends React.Component {
 
     return (
       <div>
-       <h1>Budget</h1>
+       <h1 className='budget'>Budget</h1>
+        <div className='graphPosition'> </div>
         <div className="box">
           <label> {currentTime} </label>
           <IconButton onClick={this.handleClickCurrent.bind(this)}>
