@@ -44,14 +44,14 @@ if (props.budget.budgets.length > 0) {
   d3.select('.graphPosition').selectAll('svg').remove();
 
     var svg = d3.select('.graphPosition').selectAll('svg')
-        .data(data)
+        .data(data) //.call(chart.duration(1000))
       .enter().append('svg')
         .attr('class', 'bullet')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom)
       .append('g')
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-        .call(chart);
+        .call(chart);//.duration(500));
 
     var title = svg.append('g')
         .style('text-anchor', 'end')
@@ -68,10 +68,10 @@ if (props.budget.budgets.length > 0) {
       .merge(title)
         .text(function(d) { return d.subtitle; });
 
-    d3.selectAll('button').on('click', function() {
-      console.log('invoked click');
-      svg.datum(randomize).call(chart.duration(1000)); // TODO automatic transition
-    });
+    // d3.selectAll('button').on('click', function() {
+    //   console.log('invoked click');
+    //   svg.datum(randomize).call(chart.duration(1000)); // TODO automatic transition
+    // });
 };
 
 function randomize(d) {
