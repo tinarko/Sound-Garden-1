@@ -32,9 +32,8 @@ class Login extends React.Component {
             <h3>You are well on your way to saving big</h3>
           </div>
         }
-        <p>Add your bank accounts:</p>
         <RaisedButton id="link-button"
-          onClick={createPlaid} label="Add Bank Accounts" 
+          onClick={createPlaid} label="Add More Accounts" 
         />
       </div>
     );
