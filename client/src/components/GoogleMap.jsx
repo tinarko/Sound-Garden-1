@@ -44,34 +44,34 @@ class GoogleMap extends React.Component {
   // https://api.yelp.com/v3/autocomplete?text=del&latitude=37.78162725488666&longitude=-122.40663241772154
 
   createMarkers(map) {
-    if (this.props.places.length) {
-      this.props.places.forEach((value) => {
-        console.log(value)
-        const infowindow = new google.maps.InfoWindow({
-          content: 
-          `<div>
-            <p>${value.name}</p>
-            <p>${value.types[0]}</p>
-          </div>`,
-        });
-        const marker = new google.maps.Marker({
-          animation: google.maps.Animation.DROP,
-          position: new google.maps.LatLng(value.geometry.location.lat, value.geometry.location.lng),
-          map: this.map,
-          icon: new google.maps.MarkerImage(
-            value.icon,
-            null,
-            null,
-            null,
-            new google.maps.Size(40, 40)
-          )
-        });
-        google.maps.event.addListener(marker, 'mouseover', () => {
-          infowindow.open(map, marker);
-          setTimeout(() => { infowindow.close(); }, '1000');
-        });
-      });
-    }
+    // if (this.props.places.length) {
+    //   this.props.places.forEach((value) => {
+    //     console.log(value)
+    //     const infowindow = new google.maps.InfoWindow({
+    //       content: 
+    //       `<div>
+    //         <p>${value.name}</p>
+    //         <p>${value.types[0]}</p>
+    //       </div>`,
+    //     });
+    //     const marker = new google.maps.Marker({
+    //       animation: google.maps.Animation.DROP,
+    //       position: new google.maps.LatLng(value.geometry.location.lat, value.geometry.location.lng),
+    //       map: this.map,
+    //       icon: new google.maps.MarkerImage(
+    //         value.icon,
+    //         null,
+    //         null,
+    //         null,
+    //         new google.maps.Size(40, 40)
+    //       )
+    //     });
+    //     google.maps.event.addListener(marker, 'mouseover', () => {
+    //       infowindow.open(map, marker);
+    //       setTimeout(() => { infowindow.close(); }, '1000');
+    //     });
+    //   });
+    // }
     if (this.props.geolocation) {
       const marker = new google.maps.Marker({
         animation: google.maps.Animation.DROP,
