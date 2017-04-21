@@ -1,19 +1,38 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
+import { connect } from 'react-redux';
 import { createPlaid } from './../actions/plaid.js';
+import * as login from './../actions/login.js';
 
-const Login = (props) => {
-  return (
-    <div className="login">
-      <h1>Welcome to Financial Advisorly!</h1>
-      <h3>You are well on your way to saving big</h3>
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-      <p>Add your bank accounts:</p>
-      <RaisedButton id="link-button"
-        onClick={createPlaid} label="Add Bank Accounts" 
-      />
-    </div>
-  );
-};
+  componentDidMount() {
+    if (document.cookie.replace(/(?:(?:^|.*;\s*)advisorly\s*\=\s*([^;]*).*$)|^.*$/, "$1")) {
+      console.log('checking');
+      this.props.dispatch(login.getUser());
+    }
+  }
 
-export default Login;
+  render() {
+    return (
+      <div className="login">
+        <h1>Welcome to Financial Advisorly!</h1>
+        <h3>You are well on your way to saving big</h3>
+
+        <p>Add your bank accounts:</p>
+        <RaisedButton id="link-button"
+          onClick={createPlaid} label="Add Bank Accounts" 
+        />
+      </div>
+    );
+  }
+}
+
+export default connect((state) => {
+  return {
+    loggedIn: state.login.loggedIn,
+  };
+}) (Login);

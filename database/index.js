@@ -7,7 +7,6 @@ var connection = mysql.createConnection({
   database : 'heroku_aa9603bdcb7e15e'
 });
 
-
 module.exports = {
   connection: connection,
 

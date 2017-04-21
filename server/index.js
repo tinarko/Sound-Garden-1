@@ -32,6 +32,7 @@ app.use(express.static(__dirname + './../client/dist'));
 /**
  * Authentication Routes
  */
+app.get('/auth/user', authentication.getUser);
 app.get('/auth/auth0', passport.authenticate('auth0'));
 app.get('/auth/auth0/return', passport.authenticate('auth0', {
   failureRedirect: '/auth/auth0'

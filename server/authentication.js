@@ -82,3 +82,12 @@ exports.logout = (req, res) => {
     res.redirect('/');
   });
 };
+
+exports.getUser = (req, res) => {
+  var user = req.session.passport.user;
+  var userData = {
+    name: user.displayName,
+    picture: user._json.picture_large
+  };
+  res.json(userData);
+};

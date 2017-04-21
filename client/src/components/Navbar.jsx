@@ -4,13 +4,13 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { createPlaid } from './../actions/plaid.js';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import FlatButton from 'material-ui/FlatButton';
 
 const Navbar = (props) => {
   let view = null;
-  console.log(document.cookie.replace(/(?:(?:^|.*;\s*)advisorly\s*\=\s*([^;]*).*$)|^.*$/, "$1"))
   if (document.cookie.replace(/(?:(?:^|.*;\s*)advisorly\s*\=\s*([^;]*).*$)|^.*$/, "$1")) {
     view = (
       <div>
@@ -37,4 +37,4 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar;
+export default connect() (Navbar);
