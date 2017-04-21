@@ -14,7 +14,7 @@ const Navbar = (props) => {
   if (document.cookie.replace(/(?:(?:^|.*;\s*)advisorly\s*\=\s*([^;]*).*$)|^.*$/, "$1")) {
     view = (
       <div>
-        <FlatButton label="Add Account" onClick={createPlaid} containerElement={<Link to ="/"/>} />
+        <FlatButton label="Add Accounts" onClick={createPlaid} containerElement={<Link to ="/"/>} />
         <FlatButton label="Balance" containerElement={<Link to="/Balance" />} />
         <FlatButton label="Budget" containerElement={<Link to="/budget" />} />
         <FlatButton label="Cashback" containerElement={<Link to="/ccCashback" />} />

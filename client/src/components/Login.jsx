@@ -3,6 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import { createPlaid } from './../actions/plaid.js';
 import * as login from './../actions/login.js';
+import Balance from './Balance/Balance.jsx';
 
 class Login extends React.Component {
   constructor(props) {
@@ -18,9 +19,19 @@ class Login extends React.Component {
   render() {
     return (
       <div className="login">
-        <h1>Welcome to Financial Advisorly!</h1>
-        <h3>You are well on your way to saving big</h3>
-
+        {this.props.loggedIn ? 
+          <div>
+            <h1>Welcome Back, {this.props.name}</h1>
+            <img src={this.props.picture} width="10%" height="10%"/>
+            <h3>Here's where you stand: </h3>
+            <Balance />
+          </div>
+        :
+          <div>
+            <h1>Welcome to Financial Advisorly!</h1>
+            <h3>You are well on your way to saving big</h3>
+          </div>
+        }
         <p>Add your bank accounts:</p>
         <RaisedButton id="link-button"
           onClick={createPlaid} label="Add Bank Accounts" 
@@ -33,6 +44,7 @@ class Login extends React.Component {
 export default connect((state) => {
   return {
     loggedIn: state.login.loggedIn,
-
+    name: state.login.name,
+    picture: state.login.picture,
   };
 }) (Login);

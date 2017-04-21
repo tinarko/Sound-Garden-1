@@ -86,7 +86,7 @@ exports.logout = (req, res) => {
 exports.getUser = (req, res) => {
   var user = req.session.passport.user;
   var userData = {
-    name: user.displayName,
+    name: user.displayName.split(' ')[0],
     picture: user._json.picture_large
   };
   res.json(userData);
