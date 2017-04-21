@@ -9,7 +9,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import { Provider } from 'react-redux';
 
 import store from './store.js';
-import Balance from './components/balance/Balance.jsx';
+import Balance from './components/Balance/Balance.jsx';
 import Transactions from './components/Transactions.jsx';
 import Budget from './components/Budget.jsx';
 import CCCashback from './components/CCCashback.jsx';

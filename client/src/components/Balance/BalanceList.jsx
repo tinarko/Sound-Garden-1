@@ -1,5 +1,4 @@
 import React from 'react';
-// import BalanceListEntry from './BalanceListEntry.jsx';
 
 const BalanceList = (props) => {
   return (
