@@ -11,7 +11,6 @@ class Login extends React.Component {
 
   componentDidMount() {
     if (document.cookie.replace(/(?:(?:^|.*;\s*)advisorly\s*\=\s*([^;]*).*$)|^.*$/, "$1")) {
-      console.log('checking');
       this.props.dispatch(login.getUser());
     }
   }
@@ -34,5 +33,6 @@ class Login extends React.Component {
 export default connect((state) => {
   return {
     loggedIn: state.login.loggedIn,
+
   };
 }) (Login);

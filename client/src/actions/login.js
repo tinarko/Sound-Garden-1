@@ -7,8 +7,13 @@ export const getUser = () => {
       }
     })
       .then((response) => {
-        console.log('user response', response);
-        dispatch({type: 'GET_USER_SUCCESS', payload: response});
+        response.json()
+          .then((data) => {
+            dispatch({type: 'GET_USER_SUCCESS', payload: data});
+          })
+          .catch((err) => {
+            dispatch({type: 'GET_USER_ERROR', payload: err});
+          });
       })
       .catch((err) => {
         dispatch({type: 'GET_USER_ERROR', payload: err});
