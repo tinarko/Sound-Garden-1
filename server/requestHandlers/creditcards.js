@@ -46,26 +46,6 @@ exports.getCreditcards = (req, res) => {
   });
 };
 
-// exports.getUserCreditcards = (req, res) => {
-
-//   var userid;
-//   if (req.session.passport) {
-//     userid = req.session.passport.user.id;
-//     console.log('you are logged in with userid:', userid);
-    
-//   } else {
-//     userid = "facebook|10211056100732598";
-//     console.log('YOU ARE NOT LOGGED IN');
-//   }
-//   cc.getUserCreditcards(userid, (err, results) => {
-//     if (err) {
-//       res.status(500).send(err);
-//     } else {
-//       res.status(200).send(results);
-//     }
-//   });
-// };
-
 exports.createCreditCards = function(req, res) {
 
   var userid;
@@ -134,29 +114,21 @@ exports.createCreditCards = function(req, res) {
           }
         }
 
-        console.log('creditcards *********', creditcards);
-        // insert creditcards into creditcard table
+        // console.log('creditcards *********', creditcards);
 
-        // TEST stuff
-        // creditcards = ['this','that','or the other'];
+        // insert creditcards into creditcard table
         
         Promise.map(creditcards, (creditcard) => {
-          console.log('entering promises', creditcard);
           return cc.checkCreditcard(userid, creditcard, (err, results) => {
             if (err) {
-              console.log('new error', error);
               return err;
             } else {
-              console.log('checkCreditcard RESULTS', results);
               // credit card does not exist
               if (results.length === 0) {
-                console.log('need to go and create cc!');
                 cc.createCreditcard(userid, creditcard, (err, results) => {
                   if (err) {
-                    console.log('err creating credit card..:', err);
                     return err;
                   } else {
-                    console.log('created credit card:', results);
                   }
                 });
               }
@@ -165,7 +137,6 @@ exports.createCreditCards = function(req, res) {
         )
       })
       .then(results => {
-        console.log('got through promises!', results);
         res.sendStatus(200);
       })
       .catch(function(error) {

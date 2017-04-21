@@ -72,20 +72,19 @@ export const getCashbackCategoriesKickoff = (ccid) => {
       return response.json();
     })
     .then((json) => {
-      console.log(json);
-      dispatch(getCashbackCategory(json));
+      dispatch(getCashbackCategory(ccid, json));
     })
     .catch((err) => {
-      console.log('error in get', err);
       dispatch(getCashbackCategoryError(err));
     });
   };
 };
 
-export const getCashbackCategory = (cbcategories) => {
+export const getCashbackCategory = (ccid, cbcategories) => {
   return {
     type: 'GET_CASHBACK_CATEGORY',
-    cbcategories: cbcategories
+    cbcategories: cbcategories,
+    ccid: ccid
   };
 };
 

@@ -24,9 +24,13 @@ class CCCashback extends React.Component {
   // }
 
   render () {
-    console.log('cc', this.props.creditcards.cc);
     var creditcards = this.props.creditcards.cc.map( (cc, index) => {
-              return (<CreditCard className="component" creditcard={cc} key={index} ccindex={index}/>);
+              return (<CreditCard 
+                className="component" 
+                creditcard={cc} 
+                key={index} 
+                ccindex={index}
+                />);
             });
 
     if (this.props.creditcards.cashbacksetup) {
@@ -62,14 +66,12 @@ class CCCashback extends React.Component {
 const mapStateToProps = (state) => {
   return {
     creditcards: state.creditcards,
-    cashbacksetup: state.cashbacksetup
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     createCreditcardsKickoff: () => { dispatch(createCreditcardsKickoff()); },
-    // getCreditcards: () => { dispatch(getCreditcards()); },
     toggleCashbackSetup: () => {dispatch(toggleCashbackSetup()); }
   };
 };

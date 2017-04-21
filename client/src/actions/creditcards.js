@@ -35,7 +35,6 @@ export const toggleCashbackSetup = () => {
 };
 
 export const createCreditcardsKickoff = () => {
-  console.log('createCreditcardsKickoff');
   return (dispatch) => {
     fetch('/creditcards/createcreditcards', {
       method: 'GET',
@@ -44,11 +43,9 @@ export const createCreditcardsKickoff = () => {
       },
       credentials: 'same-origin',
     }).then(response => {
-      console.log('created creditcards?')
       dispatch(getCreditcards());
     })
     .catch((err) => {
-      console.log('error in get', err);
       dispatch(createCreditcardsError(err));
     });
   }
@@ -68,7 +65,7 @@ export const getCreditcards = () => {
       return response.json();
     })
     .then((json) => {
-      console.log('json from getCreditcards in action', json);
+      // console.log('json from getCreditcards in action', json);
       dispatch(receivedCreditcards(json));
     })
     .catch((err) => {
@@ -77,70 +74,5 @@ export const getCreditcards = () => {
     });
   };
 };
-
-// export const getUserCreditcards = () => {
-//   return (dispatch) => {
-//     dispatch(fetchingCreditcards());
-//     fetch('/creditcards/getusercreditcards', {
-//       method: 'GET',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       credentials: 'same-origin',
-//     })
-//     .then(response => {
-//       return response.json();
-//     })
-//     .then((json) => {
-//       console.log('json from getCreditcards in action', json);
-//       dispatch(receivedCreditcards(json));
-//     })
-//     .catch((err) => {
-//       console.log('error in get', err);
-//       dispatch(fetchCreditcardsError(err));
-//     });
-//   };
-// };
-
-
-// reorganize the db results to a format that makes more sense on state
-// var setCC = function (array) {
-//   var results = [];
-
-//   if (array.length > 0) {
-
-//     var ccid = array[0].ccid;
-//     results[0] = {
-//       ccid: ccid, 
-//       ccname: array[0].ccname,
-//       categories: []
-//     };
-
-//     var resultsIndex = 0;
-
-//     for (var i = 0; i < array.length; i++) {
-      
-//       if (array[i].ccid !== ccid) {
-//         ccid = array[i].ccid;
-//         resultsIndex++;
-//         results[resultsIndex] = {
-//           ccid: ccid,
-//           ccname: array[i].ccname,
-//           categories: []
-//         };
-//       }
-      
-//       results[resultsIndex].categories.push({
-//         name: array[i].categoryname,
-//         percent: array[i].value, 
-//         catid: array[i].catid
-//       });
-//     }
-//   }
-
-//   return results;
-// };
-
-
 
 

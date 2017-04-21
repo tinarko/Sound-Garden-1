@@ -55,8 +55,6 @@ app.post('/budget/updatebudgetcategory', budget.updateBudgetAmount);
  * Credit Card Routes
  */
 app.get('/creditcards/getcreditcards', creditcards.getCreditcards);
-
-// app.get('/creditcards/getusercreditcards', creditcards.getUserCreditcards);
 app.get('/creditcards/createcreditcards', creditcards.createCreditCards);
 
 /**

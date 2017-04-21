@@ -102,7 +102,7 @@ module.exports.allTransactions = function(req, res) {
           data.transactions.forEach(function(value) {
             value.institution_name = response[i].institution_name;
           });
-          console.log(data.transactions.length);
+          // console.log(data.transactions.length);
           return data.transactions;
         })
         .catch(function(error) {
@@ -118,7 +118,7 @@ module.exports.allTransactions = function(req, res) {
         results.forEach(function(bankTransactions) {
           send = send.concat(bankTransactions);
         });
-        console.log(send.length);
+        // console.log(send.length);
         return res.json(send);
       })
       .catch(function(error) {

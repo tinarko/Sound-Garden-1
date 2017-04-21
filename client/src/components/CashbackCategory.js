@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { changeCashbackPercent } from '../actions/changecashbackpercent';
 import { deleteCashbackCategoryKickoff } from '../actions/deletecashbackcategory';
+import { getCashbackCategoriesKickoff } from '../actions/createcashbackcategory';
 
 import IconButton from 'material-ui/IconButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
@@ -15,44 +16,46 @@ class CashbackCategory extends React.Component {
     super(props);
   }
 
-  componentWillMount() {
-  }
+  // componentDidMount() {
+  // }
 
   render () {
-    var ccindex = this.props.ccindex;
+    var ccid = this.props.ccid;
+    var category = this.props.category;
+    var catid = category.catid;
+    var percent = category.percent;
     var catindex = this.props.catindex;
-    var percent = this.props.category.percent;
-    var catname = this.props.category.name;
-    var catid = this.props.catid;
+    var ccindex = this.props.ccindex;
 
     return (
       <li>
-        <div>
-          <p>• {catname}: 
-            <IconButton onClick={ (e) => {
-              this.props.handleChange(ccindex, catindex, percent, 'decrement', catid)
-              } } > 
-              <ContentRemoveCircleOutline/>
-            </IconButton>
-            {percent} % 
-            <IconButton onClick={ (e) => {
-              this.props.handleChange(ccindex, catindex, percent, 'increment', catid)
-              } } > 
-              <ContentAddCircleOutline/>
-            </IconButton>
-            <button onClick={(e) => {
-              this.props.deleteCashbackCategoryKickoff(ccindex, catindex, catid)
-            } }>Delete</button>
-          </p>
-        </div>
-      </li>
+        <p> • {category.name} : 
+          <IconButton 
+            onClick={ (e) => {
+            this.props.handleChange(ccindex, catindex, percent, 'decrement', catid)
+            } } > 
+            <ContentRemoveCircleOutline/> 
+          </IconButton>
+          {category.percent} %
+          <IconButton 
+            onClick={ (e) => {
+            this.props.handleChange(ccindex, catindex, percent, 'increment', catid)
+            } } > 
+            <ContentAddCircleOutline/> 
+          </IconButton>
+
+          <button onClick={(e) => {
+            this.props.deleteCashbackCategoryKickoff(ccindex, catindex, catid)
+          } }>Delete</button>
+        </p>
+      </li> 
     )
   }
 }
 
 // const mapStateToProps = (state) => {
 //   return {
-//     // cashbackpercent: state.cashbackpercent,
+//     creditcards: state.creditcards.cc
 //   };
 // };
 
@@ -63,24 +66,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     deleteCashbackCategoryKickoff: (ccindex, catindex, catid) => {
       dispatch(deleteCashbackCategoryKickoff(ccindex, catindex, catid));
-    }
-  };
-};
+    },
+  }
+}
 
 // export default connect (mapStateToProps, mapDispatchToProps) (CashbackCategory);
 export default connect (null, mapDispatchToProps) (CashbackCategory);
 
-/*
- <RaisedButton label="-"  onClick={ (e) => {
-              this.props.handleChange(ccindex, catindex, percent, 'decrement', catid)
-            } }/>
 
-            <RaisedButton label="+"  onClick={ (e) => {
-              this.props.handleChange(ccindex, catindex, percent, 'increment', catid)
-            } }/>
 
-            <RaisedButton label="Delete"  onClick={(e) => {
-              this.props.deleteCashbackCategoryKickoff(ccindex, catindex, catid)
-            } }/>
-
-*/

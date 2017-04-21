@@ -11,7 +11,7 @@ module.exports = {
   connection: connection,
 
   findUser: function(userid, cb) {
-    console.log('here is the profile', userid);
+    // console.log('here is the profile', userid);
     var queryString = 'SELECT * FROM USERS where userid = ?';
     connection.query(queryString, userid, function(err, existingUser) {
       if (existingUser.length === 0) {
@@ -30,7 +30,7 @@ module.exports = {
     ];
     var query = 'insert into users(userid, name, email) value(?, ?, ?)';
     connection.query(query, profile, function(err, results, field) {
-      console.log('inserted new user');
+      // console.log('inserted new user');
       cb(err, results);
     });
   },
@@ -59,7 +59,7 @@ module.exports = {
       queryString = queryString.concat(addOn); 
     }
 
-    console.log('queryString:', queryString);
+    // console.log('queryString:', queryString);
     connection.query(queryString, userid, function(err, results) {
       if (err) {
         cb(err, null);
@@ -74,7 +74,7 @@ module.exports = {
     // refine to update off of account data
     var query = 'UPDATE items SET access_token = ?, institution_name = ? where user_id = ? AND institution_name = ?';
     connection.query(query, [params[0], params[1], params[2], params[1]], function(err, results, field) {
-      console.log('updated plaid item', results);
+      // console.log('updated plaid item', results);
       cb(err, results.affectedRows);
     });
   },
@@ -82,7 +82,7 @@ module.exports = {
   insertPlaidItem: function(params, cb) {
     var query = 'insert into items (user_id, access_token, institution_name) values (?, ?, ?)';
     connection.query(query, params, function(err, results, field) { 
-      console.log('inserted new plaid item', results);
+      // console.log('inserted new plaid item', results);
       cb(err, results);
     });
   },
@@ -91,7 +91,7 @@ module.exports = {
     // var query = 'select * from items, users where users.userid = ?';
     var query = 'select * from items where user_id = ?';
     connection.query(query, userid, function(err, results, field) {
-      console.log('results from getPlaidItems', results);
+      // console.log('results from getPlaidItems', results);
       cb(err, results);
     });
   },
@@ -146,7 +146,7 @@ module.exports = {
     SET budgetcategories.goalvalue = ? WHERE users.userid = ? AND categorytypes.name = ? AND YEAR(budgets.month) = ? AND MONTH(budgets.month) = ?';
     connection.query(queryString, params, function(err, results, field) {
       if (err) {
-        console.log('errored in index.js in db');
+        // console.log('errored in index.js in db');
         cb(err, null);
       } else {
         cb(null, results);
@@ -203,14 +203,14 @@ module.exports = {
   },
 
   insertUserBudget: function(params, cb) {
-    console.log('params', params);
+    // console.log('params', params);
     var categoryid = params[2];
     var updatedvalue = params[0];
     var userid = params[1];
     var yearString = params[3];
     var monthString = params[4];
 
-    console.log('insertUserBudget params:', categoryid, updatedvalue, userid, yearString, monthString);
+    // console.log('insertUserBudget params:', categoryid, updatedvalue, userid, yearString, monthString);
     
     var queryString = 
     'insert into budgetcategories (budget_id, category_id, goalvalue) \
@@ -223,7 +223,7 @@ module.exports = {
       if (err, null) {
         cb(err, null);
       } else {
-        console.log(results);
+        // console.log(results);
         cb (null, results);
       }
     });

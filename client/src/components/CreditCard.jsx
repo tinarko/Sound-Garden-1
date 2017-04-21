@@ -18,7 +18,7 @@ class CreditCard extends React.Component {
     };
   }
 
-  componentDidMount () {
+  componentWillMount () {
     var ccid = this.props.creditcard.ccid;
     this.props.getCashbackCategoriesKickoff(ccid);
   }
@@ -34,7 +34,9 @@ class CreditCard extends React.Component {
 
   render () {
     var creditcard = this.props.creditcard;
+    var categories = creditcard.categories;
     var ccid = creditcard.ccid;
+    var ccindex = this.props.ccindex;
     
     return (
       <div>
@@ -42,18 +44,17 @@ class CreditCard extends React.Component {
         <li>
           <h3>{ creditcard.ccname }</h3>
           <ul>
-            { creditcard.categories.map( (category, index) => { 
+            {categories.map((category, index) => {
               return (
                 <CashbackCategory 
-                  ccindex={this.props.key} 
-                  ccindex={this.props.ccindex} 
                   key={index} 
                   catindex={index} 
-                  category={category}
-                  catid={category.catid}
+                  category={category} 
+                  ccid={ccid}
+                  ccindex={ccindex}
                 />
-              )
-            }) }
+              );
+            })}
             <li>
               <p>• Category: 
                 <input type="text" 
@@ -76,6 +77,7 @@ class CreditCard extends React.Component {
   }
 }
 
+
 // const mapStateToProps = (state) => {
 // };
 
@@ -88,13 +90,7 @@ const mapDispatchToProps = (dispatch) => {
     // handlePercentChange: (percent) => { dispatch(handlePercentChange(percent)); }
     getCashbackCategoriesKickoff: (ccid) => { dispatch(getCashbackCategoriesKickoff(ccid)); }
   };
-};
+}
 
 export default connect (null, mapDispatchToProps) (CreditCard);
 
-
-
-
-                // <RaisedButton label="Add" onClick={ (e) => 
-                //   { this.props.createCashbackCategoryKickoff(
-                //     this.props.ccindex, ccid, this.state.catname, this.state.number) } } />
