@@ -13,7 +13,7 @@ class BudgetBulletChart extends React.Component {
   //uncommenting this shows graph, but only with dummy data
   //this.props is not correct at this point
   componentDidMount() {
-    // console.log('this.props in BudgetBullet DidMount', this.props);
+    console.log('this.props in BudgetBullet DidMount', this.props);
     // var el = ReactDOM.findDOMNode(this);
     // console.log('el', el);
     // // if (this.props.budget.budgets.length > 0) {
@@ -23,12 +23,13 @@ class BudgetBulletChart extends React.Component {
 
   //uncommenting this shows graph. but only with dummy data (without if condition)
   //this.props does show correctly at this point
-  componentWillUpdate () {
+  componentDidUpdate () {
     console.log('this.props in BudgetBullet DidUpdate', this.props);
     var el = ReactDOM.findDOMNode(this);
     console.log('el', el);
     // if (this.props.budget.budgets.length > 0) {
       d3BulletChart.create(el, this.props);
+      // d3BulletChart.create(el, this.props);
     // }
   }
   render () {
