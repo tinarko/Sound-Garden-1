@@ -15,13 +15,12 @@ class CCCashback extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.createCreditcardsKickoff();
   }
 
-  // componentWillMount () {
-  //   this.props.getCreditcards();
-  // }
+  componentDidMount () {
+  }
 
   render () {
     var creditcards = this.props.creditcards.cc.map( (cc, index) => {

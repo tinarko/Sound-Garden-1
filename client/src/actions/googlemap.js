@@ -25,10 +25,16 @@ export const getLocation = () => {
             .then((response) => {
               response.json()
               .then((placesData) => {
-                dispatch({type: 'FETCHED_GOOGLE_DATA', payload: {
-                  geolocation: geolocation.location,
-                  places: placesData.results
-                }});
+                dispatch(
+                  {
+                    type: 'FETCHED_GOOGLE_DATA', 
+                    payload: 
+                    {
+                      geolocation: geolocation.location,
+                      places: placesData.results
+                    }
+                  }
+                );
               });
             })
             .catch((error) => {
