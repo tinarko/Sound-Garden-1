@@ -8,7 +8,7 @@ const chaiHttp = require ('chai-http');
 const server = require('../server/index');
 const mysql = require('mysql');
 
-// var port = process.env.PORT || 1337;
+var schema = require('../database/config.js');
 
 chai.use(chaiHttp);
 
@@ -17,6 +17,17 @@ describe ('', function () {
   let db;
   // let port = process.env.PORT || 1337;
 
+  var clearDB = (connection, tablenames, done) => {
+    var count = 0;
+    tablenames.forEach(function(tablename) {
+      connection.query('DROP TABLE IF EXISTS ' + tablename, () => {
+        count++;
+        if (count === tablename.length) {
+          return schema(db).then(done);
+        }
+      });
+    });
+  };
 
   beforeEach( () => {
     db = mysql.createConnection({
@@ -24,10 +35,15 @@ describe ('', function () {
       password: '',
       database: 'heroku_aa9603bdcb7e15e'
     });
-    db.connect();
-   // app.listen(port, function() {
-    //   console.log('listening on port' + port);
-    // });
+
+    var tables = ['users', 'budgets', 'categorytypes', 'budgetcategories', 'items', 'creditcards', 'cccategories', 'friends'];
+    db.connect( (err) => {
+      if (err) { return done(err); }
+      clearDB(db, tables, function () {
+        server = app.listen(port, done);
+      });
+    });
+
     afterEach(function () { server.close(); });
   
   });
