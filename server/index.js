@@ -61,8 +61,8 @@ app.get('/creditcards/createcreditcards', creditcards.createCreditCards);
 /**
  * Cashback Routes
  */
+app.get('/cashback/getallusercategories', cashback.getAllUserCategories);
 app.get('/cashback/getcashbackcategories/:catid', cashback.getCashbackCategories);
-
 app.post('/cashback/changecashbackpercent', cashback.changeCashbackPercent);
 app.post('/cashback/createcashbackcategory', cashback.createCashbackCategory);
 app.delete('/cashback/deletecashbackcategory/:catid', cashback.deleteCashbackCategory);

@@ -15,6 +15,21 @@ exports.getCashbackCategories = (ccid, cb) => {
   });
 };
 
+exports.getAllUserCategories = (userid, cb) => {
+  var query = `SELECT ccid, cccategories.id as catid, ccname, categoryname, value FROM users \
+      JOIN creditcards ON creditcards.userid = users.userid \
+      JOIN cccategories ON creditcards.id = cccategories.ccid \
+      WHERE users.userid = "${userid}" order by ccid, categoryname;`;
+
+  connection.query(query, (err, results) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, results);
+    }
+  });
+};
+
 exports.changeCashbackCategories = (catid, percent, action, cb) => {
   var updatedPercent;
   if (action === 'increment') {

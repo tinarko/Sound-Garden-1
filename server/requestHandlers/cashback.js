@@ -22,6 +22,24 @@ exports.getCashbackCategories = (req, res) => {
   });
 };
 
+exports.getAllUserCategories = (req, res) => {
+  var userid;
+  if (req.session.passport) {
+    userid = req.session.passport.user.id;    
+  } else {
+    userid = "facebook|10211056100732598";
+    console.log('YOU ARE NOT LOGGED IN');
+  }
+
+  cb.getAllUserCategories(userid, (err, results) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(results);
+    }
+  });
+};
+
 exports.changeCashbackPercent = (req, res) => {
   var catid = req.body.catid;
   var percent = req.body.percent;
