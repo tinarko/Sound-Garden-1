@@ -69,7 +69,6 @@ passport.deserializeUser((user, done) => {
 });
 
 exports.logout = (req, res) => {
-  console.log('hi')
   req.logout();
   res.redirect('/');
 };

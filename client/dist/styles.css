@@ -179,16 +179,12 @@ a {
   margin: 3% 0;
 }
 
-.login img {
-  display: inline;
-  height: 5%;
-  width: 5%;
+.app-bar-title {
+  cursor: pointer;
 }
 
 .app-bar {
   width: 100%;
-}
-
-.app-bar-title {
-  cursor: pointer;
+  position: fixed;
+  top: 0;
 }

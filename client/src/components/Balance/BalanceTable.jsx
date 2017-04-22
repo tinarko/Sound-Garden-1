@@ -13,7 +13,7 @@ const BalanceTable = (props) => {
                       <TableBody displayRowCheckbox={false}>
                         <TableRow>
                           <TableRowColumn>{item.institution_name + ' ' + item.name}</TableRowColumn>
-                          <TableRowColumn>{'Balance: $' + item.balances.current}</TableRowColumn>
+                          <TableRowColumn>{'       $' + item.balances.current}</TableRowColumn>
                         </TableRow>
                       </TableBody>
                   </div>);
@@ -31,7 +31,7 @@ const BalanceTable = (props) => {
                       <TableBody displayRowCheckbox={false}>
                         <TableRow>
                           <TableRowColumn>{item.institution_name + ' ' + item.name}</TableRowColumn>
-                          <TableRowColumn>{'Balance: $' + item.balances.current}</TableRowColumn>
+                          <TableRowColumn>{'       $' + item.balances.current}</TableRowColumn>
                         </TableRow>
                       </TableBody>
                     </Table>
@@ -52,7 +52,7 @@ const BalanceTable = (props) => {
                       <TableBody displayRowCheckbox={false}>
                         <TableRow>
                           <TableRowColumn>{item.institution_name + ' ' + item.name}</TableRowColumn>
-                          <TableRowColumn>{'Balance: $' + item.balances.current}</TableRowColumn>
+                          <TableRowColumn>{'       $' + item.balances.current}</TableRowColumn>
                         </TableRow>
                       </TableBody>
                     </Table>
