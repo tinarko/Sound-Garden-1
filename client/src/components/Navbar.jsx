@@ -5,35 +5,20 @@ import {
   Link
 } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createPlaid } from './../actions/plaid.js';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import FlatButton from 'material-ui/FlatButton';
+import AppBar from 'material-ui/AppBar';
+import LoggedOptions from './LoggedOptions.jsx';
+import IconMenu from 'material-ui/IconMenu';
 
 const Navbar = (props) => {
-  let view = null;
-  if (props.loggedIn) {
-    view = (
-      <div>
-        <FlatButton label="Add Accounts" onClick={createPlaid} containerElement={<Link to ="/"/>} />
-        <FlatButton label="Balance" containerElement={<Link to="/Balance" />} />
-        <FlatButton label="Budget" containerElement={<Link to="/budget" />} />
-        <FlatButton label="Cashback" containerElement={<Link to="/ccCashback" />} />
-        <FlatButton label="Transactions" containerElement={<Link to="/transactions" />} />
-        <a href="/auth/logout"><FlatButton label="Logout" containerElement={<div/>} /></a>
-      </div>
-    );
-  } else {
-    view = (
-      <div>
-        <a href="/auth/auth0"><FlatButton label="Login" /></a>
-      </div>
-    );
-  }
+  console.log('navbar here--------', props.loggedIn)
   return (
-    <Toolbar>
-      <FlatButton label="FinancialAdvisorly" containerElement={<Link to="/" />} secondary={true}/>
-      {view}
-    </Toolbar>
+    <AppBar
+      className="app-bar" 
+      title={<span className="app-bar-title">Advisorly<Link to="/" /></span>}
+      iconElementLeft={<div></div>}
+      iconElementRight={props.loggedIn ? <LoggedOptions/> : <FlatButton label="Login"><a href="/auth/auth0" /></ FlatButton>}
+    />
   );
 };
 

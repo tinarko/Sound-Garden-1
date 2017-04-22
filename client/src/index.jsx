@@ -57,14 +57,15 @@ class App extends React.Component {
               <Navbar />
 
               <hr/>
-
-              <Route exact path="/" component={Login}/>
-              <Route path="/balance" component={Balance}/>
-              <Route path="/budget" component={Budget}/>
-              <Route path="/ccCashback" component={CCCashback}/>
-              <Route path="/portfolio" component={Portfolio}/>
-              <Route path="/emailNotifications" component={EmailNotifications}/>
-              <Route path="/transactions" component={Transactions}/>
+              <div className="app-body">
+                <Route exact path="/" component={Login}/>
+                <Route path="/balance" component={Balance}/>
+                <Route path="/budget" component={Budget}/>
+                <Route path="/ccCashback" component={CCCashback}/>
+                <Route path="/portfolio" component={Portfolio}/>
+                <Route path="/emailNotifications" component={EmailNotifications}/>
+                <Route path="/transactions" component={Transactions}/>
+              </div>
             </div>
           </Router>
         </div>

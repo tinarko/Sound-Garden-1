@@ -92,6 +92,10 @@ li {
   padding-left: 1em; 
 }
 
+a {
+  text-decoration: none;
+}
+
 /*li::before {
   content: "• ";
 }*/
@@ -179,4 +183,12 @@ li {
   display: inline;
   height: 5%;
   width: 5%;
+}
+
+.app-bar {
+  width: 100%;
+}
+
+.app-bar-title {
+  cursor: pointer;
 }
