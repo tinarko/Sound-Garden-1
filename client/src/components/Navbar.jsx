@@ -11,7 +11,6 @@ import LoggedOptions from './LoggedOptions.jsx';
 import IconMenu from 'material-ui/IconMenu';
 
 const Navbar = (props) => {
-  console.log('navbar here--------', props.loggedIn)
   return (
     <AppBar
       className="app-bar" 

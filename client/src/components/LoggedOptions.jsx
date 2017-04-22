@@ -9,12 +9,12 @@ import FlatButton from 'material-ui/FlatButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
-import Dehaze from 'material-ui/svg-icons/navigation/dehaze';
+import Menu from 'material-ui/svg-icons/navigation/menu';
 
 const LoggedOptions = (props) => (
   <IconMenu
     iconButtonElement={
-      <IconButton><Dehaze color="white"/></IconButton>
+      <IconButton><Menu color="white"/></IconButton>
     }
     targetOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
@@ -23,8 +23,8 @@ const LoggedOptions = (props) => (
     <MenuItem primaryText="Balance" containerElement={<Link to="/Balance" />} />
     <MenuItem primaryText="Budget" containerElement={<Link to="/budget" />} />
     <MenuItem primaryText="Cashback" containerElement={<Link to="/ccCashback" />} />
-    <MenuItem primaryText="Transactions" containerElement={<Link to="/trasnactions" />} />
-    <MenuItem primaryText="Logout" containerElement={<div />} href="/auth/logout" />
+    <MenuItem primaryText="Transactions" containerElement={<Link to="/transactions" />} />
+    <MenuItem primaryText="Logout" href="/auth/logout" />
   </IconMenu>
 );
 
