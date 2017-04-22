@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 
 import CreditCard from './CreditCard.jsx'
-import GoogleMap from './GoogleMap.jsx';
+import MapCalculator from './MapCalculator.jsx';
 
 import { createCreditcardsKickoff, toggleCashbackSetup, getCreditcards } from '../actions/creditcards';
 
@@ -47,18 +47,18 @@ class CCCashback extends React.Component {
         </div> );
     } else {
 
-        console.log('state!!', state);
+        console.log('state!!', this.props.state);
 
         return (
         <div>
           <h1>Credit Card Selector</h1>
           <br/>
-          <h3>Are you at this location? {this.props.googlemap.bizName} </h3>
+          <h3>Are you at this location? {this.props.mapcalculator.bizName} </h3>
           <br/>
           <p>If so, please use your //credit card// for // X // % cash back!</p>
           <br/>
           <RaisedButton label="Setup" onClick={this.props.toggleCashbackSetup} />
-          <GoogleMap />
+          <MapCalculator />
         </div> 
         );
     }
@@ -68,7 +68,7 @@ class CCCashback extends React.Component {
 const mapStateToProps = (state) => {
   return {
     creditcards: state.creditcards,
-    googlemap: state.googlemap,
+    mapcalculator: state.mapcalculator,
     state: state
   };
 };

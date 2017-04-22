@@ -14,29 +14,29 @@ module.exports.geolocate = (req, res) => {
   });
 };
 
-module.exports.places = (req, res) => {
-  var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
-  var lat = req.body.location.location.lat;
-  var lng = req.body.location.location.lng;
-  var location = `${lat},${lng}`;
-  request({
-    uri: url,
-    method: 'GET', 
-    qs: {
-      location: location,
-      // radius: '1000', cannot have not radius and rankby
-      rankby: 'distance',
-      keyword: 'store',
-      key: `${process.env.GOOGLE_places_apiKey}`
-    },
-    qsStringifyOptions: {
-      encoding: false
-    }
-  }, function(error, response, body) {
-    if (error) {
-      res.status(500).send(error);
-    } else {
-      res.send(body);
-    }
-  });
-};
+// module.exports.places = (req, res) => {
+//   var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?';
+//   var lat = req.body.location.location.lat;
+//   var lng = req.body.location.location.lng;
+//   var location = `${lat},${lng}`;
+//   request({
+//     uri: url,
+//     method: 'GET', 
+//     qs: {
+//       location: location,
+//       // radius: '1000', cannot have not radius and rankby
+//       rankby: 'distance',
+//       keyword: 'store',
+//       key: `${process.env.GOOGLE_places_apiKey}`
+//     },
+//     qsStringifyOptions: {
+//       encoding: false
+//     }
+//   }, function(error, response, body) {
+//     if (error) {
+//       res.status(500).send(error);
+//     } else {
+//       res.send(body);
+//     }
+//   });
+// };

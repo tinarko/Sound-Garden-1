@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 
 //import actions
 // import * as googlemap from './../actions/googlemap.js';
-import { getLocation, yelpQuery } from './../actions/googlemap.js'
+import { getLocation, yelpQuery } from './../actions/mapcalculator.js'
 
 // import crimeImg from '../img/security.png';
 
-class GoogleMap extends React.Component {
+class MapCalculator extends React.Component {
   constructor(props) {
     super(props);
     this.createMap = this.createMap.bind(this);
@@ -72,11 +72,11 @@ class GoogleMap extends React.Component {
 
 export default connect((state) => {
   return {
-    geolocation: state.googlemap.geolocation
+    geolocation: state.mapcalculator.geolocation
   };
 }, (dispatch) => {
   return {
     yelpQuery: (lat, long) => { dispatch(yelpQuery(lat, long)) },
     getLocation: () => { dispatch(getLocation()); }
   }
-})(GoogleMap);
+})(MapCalculator);
