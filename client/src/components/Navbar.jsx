@@ -17,7 +17,7 @@ const Navbar = (props) => {
       className="app-bar" 
       title={<span className="app-bar-title">Advisorly<Link to="/" /></span>}
       iconElementLeft={<div></div>}
-      iconElementRight={props.loggedIn ? <LoggedOptions/> : <FlatButton label="Login"><a href="/auth/auth0" /></ FlatButton>}
+      iconElementRight={props.loggedIn ? <LoggedOptions/> : <FlatButton label="Login" href="/auth/auth0"></ FlatButton>}
     />
   );
 };
