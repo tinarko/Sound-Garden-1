@@ -42,7 +42,8 @@ export const createCreditcardsKickoff = () => {
         'Content-Type': 'application/json'
       },
       credentials: 'same-origin',
-    }).then(response => {
+    })
+    .then(response => {
       dispatch(getCreditcards());
     })
     .catch((err) => {

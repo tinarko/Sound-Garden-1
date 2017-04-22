@@ -14,7 +14,7 @@ module.exports = {
     // console.log('here is the profile', userid);
     var queryString = 'SELECT * FROM USERS where userid = ?';
     connection.query(queryString, userid, function(err, existingUser) {
-      if (existingUser.length === 0) {
+      if (!existingUser || existingUser.length === 0) {
         cb(err, false);
       } else {
         cb(err, existingUser[0]);

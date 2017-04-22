@@ -12,6 +12,7 @@ var budget = require('./requestHandlers/budget.js');
 var creditcards = require('./requestHandlers/creditcards.js');
 var cashback = require('./requestHandlers/cashback.js');
 var google = require('./requestHandlers/google.js');
+var yelp = require('./requestHandlers/yelp.js');
 var plaid = require('./requestHandlers/plaid.js');
 
 var app = express();
@@ -71,6 +72,12 @@ app.delete('/cashback/deletecashbackcategory/:catid', cashback.deleteCashbackCat
  */
 app.get('/google/geolocate', google.geolocate);
 app.post('/google/places', google.places);
+
+/** 
+ * Yelp routes
+ */
+
+app.get('/yelp/businesses/:lat/:long', yelp.businesses);
 
 /**
  * Plaid routes

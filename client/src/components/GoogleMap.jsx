@@ -2,7 +2,8 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 //import actions
-import * as googlemap from './../actions/googlemap.js';
+// import * as googlemap from './../actions/googlemap.js';
+import { setPinLocation, getLocation, yelpQuery } from './../actions/googlemap.js'
 
 // import crimeImg from '../img/security.png';
 
@@ -13,12 +14,12 @@ class GoogleMap extends React.Component {
     this.createMarkers = this.createMarkers.bind(this);
   }
 
-  componentDidMount() {
-    this.props.dispatch(googlemap.getLocation());
+  componentWillMount() {
+    this.props.getLocation();
     console.log('props', this.props);
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     // originally in componentDidMount
     if (this.props.geolocation) {
       const directionsDisplay = new google.maps.DirectionsRenderer();
@@ -81,7 +82,10 @@ class GoogleMap extends React.Component {
         tile: 'You!',
       });
       google.maps.event.addListener(marker, 'dragend', (e) => {
-        console.log('lat', e.latLng.lat(), e.latLng.lng())        
+        var lat = e.latLng.lat();
+        var long = e.latLng.lng();
+        console.log('lat', lat, 'long', long);
+        this.props.yelpQuery(lat, long);
       })
     }
   }
@@ -99,4 +103,10 @@ export default connect((state) => {
     places: state.googlemap.places,
     geolocation: state.googlemap.geolocation
   };
+}, (dispatch) => {
+  return {
+    setPinLocation: (lat, long) => { dispatch(setPinLocation(lat, long)) },
+    yelpQuery: (lat, long) => { dispatch(yelpQuery(lat, long)) },
+    getLocation: () => { dispatch(getLocation()); }
+  }
 })(GoogleMap);
