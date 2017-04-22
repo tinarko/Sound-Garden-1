@@ -20,11 +20,8 @@ class MapCalculator extends React.Component {
     
   }
 
-  componentDidMount() {
-    console.log('props DID MOUNT', this.props);
-      
+  componentDidMount() {      
     if (this.props.geolocation) {
-      console.log('geolocation!');
       const directionsDisplay = new google.maps.DirectionsRenderer();
       this.map = this.createMap();
       // this.map.addListener('click', (e) => {

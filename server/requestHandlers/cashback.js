@@ -40,6 +40,15 @@ exports.getAllUserCategories = (req, res) => {
   });
 };
 
+exports.calculate = (req, res) => {
+  var userCats = req.body.userCats;
+  var bizCats = req.body.bizCats;      
+  console.log('cards', userCats, 'bizCats', bizCats);
+
+  res.json('hi');
+
+};
+
 exports.changeCashbackPercent = (req, res) => {
   var catid = req.body.catid;
   var percent = req.body.percent;
