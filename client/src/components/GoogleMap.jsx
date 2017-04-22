@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 //import actions
 // import * as googlemap from './../actions/googlemap.js';
-import { setPinLocation, getLocation, yelpQuery } from './../actions/googlemap.js'
+import { getLocation, yelpQuery } from './../actions/googlemap.js'
 
 // import crimeImg from '../img/security.png';
 
@@ -41,37 +41,7 @@ class GoogleMap extends React.Component {
     return new google.maps.Map(this.refs.map, mapOptions);
   }
 
-  // https://api.yelp.com/v3/autocomplete?text=del&latitude=37.78162725488666&longitude=-122.40663241772154
-
   createMarkers(map) {
-    // if (this.props.places.length) {
-    //   this.props.places.forEach((value) => {
-    //     console.log(value)
-    //     const infowindow = new google.maps.InfoWindow({
-    //       content: 
-    //       `<div>
-    //         <p>${value.name}</p>
-    //         <p>${value.types[0]}</p>
-    //       </div>`,
-    //     });
-    //     const marker = new google.maps.Marker({
-    //       animation: google.maps.Animation.DROP,
-    //       position: new google.maps.LatLng(value.geometry.location.lat, value.geometry.location.lng),
-    //       map: this.map,
-    //       icon: new google.maps.MarkerImage(
-    //         value.icon,
-    //         null,
-    //         null,
-    //         null,
-    //         new google.maps.Size(40, 40)
-    //       )
-    //     });
-    //     google.maps.event.addListener(marker, 'mouseover', () => {
-    //       infowindow.open(map, marker);
-    //       setTimeout(() => { infowindow.close(); }, '1000');
-    //     });
-    //   });
-    // }
     if (this.props.geolocation) {
       const marker = new google.maps.Marker({
         animation: google.maps.Animation.DROP,
@@ -103,7 +73,6 @@ export default connect((state) => {
   };
 }, (dispatch) => {
   return {
-    setPinLocation: (lat, long) => { dispatch(setPinLocation(lat, long)) },
     yelpQuery: (lat, long) => { dispatch(yelpQuery(lat, long)) },
     getLocation: () => { dispatch(getLocation()); }
   }

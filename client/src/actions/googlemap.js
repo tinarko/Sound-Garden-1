@@ -27,43 +27,6 @@ export const getLocation = () => {
   };
 };
 
-
-// export const getPlace = (geolocation) => {
-//   return (dispatch) => {
-//     fetch('/google/places', {
-//       method: 'POST',
-//       credentials: 'same-origin',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({
-//         location: geolocation,
-//       })
-//     })
-//     .then((response) => {
-//       return response.json();
-//     })
-//     .then((placesData) => {
-//       dispatch(fetchedLocationPlaces(geolocation.location, placesData.results));
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-//   }
-// }
-
-// export const fetchedLocationPlaces = (location, places) => {
-//   return {
-//     type: 'FETCHED_GOOGLE_DATA', 
-//     payload: 
-//     {
-//       geolocation: location,
-//       places: places
-//     }
-//   }
-// }
-
-
 export const yelpQuery = (lat, long) => {
   var url = `/yelp/businesses/${lat}/${long}`;
   return (dispatch) => {
