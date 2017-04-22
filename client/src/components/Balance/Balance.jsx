@@ -2,15 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as balance from './../../actions/balance.js';
 import BalanceList from './BalanceList.jsx';
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
 class Balance extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  // works with componentWillMount as well
   componentDidMount() {
-    // dispatch function is in props
     this.props.dispatch(balance.getBalance());
   }
 
@@ -28,35 +27,69 @@ class Balance extends React.Component {
               const prevType = this.props.balance[index - 1].subtype;
               if (item.subtype === prevType) {
                 return (
+                  // same subtype so add a row to the existing table
                   <div>
-                    <BalanceList 
+                    {/*<BalanceList 
                       account={item}
                       key={index}
-                    />
+                    />*/}
+                    <TableBody>
+                      <TableBody>
+                        <TableHeader>{item.institution_name + ' ' + item.account.name}</TableHeader>
+                      </TableBody>
+                    </TableBody>
                   </div>);
               } else {
+                // new subtype --> new table
                 return (
                   <div>
                     <h3>{item.subtype}</h3>
-                    <ol>
+                    {/*<ol>
                       <BalanceList 
                         account={item}
                         key={index}
                       />
-                    </ol>
+                    </ol>*/}
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHeaderColumn>Account Name</TableHeaderColumn>
+                          <TableHeaderColumn>Balance</TableHeaderColumn>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <TableBody>
+                          <TableHeader>{item.institution_name + ' ' + item.name}</TableHeader>
+                        </TableBody>
+                      </TableBody>
+                    </Table>
                   </div>
                 );
               }
             } else {
+              // new subtype --> new table
               return (
                 <div>
                   <h3>{item.subtype}</h3>
-                  <ol>
+                  {/*<ol>
                     <BalanceList 
                       account={item}
                       key={index}
                     />
-                  </ol>
+                  </ol>*/}
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHeaderColumn>Account Name</TableHeaderColumn>
+                          <TableHeaderColumn>Balance</TableHeaderColumn>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        <TableBody>
+                          <TableHeader>{item.institution_name + ' ' + item.name}</TableHeader>
+                        </TableBody>
+                      </TableBody>
+                    </Table>
                 </div>
               );
             }
