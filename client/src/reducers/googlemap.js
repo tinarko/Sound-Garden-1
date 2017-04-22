@@ -1,6 +1,9 @@
 var initialState = 
 {
-  geolocation: null,
+  geolocation: {
+    lat: 37.7836577760287,
+    long: -122.40881301209487
+    },
   places: null,
   bizName: '// business name//',
   bizCats: []

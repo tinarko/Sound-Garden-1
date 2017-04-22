@@ -16,11 +16,15 @@ class GoogleMap extends React.Component {
 
   componentWillMount() {
     this.props.getLocation();
+    console.log('props', this.props);
+    
   }
 
   componentDidMount() {
-    console.log('props', this.props);
+    console.log('props DID MOUNT', this.props);
+      
     if (this.props.geolocation) {
+      console.log('geolocation!');
       const directionsDisplay = new google.maps.DirectionsRenderer();
       this.map = this.createMap();
       // this.map.addListener('click', (e) => {
@@ -29,7 +33,7 @@ class GoogleMap extends React.Component {
       // })
       directionsDisplay.setMap(this.map);
       this.createMarkers(this.map);
-    }
+    } 
   }
 
   createMap() {
@@ -53,7 +57,6 @@ class GoogleMap extends React.Component {
       google.maps.event.addListener(marker, 'dragend', (e) => {
         var lat = e.latLng.lat();
         var long = e.latLng.lng();
-        console.log('lat', lat, 'long', long);
         this.props.yelpQuery(lat, long);
       })
     }
