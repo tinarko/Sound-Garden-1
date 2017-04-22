@@ -32,6 +32,13 @@ export default (state = initialState, action) => {
       return newState;
     }
     break;
+    case 'SET_PIN_AND_BUSINESS_DATA_ERROR' : {
+      return {
+        ...state,
+        error: action.error
+      }
+    }
+    break;
     default: 
       return state;
   }

@@ -16,11 +16,10 @@ class GoogleMap extends React.Component {
 
   componentWillMount() {
     this.props.getLocation();
-    console.log('props', this.props);
   }
 
   componentDidMount() {
-    // originally in componentDidMount
+    console.log('props', this.props);
     if (this.props.geolocation) {
       const directionsDisplay = new google.maps.DirectionsRenderer();
       this.map = this.createMap();
@@ -34,7 +33,7 @@ class GoogleMap extends React.Component {
   }
 
   createMap() {
-    const geolocation = new google.maps.LatLng(this.props.geolocation.lat, this.props.geolocation.lng);
+    const geolocation = new google.maps.LatLng(this.props.geolocation.lat, this.props.geolocation.long);
     const mapOptions = {
       zoom: 15,
       center: geolocation,
@@ -76,7 +75,7 @@ class GoogleMap extends React.Component {
     if (this.props.geolocation) {
       const marker = new google.maps.Marker({
         animation: google.maps.Animation.DROP,
-        position: new google.maps.LatLng(this.props.geolocation.lat, this.props.geolocation.lng),
+        position: new google.maps.LatLng(this.props.geolocation.lat, this.props.geolocation.long),
         map: this.map,
         draggable: true,
         tile: 'You!',
@@ -100,7 +99,6 @@ class GoogleMap extends React.Component {
 
 export default connect((state) => {
   return {
-    places: state.googlemap.places,
     geolocation: state.googlemap.geolocation
   };
 }, (dispatch) => {
