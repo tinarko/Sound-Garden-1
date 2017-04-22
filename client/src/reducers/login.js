@@ -6,10 +6,9 @@ export default (state = {
 }, action) => {
   switch (action.type) {
     case 'GET_USER_SUCCESS': {
-      console.log('reducing the logged in', action.payload);
       return {
         ...state,
-        loggedIn: true,
+        loggedIn: action.payload.loggedIn,
         name: action.payload.name,
         picture: action.payload.picture,
       }

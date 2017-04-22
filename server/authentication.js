@@ -68,14 +68,6 @@ passport.deserializeUser((user, done) => {
   });
 });
 
-// remove cookie if not signed in 
-exports.read = (req, res, next) => {
-  if (!req.session.passport && req.cookies.advisorly) {
-    res.clearCookie('advisorly');
-  }
-  next();
-};
-
 exports.logout = (req, res) => {
   req.session.destroy(function (err) {
     res.clearCookie('advisorly');
@@ -83,11 +75,29 @@ exports.logout = (req, res) => {
   });
 };
 
+exports.return = (req, res) => {
+  res.cookie('advisorly', 'loggedIn', { maxAge: 900000, httpOnly: false });
+  res.redirect('/');
+};
+
 exports.getUser = (req, res) => {
-  var user = req.session.passport.user;
-  var userData = {
-    name: user.displayName.split(' ')[0],
-    picture: user._json.picture_large
-  };
+  var user = null;
+  if (req.session.passport) {
+    user = req.session.passport.user;
+  }
+  if (user) {
+    var userData = {
+      loggedIn: true,
+      name: user.displayName.split(' ')[0],
+      picture: user._json.picture_large
+    };
+  } else {
+    userData = {
+      loggedIn: false,
+      name: null,
+      picture: null
+    };
+  }
   res.json(userData);
 };
+

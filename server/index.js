@@ -27,7 +27,6 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(authentication.read);
 app.use(express.static(__dirname + './../client/dist'));
 
 /**
@@ -35,14 +34,7 @@ app.use(express.static(__dirname + './../client/dist'));
  */
 app.get('/auth/user', authentication.getUser);
 app.get('/auth/auth0', passport.authenticate('auth0'));
-app.get('/auth/auth0/return', passport.authenticate('auth0', {
-  failureRedirect: '/auth/auth0'
-}),
-  (req, res) => {
-    //TODO: encrypt cookie
-    res.cookie('advisorly', 'loggedIn', { maxAge: 900000, httpOnly: false });
-    res.redirect('/');
-  });
+app.get('/auth/auth0/return', passport.authenticate('auth0', {failureRedirect: '/auth/auth0'}), authentication.return);
 app.get('/auth/logout', authentication.logout);
 
 /**

@@ -11,7 +11,7 @@ import FlatButton from 'material-ui/FlatButton';
 
 const Navbar = (props) => {
   let view = null;
-  if (document.cookie.replace(/(?:(?:^|.*;\s*)advisorly\s*\=\s*([^;]*).*$)|^.*$/, "$1")) {
+  if (props.loggedIn) {
     view = (
       <div>
         <FlatButton label="Add Accounts" onClick={createPlaid} containerElement={<Link to ="/"/>} />
@@ -37,4 +37,8 @@ const Navbar = (props) => {
   );
 };
 
-export default connect() (Navbar);
+export default connect((state) => {
+  return {
+    loggedIn: state.login.loggedIn,
+  };
+}) (Navbar);

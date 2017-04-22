@@ -48,11 +48,7 @@ class App extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-  }
-
   render () {
-    console.log(this.props);
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div>

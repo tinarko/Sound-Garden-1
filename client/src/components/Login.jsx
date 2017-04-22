@@ -11,9 +11,7 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    if (document.cookie.replace(/(?:(?:^|.*;\s*)advisorly\s*\=\s*([^;]*).*$)|^.*$/, "$1")) {
-      this.props.dispatch(login.getUser());
-    }
+    this.props.dispatch(login.getUser());
   }
 
   render() {

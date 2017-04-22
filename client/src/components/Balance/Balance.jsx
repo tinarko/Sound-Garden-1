@@ -13,7 +13,6 @@ class Balance extends React.Component {
   }
 
   render () {
-    console.log(this.props.balance)
     return (
       <div className="balance">
         {this.props.balance.length &&
