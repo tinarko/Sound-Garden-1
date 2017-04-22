@@ -46,6 +46,9 @@ class CCCashback extends React.Component {
           
         </div> );
     } else {
+
+        console.log('state!!', state);
+
         return (
         <div>
           <h1>Credit Card Selector</h1>
@@ -65,7 +68,8 @@ class CCCashback extends React.Component {
 const mapStateToProps = (state) => {
   return {
     creditcards: state.creditcards,
-    googlemap: state.googlemap
+    googlemap: state.googlemap,
+    state: state
   };
 };
 

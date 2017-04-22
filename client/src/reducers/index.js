@@ -5,6 +5,7 @@ import creditcards from './creditcards';
 import transactions from './transactions.js';
 import googlemap from './googlemap.js';
 import login from './login.js';
+// import calculatecashback from './calculatecashback.js'
 
 //implement lines below when there are actually other reducers in folder
 // import * as reducers from './reducers';
@@ -16,5 +17,6 @@ export default combineReducers({
   creditcards,
   transactions,
   googlemap,
-  login
+  login,
+  // calculatecashback
 });
