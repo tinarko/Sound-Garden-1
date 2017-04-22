@@ -23,44 +23,37 @@ class Balance extends React.Component {
         <div className="balance">
           <br/>
           {this.props.balance.map((item, index) => {
+            console.log(item);
             if (this.props.balance[index - 1]) {
               const prevType = this.props.balance[index - 1].subtype;
               if (item.subtype === prevType) {
                 return (
                   // same subtype so add a row to the existing table
                   <div>
-                    {/*<BalanceList 
-                      account={item}
-                      key={index}
-                    />*/}
-                    <TableBody>
-                      <TableBody>
-                        <TableHeader>{item.institution_name + ' ' + item.account.name}</TableHeader>
+                      <TableBody displayRowCheckbox={false}>
+                        <TableRow>
+                          <TableRowColumn>{item.institution_name + ' ' + item.name}</TableRowColumn>
+                          <TableRowColumn>{'Balance: $' + item.balances.current}</TableRowColumn>
+                        </TableRow>
                       </TableBody>
-                    </TableBody>
                   </div>);
               } else {
                 // new subtype --> new table
                 return (
                   <div>
-                    <h3>{item.subtype}</h3>
-                    {/*<ol>
-                      <BalanceList 
-                        account={item}
-                        key={index}
-                      />
-                    </ol>*/}
-                    <Table>
-                      <TableHeader>
+                    <h6>{item.subtype === 'cd' ? 'CD Accounts' : item.subtype[0].toUpperCase() + item.subtype.substring(1) + ' Accounts'}</h6>
+                    <Table >
+                      <TableHeader displaySelectAll={false}>
                         <TableRow>
                           <TableHeaderColumn>Account Name</TableHeaderColumn>
                           <TableHeaderColumn>Balance</TableHeaderColumn>
                         </TableRow>
                       </TableHeader>
-                      <TableBody>
-                        <TableBody>
-                          <TableHeader>{item.institution_name + ' ' + item.name}</TableHeader>
-                        </TableBody>
+                      <TableBody displayRowCheckbox={false}>
+                        <TableRow>
+                          <TableRowColumn>{item.institution_name + ' ' + item.name}</TableRowColumn>
+                          <TableRowColumn>{'Balance: $' + item.balances.current}</TableRowColumn>
+                        </TableRow>
                       </TableBody>
                     </Table>
                   </div>
@@ -70,24 +63,19 @@ class Balance extends React.Component {
               // new subtype --> new table
               return (
                 <div>
-                  <h3>{item.subtype}</h3>
-                  {/*<ol>
-                    <BalanceList 
-                      account={item}
-                      key={index}
-                    />
-                  </ol>*/}
+                  <h6>{item.subtype === 'cd' ? 'CD Accounts' : item.subtype[0].toUpperCase() + item.subtype.substring(1) + ' Accounts'}</h6>
                     <Table>
-                      <TableHeader>
+                      <TableHeader displaySelectAll={false}>
                         <TableRow>
                           <TableHeaderColumn>Account Name</TableHeaderColumn>
                           <TableHeaderColumn>Balance</TableHeaderColumn>
                         </TableRow>
                       </TableHeader>
-                      <TableBody>
-                        <TableBody>
-                          <TableHeader>{item.institution_name + ' ' + item.name}</TableHeader>
-                        </TableBody>
+                      <TableBody displayRowCheckbox={false}>
+                        <TableRow>
+                          <TableRowColumn>{item.institution_name + ' ' + item.name}</TableRowColumn>
+                          <TableRowColumn>{'Balance: $' + item.balances.current}</TableRowColumn>
+                        </TableRow>
                       </TableBody>
                     </Table>
                 </div>
@@ -97,7 +85,7 @@ class Balance extends React.Component {
         </div>);
     }
     return (
-      <div>
+      <div className="balance">
         <h1>Balances</h1>
         <br/>
         {balance}

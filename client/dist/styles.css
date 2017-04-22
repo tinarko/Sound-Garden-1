@@ -163,3 +163,14 @@ li {
     left: 250px;
     top: 290px;
 }
+
+.balance {
+  height: 80%;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.balance h6 {
+  text-align: center;
+  margin: 3% 0;
+}
