@@ -22,8 +22,8 @@ class Login extends React.Component {
         {this.props.loggedIn ? 
           <div>
             <h1>Welcome Back, {this.props.name}</h1>
-            <img src={this.props.picture} width="10%" height="10%"/>
             <h3>Here's where you stand: </h3>
+            <img src={this.props.picture} />
             <Balance />
           </div>
         :
