@@ -9,9 +9,6 @@ passport.use(new Auth0Strategy({
   callbackURL: 'auth0/return',
 },
 (accessToken, refreshToken, profile, done) => {
-  console.log('accessToken:', accessToken);
-  console.log('profile:', profile);
-  console.log('friends:', profile._json.context.mutual_friends);
   db.findUser(profile.id, (err, existingUser) => {
     // TODO: error handle invalid search for profile.id
     //if user exists:
@@ -40,9 +37,6 @@ passport.use(new Auth0Strategy({
         if (err) {
           // TODO: error handle invalid save of user
         }
-        console.log('newUser', newUser);
-        console.log('profileid', profile.id);
-        console.log('friends2:', profile._json.context.mutual_friends.data);
         db.addFriendJoins(profile.id, profile._json.context.mutual_friends.data, (err, results) => {
           console.log('this has run');
           if (err) {
