@@ -5,10 +5,11 @@ dotenv.config({path: process.env.PWD + '/config.env'});
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require ('chai-http');
+var Promise = require('bluebird');
 const app = require('../server/app');
 const mysql = require('mysql');
-
-var schema = require('../database/config.js');
+var database = 'heroku_aa9603bdcb7e15e';
+var createTables = require('../database/config.js');
 
 chai.use(chaiHttp);
 
@@ -16,45 +17,32 @@ describe ('', function () {
 
   var db;
   var server;
-  // let port = process.env.PORT || 1337;
-
-  var insertDB = (connection, tablenames, done) => {
-    var count = 0;
-    // return schema(db).then(done);
-    tablenames.forEach(function(tablename) {
-      connection.query('CREATE TABLE IF NOT EXISTS ' + tablename, () => {
-        count++;
-        if (count === tablename.length) {
-          return schema(db).then(done);
-        }
-      });
-    });
-  };
 
   beforeEach( () => {
-    db = mysql.createConnection({
+    let connection = mysql.createConnection({
       user: 'root',
       password: '',
       database: 'heroku_aa9603bdcb7e15e'
     });
 
-    var tables = ['users', 'budgets', 'categorytypes', 'budgetcategories', 'items', 'creditcards', 'cccategories', 'friends'];
-    db.connect( (err) => {
-      if (err) { return done(err); }
-      insertDB(db, tables, () => {
-        server = app.listen(port, done);
-      });
-    });
+    db = Promise.promisifyAll(connection, {multiArgs: true });
 
-    // afterEach(() => { server.close(); });
-  
+    db.connectAsync().then(() => {
+      console.log('Connected to ' + database + 'database as ID' + db.threadID);
+      return db.queryAsync('CREATE DATABASE IF NOT EXISTS ' + database);
+    })
+    .then(() => {
+      return db.queryAsync('USE ' + database);
+    })
+    .then (() => {
+      return createTables(db);
+    });
   });
 
   describe('Database Tests', () => {
 
     it('should have a users table', (done) => {
       var queryString = 'select * from users;';
-      // var queryString = 'insert into users (userid, name, email) value(?, ?, ?)';
       db.query(queryString, (err, results) => {
         if (err) {
           return done(err); 
