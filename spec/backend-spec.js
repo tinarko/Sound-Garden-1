@@ -5,7 +5,7 @@ dotenv.config({path: process.env.PWD + '/config.env'});
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require ('chai-http');
-const server = require('../server/index');
+const app = require('../server/app');
 const mysql = require('mysql');
 
 var schema = require('../database/config.js');
@@ -14,13 +14,15 @@ chai.use(chaiHttp);
 
 describe ('', function () {
 
-  let db;
+  var db;
+  var server;
   // let port = process.env.PORT || 1337;
 
-  var clearDB = (connection, tablenames, done) => {
+  var insertDB = (connection, tablenames, done) => {
     var count = 0;
+    // return schema(db).then(done);
     tablenames.forEach(function(tablename) {
-      connection.query('DROP TABLE IF EXISTS ' + tablename, () => {
+      connection.query('CREATE TABLE IF NOT EXISTS ' + tablename, () => {
         count++;
         if (count === tablename.length) {
           return schema(db).then(done);
@@ -39,12 +41,12 @@ describe ('', function () {
     var tables = ['users', 'budgets', 'categorytypes', 'budgetcategories', 'items', 'creditcards', 'cccategories', 'friends'];
     db.connect( (err) => {
       if (err) { return done(err); }
-      clearDB(db, tables, function () {
+      insertDB(db, tables, () => {
         server = app.listen(port, done);
       });
     });
 
-    afterEach(function () { server.close(); });
+    // afterEach(() => { server.close(); });
   
   });
 
@@ -68,7 +70,7 @@ describe ('', function () {
   describe('Server Tests', () => {
 
     it('should return status of 404 if route is unknown', () => {
-      chai.request(server)
+      chai.request(app)
       .get('/errorroute')
       .end((err, res) => {
         console.log('res.status', res.status);
