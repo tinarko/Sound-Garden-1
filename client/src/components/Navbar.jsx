@@ -17,7 +17,7 @@ const Navbar = (props) => {
       className="app-bar"
       style={{position: 'fixed', top: 0}}
       title={<span className="app-bar-title"><Link to="/" style={{ textDecoration: 'none', color: 'white' }}>Advisorly</Link></span>}
-      iconElementLeft={props.picture ? <Avatar src={props.picture} size={50}/> : <div></div>}
+      iconElementLeft={props.picture ? <a href="/"><Avatar src={props.picture} size={50}/></a> : <div></div>}
       iconElementRight={props.loggedIn ? <LoggedOptions/> : <FlatButton label="Login" href="/auth/auth0"></ FlatButton>}
     />
   );
