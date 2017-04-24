@@ -1,7 +1,11 @@
 var db = require('./../../database/index.js');
 
 module.exports.getUserBudgets = function (req, res) {
-  var userid = req.session.passport.user.id;
+  if (req.session.passport) {
+    var userid = req.session.passport.user.id;
+  } else {
+    var userid = 'facebook|123';
+  }
   //check if (current) month budget exists for signed in user
   db.checkIfMonthBudgetExists ([userid, req.params.year, req.params.month], function(err, results) {
     if (err) {
@@ -14,7 +18,7 @@ module.exports.getUserBudgets = function (req, res) {
         } else {
           //insert default categories into newly made budget if default does not exist
           var budgetId = results.insertId;
-          db.checkForCategoryName ('Restaurants', function(err, results) {
+          db.checkForCategoryName ('Food and Drink', function(err, results) {
             if (err) {
               res.status(500).send(err);
             } else if (!results) {
