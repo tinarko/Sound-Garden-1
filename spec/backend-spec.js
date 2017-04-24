@@ -111,6 +111,7 @@ describe ('', function () {
     it('should return budgets for a given month', (done) => {
       chai.request(server)
       .get('/budget/getuserbudgets/2017/04')
+      .send({userid: 'facebook|123'})
       .end((err, res) => {
         expect(res.text).to.equal('[{"name":"Food and Drink","goalvalue":500,"actualvalue":0},{"name":"Travel","goalvalue":600,"actualvalue":0}]');
         done();
@@ -121,6 +122,7 @@ describe ('', function () {
       chai.request(server)
         .post('/budget/updatebudgetcategory')
         .send({
+          userid: 'facebook|123',
           categoryname: 'Food and Drink',
           goalvalue: 500,
           change: 'update',
@@ -137,6 +139,7 @@ describe ('', function () {
       chai.request(server)
       .post('/budget/updatebudgetcategory')
       .send({
+        userid: 'facebook|123',
         categoryname: 'Food and Drink',
         goalvalue: 500,
         change: 'increment',

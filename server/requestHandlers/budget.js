@@ -1,10 +1,13 @@
 var db = require('./../../database/index.js');
 
 module.exports.getUserBudgets = function (req, res) {
+  console.log('getUserBudgets req', req);
+  console.log('req.headers.session', req.headers.session);
   if (req.session.passport) {
     var userid = req.session.passport.user.id;
   } else {
-    var userid = 'facebook|123';
+    //accounts for non-passport sessions
+    var userid = req.body.userid;
   }
   //check if (current) month budget exists for signed in user
   db.checkIfMonthBudgetExists ([userid, req.params.year, req.params.month], function(err, results) {
@@ -79,7 +82,8 @@ module.exports.updateBudgetAmount = function(req, res) {
   if (req.session.passport) {
     var userid = req.session.passport.user.id;
   } else {
-    var userid = 'facebook|123';
+    //accounts for non-passport sessions
+    var userid = req.body.userid;
   }
   var monthString;
   if (req.body.month < 10) {
