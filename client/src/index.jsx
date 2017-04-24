@@ -27,19 +27,10 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 
-const styles = {
-  container: {
-    textAlign: 'center',
-    paddingTop: 200,
-  },
-};
 
 const muiTheme = getMuiTheme({
   palette: {
     textColor: cyan500,
-  },
-  appBar: {
-    height: 50,
   },
 });
 
@@ -55,8 +46,6 @@ class App extends React.Component {
           <Router>
             <div>
               <Navbar />
-
-              <hr/>
               <div className="app-body">
                 <Route exact path="/" component={Login}/>
                 <Route path="/balance" component={Balance}/>

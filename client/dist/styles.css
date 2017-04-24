@@ -67,7 +67,8 @@ Body
 
 
 body {
-  padding: 20px;
+  /*padding: 20px;*/
+  margin-top: 5%;
 }
 
 h1 {
