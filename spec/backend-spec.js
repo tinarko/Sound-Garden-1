@@ -99,7 +99,7 @@ describe ('', function () {
 
   describe('Budget Tests', () => {
     
-    it('should return status 200 for budget routes', (done) => {
+    it('should return status 200 when request is sent to get budget list', (done) => {
       chai.request(server)
         .get('/budget/getuserbudgets')
         .end((err, res) => {
@@ -117,7 +117,7 @@ describe ('', function () {
       });
     });
 
-    it('should return status 201 for budget routes', (done) => {
+    it('should return status 201 when request is sent to update budget amount', (done) => {
       chai.request(server)
         .post('/budget/updatebudgetcategory')
         .send({

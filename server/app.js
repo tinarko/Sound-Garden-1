@@ -48,8 +48,9 @@ app.get('/auth/logout', authentication.logout);
 /**
  * Budget Routes
  */
-app.get('/budget/getuserbudgets/:year/:month', budget.getUserBudgets);
-app.post('/budget/updatebudgetcategory', budget.updateBudgetAmount);
+ //app.route
+app.get('/budget/getuserbudgets/:year/:month', budget.getUserBudgets); //budget.getAll
+app.post('/budget/updatebudgetcategory', budget.updateBudgetAmount); // budget.update
 // app.post('/budget/addbudgetcategory', budget.addBudgetCategory);
 
 /**
@@ -95,12 +96,5 @@ app.get('*', (req, res) => {
 });
 
 
-
-// let port = process.env.PORT || 1337;
-// var server = app.listen(port, function() {
-//   console.log('listening on port ' + port + '!');
-// });
-
-// module.exports = server;
 module.exports = app;
 
