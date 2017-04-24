@@ -48,22 +48,17 @@ describe ('', function () {
       return db.queryAsync(`INSERT INTO budgets (id, user_id, month) VALUES (1, 'facebook|123', '2017-04-01 10:00:00');`);
     })
     .then(() => {
-      return db.queryAsync(`INSERT INTO categorytypes (id, name) VALUES (1, 'Food and Drink');`);
+      return db.queryAsync(`INSERT into categorytypes (name) values ('Food and Drink'), ('Travel'), ('Groceries'), ('Entertainment'), ('Other');`);
     })
     .then(() => {
-      return db.queryAsync(`INSERT INTO categorytypes (id, name) VALUES (2, 'Travel');`);
+      return db.queryAsync(`INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (1, 1, 1, 500.00, 0), (2, 1, 2, 600.00, 0);`);
     })
-    .then(() => {
-      return db.queryAsync(`INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (1, 1, 1, 500.00, 0);`);
-    })
-    .then(() => {
-      return db.queryAsync(`INSERT INTO budgetcategories (id, budget_id, category_id, goalvalue, actualvalue) VALUES (2, 1, 2, 600.00, 0);`);
-    })
+
     .then(() => {
       done();
     })
     .error ((err) => {
-      //TODO: Handle rejection
+      //TODO: Handle error
       console.log('errored:', err);
     });
 
@@ -75,8 +70,6 @@ describe ('', function () {
       server.close();
     });
 
-    // after(() => db.end());
-
   });
 
   describe('Initial/Setup Tests', () => {
@@ -87,7 +80,6 @@ describe ('', function () {
         if (err) {
           return done(err); 
         }
-        console.log('results', results);
         expect(results).to.exist;
         done();
 
@@ -95,19 +87,10 @@ describe ('', function () {
     });
   });
 
-  describe('Budget Tests', () => {
-
-    // it('should return status 200 for authentication routes', () => {
-    //   chai.request(app)
-    //     .get('/auth/user')
-    //     .end((err, res) => {
-    //       console.log('res.status auth', res.status);
-    //       expect(res.status).to.equal(200);
-    //     });
-    // });
+  describe ('Plaid Tests', () => {
 
     // it('should return status 200 for plaid routes', () => {
-    //   chai.request(app)
+    //   chai.request(server)
     //     .get('/plaid/accounts')
     //     .end((err, res) => {
     //       console.log('res.status plaid', res.status);
@@ -115,11 +98,14 @@ describe ('', function () {
     //     });
     // });
 
+  });
+
+  describe('Budget Tests', () => {
+    
     it('should return status 200 for budget routes', (done) => {
       chai.request(server)
         .get('/budget/getuserbudgets')
         .end((err, res) => {
-          console.log('res.status budget', res.status);
           expect(res.status).to.equal(200);
           done();
         });
@@ -129,50 +115,54 @@ describe ('', function () {
       chai.request(server)
       .get('/budget/getuserbudgets/2017/04')
       .end((err, res) => {
-        console.log('response from budget request', res);
         expect(res.text).to.equal('[{"name":"Food and Drink","goalvalue":500,"actualvalue":0},{"name":"Travel","goalvalue":600,"actualvalue":0}]');
         done();
       });
     });
 
-    it('should send headers in request for budget routes', (done) => {
+    it('should return status 201 for budget routes', (done) => {
       chai.request(server)
-        .get('/budget/getuserbudgets')
+        .post('/budget/updatebudgetcategory')
+        .send({
+          categoryname: 'Food and Drink',
+          goalvalue: 500,
+          change: 'update',
+          year: 2017,
+          month: 4
+        })
         .end((err, res) => {
-          console.log('req budget', req);
-          expect(req).to.have.headers;
+          expect(res.status).to.equal(201);
           done();
         });
     });
-    // it('should return status 200 for credit card routes', (done) => {
-    //   chai.request(app)
-    //     .get('/creditcards/getcreditcards')
-    //     .end((err, res) => {
-    //       console.log('res.status creditcards', res.status);
-    //       expect(res.status).to.equal(200);
-    //       done();
-    //     });
-    // });
 
-    // it('should return status 200 for cashback routes', (done) => {
-    //   chai.request(app)
-    //     .get('/cashback/getallusercategories')
-    //     .end((err, res) => {
-    //       console.log('res.status cashback', res.status);
-    //       expect(res.status).to.equal(200);
-    //       done();
-    //     });
-    // });
+    it('should update database budget amount for target category upon increment', (done) => {
+      chai.request(server)
+      .post('/budget/updatebudgetcategory')
+      .send({
+        categoryname: 'Food and Drink',
+        goalvalue: 500,
+        change: 'increment',
+        year: 2017,
+        month: 4
+      })
+      .end((err, res) => {
+        var queryString = `select budgetcategories.goalvalue\
+        from categorytypes inner join budgetcategories inner join budgets inner join users \
+        on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id \
+        AND budgetcategories.category_id = categorytypes.id AND users.userid = 'facebook|123' \
+        AND YEAR(budgets.month) = 2017 AND MONTH(budgets.month) = 04 AND categorytypes.name = 'Food and Drink';`;
 
-    // it('should return status of 404 if route is unknown', (done) => {
-    //   chai.request(app)
-    //   .get('/errorroute')
-    //   .end((err, res) => {
-    //     console.log('res.status errorroute', res.status);
-    //     expect(res.status).to.equal(404);
-    //     done();
-    //   });
-    // });
+        db.query(queryString, (err, results) => {
+          if (err) {
+            return done(err); 
+          }
+          console.log('results', results);
+          expect(results[0].goalvalue).to.equal(510);
+          done();
+        });
+      });
+    });
 
 
   });

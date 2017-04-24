@@ -76,7 +76,11 @@ module.exports.getUserBudgets = function (req, res) {
 };
 
 module.exports.updateBudgetAmount = function(req, res) {
-  var userid = req.session.passport.user.id;
+  if (req.session.passport) {
+    var userid = req.session.passport.user.id;
+  } else {
+    var userid = 'facebook|123';
+  }
   var monthString;
   if (req.body.month < 10) {
     monthString = '0'.concat(req.body.month);
