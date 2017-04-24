@@ -32,7 +32,6 @@ describe ('', function () {
       return db.queryAsync('DROP DATABASE IF EXISTS ' + database);
     })
     .then(() => {
-      console.log('Connected to ' + database);
       return db.queryAsync('CREATE DATABASE IF NOT EXISTS ' + database + ';');
     })
     .then(() => {
@@ -62,9 +61,7 @@ describe ('', function () {
       console.log('errored:', err);
     });
 
-    server = app.listen(port, () => {
-      console.log('listening on port ' + port + '!');
-    });
+    server = app.listen(port);
 
     afterEach(() => {
       server.close();
@@ -157,7 +154,6 @@ describe ('', function () {
           if (err) {
             return done(err); 
           }
-          console.log('results', results);
           expect(results[0].goalvalue).to.equal(510);
           done();
         });

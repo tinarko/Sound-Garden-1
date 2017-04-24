@@ -2,7 +2,6 @@ var Promise = require('bluebird');
 
 module.exports = function(db) {
 
-  console.log('config is ran');
   if (!db.queryAsync) {
     // console.log('db in config', db);
     db.Promise.promisifyAll(db);
