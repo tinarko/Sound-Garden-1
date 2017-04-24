@@ -6,7 +6,7 @@ exports.getCreditcards = (userid, cb) => {
 
   var query = `SELECT * from creditcards where userid = "${userid}";` ;
 
-  connection.query(query, (err, results) => {
+  connection.query(query, (err, results) => { // DONT NEED THIS CALLBACK!! TAKE THESE LINES OUT!!
     if (results.length === 0) {
       cb(err, null);
     } else {

@@ -94,7 +94,8 @@ export const calculateMaxBenefits = (userCats, bizCats) => {
       return response.json();
     })
     .then (json => {
-      console.log(json);
+      console.log('calculated!!', json);
+      
     })
     .catch((err) => {
       console.log('error calculating', err);
