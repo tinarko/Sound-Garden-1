@@ -10,6 +10,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import Menu from 'material-ui/svg-icons/navigation/menu';
+import Divider from 'material-ui/Divider';
 
 const LoggedOptions = (props) => (
   <IconMenu
@@ -24,6 +25,7 @@ const LoggedOptions = (props) => (
     <MenuItem primaryText="Budget" containerElement={<Link to="/budget" />} />
     <MenuItem primaryText="Cashback" containerElement={<Link to="/ccCashback" />} />
     <MenuItem primaryText="Transactions" containerElement={<Link to="/transactions" />} />
+    <Divider />
     <MenuItem primaryText="Logout" href="/auth/logout" />
   </IconMenu>
 );
