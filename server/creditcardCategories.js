@@ -1,115 +1,43 @@
 var wrapper = require ('./yelpCategories');
 
-console.log(wrapper);
-
-// yelpCategories is an obj with key of yelp alias, value of yelp parent alias
-
-var groceriesAlias = ['grocery', 'ethicgrocery', 'intlgrocery'];
-
-var wholesalerAlias = ['wholesalers'];
-
-var gasAlias = ['servicestations', 'gasstations'];
-
-var restarantsParents = ['restaurants', 'african', 'arabian', 'belgian', 'brazilian', 'cafes', 
-                         'caribbean', 'chinese', 'french', 'german', 'italian', 'japanese', 
-                         'donburi', 'latin', 'malaysian', 'mediterranean', 'mexican','mideastern', 
-                         'pierogis', 'portuguese', 'spanish', 'turkish'];
-
-var travelParents = ['hotelstravel', 'airports', 'hotels', 'tours', 'transport', 'travelservices'];
-
 var calculateBestCard = (userCats, bizCats, cb) => {
 
-  return wrapper.init((yelpCategories) => {
+  return wrapper.init( (yelpCategories) => {
+    // console.log(yelpCategories);
 
-    var bizAlias = bizCats[0].alias;// when i have more time, check all bizCats (not just the first one)
-    
-    var parentAlias = yelpCategories[bizAlias]; // example: restaurants
-    console.log(parentAlias);
-
+    var yelpAlias, userCat, cashbackCat, yelpCashbackCat, userCashbackCat;
     var maxCashbackPercent = 0;
     var maxCashbackIndex = 0;
-    var ccCatName;
-    var value;
 
-    for (var i = 0; i < userCats.length; i++) {
-      ccCatName = userCats[i].categoryname.toLowerCase();
-      value = userCats[i].value;
-
-      // check ccCatName against yelp alias specific categories
-      // GROCERIES
-      if (ccCatName === 'groceries' || ccCatName === 'grocery' || ccCatName === 'grocery store' || 
-          ccCatName === 'grocery stores' || ccCatName === 'supermarket') {
-        for (var g = 0; g < groceriesAlias.length; g++){
-          if (groceriesAlias[g] === bizAlias) {
-            if (value > maxCashbackPercent) {
-              maxCashbackIndex = i;
-              maxCashbackPercent = value;
-            }
+    // check all yelp business categories
+    bizCats.forEach( bizCat => {
+      yelpAlias = bizCat.alias;
+      yelpCashbackCat = yelpCategories[yelpAlias];
+      // check all credit cards cashback categories
+      userCats.forEach ( (userCat, index) => {
+        userCashbackCat = userCat.categoryname.toLowerCase();
+        // check through all cashback categories where the names match
+        if ( userCashbackCat === yelpAlias || userCashbackCat === yelpCashbackCat ||
+             userCashbackCat === 'grocery' && yelpCashbackCat === 'groceries' ||
+             userCashbackCat === 'grocery stores' && yelpCashbackCat === 'groceries' ||
+             userCashbackCat === 'supermarket' && yelpCashbackCat === 'groceries' ||
+             userCashbackCat === 'wholesale stores' && yelpCashbackCat === 'wholesale' ||
+             userCashbackCat === 'restaurant' && yelpCashbackCat === 'restaurants' || 
+             userCashbackCat === 'everything' || userCashbackCat === 'everything else') {
+          if (userCat.value > maxCashbackPercent) {
+            maxCashbackIndex = index;
+            maxCashbackPercent = userCat.value;
           }
         }
-      }
-      // WHOLESALE
-      else if (ccCatName === 'wholesale' || ccCatName === 'wholesale club' || ccCatName === 'wholesale clubs') {
-        if (wholesalerAlias[0] === bizAlias) {
-          if (value > maxCashbackPercent) {
-            maxCashbackIndex = i;
-            maxCashbackPercent = value;
-          }
-        }
-      }
-      // GAS
-      else if (ccCatName === 'gas' || ccCatName === 'gas station') {
-        for (var s = 0; s < gasAlias.length; s++){
-          if (gasAlias[s] === bizAlias) {
-            if (value > maxCashbackPercent) {
-              maxCashbackIndex = i;
-              maxCashbackPercent = value;
-            }
-          }
-        }
-      }
+      });
+      
+    });
 
-      // check ccCatName against yelp parent alias specific categories
-      // RESTAURANTS
-      else if (ccCatName === 'restaurant' || ccCatName === 'restaurants') {
-        for (var r = 0; r < restarantsParents.length; r++){
-          ('CHECKING OUT RESTAURANT! first with parent type', restarantsParents[r], 'and next with OUR parentAlias', parentAlias);
-          if (restarantsParents[r] === parentAlias) {
-            if (value > maxCashbackPercent) {
-              maxCashbackIndex = i;
-              maxCashbackPercent = value;
-            }
-          }
-        }
-      }
-
-      else if (ccCatName === 'travel' || ccCatName === 'transportation') {
-
-        for (var t = 0; t < travelParents.length; t++){
-          if (travelParents[t] === parentAlias) {
-            if (value > maxCashbackPercent) {
-              maxCashbackIndex = i;
-              maxCashbackPercent = value;
-            }
-          }
-        }
-      }
-
-      if (ccCatName === 'everything' || ccCatName === 'everything else') {
-        if (value > maxCashbackPercent) {
-          maxCashbackIndex = i;
-          maxCashbackPercent = value;
-        }
-      }
-    }
-
-    var maxCashbackCard = userCats[maxCashbackIndex].ccname;
-    var cashbackCategory = userCats[maxCashbackIndex].categoryname;
-
-    var results = [maxCashbackCard, maxCashbackPercent, cashbackCategory];
-
+    var maxCC = userCats[maxCashbackIndex].ccname;
+    var maxCat = userCats[maxCashbackIndex].categoryname;
+    var results = [maxCC, maxCashbackPercent, maxCat];
+    
     return cb(results);
-
   });
 }
 
