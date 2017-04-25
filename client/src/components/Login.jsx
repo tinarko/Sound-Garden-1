@@ -19,26 +19,12 @@ class Login extends React.Component {
     return (
       <div className="login">
         {this.props.loggedIn ?
-          <Card
-            style={{'background-color': 'black'}}
-          >
-            <CardMedia overlay={ 
-                <div className="login-overlay">
-                  <CardTitle
-                    className="login-title"
-                    title={`Welcome to Back, ${this.props.name}!`} 
-                    titleColor="white"
-                    subtitle="Here's where you stand:"
-                    subtitleColor="white"
-                  />
-                  <Balance />
-                </div>
-              }
-              overlayStyle={{width: '100%', margin: 'auto', 'top': '0%', 'text-align': 'center'}}
-            >
-              <img src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/J98HWXTPPV.jpg" />
-            </CardMedia>
-          </Card>
+          <div>
+            
+            <h1>Welcome Back, {this.props.name}</h1>
+            <h3>Here's where you stand: </h3>
+            <Balance />
+          </div>
         :
           <Card
             style={{'background-color': 'black'}}

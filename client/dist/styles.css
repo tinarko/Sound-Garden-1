@@ -177,6 +177,7 @@ a {
 
 .balance-table {
   background-color: white;
+  padding-top: 5%;
 }
 
 .balance h6 {
@@ -195,6 +196,12 @@ a {
   top: 0;
 }
 
+.login h1, h3 {
+  margin: auto;
+  padding: 0 2%;
+  text-align: center;
+}
+
 .login-caption {
   background-color: white;
   color: black;
@@ -207,4 +214,8 @@ a {
 
 .login-button {
   margin: 1% 0;
+}
+
+.login-balance {
+  margin: auto 0;
 }
