@@ -10,12 +10,14 @@ passport.use(new Auth0Strategy({
 },
 (accessToken, refreshToken, profile, done) => {
   db.findUser(profile.id, (err, existingUser) => {
-    if (existingUser !== false) {
+    if (err) {
+      done(err);
+    } else if (existingUser !== false) {
       done(null, profile);
     } else {
       db.saveUser(profile, (err, newUser) => {
         if (err) {
-          done(null, false);
+          done(err);
         }
         done(null, profile);
       });
