@@ -12,7 +12,8 @@
     "server-dev": "nodemon server/index.js",
     "start": "node server/index.js",
     "heroku-postbuild": "webpack",
-    "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
+    "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS",
+    "backendtest": "mocha spec/backend-spec.js; RES=$?; kill %1; exit $RES"
   },
   "dependencies": {
     "auth0-lock": "^10.14.0",

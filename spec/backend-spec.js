@@ -86,15 +86,6 @@ describe ('', function () {
 
   describe ('Plaid Tests', () => {
 
-    // it('should return status 200 for plaid routes', () => {
-    //   chai.request(server)
-    //     .get('/plaid/accounts')
-    //     .end((err, res) => {
-    //       console.log('res.status plaid', res.status);
-    //       expect(res.status).to.equal(200);
-    //     });
-    // });
-
   });
 
   describe('Budget Tests', () => {

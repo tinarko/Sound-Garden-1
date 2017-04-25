@@ -1,8 +1,6 @@
 var db = require('./../../database/index.js');
 
 module.exports.getUserBudgets = function (req, res) {
-  console.log('getUserBudgets req', req);
-  console.log('req.headers.session', req.headers.session);
   if (req.session.passport) {
     var userid = req.session.passport.user.id;
   } else {
