@@ -10,41 +10,13 @@ passport.use(new Auth0Strategy({
 },
 (accessToken, refreshToken, profile, done) => {
   db.findUser(profile.id, (err, existingUser) => {
-    // TODO: error handle invalid search for profile.id
-    //if user exists:
     if (existingUser !== false) {
-      console.log('this is if existing user', existingUser);
-      db.removeCurrentFriendJoins(existingUser.userid, (err, results) => {
-        if (err) {
-          //TODO: error handle
-        } else {
-          if (profile._json.context.mutual_friends.data.length === 0) {
-            done(null, profile);
-          } else {
-            db.addFriendJoins(existingUser.userid, profile._json.context.mutual_friends.data, (err, results) => {
-              if (err) {
-                //TODO: error handle
-              } else {
-                done(null, profile);
-              }
-            });
-          }
-        }
-      });
+      done(null, profile);
     } else {
-      console.log('this is if NOT existinguser');
       db.saveUser(profile, (err, newUser) => {
         if (err) {
-          // TODO: error handle invalid save of user
+          done(null, false);
         }
-        db.addFriendJoins(profile.id, profile._json.context.mutual_friends.data, (err, results) => {
-          console.log('this has run');
-          if (err) {
-            //TODO: error handle
-          } else {
-            done(null, profile);
-          }
-        });
         done(null, profile);
       });
     }
