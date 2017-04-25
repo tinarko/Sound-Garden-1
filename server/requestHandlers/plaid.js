@@ -63,19 +63,16 @@ module.exports.accounts = function(req, res) {
       return asyncResult;
     })
       .then(function(results) {
-        var send = [];
-        results.forEach(function(accounts) {
-          send = send.concat(accounts);
-        });
+        var send = results.reduce(function(previous, current) {
+          return previous.concat(current);
+        }, []);
 
         send.sort(function(a, b) {
-          // sorts unicode
           return a.subtype.localeCompare(b.subtype);
         });
         return res.json(send);
       })
       .catch(function(error) {
-        console.log(error);
         return res.status(500).send(error);
       });
   });
