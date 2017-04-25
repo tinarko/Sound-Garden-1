@@ -1,6 +1,6 @@
 
 
-const fetchingBudgets = () => {
+export const fetchingBudgets = () => {
   return {
     type: 'FETCHING_BUDGETS'
   };
