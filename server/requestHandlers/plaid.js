@@ -18,24 +18,20 @@ module.exports.accessToken = function(req, res) {
   var PUBLIC_TOKEN = req.body.public_token;
   client.exchangePublicToken(PUBLIC_TOKEN, function(err, tokenResponse) {
     if (err) {
-      console.log('could not exchange public token', error);
-      return res.json({error: 'could not exchange public token'});
+      return res.status(500).send(err);
     }
     var ACCESS_TOKEN = tokenResponse.access_token;
     var institutionName = req.body.metadata.institution.name;
     var userid = req.session.passport.user.id;
     db.updatePlaidItem([ACCESS_TOKEN, institutionName, userid], function(err, response) {
-      // TODO: -------------------- never adds more than one row in current state
       if (err) {
-        console.log('error updating plaid item');
         return res.status(500).send(error);
       }
       
       if (response === 0) {
         db.insertPlaidItem([userid, ACCESS_TOKEN, institutionName], function(err, response) {
           if (err) {
-            console.log('error inserting plaid item');
-            return res.json({error: 'error inserting plaid item'});
+            return res.status(500).send(error);
           }    
           return res.json({error: false});
         });
@@ -48,24 +44,20 @@ module.exports.accessToken = function(req, res) {
 
 module.exports.accounts = function(req, res) {
   var userid = req.session.passport.user.id;
-  var promises = [];
-  var accountData = {};
-  var plaidInstitutions = [];
   db.getPlaidItems(userid, function(err, response) {
-    plaidInstitutions = response;
-    for (let i = 0; i < response.length; i++) {
-      promises.push(client.getAccounts(response[i].access_token)
+    var plaidInstitutions = response;
+    var promises = response.map(function(item) {
+      return client.getAccounts(item.access_token)
         .then(function(data) {
           data.accounts.forEach(function(account) {
-            account.institution_name = response[i].institution_name
+            account.institution_name = item.institution_name
           });
           return data.accounts;
         })
         .catch(function(error) {
           return error;
-        })
-      );
-    }
+        });
+    });
 
     Promise.map(promises, function(asyncResult) {
       return asyncResult;

@@ -30,7 +30,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((user, done) => {
-  console.log('deserializing', user.id);
   db.findUser(user.id, (err, results) => {
     done(null, user);
   });
