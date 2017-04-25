@@ -189,3 +189,9 @@ a {
   position: fixed;
   top: 0;
 }
+
+.login-caption {
+  background-color: white;
+  color: black;
+  padding: 5% 0;
+}

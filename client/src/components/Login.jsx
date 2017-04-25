@@ -1,4 +1,5 @@
 import React from 'react';
+import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import { createPlaid } from './../actions/plaid.js';
@@ -17,21 +18,46 @@ class Login extends React.Component {
   render() {
     return (
       <div className="login">
-        {this.props.loggedIn ? 
-          <div>
-            <h1>Welcome Back, {this.props.name}</h1>
-            <h3>Here's where you stand: </h3>
-            <Balance />
-          </div>
+        {this.props.loggedIn ?
+          <Card>
+            <CardMedia
+              overlay={<CardTitle title="overlay title" subtitle="Overlay subtitle"/>} 
+              
+            >
+              <img src="https://images.pexels.com/photos/237675/pexels-photo-237675.jpeg?w=940&h=650&auto=compress&cs=tinysrgb" />
+            </CardMedia>
+            <CardTitle title="card title" subtitle="subtitle here"/>
+            <CardText>
+              text goes here
+            </CardText>
+          </Card>
         :
-          <div>
-            <h1>Welcome to Financial Advisorly!</h1>
-            <h3>You are well on your way to saving big</h3>
-          </div>
+          <Card
+            style={{'background-color': 'black'}}
+          >
+            <CardMedia overlay={ 
+                <div>
+                  <CardTitle
+                    className="login-title"
+                    title="Welcome to Advisorly!" 
+                    titleColor="white"
+                    subtitle="You are well on your way to saving big"
+                    subtitleColor="white"
+                    style={{'padding': '5% 0'}}
+                  />
+                  <h3 className="login-caption">hi</h3>
+                </div>
+              }
+              overlayStyle={{width: '100%', margin: 'auto', 'top': '-50%', 'text-align': 'center'}}
+            >
+              <img src="https://images.pexels.com/photos/237675/pexels-photo-237675.jpeg?w=940&h=650&auto=compress&cs=tinysrgb" />
+            </CardMedia>
+            <CardTitle title="card title" subtitle="subtitle here"/>
+            <CardText>
+              text goes here
+            </CardText>
+          </Card>
         }
-        <RaisedButton id="link-button"
-          onClick={createPlaid} label="Add More Accounts" 
-        />
       </div>
     );
   }
@@ -44,3 +70,11 @@ export default connect((state) => {
     picture: state.login.picture,
   };
 }) (Login);
+            {/*<CardHeader
+              title="hi"
+              subtitle="subtitle here"
+            />*/}
+          /*<div>
+            <h1>Welcome to Financial Advisorly!</h1>
+            <h3>You are well on your way to saving big</h3>
+          </div>*/
