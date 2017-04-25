@@ -47,15 +47,17 @@ class CCCashback extends React.Component {
         </div> );
     } else {
 
-        console.log('state!!', this.props.state);
+        var mapcalculator = this.props.mapcalculator;
 
         return (
         <div>
           <h1>Credit Card Selector</h1>
           <br/>
-          <h3>Are you at this location? {this.props.mapcalculator.bizName} </h3>
+          <h3>Are you at this location? {mapcalculator.bizName} </h3>
           <br/>
-          <p>If so, please use your //credit card// for // X // % cash back!</p>
+          <p>If so, please use your: </p>
+          <h5>{mapcalculator.ccName}</h5>
+          <p> for <em>{mapcalculator.cashbackPercent}%</em> cash back on {mapcalculator.cashbackCategory}!</p>
           <br/>
           <RaisedButton label="Setup" onClick={this.props.toggleCashbackSetup} />
           <MapCalculator />

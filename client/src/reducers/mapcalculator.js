@@ -19,7 +19,8 @@ export default (state = initialState, action) => {
       }
     }
     break;
-    case 'SET_PIN_AND_BUSINESS_DATA' : {      
+
+    case 'SET_PIN_AND_BUSINESS_DATA': 
       var newState = (JSON.parse(JSON.stringify(state)));
 
       newState.geolocation = {
@@ -27,22 +28,27 @@ export default (state = initialState, action) => {
         long: action.long
       };
 
-      newState.bizName = action.bizName;
-      newState.bizCats = action.bizCats;
+      return {
+        ...newState,
+        ccName: action.ccName,
+        cashbackPercent: action.cashbackPercent,
+        cashbackCategory: action.cashbackCategory,
+        bizName: action.bizName
+      };
+      break;
 
-      console.log('old', state, 'new', newState);
-
-      return newState;
-    }
-    break;
-    case 'SET_PIN_AND_BUSINESS_DATA_ERROR' : {
+    case 'SET_PIN_AND_BUSINESS_DATA_ERROR':
+    case 'GET_ALL_USER_CATEGORIES_ERROR':
+    case 'CALUCLATE_MAX_BENEFITS_ERROR':
+    case 'GET_LOCATION_ERROR':
+    case 'GET_LOCATION_REQUEST_ERROR':
       return {
         ...state,
         error: action.error
-      }
-    }
-    break;
-    default: 
+      };
+      break;
+
+    default:
       return state;
   }
 };

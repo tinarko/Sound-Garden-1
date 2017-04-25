@@ -1,4 +1,5 @@
 var cb = require('./../../database/cashback');
+var calculateBestCard = require('./../creditcardCategories');
 
 exports.getCashbackCategories = (req, res) => {
   var catid = req.params.catid;
@@ -43,9 +44,8 @@ exports.getAllUserCategories = (req, res) => {
 exports.calculate = (req, res) => {
   var userCats = req.body.userCats;
   var bizCats = req.body.bizCats;      
-  console.log('cards', userCats, 'bizCats', bizCats);
-
-  res.json('hi');
+  var best = calculateBestCard(userCats, bizCats);
+  res.json(best);
 
 };
 

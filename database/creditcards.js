@@ -15,7 +15,7 @@ exports.getCreditcards = (userid, cb) => {
   });
 };
 
-exports.checkCreditcard = function(userid, ccname, cb) {
+exports.checkCreditcard = (userid, ccname, cb) => {
 
   var query = `select * from creditcards where userid = "${userid}" and ccname like "${ccname}";`;
 
@@ -28,7 +28,7 @@ exports.checkCreditcard = function(userid, ccname, cb) {
   });
 };
 
-exports.createCreditcard = function(userid, ccname, cb) {
+exports.createCreditcard = (userid, ccname, cb) => {
 
   var query = `insert into creditcards (userid, ccname) values ("${userid}", "${ccname}");`;
 

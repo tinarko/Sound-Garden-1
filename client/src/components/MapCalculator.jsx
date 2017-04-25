@@ -16,7 +16,6 @@ class MapCalculator extends React.Component {
 
   componentWillMount() {
     this.props.getLocation();
-    console.log('props', this.props);
     
   }
 
@@ -24,10 +23,6 @@ class MapCalculator extends React.Component {
     if (this.props.geolocation) {
       const directionsDisplay = new google.maps.DirectionsRenderer();
       this.map = this.createMap();
-      // this.map.addListener('click', (e) => {
-      //   console.log(e)
-      //   console.log('lat', e.latLng.lat(), e.latLng.lng())
-      // })
       directionsDisplay.setMap(this.map);
       this.createMarkers(this.map);
     } 

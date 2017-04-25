@@ -33,7 +33,6 @@ exports.getCreditcards = (req, res) => {
       res.status(500).send(err);
     } else {
       var data = [];
-      console.log('RESULTS', results);
       for (var i = 0; i < results.length; i++) {
         data.push({
           ccid: results[i].id,
@@ -82,7 +81,6 @@ exports.createCreditCards = function(req, res) {
     var accountTypes = {};
     Promise.all(promises)
       .then(function(results) {
-        console.log(results);
         for (var j = 0; j < plaidInstitutions.length; j++) {
           accountData[plaidInstitutions[j].institution_name] = results[j];
         }

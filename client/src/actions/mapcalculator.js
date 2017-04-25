@@ -12,17 +12,15 @@ export const getLocation = () => {
       response.json()
       .then((geolocation) => {
         // obtain nearby stores
-        console.log('geolocation after getting location', geolocation);
         dispatch(yelpQuery(geolocation.location.lat, geolocation.location.lng));
         // dispatch(getPlace(geolocation));
       })
       .catch((err) => {
-        console.log(err);
+        dispatch(getLocationError(error));
       });
     })
     .catch((error) => {
-      // TODO: error handle
-      console.log(error);
+      dispatch(getLocationRequestError(error));
     });
   };
 };
@@ -42,12 +40,11 @@ export const yelpQuery = (lat, long) => {
     })
     .then (json => {
       var yelp = JSON.parse(json);
-      console.log('yelp returns', yelp);
       var business = yelp.businesses[0];
-      var name = business.name;
-      var categories = business.categories;
+      var bizName = business.name;
+      var bizCats = business.categories;
       // dispatch(setPinAndBusinessData(lat, long, name, categories));
-      dispatch(getAllUserCategories(categories));
+      dispatch(getAllUserCategories(bizCats, lat, long, bizName));
     })
     .catch((err) => {
       dispatch(setPinAndBusinessDataError(err));
@@ -55,7 +52,7 @@ export const yelpQuery = (lat, long) => {
   }
 }
 
-export const getAllUserCategories = (bizCats) => {
+export const getAllUserCategories = (bizCats, lat, long, bizName) => {
   return (dispatch) => {
     fetch('/cashback/getallusercategories', {
       method: 'GET',
@@ -68,17 +65,15 @@ export const getAllUserCategories = (bizCats) => {
       return response.json();
     })
     .then(userCats => {
-      console.log('userCats at actions', userCats);
-      dispatch(calculateMaxBenefits(userCats, bizCats));
+      dispatch(calculateMaxBenefits(userCats, bizCats, lat, long, bizName));
     })
     .catch((err) => {
-      console.log('error in get', err);
       dispatch(getAllUserCategoriesError(err));
     });
   };
 };
 
-export const calculateMaxBenefits = (userCats, bizCats) => {
+export const calculateMaxBenefits = (userCats, bizCats, lat, long, bizName) => {
   return (dispatch) => {
     fetch('/cashback/calculate', {
       method: 'POST',
@@ -94,31 +89,35 @@ export const calculateMaxBenefits = (userCats, bizCats) => {
       return response.json();
     })
     .then (json => {
-      console.log('calculated!!', json);
-      
+      var ccName = json[0];
+      var cashbackPercent = json[1];
+      var cashbackCategory = json[2];
+      dispatch(setPinAndBusinessData(lat, long, ccName, cashbackPercent, cashbackCategory, bizName));
+
     })
     .catch((err) => {
-      console.log('error calculating', err);
       dispatch(calculateMaxBenefitsError(err));
     })
   }
 
 };
 
-export const setPinAndBusinessData = (lat, long, name, categories) => {
+export const setPinAndBusinessData = (lat, long, ccName, cashbackPercent, cashbackCategory, bizName) => {
   return {
     type: 'SET_PIN_AND_BUSINESS_DATA',
     lat: lat,
     long: long,
-    bizName: name,
-    bizCats: categories
+    ccName: ccName,
+    cashbackPercent: cashbackPercent,
+    cashbackCategory: cashbackCategory,
+    bizName: bizName
   }
 }
 
-export const setPinAndBusinessDataError = (err) => {
+export const setPinAndBusinessDataError = (error) => {
   return {
     type: 'SET_PIN_AND_BUSINESS_DATA_ERROR',
-    error: err
+    error: error
   }
 }
 
@@ -136,7 +135,19 @@ export const calculateMaxBenefitsError = (error) => {
   }
 };
 
+export const getLocationError = (error) => {
+  return {
+    type: 'GET_LOCATION_ERROR',
+    error: error
+  }
+};
 
+export const getLocationRequestError = (error) => {
+  return {
+    type: 'GET_LOCATION_REQUEST_ERROR',
+    error: error
+  }
+};
 
 
 
