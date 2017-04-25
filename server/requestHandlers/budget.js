@@ -4,7 +4,6 @@ module.exports.getUserBudgets = function (req, res) {
   if (req.session.passport) {
     var userid = req.session.passport.user.id;
   } else {
-    //accounts for non-passport sessions
     var userid = req.body.userid;
   }
   //check if (current) month budget exists for signed in user
@@ -80,7 +79,6 @@ module.exports.updateBudgetAmount = function(req, res) {
   if (req.session.passport) {
     var userid = req.session.passport.user.id;
   } else {
-    //accounts for non-passport sessions
     var userid = req.body.userid;
   }
   var monthString;
