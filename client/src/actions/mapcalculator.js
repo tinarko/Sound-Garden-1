@@ -13,7 +13,6 @@ export const getLocation = () => {
       .then((geolocation) => {
         // obtain nearby stores
         dispatch(yelpQuery(geolocation.location.lat, geolocation.location.lng));
-        // dispatch(getPlace(geolocation));
       })
       .catch((err) => {
         dispatch(getLocationError(error));

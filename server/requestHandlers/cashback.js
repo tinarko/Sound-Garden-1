@@ -43,10 +43,10 @@ exports.getAllUserCategories = (req, res) => {
 
 exports.calculate = (req, res) => {
   var userCats = req.body.userCats;
-  var bizCats = req.body.bizCats;      
-  var best = calculateBestCard(userCats, bizCats);
-  res.json(best);
-
+  var bizCats = req.body.bizCats;
+  calculateBestCard(userCats, bizCats, function(results){
+    res.json(results);
+  });      
 };
 
 exports.changeCashbackPercent = (req, res) => {
