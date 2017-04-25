@@ -17,7 +17,7 @@ const BalanceTable = (props) => {
                 return (<TableRow>
                   <TableRowColumn>{item.institution_name + ' ' + item.name}</TableRowColumn>
                   <TableRowColumn>{`$${item.balances.available || item.balances.current}`}</TableRowColumn>
-                  <TableRowColumn>{item.subtype}</TableRowColumn>
+                  <TableRowColumn>{item.subtype === 'cd' ? 'CD' : item.subtype[0].toUpperCase() + item.subtype.substring(1)}</TableRowColumn>
                 </TableRow>);
               })}
             </TableBody>
