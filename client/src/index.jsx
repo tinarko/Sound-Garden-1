@@ -21,7 +21,7 @@ import EmailNotifications from './components/EmailNotifications.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 import Dialog from 'material-ui/Dialog';
-import {cyan500} from 'material-ui/styles/colors';
+import {pink600, cyan500, cyan700, grey400} from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -30,6 +30,9 @@ import AppBar from 'material-ui/AppBar';
 
 const muiTheme = getMuiTheme({
   palette: {
+    primary1Color: pink600,
+    primary2Color: cyan700,
+    primary3Color: grey400,
     textColor: cyan500,
   },
 });
