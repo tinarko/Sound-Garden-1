@@ -13,21 +13,33 @@ var client = new plaid.Client(
   plaid.environments[PLAID_ENV]
 );
 
-module.exports.promisePlaid = function(dbResponse, reqType, cb) {
+module.exports.promisePlaid = function(dbResponse, reqType, cb, startDate, endDate) {
   var promises = dbResponse.map(function(item) {
-    // type of plaid request
-    return client[type](item.access_token)
-      .then(function(data) {
-        data.accounts.forEach(function(account) {
-          // may be a jamming point
-          account.instution_name = item.institution_name;
+    if (reqType === 'getTransactions') {
+      return client[reqType](item.access_token, startDate, endDate)
+        .then(function(data) {
+          data.transactions.forEach(function(transaction) {
+            transaction.institution_name = item.institution_name;
+          });
+          return data.transactions;
+        })
+        .catch(function(error) {
+          return error;
         });
-        return data.accounts;
-      })
-      .catch(function(error) {
-        return error;
-      });
+    } else {
+      return client[reqType](item.access_token)
+        .then(function(data) {
+          data.accounts.forEach(function(account) {
+            account.institution_name = item.institution_name;
+          });
+          return data.accounts;
+        })
+        .catch(function(error) {
+          return error;
+        });
+    }
   });
+
   Promise.map(promises, function(asyncResult) {
     return asyncResult;
   })

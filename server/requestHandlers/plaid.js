@@ -1,6 +1,7 @@
 var plaid = require('plaid');
 var Promise = require('bluebird');
 var db = require('./../../database/index.js');
+var plaidUtility = require('./utility/plaidUtility.js');
 var PLAID_CLIENT_ID  = process.env.PLAID_clientID;
 var PLAID_SECRET     = process.env.PLAID_clientSecret;
 var PLAID_PUBLIC_KEY = process.env.PLAID_publicKey;
@@ -45,36 +46,19 @@ module.exports.accessToken = function(req, res) {
 module.exports.accounts = function(req, res) {
   var userid = req.session.passport.user.id;
   db.getPlaidItems(userid, function(err, response) {
-    var plaidInstitutions = response;
-    var promises = response.map(function(item) {
-      return client.getAccounts(item.access_token)
-        .then(function(data) {
-          data.accounts.forEach(function(account) {
-            account.institution_name = item.institution_name
-          });
-          return data.accounts;
-        })
-        .catch(function(error) {
-          return error;
-        });
-    });
-
-    Promise.map(promises, function(asyncResult) {
-      return asyncResult;
-    })
-      .then(function(results) {
-        var send = results.reduce(function(previous, current) {
-          return previous.concat(current);
-        }, []);
-
-        send.sort(function(a, b) {
-          return a.subtype.localeCompare(b.subtype);
-        });
-        return res.json(send);
-      })
-      .catch(function(error) {
-        return res.status(500).send(error);
+    plaidUtility.promisePlaid(response, 'getAccounts', function(err, results) {
+      if (err) {
+        res.status(500).send(err);
+      }
+      var send = results.reduce(function(previous, current) {
+        return previous.concat(current);
       });
+
+      send.sort(function(a, b) {
+        return a.subtype.localeCompare(b.subtype);
+      });
+      return res.json(send);
+    });
   });
 };
 
@@ -84,35 +68,15 @@ module.exports.allTransactions = function(req, res) {
   var startDate = req.body.startDate;
   var promises = [];
   db.getPlaidItems(userid, function(err, response) {
-    // TODO: need to use LET declaration to maintain block scope
-    for (let i = 0; i < response.length; i++) {
-      promises.push(client.getTransactions(response[i].access_token, startDate, endDate)
-        .then(function(data) {
-          data.transactions.forEach(function(value) {
-            value.institution_name = response[i].institution_name;
-          });
-          // console.log(data.transactions.length);
-          return data.transactions;
-        })
-        .catch(function(error) {
-          return error;
-        })
-      );
-    }
-    Promise.map(promises, function(asyncResult) {
-      return asyncResult;
-    })
-      .then(function(results) {
-        var send = [];
-        results.forEach(function(bankTransactions) {
-          send = send.concat(bankTransactions);
-        });
-        // console.log(send.length);
-        return res.json(send);
-      })
-      .catch(function(error) {
-        return res.status(500).send(error);
+    plaidUtility.promisePlaid(response, 'getTransactions', function(err, results) {
+      if (err) {
+        res.status(500).send(err);
+      }
+      var send = results.reduce(function(previous, current) {
+        return previous.concat(current);
       });
+      res.json(send);
+    }, startDate, endDate);
   });
 };
 
