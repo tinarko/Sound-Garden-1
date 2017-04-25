@@ -21,7 +21,6 @@ class Login extends React.Component {
           <div>
             <h1>Welcome Back, {this.props.name}</h1>
             <h3>Here's where you stand: </h3>
-            <img src={this.props.picture} />
             <Balance />
           </div>
         :
