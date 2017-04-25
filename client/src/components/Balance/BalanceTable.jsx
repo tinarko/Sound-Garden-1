@@ -3,13 +3,13 @@ import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColu
 
 const BalanceTable = (props) => {
   return (
-        <div className="balance">
+        <div className="balance-table">
           {props.balance.map((item, index) => {
             if (props.balance[index - 1]) {
               const prevType = props.balance[index - 1].subtype;
               if (item.subtype === prevType) {
                 return (
-                  <div>
+                  <div className="balance-table">
                       <TableBody displayRowCheckbox={false}>
                         <TableRow>
                           <TableRowColumn>{item.institution_name + ' ' + item.name}</TableRowColumn>
@@ -19,7 +19,7 @@ const BalanceTable = (props) => {
                   </div>);
               } else {
                 return (
-                  <div>
+                  <div className="balance-table">
                     <h6>{item.subtype === 'cd' ? 'CD Accounts' : item.subtype[0].toUpperCase() + item.subtype.substring(1) + ' Accounts'}</h6>
                     <Table >
                       <TableHeader displaySelectAll={false}>
@@ -40,7 +40,7 @@ const BalanceTable = (props) => {
               }
             } else {
               return (
-                <div>
+                <div className="balance-table">
                   <h6>{item.subtype === 'cd' ? 'CD Accounts' : item.subtype[0].toUpperCase() + item.subtype.substring(1) + ' Accounts'}</h6>
                     <Table>
                       <TableHeader displaySelectAll={false}>

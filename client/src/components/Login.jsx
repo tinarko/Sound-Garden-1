@@ -19,43 +19,46 @@ class Login extends React.Component {
     return (
       <div className="login">
         {this.props.loggedIn ?
-          <Card>
-            <CardMedia
-              overlay={<CardTitle title="overlay title" subtitle="Overlay subtitle"/>} 
-              
+          <Card
+            style={{'background-color': 'black'}}
+          >
+            <CardMedia overlay={ 
+                <div className="login-overlay">
+                  <CardTitle
+                    className="login-title"
+                    title={`Welcome to Back, ${this.props.name}!`} 
+                    titleColor="white"
+                    subtitle="Here's where you stand:"
+                    subtitleColor="white"
+                  />
+                  <Balance />
+                </div>
+              }
+              overlayStyle={{width: '100%', margin: 'auto', 'top': '0%', 'text-align': 'center'}}
             >
-              <img src="https://images.pexels.com/photos/237675/pexels-photo-237675.jpeg?w=940&h=650&auto=compress&cs=tinysrgb" />
+              <img src="https://d2lm6fxwu08ot6.cloudfront.net/img-thumbs/960w/J98HWXTPPV.jpg" />
             </CardMedia>
-            <CardTitle title="card title" subtitle="subtitle here"/>
-            <CardText>
-              text goes here
-            </CardText>
           </Card>
         :
           <Card
             style={{'background-color': 'black'}}
           >
             <CardMedia overlay={ 
-                <div>
+                <div className="login-overlay">
                   <CardTitle
                     className="login-title"
                     title="Welcome to Advisorly!" 
                     titleColor="white"
-                    subtitle="You are well on your way to saving big"
+                    subtitle="Your one stop shop for all your financial needs"
                     subtitleColor="white"
-                    style={{'padding': '5% 0'}}
                   />
-                  <h3 className="login-caption">hi</h3>
+                  <RaisedButton label="Sign up" href="/auth/auth0" className="login-button" />
                 </div>
               }
               overlayStyle={{width: '100%', margin: 'auto', 'top': '-50%', 'text-align': 'center'}}
             >
               <img src="https://images.pexels.com/photos/237675/pexels-photo-237675.jpeg?w=940&h=650&auto=compress&cs=tinysrgb" />
             </CardMedia>
-            <CardTitle title="card title" subtitle="subtitle here"/>
-            <CardText>
-              text goes here
-            </CardText>
           </Card>
         }
       </div>

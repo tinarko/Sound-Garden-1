@@ -175,9 +175,14 @@ a {
   width: 65%;
 }
 
+.balance-table {
+  background-color: white;
+}
+
 .balance h6 {
   text-align: center;
-  margin: 3% 0;
+  background-color: white;
+  margin: 2% 0;
 }
 
 .app-bar-title {
@@ -194,4 +199,12 @@ a {
   background-color: white;
   color: black;
   padding: 5% 0;
+}
+
+.login-overlay {
+  padding: 5% 0;
+}
+
+.login-button {
+  margin: 1% 0;
 }
