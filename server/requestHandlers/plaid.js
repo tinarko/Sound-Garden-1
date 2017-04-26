@@ -62,23 +62,6 @@ module.exports.accounts = function(req, res) {
   });
 };
 
-module.exports.allTransactions = function(req, res) {
-  var userid = req.session.passport.user.id;
-  var endDate = req.body.endDate;
-  var startDate = req.body.startDate;
-  db.getPlaidItems(userid, function(err, response) {
-    plaidUtility.promisePlaid(response, 'getTransactions', function(err, results) {
-      if (err) {
-        return res.status(500).send(err);
-      }
-      var send = results.reduce(function(previous, current) {
-        return previous.concat(current);
-      });
-      return res.json(send);
-    }, startDate, endDate);
-  });
-};
-
 module.exports.transactions = function (req, res) {
   var userid = req.session.passport.user.id;
   console.log(req.params.destination);
@@ -121,7 +104,7 @@ module.exports.transactions = function (req, res) {
         return res.status(500).send(err);
       }
       console.log(results);
-      if (req.params.destination = 'budget') {
+      if (req.params.destination === 'budget') {
         var transactions = [];
         results.forEach(function(array) {
           for (var i = 0; i < array.length; i++) {
@@ -147,7 +130,6 @@ module.exports.transactions = function (req, res) {
         var send = results.reduce(function(previous, current) {
           return previous.concat(current);
         });
-        console.log(send);
         return res.json(send);
       }
     }, periodStart, periodEnd);
