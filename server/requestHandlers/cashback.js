@@ -1,5 +1,5 @@
-var cb = require('./../../database/cashback');
-var calculateBestCard = require('./../calculateBestCard');
+var cb = require('./../../database/cashback.js');
+var calculateBestCard = require('./../calculateBestCard.js');
 
 exports.getAll = (req, res) => {
 

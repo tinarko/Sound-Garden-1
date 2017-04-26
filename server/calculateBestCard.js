@@ -1,4 +1,4 @@
-var wrapper = require ('./yelpCategories');
+var wrapper = require ('./yelpCategories.js');
 
 var calculateBestCard = (userCats, bizCats, cb) => {
 

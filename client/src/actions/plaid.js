@@ -3,8 +3,6 @@
 module.exports.createPlaid = () => {
   Plaid.create({
     clientName: 'Plaid Walkthrough Demo',
-    // env: config.plaid.plaidEnv,
-    // key: config.plaid.publicKey,
     env: process.env.PLAID_env,
     key: process.env.PLAID_publicKey, 
     product: ['auth', 'transactions'],
