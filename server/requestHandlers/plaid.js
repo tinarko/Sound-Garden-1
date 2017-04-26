@@ -70,12 +70,12 @@ module.exports.allTransactions = function(req, res) {
   db.getPlaidItems(userid, function(err, response) {
     plaidUtility.promisePlaid(response, 'getTransactions', function(err, results) {
       if (err) {
-        res.status(500).send(err);
+        return res.status(500).send(err);
       }
       var send = results.reduce(function(previous, current) {
         return previous.concat(current);
       });
-      res.json(send);
+      return res.json(send);
     }, startDate, endDate);
   });
 };
@@ -110,25 +110,12 @@ module.exports.transactions = function (req, res) {
     var periodEnd = oldYear + '-' + oldMonth + '-' + oldDay;
   }
 
-  var promises = [];
-  var transactionData = {};
-  var plaidInstitutions = [];
   db.getPlaidItems(userid, function(err, response) {
-    plaidInstitutions = response;
-    for (var i = 0; i < response.length; i++) {
-      
-      promises.push(client.getTransactions(response[i].access_token, periodStart, periodEnd)
-        .then(function(data) {
-          return data.transactions;
+    plaidUtility.promisePlaid(response, 'getTransactions', function(err, results) {
+      if (err) {
+        return res.status(500).send(err);
+      }
 
-        })
-        .catch(function(error) {
-          return error;
-        })
-      );
-    }
-    Promise.all(promises)
-    .then(function(results) {
       var transactions = [];
       results.forEach(function(array) {
         for (var i = 0; i < array.length; i++) {
@@ -150,9 +137,6 @@ module.exports.transactions = function (req, res) {
         }
       }
       return res.json(categoryObject);
-    })
-    .catch(function(error) {
-      return res.json({error: 'error in getting transaction data from plaid clients'});
-    });
+    }, periodStart, periodEnd);
   });
 };
