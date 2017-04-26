@@ -20,7 +20,6 @@ class Login extends React.Component {
       <div className="login">
         {this.props.loggedIn ?
           <div>
-            
             <h1>Welcome Back, {this.props.name}</h1>
             <h3>Here's where you stand: </h3>
             <Balance />
@@ -59,11 +58,3 @@ export default connect((state) => {
     picture: state.login.picture,
   };
 }) (Login);
-            {/*<CardHeader
-              title="hi"
-              subtitle="subtitle here"
-            />*/}
-          /*<div>
-            <h1>Welcome to Financial Advisorly!</h1>
-            <h3>You are well on your way to saving big</h3>
-          </div>*/

@@ -15,8 +15,12 @@ class Balance extends React.Component {
   render () {
     return (
       <div className="balance">
-        {this.props.balance.length &&
-          <BalanceTable balance={this.props.balance} />
+        {this.props.balance.length ?
+          <BalanceTable balance={this.props.balance} /> :
+          <div className="balance-empty">
+            <br/>
+            <h3>Please add some accounts!</h3>
+          </div>
         }
       </div>
     );

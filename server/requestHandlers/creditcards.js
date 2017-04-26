@@ -17,6 +17,8 @@ exports.getCreditcards = (req, res) => {
       res.status(500).send(err);
     } else {
       var data = [];
+      results = results || [];
+      
       for (var i = 0; i < results.length; i++) {
         data.push({
           ccid: results[i].id,
@@ -37,14 +39,14 @@ exports.createCreditCards = function(req, res) {
     utilityPlaid.promisePlaid(response, 'getAccounts', function(err, results) {
       results = results.reduce(function(previous, current) {
         return previous.concat(current);
-      });
+      }, []);
 
       results.forEach(function(value) {
         if (value.subtype === 'credit') {
           var creditcard = value.institution_name + ' - ' + value.official_name;
-          cc.checkCreditcard(userid, creditcard, function(err, results) {
+          cc.checkCreditcard(userid, creditcard, function(err, checkResults) {
             if (err) { return res.status(500).send(err); }
-            if (results.length === 0) {
+            if (checkResults.length === 0) {
               cc.createCreditcard(userid, creditcard, function(err, createResults) {
                 if (err) { return res.status(500).send(err); }
               });

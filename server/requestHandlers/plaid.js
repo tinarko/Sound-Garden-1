@@ -50,9 +50,10 @@ module.exports.accounts = function(req, res) {
       if (err) {
         res.status(500).send(err);
       }
+
       var send = results.reduce(function(previous, current) {
         return previous.concat(current);
-      });
+      }, []);
 
       send.sort(function(a, b) {
         return a.subtype.localeCompare(b.subtype);
@@ -128,7 +129,7 @@ module.exports.transactions = function (req, res) {
       } else {
         var send = results.reduce(function(previous, current) {
           return previous.concat(current);
-        });
+        }, []);
         return res.json(send);
       }
     }, periodStart, periodEnd);

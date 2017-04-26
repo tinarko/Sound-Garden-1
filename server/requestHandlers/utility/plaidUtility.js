@@ -44,10 +44,9 @@ module.exports.promisePlaid = function(dbResponse, reqType, cb, startDate, endDa
     return asyncResult;
   })
     .then(function(results) {
-      if (results.length === null) { cb(null, []); }
-      cb(null, results);
+      return cb(null, results);
     })
     .catch(function(error) {
-      cb(error, null);
+      return cb(error, null);
     });
 }; 
