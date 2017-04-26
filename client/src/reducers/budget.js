@@ -50,7 +50,7 @@ const budget = (state = initialState, action) => {
           var found = false;
           for (var i = 0; i < newArray.length; i++) {
             if (category === newArray[i].name) {
-              newArray[i].actualvalue = action.transactions[category];
+              newArray[i].actualvalue = parseFloat(action.transactions[category].toFixed(2));
               found = true;
             } 
           }
@@ -68,6 +68,8 @@ const budget = (state = initialState, action) => {
         for (var key in action.transactions) {
           newTotalSpent = newTotalSpent + action.transactions[key];
         }
+
+        newTotalSpent = parseFloat(newTotalSpent.toFixed(2));
 
       return {
         ...state,
