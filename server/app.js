@@ -61,7 +61,7 @@ app.post('/cashback/calculate', cashback.calculate);
 /**
  * Google Maps routes
  */
-app.get('/google/geolocate', google.geolocate);
+app.get('/google', google.geolocate);
 
 /** 
  * Yelp routes
