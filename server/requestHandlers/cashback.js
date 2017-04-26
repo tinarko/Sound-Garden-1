@@ -73,7 +73,6 @@ exports.create = (req, res) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      // console.log('results.insertId at reqHandler', results.insertId);
       res.status(200).json(results.insertId);
     }
   });
