@@ -1,6 +1,6 @@
 var Promise = require('bluebird');
-var cc = require('./../../database/creditcards');
-var db = require('./../../database/index');
+var cc = require('./../../database/creditcards.js');
+var db = require('./../../database/index.js');
 var utilityPlaid = require('./utility/plaidUtility.js');
 
 exports.getAll = (req, res) => {
