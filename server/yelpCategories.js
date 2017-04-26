@@ -29,7 +29,6 @@ Wrapper.prototype.init = (cb) => {
         obj.parents.forEach(parent => {
           parentAliases.push(parent);
         })
-        // parentAlias = obj.parents[0]; // TODO: iterate through multiple parents
         cashbackAliases = setCashbackAlias(yelpAlias, parentAliases);
         yelpCategories[yelpAlias] = cashbackAliases;
       });

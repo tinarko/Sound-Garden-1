@@ -1,13 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-
 import CreditCard from './CreditCard.jsx'
 import MapCalculator from './MapCalculator.jsx';
-
 import { createCreditcardsKickoff, toggleCashbackSetup, getCreditcards } from '../actions/creditcards.js';
 
-//styling
 import RaisedButton from 'material-ui/RaisedButton';
 
 class CCCashback extends React.Component {
