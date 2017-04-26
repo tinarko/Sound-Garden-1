@@ -5,7 +5,11 @@ var utilityPlaid = require('./utility/plaidUtility.js');
 
 exports.getAll = (req, res) => {
 
-  var userid = req.session.passport.user.id;
+  if (req.session.passport) {
+    var userid = req.session.passport.user.id;
+  } else {
+    var userid = req.body.userid;
+  }
 
   cc.getCreditcards(userid, (err, results) => {
     if (err) {
@@ -28,7 +32,11 @@ exports.getAll = (req, res) => {
 
 exports.create = function(req, res) {
 
-  var userid = req.session.passport.user.id;
+  if (req.session.passport) {
+    var userid = req.session.passport.user.id;
+  } else {
+    var userid = req.body.userid;
+  }
 
   db.getPlaidItems(userid, function(err, response) {
     

@@ -52,7 +52,6 @@ export const createCashbackCategoryKickoff = (ccindex, ccid, name, percent) => {
       dispatch(createCashbackCategory(ccindex, name, percent, catid));
     })
     .catch((err) => {
-      console.log('error in get', err);
       dispatch(createCashbackCategoryError(err));
     });
   };
@@ -60,6 +59,7 @@ export const createCashbackCategoryKickoff = (ccindex, ccid, name, percent) => {
 
 export const getCashbackCategoriesKickoff = (ccid) => {
   var url = '/cashback/' + ccid;
+
   return (dispatch) => {
     fetch(url, {
       method: 'GET',

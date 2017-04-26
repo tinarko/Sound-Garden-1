@@ -32,8 +32,10 @@ class CCCashback extends React.Component {
                 />);
             });
 
-    if (this.props.creditcards.cashbacksetup) {
+    var mapcalculator = this.props.mapcalculator;
+    var ccName = mapcalculator.ccName;
 
+    if (this.props.creditcards.cashbacksetup) {
       return (
         <div>
           <h1>Credit Card Selector - Setup</h1>
@@ -45,19 +47,51 @@ class CCCashback extends React.Component {
           <br/>
           
         </div> );
-    } else {
-
-        var mapcalculator = this.props.mapcalculator;
-
+    } else if (creditcards.length === 0) {
+        return (
+        <div>
+          <h1>Credit Card Selector</h1>
+          <h3> Please add some accounts! </h3>
+          <br/>
+          <h3>Are you at {mapcalculator.bizName}? </h3>
+          <br/>
+          <p>If so, please use: </p>
+          <h5>{mapcalculator.ccName}</h5>
+          <p> ...for <em>{mapcalculator.cashbackPercent}%</em> cash back on: </p>
+          <h5>{mapcalculator.cashbackCategory}!</h5>
+          <br/>
+          <RaisedButton label="Setup" onClick={this.props.toggleCashbackSetup} />
+          <MapCalculator />
+        </div> 
+        );
+    } else if (ccName == 'anything') {
         return (
         <div>
           <h1>Credit Card Selector</h1>
           <br/>
-          <h3>Are you at this location? {mapcalculator.bizName} </h3>
+          <h3>Are you at {mapcalculator.bizName}? </h3>
           <br/>
-          <p>If so, please use your: </p>
+          <p>If so, please use: </p>
           <h5>{mapcalculator.ccName}</h5>
-          <p> for <em>{mapcalculator.cashbackPercent}%</em> cash back on {mapcalculator.cashbackCategory}!</p>
+          <p> for <em>{mapcalculator.cashbackPercent}%</em> cash back on </p>
+          <h5>{mapcalculator.cashbackCategory}!</h5>
+          <br/>
+          <h3> Please setup some cashback categories for your credit cards, below: </h3>
+          <RaisedButton label="Setup" onClick={this.props.toggleCashbackSetup} />
+          <MapCalculator />
+        </div> 
+        );
+    } else {
+        return (
+        <div>
+          <h1>Credit Card Selector</h1>
+          <br/>
+          <h3>Are you at {mapcalculator.bizName}? </h3>
+          <br/>
+          <p>If so, please use: </p>
+          <h5>{mapcalculator.ccName}</h5>
+          <p> for <em>{mapcalculator.cashbackPercent}%</em> cash back on </p>
+          <h5>{mapcalculator.cashbackCategory}!</h5>
           <br/>
           <RaisedButton label="Setup" onClick={this.props.toggleCashbackSetup} />
           <MapCalculator />
