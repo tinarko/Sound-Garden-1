@@ -58,12 +58,11 @@ app.get('/cashback/getcashbackcategories/:catid', cashback.getCashbackCategories
 app.post('/cashback/changecashbackpercent', cashback.changeCashbackPercent);
 app.post('/cashback/createcashbackcategory', cashback.createCashbackCategory);
 app.delete('/cashback/deletecashbackcategory/:catid', cashback.deleteCashbackCategory);
-
+app.post('/cashback/calculate', cashback.calculate);
 /**
  * Google Maps routes
  */
 app.get('/google/geolocate', google.geolocate);
-app.post('/google/places', google.places);
 
 /** 
  * Yelp routes
@@ -88,4 +87,3 @@ app.get('*', (req, res) => {
 
 
 module.exports = app;
-

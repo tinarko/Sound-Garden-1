@@ -37,7 +37,7 @@ var calculateBestCard = (userCats, bizCats, cb) => {
     var maxCC = userCats[maxCashbackIndex].ccname;
     var maxCat = userCats[maxCashbackIndex].categoryname;
     var results = [maxCC, maxCashbackPercent, maxCat];
-    
+    console.log(results);
     return cb(results);
   });
 }

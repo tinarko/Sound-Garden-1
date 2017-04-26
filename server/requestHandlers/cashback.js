@@ -45,6 +45,7 @@ exports.calculate = (req, res) => {
   var userCats = req.body.userCats;
   var bizCats = req.body.bizCats;
   calculateBestCard(userCats, bizCats, function(results){
+    console.log('results at req Handler', results);
     res.json(results);
   });      
 };
