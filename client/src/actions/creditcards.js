@@ -36,8 +36,8 @@ export const toggleCashbackSetup = () => {
 
 export const createCreditcardsKickoff = () => {
   return (dispatch) => {
-    fetch('/creditcards/createcreditcards', {
-      method: 'GET',
+    fetch('/creditcards', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
@@ -55,7 +55,7 @@ export const createCreditcardsKickoff = () => {
 export const getCreditcards = () => {
   return (dispatch) => {
     dispatch(fetchingCreditcards());
-    fetch('/creditcards/getcreditcards', {
+    fetch('/creditcards', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

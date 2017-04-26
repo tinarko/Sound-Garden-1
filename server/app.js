@@ -46,8 +46,8 @@ app.post('/budget/updatebudgetcategory', budget.updateBudgetAmount);
 /**
  * Credit Card Routes
  */
-app.get('/creditcards/getcreditcards', creditcards.getCreditcards);
-app.get('/creditcards/createcreditcards', creditcards.createCreditCards);
+app.get('/creditcards', creditcards.getAll);
+app.post('/creditcards', creditcards.create);
 
 /**
  * Cashback Routes
@@ -67,7 +67,7 @@ app.get('/google/geolocate', google.geolocate);
  * Yelp routes
  */
 
-app.get('/yelp/businesses/:lat/:long', yelp.businesses);
+app.get('/yelp/:lat/:long', yelp.search);
 
 /**
  * Plaid routes
