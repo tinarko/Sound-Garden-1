@@ -53,7 +53,7 @@ export const yelpQuery = (lat, long) => {
 
 export const getAllUserCategories = (bizCats, lat, long, bizName) => {
   return (dispatch) => {
-    fetch('/cashback/getallusercategories', {
+    fetch('/cashback', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

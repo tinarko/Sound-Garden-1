@@ -52,11 +52,11 @@ app.get('/creditcards/createcreditcards', creditcards.createCreditCards);
 /**
  * Cashback Routes
  */
-app.get('/cashback/getallusercategories', cashback.getAllUserCategories);
-app.get('/cashback/getcashbackcategories/:catid', cashback.getCashbackCategories);
-app.post('/cashback/changecashbackpercent', cashback.changeCashbackPercent);
-app.post('/cashback/createcashbackcategory', cashback.createCashbackCategory);
-app.delete('/cashback/deletecashbackcategory/:catid', cashback.deleteCashbackCategory);
+app.get('/cashback', cashback.getAll);
+app.get('/cashback/:catid', cashback.getOne);
+app.put('/cashback', cashback.change);
+app.post('/cashback', cashback.create);
+app.delete('/cashback/:catid', cashback.delete);
 app.post('/cashback/calculate', cashback.calculate);
 /**
  * Google Maps routes

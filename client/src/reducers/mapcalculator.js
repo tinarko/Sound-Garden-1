@@ -6,7 +6,6 @@ var initialState =
     },
   places: null,
   bizName: '// business name//',
-  bizCats: []
 }
 
 export default (state = initialState, action) => {

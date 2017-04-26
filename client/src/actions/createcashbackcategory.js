@@ -33,7 +33,7 @@ export const createCashbackCategory = (ccindex, name, percent, catid) => {
 
 export const createCashbackCategoryKickoff = (ccindex, ccid, name, percent) => {
   return (dispatch) => {
-    fetch('/cashback/createcashbackcategory', {
+    fetch('/cashback', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ export const createCashbackCategoryKickoff = (ccindex, ccid, name, percent) => {
 };
 
 export const getCashbackCategoriesKickoff = (ccid) => {
-  var url = '/cashback/getcashbackcategories/' + ccid;
+  var url = '/cashback/' + ccid;
   return (dispatch) => {
     fetch(url, {
       method: 'GET',

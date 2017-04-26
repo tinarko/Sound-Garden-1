@@ -5,13 +5,8 @@ var utilityPlaid = require('./utility/plaidUtility.js');
 
 exports.getCreditcards = (req, res) => {
 
-  var userid;
-  if (req.session.passport) {
-    userid = req.session.passport.user.id;    
-  } else {
-    userid = "facebook|10211056100732598";
-    console.log('YOU ARE NOT LOGGED IN');
-  }
+  var userid = req.session.passport.user.id;
+
   cc.getCreditcards(userid, (err, results) => {
     if (err) {
       res.status(500).send(err);
@@ -32,6 +27,7 @@ exports.getCreditcards = (req, res) => {
 };
 
 exports.createCreditCards = function(req, res) {
+
   var userid = req.session.passport.user.id;
 
   db.getPlaidItems(userid, function(err, response) {
