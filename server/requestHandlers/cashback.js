@@ -1,7 +1,21 @@
 var cb = require('./../../database/cashback');
 var calculateBestCard = require('./../creditcardCategories');
 
-exports.getCashbackCategories = (req, res) => {
+exports.getAll = (req, res) => {
+
+  var userid = req.session.passport.user.id;
+
+  cb.getAllUserCategories(userid, (err, results) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(results);
+    }
+  });
+
+};
+
+exports.getOne = (req, res) => {
   var catid = req.params.catid;
 
   cb.getCashbackCategories(catid, (err, results) => {
@@ -23,34 +37,19 @@ exports.getCashbackCategories = (req, res) => {
   });
 };
 
-exports.getAllUserCategories = (req, res) => {
-  var userid;
-  if (req.session.passport) {
-    userid = req.session.passport.user.id;    
-  } else {
-    userid = "facebook|10211056100732598";
-    console.log('YOU ARE NOT LOGGED IN');
-  }
-
-  cb.getAllUserCategories(userid, (err, results) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(results);
-    }
-  });
-};
-
 exports.calculate = (req, res) => {
+
   var userCats = req.body.userCats;
   var bizCats = req.body.bizCats;
+  
   calculateBestCard(userCats, bizCats, function(results){
-    console.log('results at req Handler', results);
     res.json(results);
   });      
+
 };
 
-exports.changeCashbackPercent = (req, res) => {
+exports.change = (req, res) => {
+
   var catid = req.body.catid;
   var percent = req.body.percent;
   var action = req.body.action;
@@ -64,7 +63,8 @@ exports.changeCashbackPercent = (req, res) => {
   });
 };
     
-exports.createCashbackCategory = (req, res) => {
+exports.create = (req, res) => {
+
   var ccid = req.body.ccid;
   var name = req.body.name;
   var percent = req.body.percent;
@@ -79,8 +79,10 @@ exports.createCashbackCategory = (req, res) => {
   });
 };
 
-exports.deleteCashbackCategory = (req, res) => {
+exports.delete = (req, res) => {
+  
   var catid = req.params.catid;
+
   cb.deleteCashbackCategory(catid, (err, results) => {
     if (err) {
       res.status(500).send(err);

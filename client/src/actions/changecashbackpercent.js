@@ -25,8 +25,8 @@ export const changeCashbackPercentError = () => {
 
 export const changeCashbackPercent = (ccindex, catindex, percent, action, catid) => {
   return (dispatch) => {
-    fetch('/cashback/changecashbackpercent', {
-      method: 'POST',
+    fetch('/cashback/', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
