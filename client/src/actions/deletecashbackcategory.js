@@ -33,5 +33,3 @@ export const deleteCashbackCategoryKickoff = (ccindex, catindex, catid) => {
     });
   };
 }
-
-//test

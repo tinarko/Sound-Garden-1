@@ -1,11 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-
-//import actions
-// import * as googlemap from './../actions/googlemap.js';
 import { getLocation, yelpQuery } from './../actions/mapcalculator.js'
-
-// import crimeImg from '../img/security.png';
 
 class MapCalculator extends React.Component {
   constructor(props) {

@@ -15,9 +15,6 @@ class CashbackCategory extends React.Component {
     super(props);
   }
 
-  // componentDidMount() {
-  // }
-
   render () {
     var ccid = this.props.ccid;
     var category = this.props.category;
@@ -51,12 +48,6 @@ class CashbackCategory extends React.Component {
     )
   }
 }
-
-// const mapStateToProps = (state) => {
-//   return {
-//     creditcards: state.creditcards.cc
-//   };
-// };
 
 const mapDispatchToProps = (dispatch) => {
   return {
