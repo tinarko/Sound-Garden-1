@@ -2,10 +2,10 @@ var plaid = require('plaid');
 var Promise = require('bluebird');
 var db = require('./../../database/index.js');
 var plaidUtility = require('./utility/plaidUtility.js');
-var PLAID_CLIENT_ID  = process.env.PLAID_clientID;
-var PLAID_SECRET     = process.env.PLAID_clientSecret;
+var PLAID_CLIENT_ID = process.env.PLAID_clientID;
+var PLAID_SECRET = process.env.PLAID_clientSecret;
 var PLAID_PUBLIC_KEY = process.env.PLAID_publicKey;
-var PLAID_ENV        = process.env.PLAID_env;
+var PLAID_ENV = process.env.PLAID_env;
 
 var client = new plaid.Client(
   PLAID_CLIENT_ID,
@@ -66,7 +66,6 @@ module.exports.allTransactions = function(req, res) {
   var userid = req.session.passport.user.id;
   var endDate = req.body.endDate;
   var startDate = req.body.startDate;
-  var promises = [];
   db.getPlaidItems(userid, function(err, response) {
     plaidUtility.promisePlaid(response, 'getTransactions', function(err, results) {
       if (err) {
@@ -82,32 +81,37 @@ module.exports.allTransactions = function(req, res) {
 
 module.exports.transactions = function (req, res) {
   var userid = req.session.passport.user.id;
-  var periodStart = `${req.params.year}-${req.params.month}-01`;
+  if (!req.params.dates) {
+    var periodStart = `${req.params.start}-${req.params.end}-01`;
 
-  var today = new Date ();
-  var month = (today.getMonth() + 1).toString();
-  if (month.length < 2) {
-    month = '0'.concat(month);
-  }
-  var year = today.getFullYear().toString();
-  var day = today.getDate().toString();
-  if (day.length < 2) {
-    day = '0'.concat(day);
-  }
-  if (month === req.params.month && year === req.params.year) {
-    var periodEnd = year + '-' + month + '-' + day;
+    var today = new Date ();
+    var month = (today.getMonth() + 1).toString();
+    if (month.length < 2) {
+      month = '0'.concat(month);
+    }
+    var year = today.getFullYear().toString();
+    var day = today.getDate().toString();
+    if (day.length < 2) {
+      day = '0'.concat(day);
+    }
+    if (month === req.params.end && year === req.params.start) {
+      var periodEnd = year + '-' + month + '-' + day;
+    } else {
+      var oldDate = new Date(parseInt(req.params.start), parseInt(req.params.end), 0);
+      var oldMonth = (oldDate.getMonth() + 1).toString();
+      if (oldMonth.length < 2) {
+        oldMonth = '0'.concat(oldMonth);
+      }
+      var oldYear = oldDate.getFullYear().toString();
+      var oldDay = oldDate.getDate().toString();
+      if (oldDay.length < 2) {
+        oldDay = '0'.concat(oldDay);
+      }
+      var periodEnd = oldYear + '-' + oldMonth + '-' + oldDay;
+    }
   } else {
-    var oldDate = new Date(parseInt(req.params.year), parseInt(req.params.month), 0);
-    var oldMonth = (oldDate.getMonth() + 1).toString();
-    if (oldMonth.length < 2) {
-      oldMonth = '0'.concat(oldMonth);
-    }
-    var oldYear = oldDate.getFullYear().toString();
-    var oldDay = oldDate.getDate().toString();
-    if (oldDay.length < 2) {
-      oldDay = '0'.concat(oldDay);
-    }
-    var periodEnd = oldYear + '-' + oldMonth + '-' + oldDay;
+    periodStart = req.params.start;
+    periodEnd = req.params.end;
   }
 
   db.getPlaidItems(userid, function(err, response) {
