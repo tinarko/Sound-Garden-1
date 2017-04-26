@@ -5,6 +5,8 @@ var Wrapper = function () {
   this.yelpCategories = {};
 }
 
+// yelp info from: https://www.yelp.com/developers/documentation/v2/all_category_list
+
 Wrapper.prototype.init = (cb) => {
   fetch('https://www.yelp.com/developers/documentation/v2/all_category_list/categories.json', {
       method: 'GET',
@@ -19,15 +21,19 @@ Wrapper.prototype.init = (cb) => {
     .then((yelpJSON) => { 
       var yelpCategories = {};
       var yelpAlias;
-      var cashbackAlias;
+      var cashbackAliases;
 
       yelpJSON.forEach(obj => { 
         yelpAlias = obj.alias;
-        parentAlias = obj.parents[0]; // TODO: iterate through multiple parents
-        cashbackAlias = setCashbackAlias(yelpAlias, parentAlias);
-        yelpCategories[yelpAlias] = cashbackAlias;
+        var parentAliases = [];
+        obj.parents.forEach(parent => {
+          parentAliases.push(parent);
+        })
+        // parentAlias = obj.parents[0]; // TODO: iterate through multiple parents
+        cashbackAliases = setCashbackAlias(yelpAlias, parentAliases);
+        yelpCategories[yelpAlias] = cashbackAliases;
       });
-      
+
       cb(yelpCategories);
     })
     .catch((err) => {
@@ -35,8 +41,8 @@ Wrapper.prototype.init = (cb) => {
     });
 }
 
-var setCashbackAlias = (yelpAlias, parentAlias) => {
-  var cashbackAlias = parentAlias;
+var setCashbackAlias = (yelpAlias, parentAliases) => {
+  var cashbackAliases = parentAliases;
 
   // based on yelp alias or yelp's parent alias, set the "parentAlias" to match existing known cashback categories
   // yelp aliases that point to "groceries" cashback category
@@ -54,33 +60,33 @@ var setCashbackAlias = (yelpAlias, parentAlias) => {
   // yelp parent aliases that point to "travel" cashback category
   var travelParents = ['hotelstravel', 'airports', 'hotels', 'tours', 'transport', 'travelservices'];
 
-
-  if (wholesaleAlias[0] === yelpAlias) {
-    cashbackAlias = 'wholesale';
-  } else {
-    groceriesAlias.forEach(alias => {
-      if (yelpAlias === alias) {
-        cashbackAlias = 'groceries';
-      }
-    });
-    gasAlias.forEach(alias => {
-      if (yelpAlias === alias) {
-        cashbackAlias = 'gas';
-      }
-    });
-    restarantsParents.forEach(alias => {
-      if (parentAlias === alias) {
-        cashbackAlias = 'restaurants'
-      }
-    });
-    travelParents.forEach(alias => {
-      if (parentAlias === alias) {
-        cashbackAlias = 'travel'
-      }
-    });
-  }
-
-  return cashbackAlias;
+  parentAliases.forEach((parent, index) => {
+    if (wholesaleAlias[0] === yelpAlias) {
+      cashbackAliases[index] = 'wholesale';
+    } else {
+      groceriesAlias.forEach(alias => {
+        if (yelpAlias === alias) {
+          cashbackAliases[index] = 'groceries';
+        }
+      });
+      gasAlias.forEach(alias => {
+        if (yelpAlias === alias) {
+          cashbackAliases[index] = 'gas';
+        }
+      });
+      restarantsParents.forEach(alias => {
+        if (parentAliases[index] === alias) {
+          cashbackAliases[index] = 'restaurants'
+        }
+      });
+      travelParents.forEach(alias => {
+        if (parentAliases[index] === alias) {
+          cashbackAliases[index] = 'travel'
+        }
+      });
+    } 
+  });
+  return cashbackAliases;
 }
 
 module.exports = new Wrapper ();
