@@ -65,7 +65,7 @@ export const fetchTransactionError = (error) => {
 export const getTransactionData = (year, month) => {
   return (dispatch) => {
     dispatch(fetchingTransactionData());
-    fetch(`/plaid/transactions/${year}/${month}`, {
+    fetch(`/plaid/transactions/${year}/${month}/budget`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

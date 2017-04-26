@@ -75,7 +75,7 @@ app.get('/yelp/businesses/:lat/:long', yelp.businesses);
  */
 app.post('/plaid/access_token', plaid.accessToken);
 app.get('/plaid/accounts', plaid.accounts);
-app.get('/plaid/transactions/:start/:end/:dates', plaid.transactions);
+app.get('/plaid/transactions/:start/:end/:destination', plaid.transactions);
 // app.post('/plaid/allTransactions/', plaid.allTransactions);
 
 /**

@@ -81,7 +81,8 @@ module.exports.allTransactions = function(req, res) {
 
 module.exports.transactions = function (req, res) {
   var userid = req.session.passport.user.id;
-  if (!req.params.dates) {
+  console.log(req.params.destination);
+  if (req.params.destination === 'budget') {
     var periodStart = `${req.params.start}-${req.params.end}-01`;
 
     var today = new Date ();
@@ -119,28 +120,36 @@ module.exports.transactions = function (req, res) {
       if (err) {
         return res.status(500).send(err);
       }
+      console.log(results);
+      if (req.params.destination = 'budget') {
+        var transactions = [];
+        results.forEach(function(array) {
+          for (var i = 0; i < array.length; i++) {
+            transactions.push(array[i]);
+          }
+        });
 
-      var transactions = [];
-      results.forEach(function(array) {
-        for (var i = 0; i < array.length; i++) {
-          transactions.push(array[i]);
-        }
-      });
-
-      var categoryObject = {}; 
-      for (var i = 0; i < transactions.length; i++) {
-        if (transactions[i]['category']) {
-          var categoryName = transactions[i]['category'][0];
-          if (transactions[i]['category'].length > 0 && categoryName !== 'Payment' && categoryName !== 'Transfer') {
-            categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'] || transactions[i]['amount'];
+        var categoryObject = {}; 
+        for (var i = 0; i < transactions.length; i++) {
+          if (transactions[i]['category']) {
+            var categoryName = transactions[i]['category'][0];
+            if (transactions[i]['category'].length > 0 && categoryName !== 'Payment' && categoryName !== 'Transfer') {
+              categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'] || transactions[i]['amount'];
+            } else {
+              categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'] || transactions[i]['amount'];
+            }
           } else {
             categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'] || transactions[i]['amount'];
           }
-        } else {
-          categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'] || transactions[i]['amount'];
         }
+        return res.json(categoryObject);
+      } else {
+        var send = results.reduce(function(previous, current) {
+          return previous.concat(current);
+        });
+        console.log(send);
+        return res.json(send);
       }
-      return res.json(categoryObject);
     }, periodStart, periodEnd);
   });
 };
