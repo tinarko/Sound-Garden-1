@@ -41,6 +41,7 @@ Wrapper.prototype.init = (cb) => {
     });
 }
 
+// add yelp alias as key, array of self-defined or default parent aliases as value in cashbackAliases object
 var setCashbackAlias = (yelpAlias, parentAliases) => {
   var cashbackAliases = parentAliases;
 

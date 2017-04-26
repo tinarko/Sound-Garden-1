@@ -3,7 +3,6 @@ var wrapper = require ('./yelpCategories');
 var calculateBestCard = (userCats, bizCats, cb) => {
 
   return wrapper.init( (yelpCategories) => {
-    // console.log(yelpCategories);
 
     var yelpAlias, userCat, cashbackCat, yelpCashbackCats, userCashbackCat;
     var maxCashbackPercent = 0;
