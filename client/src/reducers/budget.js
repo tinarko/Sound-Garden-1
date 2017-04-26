@@ -8,30 +8,6 @@ const initialState = {
   addcategoryname: '',
   addcategorybudget: '',
   mvalue: {year: null, month: null},
-  showMyBudgets: true,
-  showFriendBudgets: false,
-  friendsBudgets: []
-    // [ 
-    //   {
-    //     name: friend1
-    //     totalBudget:
-    //     totalTrans:
-    //     budgets: [ 
-    //     {
-    //       actual: 
-    //       goal:
-    //       category: 
-    //     },
-    //     {
-    //       actual: 
-    //       goal:
-    //       category: 
-    //     }
-    //     ]
-
-    //   },
-
-    // ]
 };
 
 
@@ -150,20 +126,6 @@ const budget = (state = initialState, action) => {
       return {
         ...state,
         mvalue: action.yearMonthObject
-      };
-
-    case 'SHOW_MY_BUDGETS':
-      return {
-        ...state,
-        showMyBudgets: true,
-        showFriendBudgets: false,
-      };
-
-    case 'SHOW_FRIEND_BUDGETS':
-      return {
-        ...state,
-        showMyBudgets: false,
-        showFriendBudgets: true,
       };
 
     default:

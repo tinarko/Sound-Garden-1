@@ -6,7 +6,7 @@ import MonthPicker from 'react-month-picker/lib/month-picker.js';
 import BudgetCategoryList from './BudgetCategoryList.jsx';
 import BudgetFriends from './BudgetFriends.jsx';
 import { getUserBudgets, getTransactionData, incrementBudget, decrementBudget, 
-  postUpdatedBudget, yearMonthChange, toggleYearMonthSelection, showMyBudgets, showFriendBudgets } from '../actions/budget.js';
+  postUpdatedBudget, yearMonthChange, toggleYearMonthSelection } from '../actions/budget.js';
 // import { getTransactionData } from '../actions/transactions.js';
 
 import RaisedButton from 'material-ui/RaisedButton';
@@ -88,12 +88,6 @@ class Budget extends React.Component {
     let currentMonth = months[(this.props.budget.mvalue.month - 1)];
     let currentTime = currentMonth + ' ' + this.props.budget.mvalue.year; 
 
-    var budgetToggle;
-    if (this.props.budget.showMyBudgets && !this.props.budget.showFriendBudgets) {
-      budgetToggle = <BudgetCategoryList budget= {this.props.budget} handleBudgetChange={this.props.handleBudgetChange} toggleAddBudgetCategoryInput={this.props.toggleAddBudgetCategoryInput}/>;
-    } else {
-      budgetToggle = <BudgetFriends />;
-    }
 
     return (
       <div className='component'>
@@ -112,12 +106,7 @@ class Budget extends React.Component {
           lang ={months}
           onDismiss={this.handleAMonthDismiss.bind(this)}>
           </MonthPicker>
-        <br />
-       <RaisedButton label='My Budgets' onClick={this.props.showMyBudgets}/>
-       <RaisedButton label='Friend Budgets' onClick={this.props.showFriendBudgets}/> 
-       <br/>
-       <br/>
-        {budgetToggle}
+      <BudgetCategoryList budget= {this.props.budget} handleBudgetChange={this.props.handleBudgetChange} toggleAddBudgetCategoryInput={this.props.toggleAddBudgetCategoryInput}/>
         
       </div>
 
@@ -141,8 +130,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     yearMonthChange: (yearMonthObject) => { dispatch(yearMonthChange(yearMonthObject)); },
     toggleYearMonthSelection: () => { dispatch (toggleYearMonthSelection()); },
-    showMyBudgets: () => { dispatch(showMyBudgets()); },
-    showFriendBudgets: () => { dispatch(showFriendBudgets()); }
   };
 };
 export default connect (mapStateToProps, mapDispatchToProps) (Budget);

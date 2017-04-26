@@ -180,15 +180,3 @@ export const yearMonthChange = (yearMonthObject) => {
   };
 };
 
-export const showMyBudgets = () => {
-  return {
-    type: 'SHOW_MY_BUDGETS'
-  };
-};
-
-export const showFriendBudgets = () => {
-  return {
-    type: 'SHOW_FRIEND_BUDGETS'
-  };
-};
-
