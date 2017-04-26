@@ -64,7 +64,6 @@ module.exports.accounts = function(req, res) {
 
 module.exports.transactions = function (req, res) {
   var userid = req.session.passport.user.id;
-  console.log(req.params.destination);
   if (req.params.destination === 'budget') {
     var periodStart = `${req.params.start}-${req.params.end}-01`;
 

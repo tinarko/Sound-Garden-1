@@ -63,7 +63,6 @@ module.exports.getUserBudgets = function (req, res) {
       });
 
     } else {
-      // console.log('getting user budgets');
       db.getUserBudgets([userid, req.params.year, req.params.month], function(err, results) {
         if (err) {
           res.status(500).send(err);
