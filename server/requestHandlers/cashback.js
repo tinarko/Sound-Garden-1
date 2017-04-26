@@ -1,9 +1,13 @@
 var cb = require('./../../database/cashback');
-var calculateBestCard = require('./../creditcardCategories');
+var calculateBestCard = require('./../calculateBestCard');
 
 exports.getAll = (req, res) => {
 
-  var userid = req.session.passport.user.id;
+  if (req.session.passport) {
+    var userid = req.session.passport.user.id;
+  } else {
+    var userid = req.body.userid;
+  }
 
   cb.getAllUserCategories(userid, (err, results) => {
     if (err) {
@@ -16,9 +20,10 @@ exports.getAll = (req, res) => {
 };
 
 exports.getOne = (req, res) => {
-  var catid = req.params.catid;
 
-  cb.getCashbackCategories(catid, (err, results) => {
+  var ccid = req.params.ccid;
+
+  cb.getCashbackCategories(ccid, (err, results) => {
     if (err) {
       res.status(500).send(err);
     } else {
@@ -40,12 +45,16 @@ exports.getOne = (req, res) => {
 exports.calculate = (req, res) => {
 
   var userCats = req.body.userCats;
-  var bizCats = req.body.bizCats;
   
-  calculateBestCard(userCats, bizCats, function(results){
-    res.json(results);
-  });      
-
+  // handle case where there are no userCategories so that no error is thrown 
+  if (userCats.length === 0) {
+    res.json(['anything', 0, 'everything'])
+  } else {
+    var bizCats = req.body.bizCats;
+    calculateBestCard(userCats, bizCats, function(results){
+      res.json(results);
+    }); 
+  }
 };
 
 exports.change = (req, res) => {

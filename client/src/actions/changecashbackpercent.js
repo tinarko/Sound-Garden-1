@@ -45,7 +45,6 @@ export const changeCashbackPercent = (ccindex, catindex, percent, action, catid)
       }
     })
     .catch((err) => {
-      console.log('error in get', err);
       dispatch(changeCashbackPercentError(err));
     });
   };

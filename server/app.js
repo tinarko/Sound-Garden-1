@@ -53,7 +53,7 @@ app.post('/creditcards', creditcards.create);
  * Cashback Routes
  */
 app.get('/cashback', cashback.getAll);
-app.get('/cashback/:catid', cashback.getOne);
+app.get('/cashback/:ccid', cashback.getOne);
 app.put('/cashback', cashback.change);
 app.post('/cashback', cashback.create);
 app.delete('/cashback/:catid', cashback.delete);

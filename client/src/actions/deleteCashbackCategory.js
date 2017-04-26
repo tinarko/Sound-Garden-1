@@ -29,7 +29,6 @@ export const deleteCashbackCategoryKickoff = (ccindex, catindex, catid) => {
       dispatch(deleteCashbackCategory(ccindex, catindex));
     })
     .catch((err) => {
-      console.log('error in get', err);
       dispatch(deleteCasbhackCategoryError(err));
     });
   };
