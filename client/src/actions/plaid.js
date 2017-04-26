@@ -1,10 +1,18 @@
-// import config from './../../../config/config.js';
+var env, key;
+
+if (process.env.PLAID_env) {
+  env = process.env.PLAID_env;
+  key = process.env.PLAID_publicKey;
+} else {
+  env = 'sandbox';
+  key = 'a315a5f1d3b001210a2ea7ef2d1945';
+}
 
 module.exports.createPlaid = () => {
   Plaid.create({
     clientName: 'Plaid Walkthrough Demo',
-    env: process.env.PLAID_env,
-    key: process.env.PLAID_publicKey, 
+    env: env,
+    key: key, 
     product: ['auth', 'transactions'],
     // webhook: '[WEBHOOK_URL]', // Optional – use webhooks to get transaction and error updates
     // selectAccount: true, // Optional – trigger the Select Account
