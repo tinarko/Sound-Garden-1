@@ -103,7 +103,7 @@ module.exports.transactions = function (req, res) {
       if (err) {
         return res.status(500).send(err);
       }
-      console.log(results);
+
       if (req.params.destination === 'budget') {
         var transactions = [];
         results.forEach(function(array) {
