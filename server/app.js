@@ -42,7 +42,6 @@ app.get('/auth/logout', authentication.logout);
  */
 app.get('/budget/getuserbudgets/:year/:month', budget.getUserBudgets);
 app.post('/budget/updatebudgetcategory', budget.updateBudgetAmount);
-// app.post('/budget/addbudgetcategory', budget.addBudgetCategory);
 
 /**
  * Credit Card Routes
@@ -76,7 +75,6 @@ app.get('/yelp/businesses/:lat/:long', yelp.businesses);
 app.post('/plaid/access_token', plaid.accessToken);
 app.get('/plaid/accounts', plaid.accounts);
 app.get('/plaid/transactions/:start/:end/:destination', plaid.transactions);
-// app.post('/plaid/allTransactions/', plaid.allTransactions);
 
 /**
  * Catch all for random URLs
