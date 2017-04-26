@@ -1,6 +1,6 @@
 var Yelp = require('yelp-api-v3');
 
-module.exports.businesses = (req, res) => {
+module.exports.search = (req, res) => {
 
   var lat = req.params.lat;
   var long = req.params.long;

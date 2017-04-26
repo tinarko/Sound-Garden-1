@@ -3,7 +3,7 @@ var cc = require('./../../database/creditcards');
 var db = require('./../../database/index');
 var utilityPlaid = require('./utility/plaidUtility.js');
 
-exports.getCreditcards = (req, res) => {
+exports.getAll = (req, res) => {
 
   var userid = req.session.passport.user.id;
 
@@ -26,7 +26,7 @@ exports.getCreditcards = (req, res) => {
   });
 };
 
-exports.createCreditCards = function(req, res) {
+exports.create = function(req, res) {
 
   var userid = req.session.passport.user.id;
 

@@ -25,7 +25,7 @@ export const getLocation = () => {
 };
 
 export const yelpQuery = (lat, long) => {
-  var url = `/yelp/businesses/${lat}/${long}`;
+  var url = `/yelp/${lat}/${long}`;
   return (dispatch) => {
     fetch(url, {
       method: 'GET',
@@ -42,7 +42,6 @@ export const yelpQuery = (lat, long) => {
       var business = yelp.businesses[0];
       var bizName = business.name;
       var bizCats = business.categories;
-      // dispatch(setPinAndBusinessData(lat, long, name, categories));
       dispatch(getAllUserCategories(bizCats, lat, long, bizName));
     })
     .catch((err) => {
