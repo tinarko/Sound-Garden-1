@@ -13,13 +13,7 @@ import Menu from 'material-ui/svg-icons/navigation/menu';
 import Divider from 'material-ui/Divider';
 import Drawer from 'material-ui/Drawer';
 import * as navbar from './../actions/navbar.js';
-// <IconMenu
-//     iconButtonElement={
-//       <IconButton><Menu color="white"/></IconButton>
-//     }
-//     targetOrigin={{horizontal: 'right', vertical: 'top'}}
-//     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-//   >
+
 const LoggedOptions = (props) => (
   <Drawer open={props.toggleDrawer}
   docked={false}
