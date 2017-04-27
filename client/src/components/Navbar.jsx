@@ -18,15 +18,15 @@ const Navbar = (props) => {
     <AppBar
       className="app-bar"
       style={{position: 'fixed', top: 0}}
-      title={<span className="app-bar-title"><Link to="/" style={{ textDecoration: 'none', color: 'white' }}>Advisorly</Link></span>}
+      title={<span className="app-bar-title"><Link to="/"><img className="advisorlyLogo" src="../../../images/logo.png"/></Link></span>}
       iconElementRight={props.picture ? <a href="/"><Avatar src={props.picture} size={50}/></a> : <FlatButton label="Login" href="/auth/auth0"></ FlatButton>}
       iconElementLeft={props.loggedIn ? <IconButton><NavigationMenu/> </IconButton> : <div> </div>}
       onLeftIconButtonTouchTap = {()=> {
         props.dispatch(navbar.toggleDrawer());
-      }}
-    >
+      }}>
     <LoggedOptions toggleDrawer={props.toggleDrawer} dispatch={props.dispatch}/>
     </AppBar>
+
   );
 };
 

@@ -21,7 +21,7 @@ import EmailNotifications from './components/EmailNotifications.jsx';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 import Dialog from 'material-ui/Dialog';
-import {pink600, cyan500, cyan700, grey400} from 'material-ui/styles/colors';
+import { green800, teal800, teal300 } from 'material-ui/styles/colors';
 import FlatButton from 'material-ui/FlatButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -30,10 +30,10 @@ import AppBar from 'material-ui/AppBar';
 
 const muiTheme = getMuiTheme({
   palette: {
-    primary1Color: pink600,
-    primary2Color: cyan700,
-    primary3Color: grey400,
-    textColor: cyan500,
+    primary1Color: green800, //#2E7D32
+    primary2Color: teal800,
+    primary3Color: teal300,
+    textColor: green800,
   },
 });
 
@@ -58,6 +58,10 @@ class App extends React.Component {
                 <Route path="/emailNotifications" component={EmailNotifications}/>
                 <Route path="/transactions" component={Transactions}/>
               </div>
+              <footer>
+                <br />
+                <small>&copy; <a href="https://github.com/Sound-Garden/Sound-Garden">Advisorly</a></small>
+              </footer>
             </div>
           </Router>
         </div>

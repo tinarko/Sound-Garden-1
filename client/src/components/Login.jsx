@@ -34,7 +34,7 @@ class Login extends React.Component {
                     className="login-title"
                     title="Welcome to Advisorly!" 
                     titleColor="white"
-                    subtitle="Your one stop shop for all your financial needs"
+                    subtitle="One-stop shop for all your financial needs"
                     subtitleColor="white"
                   />
                   <RaisedButton label="Sign up" href="/auth/auth0" className="login-button" />
