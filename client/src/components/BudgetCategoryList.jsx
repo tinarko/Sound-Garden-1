@@ -64,6 +64,7 @@ class BudgetCategoryList extends React.Component {
           Budget Amount: 
             <TextField type="text" name ="addcategorybudget" hintText="$" value={this.props.budget.addcategorybudget} onChange={this.handleInputChange.bind(this)}/>
           </label>
+          <br/>
           <RaisedButton label ='Submit' type ="submit"/>
         </form>;
     } else {
