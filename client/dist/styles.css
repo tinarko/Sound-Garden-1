@@ -42,7 +42,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
-  font-family: 'didonesque-roman', 'Roboto', sans-serif;
+  font-family: 'Lora', serif;
 }
 ol, ul {
   list-style: none;
@@ -64,18 +64,10 @@ table {
 Body
 ------*/
 
-@font-face {
-    font-family: 'didonesque-roman';
-    src: url('didonesque-roman-webfont.woff2') format('woff2'),
-         url('didonesque-roman-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
 body {
   /*padding: 20px;*/
   margin-top: 80px;
-  font-family: 'didonesque-roman';
+  background: #C8E6C9;
 }
 
 h1 {
@@ -262,7 +254,6 @@ login image
 .loginImage {
   margin-top: -20px;
 }
-
 /*----
 Logo
 ----*/
@@ -322,7 +313,7 @@ footer {
   bottom:0;
   width:100%;
   height:60px;   /* Height of the footer */
-  background:#2E7D32;
+  background:#1B5E20;
   z-index: 1;
   opacity: .9;
 }
@@ -340,4 +331,12 @@ small a {
 small a:hover {
   text-decoration: underline;
 }
+
+/*----
+Font-overrides for Material UI components
+-----*/
+.fontOverride {
+  font-family: 'Lora', serif;
+}
+
 

@@ -31,16 +31,14 @@ class Login extends React.Component {
             <CardMedia overlay={ 
                 <div className="login-overlay">
                   <CardTitle
-                    className="login-title"
-                    title="Welcome to Advisorly!" 
+                    className="login-title fontOverride"
+                    title="One-stop shop for all your financial needs"
                     titleColor="white"
-                    subtitle="One-stop shop for all your financial needs"
-                    subtitleColor="white"
                   />
-                  <RaisedButton label="Sign up" href="/auth/auth0" className="login-button" />
+                  <RaisedButton label="Sign up" href="/auth/auth0" className="login-button fontOverride" />
                 </div>
               }
-              overlayStyle={{width: '100%', margin: 'auto', 'top': '-50%', 'text-align': 'center'}}
+              overlayStyle={{width: '100%', margin: 'auto', 'top': '-25%', 'text-align': 'center'}}
             >
               <img className='loginImage' src="https://images.pexels.com/photos/237675/pexels-photo-237675.jpeg?w=940&h=650&auto=compress&cs=tinysrgb" />
             </CardMedia>
