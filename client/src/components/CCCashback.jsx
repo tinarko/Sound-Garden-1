@@ -74,23 +74,27 @@ class CCCashback extends React.Component {
         var imageURL = ccImages[mapcalculator.bank];
         return (
         <div className='component cashback'>
-          <h1>Maximize Cashback</h1>
-          <br/>
-          <h3>Are you at {mapcalculator.bizName}? </h3>
-          <br/>
-          <p>If so, please use your: </p>
-          <h5>{mapcalculator.ccName}</h5>
-          <br/>
-          <img className='ccImage' src={imageURL}/>
-          <br/>
-          <br/>
-          <p> ...for <em>{mapcalculator.cashbackPercent}%</em> cash back on: </p>
-          <h5>{mapcalculator.cashbackCategory}!</h5>
-          <br/>
-          <MapCalculator />
-          <br/>
-          <RaisedButton className='setupBottom' label="Setup" onClick={this.props.toggleCashbackSetup} />
-        </div> 
+          <div>
+            <h1>Maximize Cashback</h1>
+            <br/>
+            <h3>Are you at {mapcalculator.bizName}? </h3>
+            <br/>
+            <p>If so, please use your: </p>
+            <h5>{mapcalculator.ccName}</h5>
+            <br/>
+            <img className='ccImage' src={imageURL}/>
+            <br/>
+            <br/>
+            <p> ...for <em>{mapcalculator.cashbackPercent}%</em> cash back on: </p>
+            <h5>{mapcalculator.cashbackCategory}!</h5>
+            <br/>
+            <MapCalculator />
+            <br/>
+          </div> 
+          <div className='setupBottomContainer'>
+            <RaisedButton className='setupBottom' label="Setup" onClick={this.props.toggleCashbackSetup} />
+          </div>
+        </div>
         );
     }
   }
