@@ -247,11 +247,20 @@ a {
   margin: auto 0;
 }
 
+<<<<<<< HEAD
 /*----
 Logo
 ----*/
 .advisorlyLogo {
   height: 60px;
+=======
+<<<<<<< HEAD
+/*------
+login image
+------*/
+.loginImage {
+  margin-top: -20px;
+>>>>>>> (refactor) Generate d3 graphs
 }
 
 /* ------
@@ -332,7 +341,6 @@ Font-overrides for Material UI components
   font-family: 'Roboto', sans-serif;
 }
 
-
 /*------
 login 
 ------*/
@@ -370,4 +378,10 @@ login
 
 .teaser h3 {
   color: #2E7D32;
+}
+
+.transactions-chart {
+  height: 40%;
+  width: 40%;
+  margin: 0 auto;
 }

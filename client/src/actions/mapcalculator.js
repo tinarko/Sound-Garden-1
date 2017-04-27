@@ -4,14 +4,10 @@ export const getLocation = () => {
     fetch('/google', {
       method: 'GET',
       credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
     })
     .then((response) => {
       response.json()
       .then((geolocation) => {
-        // obtain nearby stores
         dispatch(yelpQuery(geolocation.location.lat, geolocation.location.lng));
       })
       .catch((err) => {
