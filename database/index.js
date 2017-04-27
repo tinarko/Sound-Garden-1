@@ -1,11 +1,23 @@
 var mysql = require('mysql');
 
-var connection = mysql.createConnection({
+var user, pw;
+
+if (process.env.CLEARDB_USERNAME) {
+  user = process.env.CLEARDB_USERNAME;
+  pw = process.env.CLEARDB_PW;
+} else {
+  user = 'root';
+  pw = '';
+}
+
+var db_config = {
   host     : 'localhost',
-  user     : 'root',
-  password : '',
+  user     : user,
+  password : pw,
   database : 'heroku_aa9603bdcb7e15e'
-});
+};
+
+var connection = mysql.createConnection(db_config);
 
 module.exports = {
   connection: connection,
