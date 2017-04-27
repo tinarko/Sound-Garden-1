@@ -73,12 +73,14 @@ class BudgetCategoryList extends React.Component {
 
 
     return (
-      <div class ='budgetlist'>
-        <div>
-        Total Spent: ${this.props.budget.totalSpent}
-        </div>
-        <div>
-        Total Budget: ${this.props.budget.totalBudget}
+      <div className ='budgetlist'>
+        <div className = 'totals'>
+          <div>
+          Total Spent: ${this.props.budget.totalSpent}
+          </div>
+          <div>
+          Total Budget: ${this.props.budget.totalBudget}
+          </div>
         </div>
         <br />
         <div>
@@ -90,7 +92,9 @@ class BudgetCategoryList extends React.Component {
                                  month ={this.props.budget.mvalue.month}/>;
         }) }
         </div> 
+        <div className = 'budgetForm'>
         {toggleButtonForm}
+        </div>
         <BudgetBulletChart budget={this.props.budget}/>
 
     </div>

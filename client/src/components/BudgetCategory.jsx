@@ -21,9 +21,13 @@ class BudgetCategory extends React.Component {
   render() {
     let actualValue = this.props.budgetcategory.actualvalue || 0;
     return (
-      <div className="budgetCategory">
+      <div className='budgetCategory'>
         <h3>{this.props.budgetcategory.name} </h3>
-        <div>
+        <br />
+        <br /> 
+        <br />
+        <br />
+        <div className='individualAmounts'>
         Budget Goal: 
         <IconButton onClick={(e) => { this.props.handleBudgetChange(
           this.props.budgetcategory.goalvalue, 

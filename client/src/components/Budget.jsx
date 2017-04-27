@@ -76,6 +76,7 @@ class Budget extends React.Component {
 
   handleClickCurrent () {
     this.refs.pickAMonth.show();
+    //  <div className='graphPosition'> </div>
   }
   render () {
 
@@ -90,24 +91,25 @@ class Budget extends React.Component {
 
 
     return (
-      <div className='component'>
-       <h1 className='budget'>Budget</h1>
-        <div className='graphPosition'> </div>
-        <div className="box">
-          <label> {currentTime} </label>
-          <IconButton onClick={this.handleClickCurrent.bind(this)}>
-            <ActionDateRange/>
-          </IconButton>
-        </div>
-        <MonthPicker 
-          ref="pickAMonth" 
-          years={3}
-          value={this.props.budget.mvalue}
-          lang ={months}
-          onDismiss={this.handleAMonthDismiss.bind(this)}>
-          </MonthPicker>
-      <BudgetCategoryList budget= {this.props.budget} handleBudgetChange={this.props.handleBudgetChange} toggleAddBudgetCategoryInput={this.props.toggleAddBudgetCategoryInput}/>
-        
+      <div className='budget'>
+      <div className='graphPosition'> </div>
+        <div className = 'topSegment'>
+         <h1>Budget</h1>
+          <div className="box">
+            <label> {currentTime} </label>
+            <IconButton onClick={this.handleClickCurrent.bind(this)}>
+              <ActionDateRange/>
+            </IconButton>
+            <MonthPicker 
+              ref="pickAMonth" 
+              years={3}
+              value={this.props.budget.mvalue}
+              lang ={months}
+              onDismiss={this.handleAMonthDismiss.bind(this)}>
+            </MonthPicker>
+          </div>
+          </div>
+        <BudgetCategoryList budget= {this.props.budget} handleBudgetChange={this.props.handleBudgetChange} toggleAddBudgetCategoryInput={this.props.toggleAddBudgetCategoryInput}/> 
       </div>
 
     );
