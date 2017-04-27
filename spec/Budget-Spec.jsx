@@ -39,9 +39,10 @@ describe('Budget Actions', () => {
 describe('Budget Reducers', () => {
 
   it('should return the initial state', () => {
+    console.log('reducer init state', reducer(undefined, {}));
     expect(
       reducer(undefined, {})
-      ).to.equal(
+      ).to.deep.equal(
       {
         budgets: [],
         totalBudget: 0,
@@ -51,10 +52,7 @@ describe('Budget Reducers', () => {
         showaddbudgetcategoryform: false,
         addcategoryname: '',
         addcategorybudget: '',
-        mvalue: {year: null, month: null},
-        showMyBudgets: true,
-        showFriendBudgets: false,
-        friendsBudgets: []
+        mvalue: {year: null, month: null}
       }
     );
   });
@@ -64,7 +62,7 @@ describe('Budget Reducers', () => {
       reducer(undefined, {
         type: 'MONTH_VALUE_CHANGE',
         yearMonthObject: {year: 2017, month: 4}
-      })).to.equal({
+      })).to.deep.equal({
         budgets: [],
         totalBudget: 0,
         totalSpent: 0,
@@ -74,9 +72,6 @@ describe('Budget Reducers', () => {
         addcategoryname: '',
         addcategorybudget: '',
         mvalue: {year: 2017, month: 4},
-        showMyBudgets: true,
-        showFriendBudgets: false,
-        friendsBudgets: []
       }
     );
   });
