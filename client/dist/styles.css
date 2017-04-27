@@ -247,20 +247,17 @@ a {
   margin: auto 0;
 }
 
-<<<<<<< HEAD
 /*----
 Logo
 ----*/
 .advisorlyLogo {
   height: 60px;
-=======
-<<<<<<< HEAD
+}
 /*------
 login image
 ------*/
 .loginImage {
   margin-top: -20px;
->>>>>>> (refactor) Generate d3 graphs
 }
 
 /* ------
@@ -380,6 +377,9 @@ login
   color: #2E7D32;
 }
 
+/*
+Transactions
+-------*/
 .transactions-chart {
   height: 40%;
   width: 40%;

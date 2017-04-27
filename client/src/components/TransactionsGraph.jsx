@@ -9,8 +9,8 @@ import { VictoryAxis,
 
 const TransactionsGraph = (props) => {
   const styles = {};
+  
   const data = props.data.map((value, index) => {
-
     const label = `Transaction: ${value.name} \n Amount: $${Math.abs(value.amount)}`;
     return {
       date: new Date(value.date),
