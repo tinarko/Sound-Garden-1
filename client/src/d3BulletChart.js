@@ -57,10 +57,10 @@ if (props.budget.budgets.length > 0) {
         .style('text-anchor', 'end')
         .attr('transform', 'translate(-6,' + height / 2 + ')');
 
-    title.append('text')
-        .attr('class', 'title')
-      // .merge(title)
-        .text(function(d) { return d.title; });
+    // title.append('text')
+    //     .attr('class', 'title')
+    //   // .merge(title)
+    //     .text(function(d) { return d.title; });
 
     title.append('text')
         .attr('class', 'subtitle')
