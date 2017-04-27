@@ -76,7 +76,6 @@ class Budget extends React.Component {
 
   handleClickCurrent () {
     this.refs.pickAMonth.show();
-    //  <div className='graphPosition'> </div>
   }
   render () {
 
