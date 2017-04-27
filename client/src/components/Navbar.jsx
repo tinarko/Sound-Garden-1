@@ -9,10 +9,10 @@ import FlatButton from 'material-ui/FlatButton';
 import AppBar from 'material-ui/AppBar';
 import Avatar from 'material-ui/Avatar';
 import LoggedOptions from './LoggedOptions.jsx';
-import IconMenu from 'material-ui/IconMenu';
+import IconButton from 'material-ui/IconButton';
+import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import * as navbar from './../actions/navbar.js';
 
-//iconElementLeft = {!props.loggedIn ? <div> </div>}
 const Navbar = (props) => {
   return (
     <AppBar
@@ -20,7 +20,7 @@ const Navbar = (props) => {
       style={{position: 'fixed', top: 0}}
       title={<span className="app-bar-title"><Link to="/" style={{ textDecoration: 'none', color: 'white' }}>Advisorly</Link></span>}
       iconElementRight={props.picture ? <a href="/"><Avatar src={props.picture} size={50}/></a> : <FlatButton label="Login" href="/auth/auth0"></ FlatButton>}
-      
+      iconElementLeft={props.loggedIn ? <IconButton><NavigationMenu/> </IconButton> : <div> </div>}
       onLeftIconButtonTouchTap = {()=> {
         props.dispatch(navbar.toggleDrawer());
       }}
