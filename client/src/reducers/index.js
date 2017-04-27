@@ -5,6 +5,7 @@ import creditcards from './creditcards';
 import transactions from './transactions.js';
 import mapcalculator from './mapcalculator.js';
 import login from './login.js';
+import navbar from './navbar.js';
 
 //implement lines below when there are actually other reducers in folder
 // import * as reducers from './reducers';
@@ -17,4 +18,5 @@ export default combineReducers({
   transactions,
   mapcalculator,
   login,
+  navbar
 });
