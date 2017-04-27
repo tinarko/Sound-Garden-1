@@ -34,7 +34,7 @@ app.use(express.static(__dirname + './../client/dist'));
  */
 app.get('/auth/user', authentication.getUser);
 app.get('/auth/auth0', passport.authenticate('auth0'));
-app.get('/auth/auth0/return', passport.authenticate('auth0', {failureRedirect: '/auth/auth0'}), authentication.return);
+app.get('/auth/auth0/return/*', passport.authenticate('auth0', {failureRedirect: '/auth/auth0'}), authentication.return);
 app.get('/auth/logout', authentication.logout);
 
 /**
