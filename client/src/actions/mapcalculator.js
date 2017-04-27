@@ -91,16 +91,16 @@ export const calculateMaxBenefits = (userCats, bizCats, lat, long, bizName) => {
       var cashbackPercent = json[1];
       var cashbackCategory = json[2];
       dispatch(setPinAndBusinessData(lat, long, ccName, cashbackPercent, cashbackCategory, bizName));
-
     })
     .catch((err) => {
       dispatch(calculateMaxBenefitsError(err));
     })
   }
-
 };
 
+
 export const setPinAndBusinessData = (lat, long, ccName, cashbackPercent, cashbackCategory, bizName) => {
+  var bank = ccName.split('-')[0].slice(0,-1);
   return {
     type: 'SET_PIN_AND_BUSINESS_DATA',
     lat: lat,
@@ -108,7 +108,8 @@ export const setPinAndBusinessData = (lat, long, ccName, cashbackPercent, cashba
     ccName: ccName,
     cashbackPercent: cashbackPercent,
     cashbackCategory: cashbackCategory,
-    bizName: bizName
+    bizName: bizName,
+    bank: bank
   }
 }
 
