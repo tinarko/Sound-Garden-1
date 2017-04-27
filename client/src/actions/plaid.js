@@ -1,6 +1,6 @@
-var env, key;
-env = process.env.PLAID_env;
-key = process.env.PLAID_publicKey;
+var env = 'sandbox';
+// public key
+var key = 'a315a5f1d3b001210a2ea7ef2d1945';
 
 module.exports.createPlaid = () => {
   Plaid.create({
