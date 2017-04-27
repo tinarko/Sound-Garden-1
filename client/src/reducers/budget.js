@@ -25,9 +25,24 @@ const budget = (state = initialState, action) => {
       for (var i = 0; i < action.budgets.length; i++) {
         newBudgetTotal = newBudgetTotal + action.budgets[i].goalvalue;
       }
+
+      if(action.budgets.length > 0) {
+        var budgetList = [];
+        var otherObj;
+        for (var j = 0; j < action.budgets.length; j++) {
+          if(action.budgets[j].name !== 'Other') {
+            budgetList.push(action.budgets[j]);
+          } else {
+            otherObj = action.budgets[j];
+          }
+        }
+        if(otherObj) {
+          budgetList.push(otherObj);
+        }
+      }
       return {
         ...state,
-        budgets: action.budgets,
+        budgets: budgetList,
         totalBudget: newBudgetTotal
       };
 
