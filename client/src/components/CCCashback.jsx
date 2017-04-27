@@ -79,14 +79,13 @@ class CCCashback extends React.Component {
             <br/>
             <h3>Are you at {mapcalculator.bizName}? </h3>
             <br/>
-            <p>If so, please use your: </p>
-            <h5>{mapcalculator.ccName}</h5>
+            <p>Use <span className='em'>{mapcalculator.ccName}</span> for
+            </p>
             <br/>
             <img className='ccImage' src={imageURL}/>
             <br/>
             <br/>
-            <p> ...for <em>{mapcalculator.cashbackPercent}%</em> cash back on: </p>
-            <h5>{mapcalculator.cashbackCategory}!</h5>
+            <p> <span className='em'> {mapcalculator.cashbackPercent}%</span> cash back on <span className='em'> {mapcalculator.cashbackCategory}</span>!</p>
             <br/>
             <MapCalculator />
             <br/>
