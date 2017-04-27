@@ -70,7 +70,6 @@ class Budget extends React.Component {
   }
 
   handleYearMonthChange (value) {
-    console.log('invoked change');
     this.props.yearMonthChange(value);
   }
 
