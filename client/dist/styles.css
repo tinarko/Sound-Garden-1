@@ -68,7 +68,7 @@ Body
 
 body {
   /*padding: 20px;*/
-  margin-top: 10%;
+  margin-top: 80px;
 }
 
 h1 {
@@ -222,6 +222,13 @@ a {
 
 .login-balance {
   margin: auto 0;
+}
+
+/*------
+login image
+------*/
+.loginImage {
+  margin-top: -20px;
 }
 
 /* ------
