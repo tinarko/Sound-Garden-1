@@ -41,7 +41,7 @@ describe('Budget Reducers', () => {
   it('should return the initial state', () => {
     expect(
       reducer(undefined, {})
-      ).to.deep.equal(
+      ).to.equal(
       {
         budgets: [],
         totalBudget: 0,
@@ -64,7 +64,7 @@ describe('Budget Reducers', () => {
       reducer(undefined, {
         type: 'MONTH_VALUE_CHANGE',
         yearMonthObject: {year: 2017, month: 4}
-      })).to.deep.equal({
+      })).to.equal({
         budgets: [],
         totalBudget: 0,
         totalSpent: 0,
