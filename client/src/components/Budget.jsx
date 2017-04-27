@@ -96,7 +96,7 @@ class Budget extends React.Component {
     }
 
     return (
-      <div>
+      <div className='component'>
        <h1 className='budget'>Budget</h1>
         <div className='graphPosition'> </div>
         <div className="box">

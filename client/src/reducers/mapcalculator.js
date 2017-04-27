@@ -5,7 +5,7 @@ var initialState =
     long: -122.40881301209487
     },
   places: null,
-  bizName: '// business name//',
+  bizName: 'Subway',
 }
 
 export default (state = initialState, action) => {
@@ -27,12 +27,15 @@ export default (state = initialState, action) => {
         long: action.long
       };
 
+      console.log('SETTING PIN DATA!:', newState.geolocation.lat, newState.geolocation.long)
+
       return {
         ...newState,
         ccName: action.ccName,
         cashbackPercent: action.cashbackPercent,
         cashbackCategory: action.cashbackCategory,
-        bizName: action.bizName
+        bizName: action.bizName,
+        bank: action.bank
       };
       break;
 

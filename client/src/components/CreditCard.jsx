@@ -41,8 +41,10 @@ class CreditCard extends React.Component {
     return (
       <div>
         <br/>
+        <br/>
         <li>
           <h3>{ creditcard.ccname }</h3>
+          <br/>
           <ul>
             {categories.map((category, index) => {
               return (

@@ -68,7 +68,7 @@ Body
 
 body {
   /*padding: 20px;*/
-  margin-top: 5%;
+  margin-top: 10%;
 }
 
 h1 {
@@ -223,3 +223,44 @@ a {
 .login-balance {
   margin: auto 0;
 }
+
+/* ------
+Google Map
+------ */
+
+.google-map {
+  position: absolute;
+  width: 80%;
+  height: 50%;
+  padding-left: 50px;
+  padding-bottom: 50px;
+}
+
+/*-------
+Components
+--------*/
+.component {
+  padding-left: 50px;
+}
+
+/*-------
+Cashback component
+--------*/
+.cashback {
+  text-align: center;
+}
+
+/*------
+Creditcard Images
+------*/
+.ccImage {
+  height: 200px;
+}
+
+.setupBottom {
+  margin-top: 360px;
+}
+
+
+
+

@@ -29,7 +29,7 @@ class Transactions extends React.Component {
       information = <TransactionsTable data={this.props.transactions} />;
     }
     return (
-      <div>
+      <div className='component'>
         <h1>Transactions</h1>
         <br/>
         <RaisedButton label="Show Table" onClick={this.onTableClick}/>

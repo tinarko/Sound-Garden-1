@@ -11,7 +11,6 @@ class MapCalculator extends React.Component {
 
   componentWillMount() {
     this.props.getLocation();
-    
   }
 
   componentDidMount() {      
@@ -51,9 +50,13 @@ class MapCalculator extends React.Component {
 
   render() {
     return (
-      <div className="google-map">
-        <div ref="map" className="map" />
-      </div>);
+      <div>
+        <br/>
+        <div className="google-map">
+          <div ref="map" className="map" />
+        </div>
+      </div>
+    );
   }
 }
 
