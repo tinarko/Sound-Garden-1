@@ -42,7 +42,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
-  font-family: 'Lora', serif;
+  font-family: 'Roboto', sans-serif;
 }
 ol, ul {
   list-style: none;
@@ -67,7 +67,6 @@ Body
 body {
   /*padding: 20px;*/
   margin-top: 80px;
-  background: #C8E6C9;
 }
 
 h1 {
@@ -248,12 +247,6 @@ a {
   margin: auto 0;
 }
 
-/*------
-login image
-------*/
-.loginImage {
-  margin-top: -20px;
-}
 /*----
 Logo
 ----*/
@@ -336,7 +329,41 @@ small a:hover {
 Font-overrides for Material UI components
 -----*/
 .fontOverride {
-  font-family: 'Lora', serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 
+/*------
+login 
+------*/
+
+.loginImage {
+  margin-top: -20px;
+}
+
+.row {
+  min-width: 960px;
+  background: #fff;
+  padding: 66px 0 44px 0;
+  text-align: center;
+  padding-bottom: 150px;
+}
+
+.col-1-4 {
+  width: 20%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.grid,
+.col-1-4 {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.teaser img {
+  border-radius: 5px;
+  max-height: 60px;
+  display: block;
+  margin: auto;
+}
