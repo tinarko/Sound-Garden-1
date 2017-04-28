@@ -67,12 +67,13 @@ class BudgetCategoryList extends React.Component {
       <div className ='budgetlist'>
         <div className = 'totals'>
           <div>
-            <h3 className='budgetTitle'>Total Spent: <span>${this.props.budget.totalSpent}</span></h3>
+            <p className='budgetTitle'>Total Spent: <span>${this.props.budget.totalSpent}</span></p>
           </div>
           <div>
-            <h3 className='budgetTitle'>Total Budget: <span>${this.props.budget.totalBudget}</span></h3>
+            <p className='budgetTitle'>Total Budget: <span>${this.props.budget.totalBudget}</span></p>
           </div>
         </div>
+        <br />
         <br />
         <div>
         {this.props.budget.budgets.map ((budgetcategory, index) => {
