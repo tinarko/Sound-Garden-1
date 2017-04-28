@@ -9,7 +9,6 @@ var client = new plaid.Client(
   PLAID_CLIENT_ID,
   PLAID_SECRET,
   PLAID_PUBLIC_KEY,
-  // TODO: adjust environment as product life cycle advances
   plaid.environments[PLAID_ENV]
 );
 

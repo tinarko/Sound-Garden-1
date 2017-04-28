@@ -129,7 +129,9 @@ module.exports.transactions = function (req, res) {
       } else {
         var send = results.reduce(function(previous, current) {
           return previous.concat(current);
-        }, []);
+        }, []).sort(function(a, b) {
+          return a.institution_name.localeCompare(b.institution_name);
+        });
         return res.json(send);
       }
     }, periodStart, periodEnd);

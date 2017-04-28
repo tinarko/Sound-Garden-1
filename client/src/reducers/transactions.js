@@ -1,6 +1,6 @@
 export default (state = {
   // types of payloads and default state must match
-  transactions: null,
+  transactions: [],
   focusedInput: null,
   startDate: null,
   endDate: null,
