@@ -13,8 +13,8 @@ const BalanceTable = (props) => {
           </TableRow>
           <TableRow>
             <TableHeaderColumn>Account Name</TableHeaderColumn>
-            <TableHeaderColumn>Type</TableHeaderColumn>
             <TableHeaderColumn>Balance</TableHeaderColumn>
+            <TableHeaderColumn>Type</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody 
