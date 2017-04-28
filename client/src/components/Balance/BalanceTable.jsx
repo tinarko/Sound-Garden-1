@@ -6,6 +6,9 @@ const BalanceTable = (props) => {
     <div className="balance-table">
       <Table>
         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+            <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
+              Accounts
+            </TableHeaderColumn>
           <TableRow>
             <TableHeaderColumn>Account Name</TableHeaderColumn>
             <TableHeaderColumn>Type</TableHeaderColumn>
@@ -14,7 +17,6 @@ const BalanceTable = (props) => {
         </TableHeader>
         <TableBody 
           displayRowCheckbox={false}
-          stripedRows={true}
         >
           {props.balance.map((item, index) => {
             return (<TableRow>

@@ -1,52 +1,37 @@
-import React, {Component} from 'react';
-import DataTables from 'material-ui-datatables';
+import React from 'react';
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 
-class TransactionsTable extends Component {
-  constructor(props) {
-    super(props);
-  }
-  
-  render() {
-    console.log('inside the data table-------', this.props);
-    const tableColumns = [
-      {
-        key: 'name',
-        label: 'Transaction'
-      }, {
-        key: 'amount',
-        label: 'Amount'
-      }, {
-        key: 'institution_name',
-        label: 'Bank'
-      }, {
-        key: 'date',
-        label: 'Date'
-      }
-    ];
-    const tableData = [];
-    this.props.data.forEach((value) => {
-      tableData.push({
-        name: value.name,
-        amount: `$${value.amount}`,
-        institution_name: value.institution_name,
-        date: value.date.toString().slice(0,10),
-      });
-    });
-    console.log('table data', tableData)
-    return (
-      <div className="transactions-table">
-        <DataTables
-          height={'auto'}
-          showRowHover={false}
-          columns={tableColumns}
-          data={tableData}
-          showCheckboxes={false}
-          selectable={true}
-          page={1}
-          count={100}
-        />
-      </div>
-    );
-  }
-}
+const TransactionsTable = (props) => {
+  return (
+    <div className="balance-table">
+      <Table fixedHeader={true}>
+        <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+          <TableRow>
+            <TableHeaderColumn colSpan="4" tooltip="Super Header" style={{textAlign: 'center'}}>
+              Transactions
+            </TableHeaderColumn>
+          </TableRow>
+          <TableRow>
+            <TableHeaderColumn>Transaction</TableHeaderColumn>
+            <TableHeaderColumn>Amount</TableHeaderColumn>
+            <TableHeaderColumn>Bank</TableHeaderColumn>
+            <TableHeaderColumn>Date</TableHeaderColumn>
+          </TableRow>
+        </TableHeader>
+        <TableBody 
+          displayRowCheckbox={false}
+        >
+          {props.data.map((item, index) => {
+            return (<TableRow>
+              <TableRowColumn>{item.name}</TableRowColumn>
+              <TableRowColumn>{'$' + Math.abs(item.amount)}</TableRowColumn>
+              <TableRowColumn>{item.institution_name}</TableRowColumn>
+              <TableRowColumn>{item.date}</TableRowColumn>
+            </TableRow>);
+          })}
+        </TableBody>
+      </Table>
+    </div>);
+};
+
 export default TransactionsTable;
