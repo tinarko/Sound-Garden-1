@@ -1,17 +1,19 @@
 var mysql = require('mysql');
 
-var user, pw;
+var user, pw, host;
 
 if (process.env.CLEARDB_USERNAME) {
   user = process.env.CLEARDB_USERNAME;
   pw = process.env.CLEARDB_PW;
+  host = process.env.CLEARDB_HOST;
 } else {
   user = 'root';
   pw = '';
+  host = 'localhost';
 }
 
 var db_config = {
-  host     : 'localhost',
+  host     : host,
   user     : user,
   password : pw,
   database : 'heroku_aa9603bdcb7e15e'
