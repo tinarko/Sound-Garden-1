@@ -6,6 +6,8 @@ import MapCalculator from './MapCalculator.jsx';
 import { createCreditcardsKickoff, toggleCashbackSetup, getCreditcards } from './../../actions/creditcards.js';
 import RaisedButton from 'material-ui/RaisedButton';
 import ccImages from './../creditcardImages/ccImages.js';
+import IconButton from 'material-ui/IconButton';
+import ContentAddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 
 class CCCashback extends React.Component {
   constructor(props) {

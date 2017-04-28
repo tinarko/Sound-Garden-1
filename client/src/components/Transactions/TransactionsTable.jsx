@@ -18,10 +18,10 @@ const TransactionsTable = (props) => {
         >
           {props.data.map((item, index) => {
             return (<TableRow>
-              <TableRowColumn style={{fontSize: '20', color: '#000', fontFamily: 'Roboto'}}>{item.name}</TableRowColumn>
-              <TableRowColumn style={{fontSize: '20', color: '#000', fontFamily: 'Roboto'}}>{'$' + Math.abs(item.amount)}</TableRowColumn>
-              <TableRowColumn style={{fontSize: '20', color: '#000', fontFamily: 'Roboto'}}>{item.institution_name}</TableRowColumn>
-              <TableRowColumn style={{fontSize: '20', color: '#000', fontFamily: 'Roboto'}}>{item.date}</TableRowColumn>
+              <TableRowColumn style={{fontSize: '16', color: '#000', fontFamily: 'Roboto'}}>{item.name}</TableRowColumn>
+              <TableRowColumn style={{fontSize: '16', color: '#000', fontFamily: 'Roboto'}}>{'$' + Math.abs(item.amount).toFixed(2)}</TableRowColumn>
+              <TableRowColumn style={{fontSize: '16', color: '#000', fontFamily: 'Roboto'}}>{item.date}</TableRowColumn>
+              <TableRowColumn style={{fontSize: '16', color: '#000', fontFamily: 'Roboto'}}>{item.institution_name}</TableRowColumn>
             </TableRow>);
           })}
         </TableBody>

@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import CashbackCategory from './CashbackCategory.jsx';
 import { createCashbackCategoryKickoff, getCashbackCategoriesKickoff } from './../../actions/createcashbackcategory.js';
 import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
+import Add from 'material-ui/svg-icons/content/add-circle';
+
 
 class CreditCard extends React.Component {
   constructor (props) {
@@ -62,10 +65,15 @@ class CreditCard extends React.Component {
                 <input type="number"
                        value={this.props.number}
                        onChange={ (e) => { this.handlePercentChange(e.target.value) } }/> 
-                <button onClick={ (e) => 
+                <IconButton
+                onClick={ (e) => 
                   { this.props.createCashbackCategoryKickoff(
                     this.props.ccindex, ccid, this.state.catname, this.state.number) } }>Add
-                </button>
+                >
+                  <Add />
+                </IconButton>
+
+
               </p>
             </li>
           </ul>

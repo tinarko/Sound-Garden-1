@@ -26,7 +26,7 @@ class Transactions extends React.Component {
     return (
       <div className='transactions component'>
         <h1>
-          <img className='componentIcon' src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTTm50tK43pGJ9EWr66kD9lELxuufTfyB9Yhoej0Fohs8ZnBb8i'/>Transactions
+          <img className='componentIcon' src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTTm50tK43pGJ9EWr66kD9lELxuufTfyB9Yhoej0Fohs8ZnBb8i'/> Transactions
         </h1>
         <br/>
         <Calendar />
