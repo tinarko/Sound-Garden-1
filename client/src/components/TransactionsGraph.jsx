@@ -5,19 +5,28 @@ import { VictoryAxis,
   VictoryChart, 
   VictoryScatter, 
   VictoryTheme,
-  VictoryTooltip } from 'victory';
+  VictoryTooltip, 
+  VictoryStack,
+  VictoryLegend } from 'victory';
 
 const TransactionsGraph = (props) => {
   const styles = {};
-  
-  const data = props.data.map((value, index) => {
-    const label = `Transaction: ${value.name} \n Amount: $${Math.abs(value.amount)}`;
-    return {
-      date: new Date(value.date),
-      amount: Math.abs(value.amount),
-      label: label,
-    };
+  const data = [];
+  const legendData = [];
+  props.data.forEach((value, index) => {
+    if (index > 0) { 
+      const prev = props.data[index - 1].institution_name; 
+      if (value.institution_name === prev) {
+        return data[data.length - 1].push(value);
+      } else {
+        legendData.push({name: value.institution_name});
+        return data.push([value]);
+      }
+    }
+    legendData.push({name: value.institution_name});
+    return data.push([value]);
   });
+
   return (<div className="transactions-chart">
     <VictoryChart
       domainPadding={50}
@@ -31,16 +40,37 @@ const TransactionsGraph = (props) => {
       <VictoryAxis
         dependentAxis
         tickFormat = {(x) => (`$${x}`)}
-      /> 
-      <VictoryScatter
+      />
+      <VictoryLegend
+        data={legendData}
+        orientation={'vertical'}
+        padding={20}
+        x={180}
+      />
+      <VictoryStack
+        scale={{x: 'time', y: 'linear'}}
         labelComponent={<VictoryTooltip 
           renderInPortal={false}
         />}
-        data={data}
-        scale={{x: 'time', y: 'linear'}}
-        x='date'
-        y='amount'
-      />
+      >
+        {data.map((item) => {
+          const scatterData = item.map((value, index) => {
+            const label = `Transaction: ${value.name} \n Amount: $${Math.abs(value.amount)}`;
+            return {
+              date: new Date(value.date),
+              amount: Math.abs(value.amount),
+              label: label,
+            };
+          });
+          return (
+            <VictoryScatter
+              data={scatterData}
+              x='date'
+              y='amount'
+            />
+          );
+        })}
+      </VictoryStack>
     </VictoryChart>
   </div>);
 };
