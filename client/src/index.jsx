@@ -16,6 +16,7 @@ import CCCashback from './components/CCCashback.jsx';
 import Login from './components/Login.jsx';
 import Navbar from './components/Navbar.jsx';
 import Portfolio from './components/Portfolio.jsx';
+import Landing from './components/Landing.jsx';
 import EmailNotifications from './components/EmailNotifications.jsx';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -50,7 +51,7 @@ class App extends React.Component {
             <div>
               <Navbar />
               <div className="app-body">
-                <Route exact path="/" component={Login}/>
+                <Route exact path="/" component={Landing}/>
                 <Route path="/balance" component={Balance}/>
                 <Route path="/budget" component={Budget}/>
                 <Route path="/ccCashback" component={CCCashback}/>

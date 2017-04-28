@@ -12,7 +12,6 @@ class Calendar extends React.Component {
   }
 
   onDatesChange({ startDate, endDate }) {
-    // populate transactions
     if (startDate && endDate) {
       this.props.dispatch(transactions.getTransactions({
         startDate: startDate.toISOString().substring(0, 10),
