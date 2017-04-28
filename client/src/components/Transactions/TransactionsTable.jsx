@@ -9,8 +9,8 @@ const TransactionsTable = (props) => {
           <TableRow>
             <TableHeaderColumn style={{fontSize: '24', color: '#2E7D32', fontFamily: 'Roboto'}}>Transaction</TableHeaderColumn>
             <TableHeaderColumn style={{fontSize: '24', color: '#2E7D32', fontFamily: 'Roboto'}}>Amount</TableHeaderColumn>
-            <TableHeaderColumn style={{fontSize: '24', color: '#2E7D32', fontFamily: 'Roboto'}}>Bank</TableHeaderColumn>
             <TableHeaderColumn style={{fontSize: '24', color: '#2E7D32', fontFamily: 'Roboto'}}>Date</TableHeaderColumn>
+            <TableHeaderColumn style={{fontSize: '24', color: '#2E7D32', fontFamily: 'Roboto'}}>Bank</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody 
