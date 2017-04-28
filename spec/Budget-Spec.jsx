@@ -1,13 +1,12 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import { expect } from 'chai';
-// import sinon from 'sinon';
 import { Provider } from 'react-redux';
-import Budget from '../client/src/components/Budget.jsx';
-import BudgetCategoryList from '../client/src/components/BudgetCategoryList.jsx';
+import Budget from '../client/src/components/Budget/Budget.jsx';
+import BudgetCategoryList from '../client/src/components/Budget/BudgetCategoryList.jsx';
 import * as actions from '../client/src/actions/budget.js';
 import reducer from '../client/src/reducers/budget.js';
-import BudgetCategory from '../client/src/components/BudgetCategory.jsx';
+import BudgetCategory from '../client/src/components/Budget/BudgetCategory.jsx';
 
 describe('Budget Actions', () => {
 
