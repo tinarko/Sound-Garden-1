@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import CreditCard from './CreditCard.jsx'
+import CreditCard from './CreditCard.jsx';
 import MapCalculator from './MapCalculator.jsx';
-import { createCreditcardsKickoff, toggleCashbackSetup, getCreditcards } from '../actions/creditcards.js';
+import { createCreditcardsKickoff, toggleCashbackSetup, getCreditcards } from './../../actions/creditcards.js';
 import RaisedButton from 'material-ui/RaisedButton';
-import ccImages from './creditcardImages/ccImages.js'
+import ccImages from './../creditcardImages/ccImages.js';
 
 class CCCashback extends React.Component {
   constructor(props) {
@@ -16,18 +16,15 @@ class CCCashback extends React.Component {
     this.props.createCreditcardsKickoff();
   }
 
-  // componentDidMount () {
-  // }
-
   render () {
     var creditcards = this.props.creditcards.cc.map( (cc, index) => {
-              return (<CreditCard 
-                className="component" 
-                creditcard={cc} 
-                key={index} 
-                ccindex={index}
-                />);
-            });
+      return (<CreditCard 
+        className="component" 
+        creditcard={cc} 
+        key={index} 
+        ccindex={index}
+        />);
+    });
 
     var mapcalculator = this.props.mapcalculator;
     var ccName = mapcalculator.ccName;
@@ -47,7 +44,7 @@ class CCCashback extends React.Component {
           
         </div> );
     } else if (creditcards.length === 0) {
-        return (
+      return (
         <div className='component cashback'>
           <h1>
             <img className='componentIcon' src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTf7zzMiEKSeQpeZ-ZC0r0QB445fmaU2A6lJlXWecQMGxh3NyEg4wLSi5g'/> Maximize Cashback
@@ -58,9 +55,9 @@ class CCCashback extends React.Component {
           <br/>
 
         </div> 
-        );
-    } else if (ccName == 'anything') {
-        return (
+      );
+    } else if (ccName === 'anything') {
+      return (
         <div className='component cashback'>
           <h1>
             <img className='componentIcon' src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTf7zzMiEKSeQpeZ-ZC0r0QB445fmaU2A6lJlXWecQMGxh3NyEg4wLSi5g'/> Maximize Cashback
@@ -72,10 +69,10 @@ class CCCashback extends React.Component {
           <RaisedButton label="Setup" onClick={this.props.toggleCashbackSetup} />
           <br/>
         </div> 
-        );
+      );
     } else {
-        var imageURL = ccImages[mapcalculator.bank];
-        return (
+      var imageURL = ccImages[mapcalculator.bank];
+      return (
         <div className='component cashback'>
           <div>
             <h1>
@@ -98,7 +95,7 @@ class CCCashback extends React.Component {
             <RaisedButton className='setupBottom' label="Setup" onClick={this.props.toggleCashbackSetup} />
           </div>
         </div>
-        );
+      );
     }
   }
 }

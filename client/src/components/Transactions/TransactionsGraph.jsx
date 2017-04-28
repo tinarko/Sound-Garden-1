@@ -8,7 +8,8 @@ import { VictoryAxis,
   VictoryTooltip, 
   VictoryStack,
   VictoryLegend,
-  VictoryContainer } from 'victory';
+  VictoryContainer 
+} from 'victory';
 
 const TransactionsGraph = (props) => {
   const styles = {};

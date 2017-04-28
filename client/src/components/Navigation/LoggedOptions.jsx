@@ -4,7 +4,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import { createPlaid } from './../actions/plaid.js';
+import { createPlaid } from './../../actions/plaid.js';
 import FlatButton from 'material-ui/FlatButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
@@ -13,7 +13,7 @@ import IconButton from 'material-ui/IconButton';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 import Divider from 'material-ui/Divider';
 import Drawer from 'material-ui/Drawer';
-import * as navbar from './../actions/navbar.js';
+import * as navbar from './../../actions/navbar.js';
 
 const LoggedOptions = (props) => (
   <Drawer open={props.toggleDrawer}

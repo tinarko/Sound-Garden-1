@@ -4,19 +4,13 @@ import { connect } from 'react-redux';
 import BudgetBulletChart from './BudgetBulletChart.jsx';
 import MonthPicker from 'react-month-picker/lib/month-picker.js';
 import BudgetCategoryList from './BudgetCategoryList.jsx';
-import BudgetFriends from './BudgetFriends.jsx';
 import { getUserBudgets, getTransactionData, incrementBudget, decrementBudget, 
-  postUpdatedBudget, yearMonthChange, toggleYearMonthSelection } from '../actions/budget.js';
-// import { getTransactionData } from '../actions/transactions.js';
+  postUpdatedBudget, yearMonthChange, toggleYearMonthSelection } from './../../actions/budget.js';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import IconButton from 'material-ui/IconButton';
 import ActionDateRange from 'material-ui/svg-icons/action/date-range';
-
-// import d3BulletChart from '../d3BulletChart.js';
-// import * as d3 from 'd3';
-
 
 class Budget extends React.Component {
   constructor (props) {

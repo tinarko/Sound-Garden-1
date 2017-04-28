@@ -10,13 +10,11 @@ import { Provider } from 'react-redux';
 
 import store from './store.js';
 import Balance from './components/Balance/Balance.jsx';
-import Transactions from './components/Transactions.jsx';
-import Budget from './components/Budget.jsx';
-import CCCashback from './components/CCCashback.jsx';
-import Navbar from './components/Navbar.jsx';
-import Portfolio from './components/Portfolio.jsx';
-import Landing from './components/Landing.jsx';
-import EmailNotifications from './components/EmailNotifications.jsx';
+import Transactions from './components/Transactions/Transactions.jsx';
+import Budget from './components/Budget/Budget.jsx';
+import CCCashback from './components/CreditCard/CCCashback.jsx';
+import Navbar from './components/Navigation/Navbar.jsx';
+import Landing from './components/Navigation/Landing.jsx';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
@@ -30,7 +28,7 @@ import AppBar from 'material-ui/AppBar';
 
 const muiTheme = getMuiTheme({
   palette: {
-    primary1Color: green800, //#2E7D32
+    primary1Color: green800,
     primary2Color: teal800,
     primary3Color: teal300,
     textColor: green800,
@@ -54,8 +52,6 @@ class App extends React.Component {
                 <Route path="/balance" component={Balance}/>
                 <Route path="/budget" component={Budget}/>
                 <Route path="/ccCashback" component={CCCashback}/>
-                <Route path="/portfolio" component={Portfolio}/>
-                <Route path="/emailNotifications" component={EmailNotifications}/>
                 <Route path="/transactions" component={Transactions}/>
               </div>
               <footer>

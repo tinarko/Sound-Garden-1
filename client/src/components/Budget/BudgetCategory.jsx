@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { incrementBudget, decrementBudget } from '../actions/budget.js';
+import { incrementBudget, decrementBudget } from './../../actions/budget.js';
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import IconButton from 'material-ui/IconButton';
@@ -15,8 +15,6 @@ import BudgetBulletChart from './BudgetBulletChart.jsx';
 class BudgetCategory extends React.Component {
   constructor(props) {
     super(props);
-    console.log('this.props in budgetCategory', this.props);
-    //<BudgetBulletChart name={this.props.budgetcategory.name}/>
   }
 
   render() {

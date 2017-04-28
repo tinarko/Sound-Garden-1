@@ -1,6 +1,6 @@
 import React from 'react'; 
 import ReactDOM from 'react-dom';
-import d3BulletChart from '../d3BulletChart.js';
+import d3BulletChart from './../../d3BulletChart.js';
 import * as d3 from 'd3';
 
 class BudgetBulletChart extends React.Component {

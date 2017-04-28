@@ -1,9 +1,7 @@
 export const getBalance = () => {
-  // dispatching in this manner utilizes the thunk middleware
   return (dispatch) => {
     dispatch({type: 'GET_BALANCE_START'});
     fetch('/plaid/accounts', {
-      // TODO: required to send cookies
       credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json'

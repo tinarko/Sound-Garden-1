@@ -4,7 +4,7 @@ import Calendar from './Calendar.jsx';
 import RaisedButton from 'material-ui/RaisedButton';
 import TransactionsGraph from './TransactionsGraph.jsx';
 import TransactionsTable from './TransactionsTable.jsx';
-import * as transactions from './../actions/transactions.js';
+import * as transactions from './../../actions/transactions.js';
 
 class Transactions extends React.Component {
   constructor(props) {

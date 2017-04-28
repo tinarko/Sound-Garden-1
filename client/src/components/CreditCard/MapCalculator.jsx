@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { getLocation, yelpQuery } from './../actions/mapcalculator.js'
+import { getLocation, yelpQuery } from './../../actions/mapcalculator.js';
 
 class MapCalculator extends React.Component {
   constructor(props) {

@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import * as login from './../actions/login.js';
-import Balance from './../components/Balance/Balance.jsx';
-
+import * as login from './../../actions/login.js';
+import Balance from './../../components/Balance/Balance.jsx';
 
 class Landing extends React.Component {
   constructor(props) {

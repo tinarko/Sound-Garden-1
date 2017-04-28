@@ -11,7 +11,7 @@ import Avatar from 'material-ui/Avatar';
 import LoggedOptions from './LoggedOptions.jsx';
 import IconButton from 'material-ui/IconButton';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
-import * as navbar from './../actions/navbar.js';
+import * as navbar from './../../actions/navbar.js';
 
 const Navbar = (props) => {
   return (

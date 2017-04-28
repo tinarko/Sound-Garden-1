@@ -1,6 +1,5 @@
 export const getLocation = () => {
   return (dispatch) => {
-    // obtain geolocation
     fetch('/google', {
       method: 'GET',
       credentials: 'same-origin',

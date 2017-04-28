@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import BudgetCategory from './BudgetCategory.jsx';
 import { connect } from 'react-redux';
-import { toggleAddBudgetCategoryInput, categoryNameInputChange, categoryGoalInputChange } from '../actions/budget.js';
+import { toggleAddBudgetCategoryInput, categoryNameInputChange, categoryGoalInputChange } from './../../actions/budget.js';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';

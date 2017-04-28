@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { DateRangePicker, isInclusivelyBeforeDay } from 'react-dates';
 import moment from 'moment';
-import * as transactions from './../actions/transactions.js';
+import * as transactions from './../../actions/transactions.js';
 
 class Calendar extends React.Component {
   constructor(props) {

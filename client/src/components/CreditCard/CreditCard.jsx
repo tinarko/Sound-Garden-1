@@ -1,12 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-
 import CashbackCategory from './CashbackCategory.jsx';
-
-import { createCashbackCategoryKickoff, getCashbackCategoriesKickoff } from '../actions/createcashbackcategory.js';
-// import { handleCategoryChange } from '../actions/createcashbackcategory';
-
+import { createCashbackCategoryKickoff, getCashbackCategoriesKickoff } from './../../actions/createcashbackcategory.js';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class CreditCard extends React.Component {
@@ -75,7 +71,7 @@ class CreditCard extends React.Component {
           </ul>
         </li>
       </div>
-    )
+    );
   }
 }
 

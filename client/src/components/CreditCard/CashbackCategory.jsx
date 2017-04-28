@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import { changeCashbackPercent } from '../actions/changecashbackpercent.js';
-import { deleteCashbackCategoryKickoff } from '../actions/deletecashbackcategory.js';
-import { getCashbackCategoriesKickoff } from '../actions/createcashbackcategory.js';
+import { changeCashbackPercent } from './../../actions/changecashbackpercent.js';
+import { deleteCashbackCategoryKickoff } from './../../actions/deletecashbackcategory.js';
+import { getCashbackCategoriesKickoff } from './../../actions/createcashbackcategory.js';
 
 import IconButton from 'material-ui/IconButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
