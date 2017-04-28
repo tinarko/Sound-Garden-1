@@ -13,7 +13,6 @@ import Balance from './components/Balance/Balance.jsx';
 import Transactions from './components/Transactions.jsx';
 import Budget from './components/Budget.jsx';
 import CCCashback from './components/CCCashback.jsx';
-import Login from './components/Login.jsx';
 import Navbar from './components/Navbar.jsx';
 import Portfolio from './components/Portfolio.jsx';
 import Landing from './components/Landing.jsx';
