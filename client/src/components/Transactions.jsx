@@ -24,7 +24,7 @@ class Transactions extends React.Component {
       information = <TransactionsTable data={this.props.transactions} />;
     }
     return (
-      <div className='component'>
+      <div className='transactions'>
         <h1>Transactions</h1>
         <br/>
         <br/>

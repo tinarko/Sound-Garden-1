@@ -386,6 +386,12 @@ Transactions
   margin: 0 auto;
 }
 
+.transactions  h1 {
+  text-align: center;
+}
+
 .calendar {
+  text-align: center;
   margin: 0 auto;
+  padding-bottom: 2%;
 }

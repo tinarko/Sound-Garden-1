@@ -25,7 +25,7 @@ class Landing extends React.Component {
               <div className="login-overlay">
                 <CardTitle
                   className="login-title fontOverride"
-                  title={this.props.loggedIn ? `Welcome , ${this.props.name}` : 'One-stop shop for all your financial needs'}
+                  title={this.props.loggedIn ? `Welcome, ${this.props.name}` : 'One-stop shop for all your financial needs'}
                   titleColor="white"
                 />
                 {this.props.loggedIn ? <div/> : <RaisedButton label="Sign up" href="/auth/auth0" className="login-button fontOverride" />}
@@ -72,7 +72,6 @@ class Landing extends React.Component {
                     <h3>Budget</h3>
                   </div>
                 }
-                <br/>
                 <p>Set monthly goals and save</p>
               </section>
               
