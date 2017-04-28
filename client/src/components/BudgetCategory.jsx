@@ -35,11 +35,7 @@ class BudgetCategory extends React.Component {
             <Trash/> 
          </IconButton>
          </h3> 
-       
-        <br />
-        <br /> 
-        <br />
-        <br />
+
         <div className='individualAmounts'>
         Budget Goal: 
         <IconButton onClick={(e) => { this.props.handleBudgetChange(
@@ -68,6 +64,11 @@ class BudgetCategory extends React.Component {
         <div>
         Spent this Month: ${actualValue}
         </div>
+        <br />
+              
+        <br />
+        <br /> 
+        <br />
         <br />
         
       </div>

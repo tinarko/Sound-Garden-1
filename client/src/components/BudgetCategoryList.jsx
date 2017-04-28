@@ -36,7 +36,6 @@ class BudgetCategoryList extends React.Component {
   
   render () {
 
-    // let month = 'April';
     let toggleButtonForm = null;
     // console.log('this.props in BudgetCategoryList render', this.props);
     if (this.props.budget.showaddbudgetcategoryform) {
