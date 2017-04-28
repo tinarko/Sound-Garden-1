@@ -45,15 +45,15 @@ class BudgetCategoryList extends React.Component {
           this.handleSubmit(e);
         }
       }>
-          <label> 
-          Category Name:
-            <TextField type="text" name= "addcategoryname" hintText="Ex: Housing" value={this.props.budget.addcategoryname} onChange={this.handleInputChange.bind(this)}/>
-          </label>
+          
+          Category Name:  
+            <TextField type="text" name= "addcategoryname" hintText=" Ex: Housing" value={this.props.budget.addcategoryname} onChange={this.handleInputChange.bind(this)}/>
+        
           <br/>
-          <label> 
+          
           Budget Amount: 
-            <TextField type="text" name ="addcategorybudget" hintText="$" value={this.props.budget.addcategorybudget} onChange={this.handleInputChange.bind(this)}/>
-          </label>
+            <TextField type="text" name ="addcategorybudget" hintText=" $" value={this.props.budget.addcategorybudget} onChange={this.handleInputChange.bind(this)}/>
+          
           <br/>
           <RaisedButton label ='Submit' type ="submit"/>
         </form>;
