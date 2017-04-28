@@ -9,31 +9,25 @@ import * as transactions from './../actions/transactions.js';
 class Transactions extends React.Component {
   constructor(props) {
     super(props);
-    this.onGraphClick = this.onGraphClick.bind(this);
-    this.onTableClick = this.onTableClick.bind(this);
-  }
-  
-  onGraphClick() {
-    this.props.dispatch({type: 'SHOW_GRAPH'});
-  }
-
-  onTableClick() {
-    this.props.dispatch({type: 'SHOW_TABLE'});
   }
 
   render() {
     let information = null;
-    if (this.props.startDate && this.props.endDate && this.props.showGraph) {
-      information = <TransactionsGraph data={this.props.transactions} />;
-    } else if (this.props.startDate && this.props.endDate && this.props.showTable) {
+    if (this.props.startDate && this.props.endDate && this.props.fetched) {
+      information = (
+        <div>
+          <TransactionsGraph data={this.props.transactions} />
+          <TransactionsTable data={this.props.transactions} />
+        </div>
+      );
+    } else {
       information = <TransactionsTable data={this.props.transactions} />;
     }
     return (
       <div className='component'>
         <h1>Transactions</h1>
         <br/>
-        <RaisedButton label="Show Table" onClick={this.onTableClick}/>
-        <RaisedButton label="Show Graph" onClick={this.onGraphClick}/>
+        <br/>
         <Calendar />
         {information}
       </div>

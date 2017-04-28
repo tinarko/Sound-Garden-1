@@ -5,14 +5,17 @@ const BalanceTable = (props) => {
   return (
         <div className="balance-table">
           <Table>
-            <TableHeader displaySelectAll={false}>
+            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>
                 <TableHeaderColumn>Account Name</TableHeaderColumn>
                 <TableHeaderColumn>Type</TableHeaderColumn>
                 <TableHeaderColumn>Balance</TableHeaderColumn>
               </TableRow>
             </TableHeader>
-            <TableBody displayRowCheckbox={true}>
+            <TableBody 
+              displayRowCheckbox={false}
+              stripedRows={true}
+            >
               {props.balance.map((item, index) => {
                 return (<TableRow>
                   <TableRowColumn>{item.institution_name + ' ' + item.name}</TableRowColumn>

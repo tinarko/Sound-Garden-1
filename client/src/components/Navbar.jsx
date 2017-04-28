@@ -18,8 +18,13 @@ const Navbar = (props) => {
     <AppBar
       className="app-bar"
       style={{position: 'fixed', top: 0}}
+<<<<<<< HEAD
       title={<span className="app-bar-title"><Link to="/"><img className="advisorlyLogo" src="../../../images/logo.png"/></Link></span>}
       iconElementRight={props.picture ? <a href="/"><Avatar src={props.picture} size={50}/></a> : <FlatButton label="Login" href="/auth/auth0"></ FlatButton>}
+=======
+      title={<span className="app-bar-title"><Link to="/" style={{ textDecoration: 'none', color: 'white' }}>Advisorly</Link></span>}
+      iconElementRight={props.picture ? <Link to="/"><Avatar src={props.picture} size={50}/></Link> : <FlatButton label="Login" href="/auth/auth0"></ FlatButton>}
+>>>>>>> (refactor) Adjust Balance table
       iconElementLeft={props.loggedIn ? <IconButton><NavigationMenu/> </IconButton> : <div> </div>}
       onLeftIconButtonTouchTap = {()=> {
         props.dispatch(navbar.toggleDrawer());
