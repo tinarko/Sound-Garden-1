@@ -178,6 +178,21 @@ module.exports = {
     });
   },
 
+  deleteBudgetCategory: function (params, cb) {
+
+    var queryString = 'delete budgetcategories from categorytypes inner join budgetcategories inner join budgets inner join users \
+    on users.userid = budgets.user_id AND budgetcategories.budget_id = budgets.id AND budgetcategories.category_id = categorytypes.id \
+    WHERE users.userid = ? AND categorytypes.name = ? AND YEAR(budgets.month) = ? AND MONTH(budgets.month) = ?';
+    
+    connection.query(queryString, params, function(err, results) {
+      if (err, null) {
+        cb(err, null);
+      } else {
+        cb(null, results);
+      }
+    });
+  },
+
   checkForCategoryName: function (categoryname, cb) {
     var queryString = 'select * from categorytypes where name = ?';
     connection.query (queryString, categoryname, function (err, results) {

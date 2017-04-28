@@ -100,6 +100,34 @@ export const decrementBudget = (index) => {
   };
 };
 
+// export const deleteBudgetCategory = (categoryname, index, year, month) => {
+//   return (dispatch) => {
+//     fetch('/budget/delete', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       credentials: 'same-origin',
+//       body: JSON.stringify({
+//         categoryname: categoryname,
+//         index: index,
+//         year: year,
+//         month: month
+//       })
+//     })
+//     .then ((response) => {
+//       console.log('successful deletion of budgetcategory');
+//       response.json()
+//         .then((json) => {
+//           dispatch(getUserBudgets(year, month));
+//         });
+//     })
+//     .catch((err) => {
+//       console.log('error in updating budget amount', err);
+//     });
+//   };
+// };
+
 export const addBudgetCategory = () => {
   return {
     type: 'ADD_BUDGET_CATEGORY',
@@ -138,7 +166,7 @@ export const postUpdatedBudget = (goalvalue, categoryname, index, change, year, 
             dispatch(incrementBudget(index));
           } else if (change === 'decrement') {
             dispatch(decrementBudget(index));
-          } else if (change === 'newValue') {
+          } else if (change === 'newValue' || change === 'delete') {
             dispatch(getUserBudgets(year, month));
             dispatch(getTransactionData(year, month));
           }

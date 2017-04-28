@@ -89,51 +89,62 @@ module.exports.updateBudgetAmount = function(req, res) {
   var yearString = req.body.year.toString();
 
   var updatedvalue;
-  if (req.body.change === 'increment') {
+
+  if (req.body.change === 'delete') {
+    db.deleteBudgetCategory([userid, req.body.categoryname, yearString, monthString], function(err, results) {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(201).send(results);
+      }
+    });
+  } else if (req.body.change === 'increment') {
     updatedvalue = req.body.goalvalue + 10;
   } else if (req.body.change === 'decrement') {
     updatedvalue = req.body.goalvalue - 10;
   } else {
     updatedvalue = parseFloat(req.body.goalvalue);
   }
+  if (req.body.change !== 'delete') {
   //check to see if budget category exists for user
-  db.updateUserBudgetCategory([updatedvalue, userid, req.body.categoryname, yearString, monthString], function(err, results) {
-    if (err) {
-      res.status(500).send(err);
-    //if does not exist
-    } else if (results.affectedRows === 0) {
-      //check if budget category name exists in database
-      db.checkForCategoryName (req.body.categoryname, function(err, results) {
-        if (err) {
-          res.status(500).send(err);
-        } else if (results) {
-          //if exists, use this budget category name to create a budget listing for user
-          db.insertUserBudget([updatedvalue, userid, results.id, yearString, monthString], function(err, finalResults) {
-            if (err) {
-              res.status(500).send(err);
-            } else {
-              res.status(201).send(finalResults);
-            }
-          });
-        } else {
-          //if it does not exist, insert a budget category name and use this newly inserted category name to create budget listing for user
-          db.insertBudgetCategory ([req.body.categoryname], function(err, results) {
-            if (err) {
-              res.status(500).send(err);
-            } else {
-              db.insertUserBudget([updatedvalue, userid, results.insertId, yearString, monthString], function(err, finalResults) {
-                if (err) {
-                  res.status(500).send(err);
-                } else {
-                  res.status(201).send(finalResults);
-                }
-              });
-            }
-          });
-        }
-      });
-    } else {
-      res.status(201).send(results);
-    }
-  });
+    db.updateUserBudgetCategory([updatedvalue, userid, req.body.categoryname, yearString, monthString], function(err, results) {
+      if (err) {
+        res.status(500).send(err);
+      //if does not exist
+      } else if (results.affectedRows === 0) {
+        //check if budget category name exists in database
+        db.checkForCategoryName (req.body.categoryname, function(err, results) {
+          if (err) {
+            res.status(500).send(err);
+          } else if (results) {
+            //if exists, use this budget category name to create a budget listing for user
+            db.insertUserBudget([updatedvalue, userid, results.id, yearString, monthString], function(err, finalResults) {
+              if (err) {
+                res.status(500).send(err);
+              } else {
+                res.status(201).send(finalResults);
+              }
+            });
+          } else {
+            //if it does not exist, insert a budget category name and use this newly inserted category name to create budget listing for user
+            db.insertBudgetCategory ([req.body.categoryname], function(err, results) {
+              if (err) {
+                res.status(500).send(err);
+              } else {
+                db.insertUserBudget([updatedvalue, userid, results.insertId, yearString, monthString], function(err, finalResults) {
+                  if (err) {
+                    res.status(500).send(err);
+                  } else {
+                    res.status(201).send(finalResults);
+                  }
+                });
+              }
+            });
+          }
+        });
+      } else {
+        res.status(201).send(results);
+      }
+    });
+  }
 };
