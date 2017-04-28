@@ -8,6 +8,7 @@ import { createPlaid } from './../actions/plaid.js';
 import FlatButton from 'material-ui/FlatButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import Menu from 'material-ui/svg-icons/navigation/menu';
 import Divider from 'material-ui/Divider';
@@ -20,6 +21,19 @@ const LoggedOptions = (props) => (
   onRequestChange={() => {
     props.dispatch(navbar.closeDrawer());
   }}>
+  <AppBar
+      className="app-bar"
+      style={{position: 'fixed', top: 0}}
+      title={<span className="app-bar-title"><Link to="/"><img className="advisorlyLogo" src="../../../images/logo.png"/></Link></span>}
+      onLeftIconButtonTouchTap = {()=> {
+        props.dispatch(navbar.closeDrawer());
+      }}
+      />
+    <br/> 
+    <br/> 
+    <br/> 
+    <br/> 
+
     <MenuItem primaryText="Add Accounts" onClick={createPlaid}/>
     <MenuItem primaryText="Balance" containerElement={<Link to="/Balance" />} onTouchTap={()=>{ props.dispatch(navbar.closeDrawer()); }}/>
     <MenuItem primaryText="Budget" containerElement={<Link to="/budget" />} onTouchTap={()=>{ props.dispatch(navbar.closeDrawer()); }}/>
