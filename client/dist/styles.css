@@ -367,3 +367,7 @@ login
   display: block;
   margin: auto;
 }
+
+.teaser h3 {
+  color: #2E7D32;
+}
