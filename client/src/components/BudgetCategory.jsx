@@ -8,6 +8,7 @@ import IconButton from 'material-ui/IconButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentAddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 import ContentRemoveCircleOutline from 'material-ui/svg-icons/content/remove-circle-outline';
+import Trash from 'material-ui/svg-icons/action/delete';
 
 import BudgetBulletChart from './BudgetBulletChart.jsx';
 
@@ -22,7 +23,8 @@ class BudgetCategory extends React.Component {
     let actualValue = this.props.budgetcategory.actualvalue || 0;
     return (
       <div className='budgetCategory'>
-        <h3>{this.props.budgetcategory.name} </h3>
+        <h3>{this.props.budgetcategory.name}  <IconButton><Trash/> </IconButton></h3> 
+       
         <br />
         <br /> 
         <br />
