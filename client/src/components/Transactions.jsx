@@ -24,10 +24,10 @@ class Transactions extends React.Component {
       information = <TransactionsTable data={this.props.transactions} />;
     }
     return (
-      <div className='transactions'>
-        <h1>Transactions</h1>
-        <br/>
-        <br/>
+      <div className='transactions component'>
+        <h1>
+          <img className='componentIcon' src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTTm50tK43pGJ9EWr66kD9lELxuufTfyB9Yhoej0Fohs8ZnBb8i'/>Transactions
+        </h1>
         <Calendar />
         {information}
       </div>
