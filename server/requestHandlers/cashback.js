@@ -43,12 +43,9 @@ exports.getOne = (req, res) => {
 };
 
 exports.calculate = (req, res) => {
-
   var userCats = req.body.userCats;
-  
-  // handle case where there are no userCategories so that no error is thrown 
   if (userCats.length === 0) {
-    res.json(['anything', 0, 'everything'])
+    res.json(['anything', 0, 'everything']);
   } else {
     var bizCats = req.body.bizCats;
     calculateBestCard(userCats, bizCats, function(results){

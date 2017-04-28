@@ -11,7 +11,6 @@ var client = new plaid.Client(
   PLAID_CLIENT_ID,
   PLAID_SECRET,
   PLAID_PUBLIC_KEY,
-  // TODO: adjust environment as product life cycle advances
   plaid.environments[PLAID_ENV]
 );
 
@@ -44,22 +43,24 @@ module.exports.accessToken = function(req, res) {
 };
 
 module.exports.accounts = function(req, res) {
-  var userid = req.session.passport.user.id;
+  var userid = req.session.passport.user.id || '';
   db.getPlaidItems(userid, function(err, response) {
-    plaidUtility.promisePlaid(response, 'getAccounts', function(err, results) {
-      if (err) {
-        res.status(500).send(err);
-      }
+    if (response.length) {
+      plaidUtility.promisePlaid(response, 'getAccounts', function(err, results) {
+        if (err) {
+          res.status(500).send(err);
+        }
 
-      var send = results.reduce(function(previous, current) {
-        return previous.concat(current);
-      }, []);
+        var send = results.reduce(function(previous, current) {
+          return previous.concat(current);
+        }, []);
 
-      send.sort(function(a, b) {
-        return a.subtype.localeCompare(b.subtype);
+        send.sort(function(a, b) {
+          return a.subtype.localeCompare(b.subtype);
+        });
+        return res.json(send);
       });
-      return res.json(send);
-    });
+    } else { return res.status(500); }
   });
 };
 
@@ -99,41 +100,43 @@ module.exports.transactions = function (req, res) {
   }
 
   db.getPlaidItems(userid, function(err, response) {
-    plaidUtility.promisePlaid(response, 'getTransactions', function(err, results) {
-      if (err) {
-        return res.status(500).send(err);
-      }
+    if (response.length) {
+      plaidUtility.promisePlaid(response, 'getTransactions', function(err, results) {
+        if (err) {
+          return res.status(500).send(err);
+        }
 
-      if (req.params.destination === 'budget') {
-        var transactions = [];
-        results.forEach(function(array) {
-          for (var i = 0; i < array.length; i++) {
-            transactions.push(array[i]);
-          }
-        });
+        if (req.params.destination === 'budget') {
+          var transactions = [];
+          results.forEach(function(array) {
+            for (var i = 0; i < array.length; i++) {
+              transactions.push(array[i]);
+            }
+          });
 
-        var categoryObject = {}; 
-        for (var i = 0; i < transactions.length; i++) {
-          if (transactions[i]['category']) {
-            var categoryName = transactions[i]['category'][0];
-            if (transactions[i]['category'].length > 0 && categoryName !== 'Payment' && categoryName !== 'Transfer') {
-              categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'] || transactions[i]['amount'];
+          var categoryObject = {}; 
+          for (var i = 0; i < transactions.length; i++) {
+            if (transactions[i]['category']) {
+              var categoryName = transactions[i]['category'][0];
+              if (transactions[i]['category'].length > 0 && categoryName !== 'Payment' && categoryName !== 'Transfer') {
+                categoryObject[categoryName] = categoryObject[categoryName] + transactions[i]['amount'] || transactions[i]['amount'];
+              } else {
+                categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'] || transactions[i]['amount'];
+              }
             } else {
               categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'] || transactions[i]['amount'];
             }
-          } else {
-            categoryObject['Other'] = categoryObject['Other'] + transactions[i]['amount'] || transactions[i]['amount'];
           }
+          return res.json(categoryObject);
+        } else {
+          var send = results.reduce(function(previous, current) {
+            return previous.concat(current);
+          }, []).sort(function(a, b) {
+            return a.institution_name.localeCompare(b.institution_name);
+          });
+          return res.json(send);
         }
-        return res.json(categoryObject);
-      } else {
-        var send = results.reduce(function(previous, current) {
-          return previous.concat(current);
-        }, []).sort(function(a, b) {
-          return a.institution_name.localeCompare(b.institution_name);
-        });
-        return res.json(send);
-      }
-    }, periodStart, periodEnd);
+      }, periodStart, periodEnd);
+    } else { return res.status(500); }
   });
 };
