@@ -284,15 +284,39 @@ Components
 .component h1 {
   font-size: 40px;
   padding-bottom: 30px;
+  text-align: center;
 }
 
 .component h3 {
   color: #000;
-  font-size: 22px;
+  font-size: 24px;
 }
 
 .component p {
-  font-size: 20px;
+  font-size: 18px;
+}
+
+.componentIcon {
+  border-radius: 5px;
+  max-height:40px;
+  margin: auto;
+  display:inline;
+}
+
+/*------
+Budgets
+--------*/ 
+
+.monthLabel {
+  font-size: 24px;
+}
+
+.budgetTitle {
+  color: #000;
+}
+
+.budgetTitle span {
+  color: #2E7D32;
 }
 
 /*-------
@@ -309,12 +333,6 @@ p .em {
 }
 
 
-.componentIcon {
-  border-radius: 5px;
-  max-height:40px;
-  margin: auto;
-  display:inline;
-}
 
 /*------
 Creditcard Images

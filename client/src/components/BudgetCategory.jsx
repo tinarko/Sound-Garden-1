@@ -22,7 +22,7 @@ class BudgetCategory extends React.Component {
   render() {
     let actualValue = this.props.budgetcategory.actualvalue || 0;
     return (
-      <div className='budgetCategory'>
+      <div className='budgetCategory component'>
         <h3>{this.props.budgetcategory.name} 
         <IconButton onClick={(e) => { this.props.handleBudgetChange(
           0, 
@@ -37,39 +37,39 @@ class BudgetCategory extends React.Component {
          </h3> 
 
         <div className='individualAmounts'>
-        Budget Goal: 
-        <IconButton onClick={(e) => { this.props.handleBudgetChange(
-          this.props.budgetcategory.goalvalue, 
-          this.props.budgetcategory.name, 
-          this.props.index, 
-          'decrement',
-          this.props.year,
-          this.props.month); 
-        } }> 
-          <ContentRemoveCircleOutline/>
-        </IconButton>
-        ${this.props.budgetcategory.goalvalue}
-        <IconButton onClick={(e) => { this.props.handleBudgetChange(
-          this.props.budgetcategory.goalvalue, 
-          this.props.budgetcategory.name, 
-          this.props.index, 
-          'increment',
-          this.props.year,
-          this.props.month); 
-        } }> 
-          <ContentAddCircleOutline/>
-        </IconButton> 
-
+          <p>Budget Goal: 
+            <IconButton onClick={(e) => { this.props.handleBudgetChange(
+              this.props.budgetcategory.goalvalue, 
+              this.props.budgetcategory.name, 
+              this.props.index, 
+              'decrement',
+              this.props.year,
+              this.props.month); 
+            } }> 
+              <ContentRemoveCircleOutline/>
+            </IconButton> 
+            ${this.props.budgetcategory.goalvalue}
+            <IconButton onClick={(e) => { this.props.handleBudgetChange(
+              this.props.budgetcategory.goalvalue, 
+              this.props.budgetcategory.name, 
+              this.props.index, 
+              'increment',
+              this.props.year,
+              this.props.month); 
+            } }> 
+              <ContentAddCircleOutline/>
+            </IconButton> 
+          </p>
         </div>
         <div>
-        Spent this Month: ${actualValue}
-        </div>
-        <br />
-              
-        <br />
-        <br /> 
-        <br />
-        <br />
+          <p> Spent this Month: ${actualValue} </p>
+          </div>
+          <br />
+                
+          <br />
+          <br /> 
+          <br />
+          <br />
         
       </div>
 

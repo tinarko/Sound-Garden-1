@@ -7,15 +7,10 @@ const TransactionsTable = (props) => {
       <Table fixedHeader={true}>
         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
           <TableRow>
-            <TableHeaderColumn colSpan="4" tooltip="Transactions" style={{textAlign: 'center', fontSize: '26'}}>
-              Transactions
-            </TableHeaderColumn>
-          </TableRow>
-          <TableRow>
-            <TableHeaderColumn style={{fontSize: '22'}}>Transaction</TableHeaderColumn>
-            <TableHeaderColumn style={{fontSize: '22'}}>Amount</TableHeaderColumn>
-            <TableHeaderColumn style={{fontSize: '22'}}>Bank</TableHeaderColumn>
-            <TableHeaderColumn style={{fontSize: '22'}}>Date</TableHeaderColumn>
+            <TableHeaderColumn style={{fontSize: '24', color: '#2E7D32', fontFamily: 'Roboto'}}>Transaction</TableHeaderColumn>
+            <TableHeaderColumn style={{fontSize: '24', color: '#2E7D32', fontFamily: 'Roboto'}}>Amount</TableHeaderColumn>
+            <TableHeaderColumn style={{fontSize: '24', color: '#2E7D32', fontFamily: 'Roboto'}}>Bank</TableHeaderColumn>
+            <TableHeaderColumn style={{fontSize: '24', color: '#2E7D32', fontFamily: 'Roboto'}}>Date</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody 
@@ -23,10 +18,10 @@ const TransactionsTable = (props) => {
         >
           {props.data.map((item, index) => {
             return (<TableRow>
-              <TableRowColumn style={{fontSize: '16'}}>{item.name}</TableRowColumn>
-              <TableRowColumn style={{fontSize: '16'}}>{'$' + Math.abs(item.amount)}</TableRowColumn>
-              <TableRowColumn style={{fontSize: '16'}}>{item.institution_name}</TableRowColumn>
-              <TableRowColumn style={{fontSize: '16'}}>{item.date}</TableRowColumn>
+              <TableRowColumn style={{fontSize: '20', color: '#000', fontFamily: 'Roboto'}}>{item.name}</TableRowColumn>
+              <TableRowColumn style={{fontSize: '20', color: '#000', fontFamily: 'Roboto'}}>{'$' + Math.abs(item.amount)}</TableRowColumn>
+              <TableRowColumn style={{fontSize: '20', color: '#000', fontFamily: 'Roboto'}}>{item.institution_name}</TableRowColumn>
+              <TableRowColumn style={{fontSize: '20', color: '#000', fontFamily: 'Roboto'}}>{item.date}</TableRowColumn>
             </TableRow>);
           })}
         </TableBody>
