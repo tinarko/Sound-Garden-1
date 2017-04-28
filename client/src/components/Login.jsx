@@ -42,7 +42,7 @@ class Login extends React.Component {
               }
               overlayStyle={{width: '100%', margin: 'auto', 'top': '-25%', 'text-align': 'center'}}
             >          
-              <img className='loginImage' src="https://images.pexels.com/photos/237675/pexels-photo-237675.jpeg?w=940&h=650&auto=compress&cs=tinysrgb"/>
+              <img className='loginImage' src="http://reydman.com/wp-content/uploads/2016/07/accounting-1200x518.jpg"/>
             </CardMedia>
 
           </Card>
