@@ -42,7 +42,6 @@ app.get('/auth/logout', authentication.logout);
  */
 app.get('/budget/getuserbudgets/:year/:month', budget.getUserBudgets);
 app.post('/budget/updatebudgetcategory', budget.updateBudgetAmount);
-// app.post('/budget/delete', budget.deleteBudgetCategory);
 
 /**
  * Credit Card Routes

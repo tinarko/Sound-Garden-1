@@ -39,7 +39,6 @@ describe('Budget Actions', () => {
 describe('Budget Reducers', () => {
 
   it('should return the initial state', () => {
-    console.log('reducer init state', reducer(undefined, {}));
     expect(
       reducer(undefined, {})
       ).to.deep.equal(

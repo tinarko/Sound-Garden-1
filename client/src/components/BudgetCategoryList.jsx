@@ -13,17 +13,8 @@ import * as d3 from 'd3';
 class BudgetCategoryList extends React.Component {
   constructor (props) {
     super(props);
-    // console.log('this.props in BudgetCategoryList Constructor', this.props);
-    //<BudgetBulletChart budget={this.props.budget}/>
   }
 
-  componendDidMount() {
-    // console.log('this.props in BudgetCategoryList DidMount', this.props);
-  }
-
-  componentDidUpdate() {
-    // console.log('this.props in BudgetCategoryList DidUpdate', this.props);
-  }
   handleInputChange (event) {
     if (event.target.name === 'addcategoryname') {
       this.props.categoryNameInputChange(event.target.value);

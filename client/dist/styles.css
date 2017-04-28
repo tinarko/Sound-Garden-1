@@ -156,7 +156,6 @@ a {
 .bullet { 
   font: 10px sans-serif;
   margin-bottom: 140px;
-  /*margin-bottom: 110px;*/
 }
 .bullet .marker { 
   stroke: #000; stroke-width: 2px; 
@@ -190,7 +189,6 @@ a {
 .graphPosition {
     position: absolute;
     left: 200px;
-    /*top: 230px;*/
     top: 260px;
 }
 
