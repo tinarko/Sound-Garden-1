@@ -92,7 +92,7 @@ class Budget extends React.Component {
       <div className='budget'>
       <div className='graphPosition'> </div>
         <div className = 'topSegment'>
-         <h1>Budget</h1>
+         <h1>Budgets</h1>
           <div className="box">
             <label> {currentTime} </label>
             <IconButton onClick={this.handleClickCurrent.bind(this)}>

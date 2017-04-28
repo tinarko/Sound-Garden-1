@@ -58,7 +58,7 @@ class CreditCard extends React.Component {
               );
             })}
             <li>
-              <p>• Category: 
+              <p>Category: 
                 <input type="text" 
                        value={this.props.catname} 
                        onChange={ (e) => { this.handleCategoryChange(e.target.value) } }/> 

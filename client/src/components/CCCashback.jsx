@@ -35,8 +35,9 @@ class CCCashback extends React.Component {
     if (this.props.creditcards.cashbacksetup) {
       return (
         <div className='component cashback'>
-          <h1>Maximize Cashback - Setup</h1>
-          <br/>
+          <h1>
+            <img className='cashbackIcon' src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTf7zzMiEKSeQpeZ-ZC0r0QB445fmaU2A6lJlXWecQMGxh3NyEg4wLSi5g'/> Maximize Cashback - Setup
+          </h1>
           <ul>
             { creditcards }
           </ul>
@@ -48,8 +49,9 @@ class CCCashback extends React.Component {
     } else if (creditcards.length === 0) {
         return (
         <div className='component cashback'>
-          <h1>Maximize Cashback</h1>
-          <br/>
+          <h1>
+            <img className='cashbackIcon' src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTf7zzMiEKSeQpeZ-ZC0r0QB445fmaU2A6lJlXWecQMGxh3NyEg4wLSi5g'/> Maximize Cashback
+          </h1>
           <h5> Please add some bank accounts by clicking in the upper left-hand corner > Add Accounts </h5>
           <br/>
           <img className='ccImage' src='https://www.mememaker.net/static/images/memes/4365652.jpg'/>
@@ -60,8 +62,9 @@ class CCCashback extends React.Component {
     } else if (ccName == 'anything') {
         return (
         <div className='component cashback'>
-          <h1>Maximize Cashback</h1>
-          <br/>
+          <h1>
+            <img className='cashbackIcon' src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTf7zzMiEKSeQpeZ-ZC0r0QB445fmaU2A6lJlXWecQMGxh3NyEg4wLSi5g'/> Maximize Cashback
+          </h1>
           <img className='ccImage' src='https://www.mememaker.net/static/images/memes/4365652.jpg'/>
           <br/>
           <h3> Please setup your credit card cashback categories below! </h3>
@@ -75,8 +78,9 @@ class CCCashback extends React.Component {
         return (
         <div className='component cashback'>
           <div>
-            <h1>Maximize Cashback</h1>
-            <br/>
+            <h1>
+              <img className='cashbackIcon' src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTf7zzMiEKSeQpeZ-ZC0r0QB445fmaU2A6lJlXWecQMGxh3NyEg4wLSi5g'/> Maximize Cashback
+            </h1>
             <h3>Are you at {mapcalculator.bizName}? </h3>
             <br/>
             <p>Use <span className='em'>{mapcalculator.ccName}</span> for

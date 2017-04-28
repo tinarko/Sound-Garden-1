@@ -280,6 +280,20 @@ Components
   padding-bottom: 100px;
 }
 
+.component h1 {
+  font-size: 40px;
+  padding-bottom: 30px;
+}
+
+.component h3 {
+  color: #000;
+  font-size: 22px;
+}
+
+.component p {
+  font-size: 20px;
+}
+
 /*-------
 Cashback component
 --------*/
@@ -287,9 +301,18 @@ Cashback component
   text-align: center;
 }
 
-.em {
+p .em {
   display:inline;
   font-weight: bold;
+  color: #2E7D32;
+}
+
+
+.cashbackIcon {
+  border-radius: 5px;
+  max-height:40px;
+  margin: auto;
+  display:inline;
 }
 
 /*------
@@ -355,15 +378,15 @@ login
 }
 
 .col-1-4 {
-  width: 20%;
+  width: 15%;
   display: inline-block;
   vertical-align: top;
 }
 
 .grid,
 .col-1-4 {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .teaser img {
@@ -377,7 +400,7 @@ login
   color: #2E7D32;
 }
 
-/*
+/*------
 Transactions
 -------*/
 .transactions-chart {

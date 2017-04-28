@@ -35,9 +35,9 @@ const LoggedOptions = (props) => (
     <br/> 
 
     <MenuItem primaryText="Add Accounts" onClick={createPlaid}/>
-    <MenuItem primaryText="Balance" containerElement={<Link to="/Balance" />} onTouchTap={()=>{ props.dispatch(navbar.closeDrawer()); }}/>
-    <MenuItem primaryText="Budget" containerElement={<Link to="/budget" />} onTouchTap={()=>{ props.dispatch(navbar.closeDrawer()); }}/>
-    <MenuItem primaryText="Cashback" containerElement={<Link to="/ccCashback" />} onTouchTap={()=>{ props.dispatch(navbar.closeDrawer()); }}/>
+    <MenuItem primaryText="Balances" containerElement={<Link to="/balance" />} onTouchTap={()=>{ props.dispatch(navbar.closeDrawer()); }}/>
+    <MenuItem primaryText="Budgets" containerElement={<Link to="/budget" />} onTouchTap={()=>{ props.dispatch(navbar.closeDrawer()); }}/>
+    <MenuItem primaryText="Maximize Cashback" containerElement={<Link to="/ccCashback" />} onTouchTap={()=>{ props.dispatch(navbar.closeDrawer()); }}/>
     <MenuItem primaryText="Transactions" containerElement={<Link to="/transactions" />} onTouchTap={()=>{ props.dispatch(navbar.closeDrawer()); }}/>
     <Divider />
     <MenuItem primaryText="Logout" href="/auth/logout" />

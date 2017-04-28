@@ -9,6 +9,7 @@ import IconButton from 'material-ui/IconButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentAddCircleOutline from 'material-ui/svg-icons/content/add-circle-outline';
 import ContentRemoveCircleOutline from 'material-ui/svg-icons/content/remove-circle-outline';
+import Trash from 'material-ui/svg-icons/action/delete';
 
 class CashbackCategory extends React.Component {
   constructor (props) {
@@ -25,7 +26,7 @@ class CashbackCategory extends React.Component {
 
     return (
       <li>
-        <p> • {category.name} : 
+        <p> {category.name} : 
           <IconButton 
             onClick={ (e) => {
             this.props.handleChange(ccindex, catindex, percent, 'decrement', catid)
@@ -40,9 +41,11 @@ class CashbackCategory extends React.Component {
             <ContentAddCircleOutline/> 
           </IconButton>
 
-          <button onClick={(e) => {
-            this.props.deleteCashbackCategoryKickoff(ccindex, catindex, catid)
-          } }>Delete</button>
+          <Trash
+            onClick={(e) => {
+              this.props.deleteCashbackCategoryKickoff(ccindex, catindex, catid)
+            } }
+          />
         </p>
       </li> 
     )
