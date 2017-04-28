@@ -1,13 +1,12 @@
-# Project Name
+# Advisorly
 
-> Pithy project description
+> Financial budgeting and analysis application! 
 
 ## Team
 
-  - teamMember
-  - teamMember
-  - teamMember
-  - teamMember
+  - Jason An
+  - Tina Ko
+  - Chris Yang
 
 ## Table of Contents
 
@@ -21,15 +20,14 @@
 
 ## Usage
 
-> Some usage instructions
+> Users register their financial accounts through the Plaid API tooltip. They can then customize monthly budgets, optimze credit card usage, and analyze spending habits through our platform.
 
 ## Requirements
 
+- React 15.5.x
 - Node 6.4.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- MySql 2.13.x 
+- etc.
 
 ## Development
 
@@ -38,15 +36,19 @@
 From within the root directory:
 
 ```sh
-npm install -g bower
 npm install
-bower install
 ```
 
-### Roadmap
+### Local Development
+```sh 
+npm run client-dev
+npm run server-dev
+```
 
-View the project roadmap [here](LINK_TO_DOC)
-
+### Local Development
+```sh
+npm run test
+```
 
 ## Contributing
 
