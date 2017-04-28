@@ -7,7 +7,7 @@ const TransactionsTable = (props) => {
       <Table fixedHeader={true}>
         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
           <TableRow>
-            <TableHeaderColumn colSpan="4" tooltip="Super Header" style={{textAlign: 'center'}}>
+            <TableHeaderColumn colSpan="4" tooltip="Transactions" style={{textAlign: 'center'}}>
               Transactions
             </TableHeaderColumn>
           </TableRow>

@@ -7,7 +7,8 @@ import { VictoryAxis,
   VictoryTheme,
   VictoryTooltip, 
   VictoryStack,
-  VictoryLegend } from 'victory';
+  VictoryLegend,
+  VictoryContainer } from 'victory';
 
 const TransactionsGraph = (props) => {
   const styles = {};
@@ -43,9 +44,9 @@ const TransactionsGraph = (props) => {
       />
       <VictoryLegend
         data={legendData}
-        orientation={'vertical'}
+        orientation={'horizontal'}
         padding={20}
-        x={180}
+        y={-50}
       />
       <VictoryStack
         scale={{x: 'time', y: 'linear'}}

@@ -6,9 +6,11 @@ const BalanceTable = (props) => {
     <div className="balance-table">
       <Table>
         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-            <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
+          <TableRow>
+            <TableHeaderColumn colSpan="3" style={{textAlign: 'center'}}>
               Accounts
             </TableHeaderColumn>
+          </TableRow>
           <TableRow>
             <TableHeaderColumn>Account Name</TableHeaderColumn>
             <TableHeaderColumn>Type</TableHeaderColumn>
