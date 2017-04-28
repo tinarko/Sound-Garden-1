@@ -86,11 +86,11 @@ class Budget extends React.Component {
     // let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let currentMonth = months[(this.props.budget.mvalue.month - 1)];
     let currentTime = currentMonth + ' ' + this.props.budget.mvalue.year; 
-    // <div className='graphPosition'> </div>
+
 
     return (
       <div className='budget'>
-     
+      <div className='graphPosition'> </div>
         <div className = 'topSegment'>
          <h1>Budget</h1>
           <div className="box">
