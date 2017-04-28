@@ -7,14 +7,14 @@ const BalanceTable = (props) => {
       <Table>
         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
           <TableRow>
-            <TableHeaderColumn colSpan="3" style={{textAlign: 'center'}}>
+            <TableHeaderColumn colSpan="3" style={{textAlign: 'center', fontSize: '26'}}>
               Accounts
             </TableHeaderColumn>
           </TableRow>
           <TableRow>
-            <TableHeaderColumn>Account Name</TableHeaderColumn>
-            <TableHeaderColumn>Balance</TableHeaderColumn>
-            <TableHeaderColumn>Type</TableHeaderColumn>
+            <TableHeaderColumn style={{fontSize: '22'}}>Account Name</TableHeaderColumn>
+            <TableHeaderColumn style={{fontSize: '22'}}>Balance</TableHeaderColumn>
+            <TableHeaderColumn style={{fontSize: '22'}}>Type</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody 
@@ -22,9 +22,9 @@ const BalanceTable = (props) => {
         >
           {props.balance.map((item, index) => {
             return (<TableRow>
-              <TableRowColumn>{item.institution_name + ' ' + item.name}</TableRowColumn>
-              <TableRowColumn>{`$${item.balances.available || item.balances.current}`}</TableRowColumn>
-              <TableRowColumn>{item.subtype === 'cd' ? 'CD' : item.subtype[0].toUpperCase() + item.subtype.substring(1)}</TableRowColumn>
+              <TableRowColumn style={{fontSize: '14'}}>{item.institution_name + ' ' + item.name}</TableRowColumn>
+              <TableRowColumn style={{fontSize: '14'}}>{`$${item.balances.available || item.balances.current}`}</TableRowColumn>
+              <TableRowColumn style={{fontSize: '14'}}>{item.subtype === 'cd' ? 'CD' : item.subtype[0].toUpperCase() + item.subtype.substring(1)}</TableRowColumn>
             </TableRow>);
           })}
         </TableBody>
